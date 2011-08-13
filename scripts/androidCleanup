@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Cleaning up project in directory: "
+pwd
+echo "and writing output to unused.txt"
+rm unused.txt
+touch unused.txt
+# tail -f unused.txt
+java -jar ~/Dev*/Lib*/AndroidUnusedResources*.jar > unused.txt
+echo "Complete.  Check unused.txt for results."
