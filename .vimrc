@@ -15,7 +15,8 @@ set number
 
 "Allow backspace over EOL...like every other text editor"
 set backspace=indent,eol,start
-
+"Make ;; escape insert mode
+inoremap ;; <Esc>
 
 filetype off
 call pathogen#infect()
@@ -36,8 +37,6 @@ set tabstop=8
 set expandtab
 set softtabstop=4
 set shiftwidth=4
-
-
 
 filetype indent plugin on
 

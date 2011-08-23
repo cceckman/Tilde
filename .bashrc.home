@@ -1,0 +1,5 @@
+# include master bashrc
+~/.bashrc
+
+# bashrc to force start in the home directory
+cd $HOME
