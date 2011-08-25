@@ -95,4 +95,4 @@ termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
 # use cmatrix as a screensaver
 blankerprg cmatrix -sab
-idle 60 blanker 
+idle 180 blanker 

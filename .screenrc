@@ -1,7 +1,7 @@
 # ScreenRC to automatically start certain session aspects.
 
 # Default settings from the master
-source $HOME/.screenrc.settings
+source $HOME/.settings.screenrc
 
 # Default windows
 screen -t top 1 top
