@@ -1,9 +1,11 @@
 # Aliases (for mnemonics etc) 
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
-alias clean='clear; pwd'
+alias cl='clear; pwd; ls'
 alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
+alias matrix='cmatrix -sab'
+alias la='ls -la'
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
