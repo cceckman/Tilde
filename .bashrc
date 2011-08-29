@@ -11,7 +11,7 @@ alias la='ls -la'
 PATH="$HOME/scripts:${PATH}"
 
 # Prompt color/look mods...
-PROMPTCOL='\[\e[32m\]'
+PROMPTCOL='\[\e[34m\]'
 ENDCOL='\[\e[0m\]'
 PS1="$PROMPTCOL(\A) \W \$:$ENDCOL"
 
