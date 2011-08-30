@@ -6,6 +6,7 @@ alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
 alias la='ls -la'
+alias pd="pushd"
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
@@ -17,3 +18,6 @@ PS1="$PROMPTCOL(\A) \W \$:$ENDCOL"
 
 export PATH  
 export PS1
+
+# Use the DirB directory bookmarks tool
+source ~/.bashDirB
