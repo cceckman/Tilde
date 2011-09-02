@@ -7,6 +7,7 @@ alias del='rm'
 alias matrix='cmatrix -sab'
 alias la='ls -la'
 alias pd="pushd"
+alias gpp="g++"
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
@@ -14,7 +15,7 @@ PATH="$HOME/scripts:${PATH}"
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
-PS1="$PROMPTCOL(\A) \W \$:$ENDCOL"
+PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 
 export PATH  
 export PS1
