@@ -8,6 +8,7 @@ alias matrix='cmatrix -sab'
 alias la='ls -la'
 alias pd="pushd"
 alias gpp="g++"
+alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
