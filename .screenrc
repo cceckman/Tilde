@@ -8,5 +8,3 @@ screen -t top 1 top
 screen -t tilde 2 bash --rcfile ~/.bashrc.home -li
 screen -t cwd 3
 
-# And just for fun
-screen  4 cmatrix -sab 
