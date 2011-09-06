@@ -2,9 +2,8 @@
 
 # Merges in changes from a master branch into a sub-branch
 if git checkout master;
-then{
+then
     git pull;
     git checkout ssh;
     git merge master;
-};
 fi
