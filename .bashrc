@@ -9,6 +9,7 @@ alias la='ls -la'
 alias pd="pushd"
 alias gpp="g++"
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
+alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"

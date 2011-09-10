@@ -94,5 +94,5 @@ termcapinfo xterm*|linux*|rxvt*|Eterm* OP
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
 # use cmatrix as a screensaver
-blankerprg 'cmatrix -sab' 
-idle 180 blanker 
+# blankerprg 'cmatrix -sab' 
+# idle 180 blanker 
