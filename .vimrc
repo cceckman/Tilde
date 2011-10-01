@@ -64,3 +64,7 @@ map <c-h> <c-w>h
 "When vimrc is edited, reload it"
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
+"Set default printer to PDF"
+set pdev=pdf
+set printoptions=paper:letter,syntax:y,number:y,wrap:y
+

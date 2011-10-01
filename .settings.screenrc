@@ -73,7 +73,7 @@ bind \# colon "number "
 # %+Lw     - all window numbers & names (w) after current (+), with flags (L)
 # %-0<     - truncate up to here, placing zero spaces (0) from right margin (-)
 # Spaces outside of escapes and other text are interpreted literally.
-caption always "%{=r kg}%Y-%m-%d %0c %{=r kg} %H  %l  %{=r kg}%-Lw%{=r gk}%60L>%n* %t%{-}%+Lw%-0<"
+caption always "%{=r kg}%Y-%m-%d  %{=br kg}%0c %{=r kg} %H  %l  %{=r kg}%-Lw%{=r gk}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
 bindkey -k k8 caption splitonly
