@@ -1,5 +1,4 @@
-"Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide \
-" for this setup."
+"Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide for this setup."
 
 "Status line setup"
 set laststatus=2 "alawys show
@@ -68,3 +67,8 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 set pdev=pdf
 set printoptions=paper:letter,syntax:y,number:y,wrap:y
 
+" Set things to fold automatically
+set foldmethod=syntax
+" And store what's been folded
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
