@@ -22,5 +22,19 @@ PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 export PATH  
 export PS1
 
+if [ "$TERM" = "screen" ]; 
+then
+  screen_set_window_title () {
+      local HPWD="$PWD"
+      case $HPWD in 
+          $HOME) HPWD="~";;
+          $HOME/*) HPWD="~${HPWD#$HOME}";;
+    esac
+    printf '\ek%s\e\\' "$HPWD"
+    }
+    PROMPT_COMMAND="screen_set_window_title; $PROMPT_COMMAND"
+fi
+
+
 # Use the DirB directory bookmarks tool
 source ~/.bashDirB
