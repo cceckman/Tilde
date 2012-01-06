@@ -3,3 +3,13 @@
 # 1) Find broadcast address of current interface
 # 2) Ping broadcast address of current interface
 # 3) arp -a | grep [MAC address sought]
+
+BASE=199.111.195.
+
+i=40
+while (($i < 255))
+do
+    echo "Trying $BASE$i"
+    ping -c 4 $BASE$i | grep "bytes from"
+    ((i++))
+done

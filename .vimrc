@@ -32,7 +32,7 @@ if has("syntax")
     syntax on
 endif
 
-set tabstop=8
+set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
@@ -72,3 +72,8 @@ set foldmethod=syntax
 " And store what's been folded
 au BufWinLeave * mkview
 au BufWinEnter * silent loadview
+
+
+" Use 256 colors
+set t_Co=256
+colorscheme torte

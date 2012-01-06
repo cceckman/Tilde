@@ -10,6 +10,8 @@ alias pd="pushd"
 alias gpp="g++"
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
+alias e="vim"   #Because in vim, the command is e <filename>, so...
+alias gitup="git commit -a ; git push"   # Commit and upload
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
@@ -28,7 +30,7 @@ then
       local HPWD="$PWD"
       case $HPWD in 
           $HOME) HPWD="~";;
-          $HOME/*) HPWD="~${HPWD#$HOME}";;
+          *) HPWD=`basename "$HPWD"`;; 
     esac
     printf '\ek%s\e\\' "$HPWD"
     }
