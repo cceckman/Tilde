@@ -13,6 +13,7 @@ alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
+LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
