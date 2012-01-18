@@ -13,8 +13,13 @@ alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias gitup="git commit -a ; git push"   # Commit and upload
 
+# This is only for Linux
+# alias pbcopy='xclip -selection clipboard'
+# alias pbpaste='xclip -selection clipboard -o'
+
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
+LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
