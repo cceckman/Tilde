@@ -26,6 +26,8 @@ PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 
+PYTHONSTARTUP="~/.profile.py"
+
 export PATH  
 export PS1
 

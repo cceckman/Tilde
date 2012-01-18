@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Functions to get system information.
+# This works on OS X, not so much on Linux
+
+BATTERY=0
+ACPWR=1
+
+# Get clock rate
+clock()
+{
+    return `sysctl -n kern.clockrate`;
+}
+
+# Get battery percentage as an integer between 0 and 100
+BATTRETURN="";
+battpercent()
+{
+    # pmset output looks like this:
+#Currently drawing from 'AC Power'
+# -InternalBattery-0    100%; charged; 0:00 remaining
+
+    # This sed expression gets just the percent; however, it breaks when <10%
+    BRETURN=`pmset -g batt | sed -n 's/.*\([0-9]\{2\}\)%.*/\1/p'`;
+    if [ -z "$BRETURN" ]; then # <10%; nothing matched, so look for one-digit string
+        BRETURN=`pmset -g batt | sed -n 's/.*\([0-9]\{1\}\)%.*/\1/p'`; 
+    elif [ "$BRETURN" -eq "00" ]; then
+        BRETURN="100"
+    fi
+}
+
+# Gets the time remaining on the battery (to charge or to depletion)
+batttime()
+{
+    # pmset output looks like this:
+#Currently drawing from 'AC Power'
+# -InternalBattery-0    100%; charged; 0:00 remaining
+
+    BRETURN=`pmset -g batt | sed -n 's/.*\([0-9]\{1\}\):\([0-9]\{2\}\).*/\1:\2/p'`;
+}
+
+battcharging()
+{
+    # -z operand tests for zero length; if the grep returns nothing, it's set
+    BRETURN=`pmset -g batt | grep 'AC'`;
+    if [ -z  "$BRETURN" ]; then
+        return $BATTERY
+    else
+        return $ACPWR
+    fi
+}
+
+main()
+{ 
+    battpercent;
+    echo -n "${BRETURN}% charge (";
+    batttime;
+    battcharging;
+    if [ $ACPWR -eq $? ]; then
+        echo "AC: ${BRETURN} until charged";
+    else
+        echo "BBAT: ${BRETURN} until discharged";
+    fi
+}
+
+main
