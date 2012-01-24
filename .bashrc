@@ -41,7 +41,7 @@ LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 PATH="$HOME/dev/cool:${PATH}"
 
 # Prompt color/look mods...
-PROMPTCOL='\[\e[34m\]'
+PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 
