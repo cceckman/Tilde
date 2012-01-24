@@ -21,6 +21,9 @@ alias gitup="git commit -a ; git push"   # Commit and upload
 PATH="$HOME/scripts:${PATH}"
 LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 
+# To use the Cool interpreter...
+PATH="$HOME/dev/cool:${PATH}"
+
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'

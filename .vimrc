@@ -77,3 +77,8 @@ au BufWinEnter * silent loadview
 " Use 256 colors
 set t_Co=256
 colorscheme torte
+
+" from http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+" Highlight when over 80 chars
+highlight OverLength ctermbg=red ctermfg=white guibg=$592929
+match OverLength /\%81v.\+/
