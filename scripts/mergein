@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Merges in changes from a master branch into a sub-branch
+if git checkout master;
+then
+    git pull;
+    git checkout ssh;
+    git merge master;
+fi
