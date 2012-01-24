@@ -38,7 +38,7 @@ PATH="$HOME/scripts:${PATH}"
 LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 
 # Prompt color/look mods...
-PROMPTCOL='\[\e[36m\]'
+PROMPTCOL='\[\e[34m\]'
 ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 
