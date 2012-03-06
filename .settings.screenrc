@@ -3,8 +3,7 @@
 # Set an escape key which is handy but doesn't get in your way.
 # C-] is a really useful key, since it's hardly used elsewhere theses days.
 # escape ^]]
-# But if we're on SSH, that gets caught by our local screen session; better make it
-escape ^[[
+escape ^]]
 
 # Having just overridden the paste keybinding, bind a new one.
 # Enter copy mode with C-] C-[

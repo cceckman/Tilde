@@ -18,6 +18,7 @@ then
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
+alias ls='ls -G'
 alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
@@ -28,6 +29,10 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias gitup="git commit -a ; git push"   # Commit and upload
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC' # I'm mostly on OS X;
+                                                     # should figure out a way
+                                                     # to have if/thens in here
+alias ltspice="wine ~/dev/wineprogs/ltspice/scad3.exe"
 
 # This is only for Linux
 # alias pbcopy='xclip -selection clipboard'
@@ -46,6 +51,8 @@ ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
 
 PYTHONSTARTUP="~/.profile.py"
+
+export CLICOLOR="Yes"
 
 export PATH  
 export PS1
