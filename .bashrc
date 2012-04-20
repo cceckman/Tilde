@@ -29,10 +29,6 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias gitup="git commit -a ; git push"   # Commit and upload
-alias vlc='/Applications/VLC.app/Contents/MacOS/VLC' # I'm mostly on OS X;
-                                                     # should figure out a way
-                                                     # to have if/thens in here
-alias ltspice="wine ~/dev/wineprogs/ltspice/scad3.exe"
 
 # This is only for Linux
 # alias pbcopy='xclip -selection clipboard'
@@ -70,6 +66,3 @@ then
     PROMPT_COMMAND="screen_set_window_title; $PROMPT_COMMAND"
 fi
 
-
-# Use the DirB directory bookmarks tool
-source ~/.bashDirB
