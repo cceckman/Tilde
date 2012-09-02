@@ -22,7 +22,7 @@ alias ls='ls -G'
 alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
-alias la='ls -la'
+alias la='ls -lah'
 alias pd="pushd"
 alias gpp="g++"
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
@@ -65,4 +65,7 @@ then
     }
     PROMPT_COMMAND="screen_set_window_title; $PROMPT_COMMAND"
 fi
+
+# Enable vi mode; hit escape to use
+set -o vi
 
