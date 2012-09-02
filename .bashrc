@@ -18,7 +18,7 @@ then
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
-alias ls='ls -G'
+alias ls='ls -G --color=auto'
 alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
