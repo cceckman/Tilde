@@ -48,6 +48,17 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" Use space to center screen on current line in normal mode
+nmap <space> zz
+
+" Use 'comma' shortcuts for comments
+" single-line
+map ,/ :s/^/\/\//<CR>
+map ,? :s/^\/\///<CR>
+" multi-line
+map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
+
+
 " Add the virtualenv's site-packages to vim path"
 " py << EOF
 "import os.path
@@ -83,4 +94,8 @@ colorscheme torte
 " highlight OverLength ctermbg=red ctermfg=white guibg=$592929
 " match OverLength /\%81v.\+/
 
+" Nice little hack; allow :W to do :w
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
+set cursorline

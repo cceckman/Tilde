@@ -18,7 +18,7 @@ then
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
-alias ls='ls -G --color=auto'
+alias ls='ls -G'
 alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
@@ -29,6 +29,7 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias gitup="git commit -a ; git push"   # Commit and upload
+alias gcc-arm="arm-none-eabi-gcc"       # easier-to-remember alternative to the full YAGARTO command
 
 # This is only for Linux
 # alias pbcopy='xclip -selection clipboard'
@@ -37,6 +38,13 @@ alias gitup="git commit -a ; git push"   # Commit and upload
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
 LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
+
+# And to ensure CUDA is in the PATH:
+PATH="/usr/local/cuda/bin:${PATH}"
+export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
+
+# Ensure YAGARTO is in the PATH...
+PATH="${PATH}:${HOME}/dev/raspi/yagarto/yagarto-4.7.1/bin:${HOME}/dev/raspi/yagarto/yagarto-4.7.1/tools"
 
 # To use the Cool interpreter...
 PATH="$HOME/dev/cool:${PATH}"
