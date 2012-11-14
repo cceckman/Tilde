@@ -5,6 +5,6 @@ source $HOME/.settings.screenrc
 
 # Default windows
 screen -t top 1 top
-screen -t tilde 2 bash --rcfile ~/.bashrc.home -li
+screen -t tilde 2 bash
 screen -t cwd 3
 
