@@ -44,10 +44,19 @@ PATH="/usr/local/cuda/bin:${PATH}"
 export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
 
 # Ensure YAGARTO is in the PATH...
-PATH="${PATH}:${HOME}/dev/raspi/yagarto/yagarto-4.7.1/bin:${HOME}/dev/raspi/yagarto/yagarto-4.7.1/tools"
+PATH="${PATH}:${HOME}/dev/yagarto/yagarto-4.7.1/bin:${HOME}/dev/yagarto/yagarto-4.7.1/tools"
+
+# Ensure GNU autoconf is in PATH
+PATH="${PATH}:/usr/local/bin"
 
 # To use the Cool interpreter...
-PATH="$HOME/dev/cool:${PATH}"
+#PATH="$HOME/dev/cool:${PATH}"
+
+# To use lejos
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
+export NXJ_HOME=~/dev/lejos_nxj
+export DYLD_LIBRARY_PATH=$NXJ_HOME/bin
+PATH="${PATH}:${JAVA_HOME}/bin:${NXJ_HOME}/bin"
 
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
