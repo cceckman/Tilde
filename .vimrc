@@ -14,8 +14,8 @@ set number
 
 "Allow backspace over EOL...like every other text editor"
 set backspace=indent,eol,start
-"Make ii escape insert mode
-inoremap ii <Esc>
+"Make jj escape insert mode
+inoremap jj <Esc>
 
 filetype off
 call pathogen#infect()
