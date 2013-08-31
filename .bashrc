@@ -35,6 +35,9 @@ alias gcc-arm="arm-none-eabi-gcc"       # easier-to-remember alternative to the 
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
 
+# To use macports
+PATH="/opt/local/bin:$PATH"
+
 # To use custom bash scripts in the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
 LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
@@ -56,7 +59,7 @@ PATH="${PATH}:/usr/local/bin"
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
 export NXJ_HOME=~/dev/lejos_nxj
 export DYLD_LIBRARY_PATH=$NXJ_HOME/bin
-PATH="${PATH}:${JAVA_HOME}/bin:${NXJ_HOME}/bin"
+#PATH="${PATH}:${JAVA_HOME}/bin:${NXJ_HOME}/bin"
 
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
@@ -86,3 +89,6 @@ fi
 # Enable vi mode; hit escape to use
 set -o vi
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

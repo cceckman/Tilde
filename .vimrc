@@ -27,10 +27,13 @@ map <Leader>[ <Plug>TaskList
 "Powerful undo editor"
 map <leader>g :GundoToggle<CR>
 
-"Set up syntax preverences"
+"Set up syntax preferences"
 if has("syntax")
     syntax on
 endif
+"au BufRead,BufNewFile *.tsc set filetype=typescript
+"au! Syntax typescript source ~/.vim/syntax/typescript.vim
+
 
 set tabstop=4
 set expandtab
@@ -81,8 +84,8 @@ set printoptions=paper:letter,syntax:y,number:y,wrap:y
 " Set things to fold automatically
 set foldmethod=syntax
 " And store what's been folded
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+" au BufWinLeave * mkview
+" au BufWinEnter * silent loadview
 
 
 " Use 256 colors
