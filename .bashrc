@@ -55,12 +55,6 @@ PATH="${PATH}:/usr/local/bin"
 # To use the Cool interpreter...
 #PATH="$HOME/dev/cool:${PATH}"
 
-# To use lejos
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home
-export NXJ_HOME=~/dev/lejos_nxj
-export DYLD_LIBRARY_PATH=$NXJ_HOME/bin
-#PATH="${PATH}:${JAVA_HOME}/bin:${NXJ_HOME}/bin"
-
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'

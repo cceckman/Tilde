@@ -77,7 +77,7 @@ bind \# colon "number "
 # caption always "%{=r kg}%Y-%m-%d  %{=br kg}%0c %{=r kg} %H  %l  %{=r kg}%-Lw%{=r gk}%60L>%n* %t%{-}%+Lw%-0<"
 #
 ## Backtick: Get output of a command
-backtick 1 5 5 pmset -g batt | tail -n 1 | sed -n "s/.*\([0-9]*%\).*\([0-9]:[0-9]{2}\)/\1 \2/p"
+#backtick 1 5 5 pmset -g batt | tail -n 1 | sed -n "s/.*\([0-9]*%\).*\([0-9]:[0-9]{2}\)/\1 \2/p"
 caption always "%{=r kg}%Y-%m-%d  %{=br kg}%0c %{=r kg} %H  %1` %{=r kg}%-Lw%{=r gk}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
