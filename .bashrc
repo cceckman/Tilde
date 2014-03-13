@@ -23,15 +23,8 @@ alias dir='ls' # In case I start using the windows CLI
 alias del='rm'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
-alias pd="pushd"
-alias gpp="g++"
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
-alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
-alias gitup="git commit -a ; git push"   # Commit and upload
-alias gcc-arm="arm-none-eabi-gcc"       # easier-to-remember alternative to the full YAGARTO command
-alias c="gcc -Wall --pedantic"
-alias pkgup="sudo apt-get update && sudo apt-get upgrade -y"
 alias node="nodejs"
 
 # This is only for Linux
@@ -49,21 +42,10 @@ LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 PATH="/usr/local/cuda/bin:${PATH}"
 export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
 
-# Ensure YAGARTO is in the PATH...
-PATH="${PATH}:${HOME}/dev/yagarto/yagarto-4.7.1/bin:${HOME}/dev/yagarto/yagarto-4.7.1/tools"
-
-# Ensure GNU autoconf is in PATH
-PATH="${PATH}:/usr/local/bin"
-
-# To use the Cool interpreter...
-#PATH="$HOME/dev/cool:${PATH}"
-
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
-
-PYTHONSTARTUP="~/.profile.py"
 
 export CLICOLOR="Yes"
 
@@ -86,9 +68,3 @@ fi
 # Enable vi mode; hit escape to use
 set -o vi
 
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-### Added for Pebble toolkit
-export PATH="~/pebble/PebbleSDK-2.0.0/bin:$PATH"
