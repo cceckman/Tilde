@@ -30,6 +30,9 @@ alias makelog="rm make.log; touch make.log; make > make.log & tail -f make.log"
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias gitup="git commit -a ; git push"   # Commit and upload
 alias gcc-arm="arm-none-eabi-gcc"       # easier-to-remember alternative to the full YAGARTO command
+alias c="gcc -Wall --pedantic"
+alias pkgup="sudo apt-get update && sudo apt-get upgrade -y"
+alias node="nodejs"
 
 # This is only for Linux
 # alias pbcopy='xclip -selection clipboard'
@@ -86,3 +89,6 @@ set -o vi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Added for Pebble toolkit
+export PATH="~/pebble/PebbleSDK-2.0.0/bin:$PATH"
