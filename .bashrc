@@ -3,15 +3,15 @@
 # then automatically put us into a screen(1) session.   Only try once
 # -- if $STARTED_SCREEN is set, don't try it again, to avoid looping
 # if screen fails for some reason.
-if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x ]
-then
-      STARTED_SCREEN=1 ; export STARTED_SCREEN
-        [ -d $HOME/lib/screen-logs ] || mkdir -p $HOME/lib/screen-logs
-          sleep 1
-            screen -RR && exit 0
-              # normally, execution of this rc script ends here...
-                echo "Screen failed! continuing with normal bash startup"
-            fi
+#if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x ]
+#then
+#      STARTED_SCREEN=1 ; export STARTED_SCREEN
+#        [ -d $HOME/lib/screen-logs ] || mkdir -p $HOME/lib/screen-logs
+#          sleep 1
+#            screen -RR && exit 0
+#              # normally, execution of this rc script ends here...
+#                echo "Screen failed! continuing with normal bash startup"
+#            fi
             # [end of auto-screen snippet]
 
 # Aliases (for mnemonics etc) 
@@ -27,16 +27,19 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias node="nodejs"
 
+# emacs isn't for everyone.
+export EDITOR=vim
+
 # This is only for Linux
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
 
-# To use macports
-PATH="/opt/local/bin:$PATH"
-
-# To use custom bash scripts in the Tilde repo...
+# To use custom bash scripts from the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
-LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
+# Apparently this isn't picked up from .profile...
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
 # And to ensure CUDA is in the PATH:
 PATH="/usr/local/cuda/bin:${PATH}"

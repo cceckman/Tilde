@@ -5,6 +5,6 @@ source $HOME/.settings.screenrc
 
 # Default windows
 screen -t top 1 top
-screen -t tilde 2 bash
-screen -t cwd 3
+screen -t irc 2 bash
+screen 3 bash
 

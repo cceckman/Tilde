@@ -1,0 +1,11 @@
+.bash_history
+.bash_logout
+.bazel/
+.cache/
+.oracle_jre_usage/
+.viminfo
+.ssh/
+.profile
+.gitconfig
+bin/
+cce3/
