@@ -104,6 +104,9 @@ then
   pacman --noconfirm -S grub
   grub-install --target=i386-pc --recheck /dev/sda
   grub-mkconfig -o /boot/grub/grub.cfg
+  
+  # And ensure that dhcpcd starts next time around
+  systemctl enable dhcpcd@$(ip link | grep -Po 'en[^:]*(?=:)').service
 fi
   
 set +v
