@@ -66,7 +66,7 @@ then
 
   # Generate /etc/fstab, and hop in to the chroot with the second part of the script.
   genfstab -p /mnt >> /mnt/etc/fstab || exit
-  cp $(realname $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
+  cp $(realpath $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
   exit # TODO: Don't break here.
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
