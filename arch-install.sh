@@ -82,6 +82,9 @@ then
   echo -n ">"
   read hostname
   echo "$hostname" > /etc/hostname
+  # Set root password:
+  echo "Set root password: "
+  passwd
 
   # Set locale settings
   # Ignore time zone; we run in UTC
@@ -96,10 +99,6 @@ then
   sed -i "s/^MODULES=\"/MODULES=\"$hv_modules /" /etc/mkinitcpio.conf
 
   mkinitcpio -p linux
-
-  # Set root password:
-  echo "Set root password: "
-  passwd
 
   # Install GRUB
   pacman --noconfirm -S grub
