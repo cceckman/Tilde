@@ -12,24 +12,24 @@
 
 # To run:
 # curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
-# chmox +x /tmp/arch-install.sh && /tmp/arch-install.sh
+# chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh
 
 echo "Hi! This script isn't ready for prime time yet; contact @cceckman if you want to use it." && exit
 
 set -v
 
-# Only allow the above invocation (curl -o- etc.)
-if [[ "$BASH_SOURCE" != ""]]
+# Only allow the above invocation (as a script, not piped into Bash.)
+if [[ "$BASH_SOURCE" == "" ]]
 then
   echo "Whoop! Execute this script, don't pipe it to a shell!"
   exit
 fi
 
 ME=$(realpath "$BASH_SOURCE")
-if [[ "$BASH_SOURCE" != "$0"]]
+if [[ "$BASH_SOURCE" != "$0" ]]
 then
   shift
-  if [[ "$BASH_SOURCE" != "$0"]]
+  if [[ "$BASH_SOURCE" != "$0" ]]
   then
     echo "Assert failed! :-("
     exit 1
@@ -44,15 +44,14 @@ then
   timedatectl set-ntp true # enable NTP-based time.
 
   # Set up the disk: use GPT (rather than MBR); leave 1MiB for GRUB; and leave 8GB for swap.
-  parted --script /dev/sda mklabel gpt
-  parted --script --align optimal /dev/sda -- mkpart primary 0% 1M set 1 bios_grub on name 1 grub
-  parted --script --align optimal /dev/sda -- mkpart primary ext4 1M -8GiB name 2 root
-  parted --script --align optimal /dev/sda -- mkpart primary linux-swap -8GiB 100% name 3 swap
+  parted --script /dev/sda mklabel gpt || exit
+  parted --script --align optimal /dev/sda -- mkpart primary 0% 1M set 1 bios_grub on name 1 grub || exit
+  parted --script --align optimal /dev/sda -- mkpart primary ext4 1M -8GiB name 2 root || exit
+  parted --script --align optimal /dev/sda -- mkpart primary linux-swap -8GiB 100% name 3 swap || exit
 
   # Format root partition and swap
-  mkfs -t ext4 /dev/sda2 && mount /dev/sda2 /mnt
-  mkswap /dev/sda3 && swapon /dev/sda3
-
+  mkfs -t ext4 /dev/sda2 && mount /dev/sda2 /mnt || exit
+  mkswap /dev/sda3 && swapon /dev/sda3 || exit
 
   # Update mirror list and package DB. This isn’t the most optimal assignment, but good enough till we get really started.
   cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup # back up mirror list
@@ -62,16 +61,19 @@ then
   pacman --noconfirm -Scc # clean up space
 
   # Install...
-  pacstrap /mnt base
+  pacstrap /mnt base || exit
   # Wait...
 
   # Generate /etc/fstab, and hop in to the chroot with the second part of the script.
-  genfstab -p /mnt >> /mnt/etc/fstab
-  cp $(realname $BASH_SOURCE) /mnt/usr/bin/arch-install.sh
+  genfstab -p /mnt >> /mnt/etc/fstab || exit
+  cp $(realname $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
+  exit # TODO: Don't break here.
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
   # Restart- remove the drive when it's down, then continue.
   echo "Remove the CD image, then run TODO(cceckman) when reboot is done."
+  echo "Press enter to continue..."
+  read
   shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
