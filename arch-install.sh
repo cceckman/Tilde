@@ -143,7 +143,7 @@ then
   # TODO grab Tilde, do key-setup stuff.
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 java8-openjdk"
+  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
   pacman --noconfirm -S $DEV_PKGS
   # TODO add Bazel
   # TODO add private repositories
