@@ -115,22 +115,90 @@ then
 elif [[ "$1" == 'friendlify' ]]
 then
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
-
-  # TODO configure user(s)
-
   pacman --noconfirm -Syyu
   
   # SYSTEM
-  SYS_PKGS="sudo openssh intel-ucode"
+  SYS_PKGS="sudo openssh intel-ucode mlocate"
   pacman --noconfirm -S $SYS_PKGS
   grub-mkconfig -o /boot/grub/grub.cfg # Update intel microcode
+  updatedb # Update 'locate' database
   # TODO consider Mosh
   # TODO consider two-factor with U2F: https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html
   ## (libu2f-host)
   
-  # TODO configure SSHd before enabling
-  systemctl --now enable sshd.socket sshd@.service
+  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel"
+  visudo
   
+  groupadd ssh-users
+  
+  # Set up user before starting sshd
+  echo "Pick a username for login:"
+  echo -n ">"
+  read newuser
+  useradd -m -G wheel,ssh-users $newuser
+  echo "Set password for $newuser:"
+  passwd $newuser
+  
+  # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
+  sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
+  sed -i 's/^PasswordAuthentication .*$//g' /etc/ssh/sshd_config
+  sed -i 's/^ChallengeResponseAuthentication .*$//g' /etc/ssh/sshd_config
+  sed -i 's/^PubkeyAuthentication .*$//g' /etc/ssh/sshd_config
+  sed -i 's/^Protocol .*$//g' /etc/ssh/sshd_config
+  cat << HRD >>/etc/ssh/sshd_config
+AllowGroups ssh-users
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+PubkeyAuthentication yes
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+HRD
+
+  cat << HRD >>/etc/ssh/ssh_config
+# Github needs diffie-hellman-group-exchange-sha1 some of the time but not always.
+Host github.com
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1
+Host *
+  PasswordAuthentication no
+  ChallengeResponseAuthentication no
+  PubkeyAuthentication yes
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+HRD
+
+  # Make good, new, moduli...
+  awk '$5 > 2000' /etc/ssh/moduli > "${HOME}/moduli"
+  mv "${HOME}/moduli" /etc/ssh/moduli
+  if [ ! -e /tmp/foo ] || (( $(wc -l /tmp/foo | cut -f1 -d' ' ) == 0 ))
+  then
+    ssh-keygen -G /etc/ssh/moduli.all -b 4096
+    ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.all
+    mv /etc/ssh/moduli.safe /etc/ssh/moduli
+    rm /etc/ssh/moduli.all
+  fi
+  # Make new keys
+  pushd /etc/ssh
+  rm ssh_host_*key*
+  ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
+  ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
+  popd
+  
+  echo "Generating keys for $newuser"
+  sudo -u $newuser /bin/bash <<'HRD'
+cd $HOME
+ssh-keygen -t ed25519 -o -a 100
+ssh-keygen -t rsa -b 4096 -o -a 100
+HRD
+  
+  systemctl --now enable sshd.socket sshd@.service
+  echo "System packages installed! Press enter to continue."
+  read
   
   # USABILITY
   ## TODO learn tmux too...
@@ -139,14 +207,17 @@ then
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS
   # TODO turn on numlock by default.
-  
   # TODO grab Tilde, do key-setup stuff.
+  echo "Useful packages installed! Press enter to continue."
+  read
   
   # DEVELOPMENT
   DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
   pacman --noconfirm -S $DEV_PKGS
   # TODO add Bazel
   # TODO add private repositories
+  echo "Developer packages installed! Press enter to complete."
+  read
   
 else
   echo "Unrecognized command $1! Whoops!"
