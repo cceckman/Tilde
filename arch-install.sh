@@ -12,10 +12,10 @@
 
 # To run:
 # curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
-# chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh
+# chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh base-install
 
 # Modes:
-## No additional arguments -> assume in live image, set up partitions, etc. on /dev/sda
+## base-install -> assume in live image, set up partitions, etc. on /dev/sda
 ## setup-chroot -> Assume in live image, within chroot of the new system; set up root password, hostname, networking, etc.
 ## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, my usual aliases, etc.
 
@@ -41,7 +41,7 @@ then
   fi
 fi
 
-if [[ "$1" == '' ]]
+if [[ "$1" == 'base-install' ]]
 then
   # Base system install.
 
@@ -148,6 +148,8 @@ then
   # TODO add Bazel
   # TODO add private repositories
   
+else
+  echo "Unrecognized command $1! Whoops!"
 fi
   
 set +v
