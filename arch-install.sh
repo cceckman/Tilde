@@ -14,6 +14,11 @@
 # curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
 # chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh
 
+# Modes:
+## No additional arguments -> assume in live image, set up partitions, etc. on /dev/sda
+## setup-chroot -> Assume in live image, within chroot of the new system; set up root password, hostname, networking, etc.
+## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, my usual aliases, etc.
+
 echo "Hi! This script isn't ready for prime time yet; contact @cceckman if you want to use it." && exit
 
 set -v
@@ -107,6 +112,42 @@ then
   
   # And ensure that dhcpcd starts next time around
   systemctl enable dhcpcd@$(ip link | grep -Po 'en[^:]*(?=:)').service
+elif [[ "$1" == 'friendlify' ]]
+then
+  # Make the system actually usable. Run from within chroot, or from the newly-booted system.
+
+  # TODO configure user(s)
+
+  pacman --noconfirm -Syyu
+  
+  # SYSTEM
+  SYS_PKGS="sudo openssh intel-ucode"
+  pacman --noconfirm -S $SYS_PKGS
+  grub-mkconfig -o /boot/grub/grub.cfg # Update intel microcode
+  # TODO consider Mosh
+  # TODO consider two-factor with U2F: https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html
+  ## (libu2f-host)
+  
+  # TODO configure SSHd before enabling
+  systemctl --now enable sshd.socket sshd@.service
+  
+  
+  # USABILITY
+  ## TODO learn tmux too...
+  STD_PKGS="vim screen ttf-dejavu gpm"
+  # TODO add display drivers, X, & GUI.
+  # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
+  pacman --noconfirm -S $STD_PKGS
+  # TODO turn on numlock by default.
+  
+  # TODO grab Tilde, do key-setup stuff.
+  
+  # DEVELOPMENT
+  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 java8-openjdk"
+  pacman --noconfirm -S $DEV_PKGS
+  # TODO add Bazel
+  # TODO add private repositories
+  
 fi
   
 set +v
