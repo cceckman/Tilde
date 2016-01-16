@@ -125,13 +125,11 @@ then
   # TODO consider two-factor with U2F: https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html
   ## (libu2f-host)
   
+  # Set up groups and new user
   echo "Add wheel to sudoers by uncommenting the line starting with # %wheel"
   read
   visudo
-  
   groupadd ssh-users
-  
-  # Set up user before starting sshd
   echo "Pick a username for login:"
   echo -n ">"
   read newuser
@@ -193,12 +191,51 @@ HRD
   
   # USABILITY
   ## TODO learn tmux too...
-  STD_PKGS="vim screen ttf-dejavu gpm"
+  STD_PKGS="vim screen ttf-dejavu gpm ssmtp"
   # TODO add display drivers, X, & GUI.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS
+  
+  mailuser=cceckman.sendacct
+  maildom=gmail.com
+  echo "Enter the password for ${mailuser}@${maildom}:"
+  read mailpass
+  
+  cat - >/etc/ssmtp/ssmtp.conf <<-HRD
+  # The user that gets all the mails (UID < 1000, usually the admin)
+  root=${mailuser}@${maildom}
+
+  # The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
+  # See also http://mail.google.com/support/bin/answer.py?answer=78799
+  mailhub=smtp.$maildom:587
+
+  # The address where the mail appears to come from for user authentication.
+  rewriteDomain=$maildom
+
+  # The full hostname
+  hostname=localhost
+
+  # Use SSL/TLS before starting negotiation
+  UseTLS=Yes
+  UseSTARTTLS=Yes
+
+  # Username/Password
+  AuthUser=$mailuser
+  AuthPass=$mailpass
+
+  # Email 'From header's can override the default domain?
+  FromLineOverride=yes
+HRD
+  unset mailuser
+  unset mailpass
+  unset maildom
+  
+  groupadd ssmtp
+  chown :ssmtp /etc/ssmtp/ssmtp.conf
+  chmod 640 /etc/ssmtp/ssmtp.conf
+  chmod g+s /usr/bin/ssmtp
+  
   # TODO turn on numlock by default.
-  # TODO grab Tilde, do key-setup stuff.
   echo "Useful packages installed! Press enter to continue."
   read
   
@@ -223,13 +260,14 @@ then
   ssh-keygen -t ed25519 -f $edkey  -C $(hostname) -o -a 100
   ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -C $(hostname) -o -a 100
   
-  echo "Go to https://github.com/settings/ssh and add the following key: "
-  cat ${edkey}.pub
+  echo -n "Enter an e-mail address you have access to: "
+  read email
+  
+  cat ${edkey}.pub | mail -s "Your new SSH public key" $email
+  echo "Sent public key to $email; add it at https://github.com/settings/ssh. When that's done, hit Enter."
   read
   
   git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . && rm -rf Tilde
-  
-  
 else
   echo "Unrecognized command $1! Whoops!"
 fi
