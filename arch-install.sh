@@ -211,17 +211,25 @@ HRD
   read
   
   # TODO set up /home/$newuser with Tilde
-  sudo -u $newuser $0 user-setup
+  sudo -u $newuser -- $0 user-setup
 elif [[ "$1" == 'user-setup' ]]
 then
   # Remember, s/newuser/USER/ below.
-  echo "Set password for $USER:"
   passwd $USER
 
   echo "Generating keys for $USER"
   cd $HOME
-  ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C $(hostname) -o -a 100
-  ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -C $(hostname) -o -a 100
+  edkey="$HOME/.ssh/id_ed25519"
+  ssh-keygen -t ed25519 -f $edkey  -C $(hostname) -o -a 100
+  ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -C $(hostname) -o -a 100
+  
+  echo "Go to https://github.com/settings/ssh and add the following key: "
+  cat ${edkey}.pub
+  read
+  
+  git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . && rm -rf Tilde
+  
+  
 else
   echo "Unrecognized command $1! Whoops!"
 fi
