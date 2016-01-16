@@ -126,7 +126,7 @@ then
   ## (libu2f-host)
   
   # Set up groups and new user
-  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel. Press enter do continue."
+  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel. Press enter to continue."
   read
   visudo
   groupadd ssh-users
