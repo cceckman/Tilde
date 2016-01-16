@@ -257,6 +257,9 @@ HRD
   
   # TODO set up /home/$newuser with Tilde
   sudo -u $newuser -- $0 user-setup
+  echo "All done! Hit enter to log out as root."
+  read
+  exit
 elif [[ "$1" == 'user-setup' ]]
 then
   echo "Generating keys for $USER"
@@ -265,14 +268,15 @@ then
   ssh-keygen -t ed25519 -f $edkey  -C $(hostname) -o -a 100
   ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -C $(hostname) -o -a 100
   
-  echo -n "Enter an e-mail address you have access to: "
+  echo -n "Enter an e-mail address you can read: "
   read email
   
-  cat ${edkey}.pub | mail -s "Your new SSH public key" $email
+  cat ${edkey}.pub | mail -s "Your new SSH public key on $(hostname)" $email
   echo "Sent public key to $email; add it at https://github.com/settings/ssh. When that's done, hit Enter."
   read
   
-  git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . && rm -rf Tilde
+  git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . 
+  rm -rf Tilde
 else
   echo "Unrecognized command $1! Whoops!"
 fi
