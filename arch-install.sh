@@ -169,17 +169,22 @@ Host *
 HRD
 
   # Make good, new, moduli...
-  awk '$5 > 2000' /etc/ssh/moduli > "${HOME}/moduli"
-  mv "${HOME}/moduli" /etc/ssh/moduli
-  if [ ! -e /tmp/foo ] || (( $(wc -l /tmp/foo | cut -f1 -d' ' ) == 0 ))
+  echo "Want to regenerate moduli? Y/n"
+  read genmoduli
+  if [[ "$genmoduli" == y* ]] || [[ "$genmoduli" == Y* ]]
   then
-    ssh-keygen -G /etc/ssh/moduli.all -b 4096
-    ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.all
-    mv /etc/ssh/moduli.safe /etc/ssh/moduli
-    rm /etc/ssh/moduli.all
+    awk '$5 > 2000' /etc/ssh/moduli > "${HOME}/moduli"
+    mv "${HOME}/moduli" /etc/ssh/moduli
+    if [ ! -e /tmp/foo ] || (( $(wc -l /tmp/foo | cut -f1 -d' ' ) == 0 ))
+    then
+      ssh-keygen -G /etc/ssh/moduli.all -b 4096
+      ssh-keygen -T /etc/ssh/moduli.safe -f /etc/ssh/moduli.all
+      mv /etc/ssh/moduli.safe /etc/ssh/moduli
+      rm /etc/ssh/moduli.all
+    fi
   fi
   # Make new host keys
-  pushd /etc/ssh
+  pushd /etc/ssh/
   rm ssh_host_*key*
   ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
   ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
@@ -202,29 +207,29 @@ HRD
   read mailpass
   
   cat - >/etc/ssmtp/ssmtp.conf <<-HRD
-  # The user that gets all the mails (UID < 1000, usually the admin)
-  root=${mailuser}@${maildom}
+	# The user that gets all the mails (UID < 1000, usually the admin)
+	root=${mailuser}@${maildom}
 
-  # The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
-  # See also http://mail.google.com/support/bin/answer.py?answer=78799
-  mailhub=smtp.$maildom:587
+	# The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
+	# See also http://mail.google.com/support/bin/answer.py?answer=78799
+	mailhub=smtp.$maildom:587
 
-  # The address where the mail appears to come from for user authentication.
-  rewriteDomain=$maildom
+	# The address where the mail appears to come from for user authentication.
+	rewriteDomain=$maildom
 
-  # The full hostname
-  hostname=localhost
+	# The full hostname
+	hostname=localhost
 
-  # Use SSL/TLS before starting negotiation
-  UseTLS=Yes
-  UseSTARTTLS=Yes
+	# Use SSL/TLS before starting negotiation
+	UseTLS=Yes
+	UseSTARTTLS=Yes
 
-  # Username/Password
-  AuthUser=$mailuser
-  AuthPass=$mailpass
+	# Username/Password
+	AuthUser=$mailuser
+	AuthPass=$mailpass
 
-  # Email 'From header's can override the default domain?
-  FromLineOverride=yes
+	# Email 'From header's can override the default domain?
+	FromLineOverride=yes
 HRD
   unset mailuser
   unset mailpass
@@ -240,7 +245,7 @@ HRD
   read
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel git llvm-llibs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
+  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
   pacman --noconfirm -S $DEV_PKGS
   # TODO add Bazel
   # TODO add private repositories
