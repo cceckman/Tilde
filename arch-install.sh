@@ -126,14 +126,17 @@ then
   ## (libu2f-host)
   
   # Set up groups and new user
-  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel"
+  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel. Press enter do continue."
   read
   visudo
   groupadd ssh-users
+  groupadd ssmtp
   echo "Pick a username for login:"
   echo -n ">"
   read newuser
-  useradd -m -G wheel,ssh-users $newuser
+  useradd -m -G wheel,ssh-users,ssmtp $newuser
+  # Remember, s/newuser/USER/ below.
+  passwd $USER
   
   # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
   sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
@@ -141,7 +144,7 @@ then
   sed -i 's/^ChallengeResponseAuthentication .*$//g' /etc/ssh/sshd_config
   sed -i 's/^PubkeyAuthentication .*$//g' /etc/ssh/sshd_config
   sed -i 's/^Protocol .*$//g' /etc/ssh/sshd_config
-  cat << HRD >>/etc/ssh/sshd_config
+  cat - << HRD >>/etc/ssh/sshd_config
 AllowGroups ssh-users
 PermitRootLogin no
 PasswordAuthentication no
@@ -154,7 +157,7 @@ Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
 HRD
 
-  cat << HRD >>/etc/ssh/ssh_config
+  cat - << HRD >>/etc/ssh/ssh_config
 # Github needs diffie-hellman-group-exchange-sha1 some of the time but not always.
 Host github.com
   KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1
@@ -206,7 +209,7 @@ HRD
   echo "Enter the password for ${mailuser}@${maildom}:"
   read mailpass
   
-  cat - >/etc/ssmtp/ssmtp.conf <<-HRD
+  cat - <<-HRD >/etc/ssmtp/ssmtp.conf
 	# The user that gets all the mails (UID < 1000, usually the admin)
 	root=${mailuser}@${maildom}
 
@@ -235,8 +238,8 @@ HRD
   unset mailpass
   unset maildom
   
-  groupadd ssmtp
   chown :ssmtp /etc/ssmtp/ssmtp.conf
+  chown :ssmtp /usr/bin/ssmtp
   chmod 640 /etc/ssmtp/ssmtp.conf
   chmod g+s /usr/bin/ssmtp
   
@@ -256,9 +259,6 @@ HRD
   sudo -u $newuser -- $0 user-setup
 elif [[ "$1" == 'user-setup' ]]
 then
-  # Remember, s/newuser/USER/ below.
-  passwd $USER
-
   echo "Generating keys for $USER"
   cd $HOME
   edkey="$HOME/.ssh/id_ed25519"
