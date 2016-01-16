@@ -117,7 +117,7 @@ then
   pacman --noconfirm -Syyu
   
   # SYSTEM
-  SYS_PKGS="sudo openssh intel-ucode mlocate"
+  SYS_PKGS="sudo openssh intel-ucode mlocate tcpdump"
   pacman --noconfirm -S $SYS_PKGS
   grub-mkconfig -o /boot/grub/grub.cfg # Update intel microcode
   updatedb # Update 'locate' database
@@ -228,7 +228,7 @@ HRD
 	UseSTARTTLS=Yes
 
 	# Username/Password
-	AuthUser=$mailuser
+	AuthUser=${mailuser}@${maildom}
 	AuthPass=$mailpass
 
 	# Email 'From header's can override the default domain?
