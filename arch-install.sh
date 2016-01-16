@@ -213,16 +213,15 @@ HRD
   # TODO set up /home/$newuser with Tilde
   sudo -u $newuser $0 user-setup
 elif [[ "$1" == 'user-setup' ]]
-  echo "Set password for $newuser:"
-  passwd $newuser
+then
+  # Remember, s/newuser/USER/ below.
+  echo "Set password for $USER:"
+  passwd $USER
 
-  echo "Generating keys for $newuser"
+  echo "Generating keys for $USER"
   cd $HOME
   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C $(hostname) -o -a 100
   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -C $(hostname) -o -a 100
-  
-  
-
 else
   echo "Unrecognized command $1! Whoops!"
 fi
