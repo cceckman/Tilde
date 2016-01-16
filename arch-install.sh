@@ -17,11 +17,10 @@
 # Modes:
 ## base-install -> assume in live image, set up partitions, etc. on /dev/sda
 ## setup-chroot -> Assume in live image, within chroot of the new system; set up root password, hostname, networking, etc.
-## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, my usual aliases, etc.
+## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, etc.
+## user-setup -> Started as the new user; set up keys, password, Tilde repository, etc.
 
 echo "Hi! This script isn't ready for prime time yet; contact @cceckman if you want to use it." && exit
-
-set -v
 
 # Only allow the above invocation (as a script, not piped into Bash.)
 if [[ "$BASH_SOURCE" == "" ]]
@@ -127,6 +126,7 @@ then
   ## (libu2f-host)
   
   echo "Add wheel to sudoers by uncommenting the line starting with # %wheel"
+  read
   visudo
   
   groupadd ssh-users
@@ -136,8 +136,6 @@ then
   echo -n ">"
   read newuser
   useradd -m -G wheel,ssh-users $newuser
-  echo "Set password for $newuser:"
-  passwd $newuser
   
   # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
   sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
@@ -182,19 +180,12 @@ HRD
     mv /etc/ssh/moduli.safe /etc/ssh/moduli
     rm /etc/ssh/moduli.all
   fi
-  # Make new keys
+  # Make new host keys
   pushd /etc/ssh
   rm ssh_host_*key*
   ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
   ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
   popd
-  
-  echo "Generating keys for $newuser"
-  sudo -u $newuser /bin/bash <<'HRD'
-cd $HOME
-ssh-keygen -t ed25519 -o -a 100
-ssh-keygen -t rsa -b 4096 -o -a 100
-HRD
   
   systemctl --now enable sshd.socket sshd@.service
   echo "System packages installed! Press enter to continue."
@@ -212,15 +203,26 @@ HRD
   read
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
+  DEV_PKGS="base-devel git llvm-llibs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
   pacman --noconfirm -S $DEV_PKGS
   # TODO add Bazel
   # TODO add private repositories
-  echo "Developer packages installed! Press enter to complete."
+  echo "Developer packages installed! Press enter to continue."
   read
   
+  # TODO set up /home/$newuser with Tilde
+  sudo -u $newuser $0 user-setup
+elif [[ "$1" == 'user-setup' ]]
+  echo "Set password for $newuser:"
+  passwd $newuser
+
+  echo "Generating keys for $newuser"
+  cd $HOME
+  ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C $(hostname) -o -a 100
+  ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -C $(hostname) -o -a 100
+  
+  
+
 else
   echo "Unrecognized command $1! Whoops!"
 fi
-  
-set +v
