@@ -137,8 +137,7 @@ then
   echo -n ">"
   read newuser
   useradd -m -G wheel,ssh-users,ssmtp $newuser
-  # Remember, s/newuser/USER/ below.
-  passwd $USER
+  passwd $newuser
   
   # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
   sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
