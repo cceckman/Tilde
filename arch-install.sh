@@ -20,7 +20,9 @@
 ## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, etc.
 ## user-setup -> Started as the new user; set up keys, password, Tilde repository, etc.
 
-echo "Hi! This script isn't ready for prime time yet; contact @cceckman if you want to use it." && exit
+echo "Hi! This script isn't necessarily ready for prime time."
+echo "If you know what you're doing, hit enter to start."
+read
 
 # Only allow the above invocation (as a script, not piped into Bash.)
 if [[ "$BASH_SOURCE" == "" ]]
@@ -271,8 +273,8 @@ then
   echo -n "Enter an e-mail address you can read: "
   read email
   
-  cat ${edkey}.pub | mail -s "Your new SSH public key on $(hostname)" $email
-  echo "Sent public key to $email; add it at https://github.com/settings/ssh. When that's done, hit Enter."
+  echo "Add this at  https://github.com/settings/ssh: " | cat - ${edkey}.pub | mail -s "Your new SSH public key on $(hostname)" $email
+  echo "Sent public key to $email; add it to Github, then press Enter."
   read
   
   git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . 
