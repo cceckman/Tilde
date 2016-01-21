@@ -251,15 +251,26 @@ HRD
   read
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel git llvm-libs clang go protobuf python2 jre8-openjdk jdk8-openjdk openjdk8-doc"
-  pacman --noconfirm -S $DEV_PKGS
-  # TODO add Bazel
+  DEV_PKGS="base-devel git go protobuf python2"
+  HS_PKGS="ghc cabal-install haddock happy alex"
+  JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
+  BUILD_PKGS="clang llvm-libs" # TODO add Bazel
+  pacman --noconfirm -S $DEV_PKGS $HS_PKGS $JAVA_PKGS $BUILD_PKGS
   # TODO add private repositories
   echo "Developer packages installed! Press enter to continue."
   read
   
-  # TODO set up /home/$newuser with Tilde
   sudo -u $newuser -- $0 user-setup
+  
+  # Set up X, display manager, and window manager.
+  # Starting out with xmonad is probably a bad idea, but sure!
+  pacman --noconfirm -S xorg-server xorg-server-utils xorg-drivers lxdm xmonad xmonad-contrib
+  sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
+  sed -i "s:^.*[^a-z]session=.*\$:session=$(which xmonad):" /etc/lxdm/lxdm.conf
+  systemctl enable lxdm.service
+  # TODO Make the login prompt prettier.
+  # TODO Include config for xmonad in Tilde.
+  
   echo "All done! Hit enter to log out as root."
   read
   exit
