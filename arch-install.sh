@@ -202,7 +202,7 @@ HRD
   
   # USABILITY
   ## TODO learn tmux too...
-  STD_PKGS="vim screen ttf-dejavu gpm ssmtp chromium"
+  STD_PKGS="vim screen ttf-dejavu gpm ssmtp"
   # TODO add display drivers, X, & GUI.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS
@@ -260,20 +260,24 @@ HRD
   echo "Developer packages installed! Press enter to continue."
   read
   
-  sudo -u $newuser -- $0 user-setup
-  
+  # GUI
   # Set up X, display manager, and window manager.
   # Starting out with xmonad is probably a bad idea, but sure!
-  pacman --noconfirm -S xorg-server xorg-server-utils xorg-drivers xterm lxdm xmonad xmonad-contrib xmobar
+  X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm"
+  XMONAD_PKGS="lxdm xmonad xmonad-contrib xmobar dmenu"
+  pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
   sed -i "s:^.*[^a-z]session=.*\$:session=$(which xmonad):" /etc/lxdm/lxdm.conf
   systemctl enable lxdm.service
   # TODO Make the login prompt prettier.
+  # TODO configure clipboard shortcuts.
   # TODO Include config for xterm in Tilde.
   # TODO Include config for xmonad in Tilde.
   # TODO Include config for xmobar in Tilde.
   
-  echo "All done! Hit enter to log out as root."
+  # Now we're ready to set up the user account.
+  sudo -u $newuser -- $0 user-setup
+  echo "All done! Time to log out.."
   read
   exit
 elif [[ "$1" == 'user-setup' ]]
