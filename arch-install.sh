@@ -264,12 +264,14 @@ HRD
   
   # Set up X, display manager, and window manager.
   # Starting out with xmonad is probably a bad idea, but sure!
-  pacman --noconfirm -S xorg-server xorg-server-utils xorg-drivers lxdm xmonad xmonad-contrib
+  pacman --noconfirm -S xorg-server xorg-server-utils xorg-drivers xterm lxdm xmonad xmonad-contrib xmobar
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
   sed -i "s:^.*[^a-z]session=.*\$:session=$(which xmonad):" /etc/lxdm/lxdm.conf
   systemctl enable lxdm.service
   # TODO Make the login prompt prettier.
+  # TODO Include config for xterm in Tilde.
   # TODO Include config for xmonad in Tilde.
+  # TODO Include config for xmobar in Tilde.
   
   echo "All done! Hit enter to log out as root."
   read
