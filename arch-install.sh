@@ -202,10 +202,11 @@ HRD
   
   # USABILITY
   ## TODO learn tmux too...
-  STD_PKGS="vim screen ttf-dejavu gpm ssmtp"
+  FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
+  STD_PKGS="vim screen gpm ssmtp"
   # TODO add display drivers, X, & GUI.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
-  pacman --noconfirm -S $STD_PKGS
+  pacman --noconfirm -S $STD_PKGS $FONT_PKGS
   
   mailuser=cceckman.sendacct
   maildom=gmail.com
