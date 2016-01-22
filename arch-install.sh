@@ -203,8 +203,8 @@ HRD
   # USABILITY
   ## TODO learn tmux too...
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
-  STD_PKGS="vim screen gpm ssmtp"
-  # TODO add display drivers, X, & GUI.
+  STD_PKGS="vim screen gpm ssmtp chromium"
+  # TODO add Vimium to Chromium automatically.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS $FONT_PKGS
   
