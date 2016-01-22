@@ -264,7 +264,7 @@ HRD
   # GUI
   # Set up X, display manager, and window manager.
   # Starting out with xmonad is probably a bad idea, but sure!
-  X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm"
+  X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm xscreensaver cmatrix"
   XMONAD_PKGS="lxdm xmonad xmonad-contrib xmobar dmenu"
   pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
