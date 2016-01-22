@@ -202,7 +202,7 @@ HRD
   
   # USABILITY
   ## TODO learn tmux too...
-  STD_PKGS="vim screen ttf-dejavu gpm ssmtp"
+  STD_PKGS="vim screen ttf-dejavu gpm ssmtp ttf-inconsolata"
   # TODO add display drivers, X, & GUI.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS
@@ -251,7 +251,7 @@ HRD
   read
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel git go protobuf python2"
+  DEV_PKGS="base-devel rsync git go protobuf python2"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs" # TODO add Bazel
@@ -275,8 +275,11 @@ HRD
   # TODO Include config for xmonad in Tilde.
   # TODO Include config for xmobar in Tilde.
   
+  
   # Now we're ready to set up the user account.
+  # Do this setup before GUI because it includes adding AUR.
   sudo -u $newuser -- $0 user-setup
+  
   echo "All done! Time to log out.."
   read
   exit
@@ -297,6 +300,18 @@ then
   
   git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . 
   rm -rf Tilde
+  
+  # Make Yaourt, but not as root.
+  for repo in package-query yaourt
+  do
+  	pushd /tmp/
+  	git clone https://aur.archlinux.org/${repo}.git && cd ${repo}
+  	echo "Check PKGBUILD and any .install files..."
+  	bash
+  	makepkg -sri
+  	popd
+  done
+  
 else
   echo "Unrecognized command $1! Whoops!"
 fi
