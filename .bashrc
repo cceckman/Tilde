@@ -48,7 +48,7 @@ export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
-PS1="$ENDCOL$PROMPTCOL(\A) \W \$:$ENDCOL"
+PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \W \$:$ENDCOL"
 
 export CLICOLOR="Yes"
 

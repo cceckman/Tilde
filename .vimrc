@@ -35,10 +35,10 @@ endif
 "au! Syntax typescript source ~/.vim/syntax/typescript.vim
 
 
-set tabstop=4
+set tabstop=2
 set expandtab
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=2
+set shiftwidth=2
 
 filetype indent plugin on
 
@@ -86,11 +86,13 @@ set foldmethod=syntax
 " And store what's been folded
 " au BufWinLeave * mkview
 " au BufWinEnter * silent loadview
+" But use indent-based folding for Python
+autocmd FileType python setlocal foldmethod=indent
 
 
 " Use 256 colors
 set t_Co=256
-colorscheme torte
+colorscheme xemacs
 
 " from http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 " Highlight when over 80 chars
@@ -101,7 +103,14 @@ colorscheme torte
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
-set cursorline
+" Line and column hilighting
+au WinLeave * set nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+set colorcolumn=80
+
+" Restore line position when re-opening a file
+au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
 
 " Thanks to http://vim.wikia.com/wiki/Improved_hex_editing

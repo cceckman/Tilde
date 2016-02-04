@@ -286,6 +286,14 @@ HRD
   exit
 elif [[ "$1" == 'user-setup' ]]
 then
+  echo "Enter your e-mail for Git:"
+  read gitemail
+  echo "Enter your name for Git:"
+  echo gitname
+
+  git config --global user.email "$gitemail"
+  git config --global user.name "$gitname"
+
   echo "Generating keys for $USER"
   cd $HOME
   edkey="$HOME/.ssh/id_ed25519"
