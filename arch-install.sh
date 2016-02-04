@@ -293,6 +293,7 @@ then
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
+  git config --global push.default simple # Squash that message!
 
   echo "Generating keys for $USER"
   cd $HOME
