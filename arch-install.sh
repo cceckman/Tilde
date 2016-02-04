@@ -196,7 +196,7 @@ HRD
   ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
   popd
   
-  systemctl --now enable sshd.socket sshd@.service
+  systemctl --now enable sshd.service
   echo "System packages installed! Press enter to continue."
   read
   
