@@ -1,0 +1,5 @@
+! Hey, cool guide: http://www.in-ulm.de/~mascheck/X11/XTerm
+*foreground: rgb:b2/b2/b2
+*background: rgb:08/08/08
+*selectToClipboard: true
+*faceName: Anonymous Pro:size=12
