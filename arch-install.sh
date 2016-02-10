@@ -166,7 +166,7 @@ then
   grub-mkconfig -o /boot/grub/grub.cfg
   
   # And ensure that dhcpcd starts next time around
-  systemctl enable dhcpcd@$(ip link | grep -Po 'en[^:]*(?=:)').service
+  systemctl enable dhcpcd@$(ip link | grep -Po '(en|eth)[^:]*(?=:)').service
 elif [[ "$1" == 'friendlify' ]]
 then
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
