@@ -127,7 +127,6 @@ then
   # Generate /etc/fstab, and hop in to the chroot with the second part of the script.
   genfstab -p /mnt >> /mnt/etc/fstab || exit
   cp $(realpath $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
-  exit # TODO: Don't break here.
   mv $PROMPTFILE /mnt${PROMPTFILE}
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
@@ -141,6 +140,7 @@ then
   # Second step: run from within the chroot.
   getkey hostname > /etc/hostname
   # Set root password:
+  # TODO(cceckman) Do this in prompt?
   echo "Set root password: "
   passwd
 
