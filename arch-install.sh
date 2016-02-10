@@ -19,10 +19,17 @@
 ## setup-chroot -> Assume in live image, within chroot of the new system; set up root password, hostname, networking, etc.
 ## friendlify -> Assume within chroot or on new, live, machine; set up user, packages & configuration for access, dev tools, etc.
 ## user-setup -> Started as the new user; set up keys, password, Tilde repository, etc.
+## prompt -> Prompt for, and write to file, configuration parameters.
 
 echo "Hi! This script isn't necessarily ready for prime time."
 echo "If you know what you're doing, hit enter to start."
 read
+
+PROMPTFILE='/etc/newhostconfig'
+
+getkey() {
+  grep -Pho "(?<=^$1:).*$" $PROMPTFILE
+}
 
 # Only allow the above invocation (as a script, not piped into Bash.)
 if [[ "$BASH_SOURCE" == "" ]]
@@ -42,8 +49,55 @@ then
   fi
 fi
 
-if [[ "$1" == 'base-install' ]]
+if [[ "$1" == 'prompt' ]]
 then
+  prompt() {
+    echo "$1"
+    echo -n '>'
+  }
+
+  # Input info:
+  prompt 'Hostname'
+  read hostname
+  
+  # TODO(cceckman) Root password?
+  prompt 'Username'
+  read newuser
+
+  prompt 'URL of an SSH pubkey (autorized_key) for that user'
+  read authkey_url
+
+  prompt 'Generate moduli [y/N]'
+  read moduli
+  
+  prompt 'GitHub username'
+  read githubuser
+
+  prompt 'GitHub API access token (with write:public_key scope)'
+  read githubtoken
+
+  prompt 'E-mail for Git commits'
+  read gitemail
+
+  prompt 'Name for Git commits'
+  read gitname
+
+  # Write out; copy to chroot later.
+  cat - << HRD > $PROMPTFILE
+hostname:$hostname
+newuser:$newuser
+authkey_url:$authkey_url
+moduli:$moduli
+githubuser:$githubuser
+githubtoken:$githubtoken
+gitemail:$gitemail
+gitname:$gitname
+HRD
+
+elif [[ "$1" == 'base-install' ]]
+then
+  $0 prompt 
+
   # Base system install.
 
   # Turn on some base services: 
@@ -74,20 +128,18 @@ then
   genfstab -p /mnt >> /mnt/etc/fstab || exit
   cp $(realpath $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
   exit # TODO: Don't break here.
+  mv $PROMPTFILE /mnt${PROMPTFILE}
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
   # Restart- remove the drive when it's down, then continue.
-  echo "Remove the CD image, then run TODO(cceckman) when reboot is done."
+  echo 'Remove the CD image, then run `/usr/bin/arch-install.sh friendlify` when reboot is done.'
   echo "Press enter to continue..."
   read
   shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
   # Second step: run from within the chroot.
-  echo "Hostname? "
-  echo -n ">"
-  read hostname
-  echo "$hostname" > /etc/hostname
+  getkey hostname > /etc/hostname
   # Set root password:
   echo "Set root password: "
   passwd
@@ -130,14 +182,12 @@ then
   ## (libu2f-host)
   
   # Set up groups and new user
-  echo "Add wheel to sudoers by uncommenting the line starting with # %wheel. Press enter to continue."
-  read
-  visudo
+  # Add wheel to sudoers by uncommenting the line starting with # %wheel.
+  # We don't actually uncomment- just append, becase in-place edits are hard.
+  echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
   groupadd ssh-users
   groupadd ssmtp
-  echo "Pick a username for login:"
-  echo -n ">"
-  read newuser
+  newuser=$(getkey newuser)
   useradd -m -G wheel,ssh-users,ssmtp $newuser
   passwd $newuser
   
@@ -175,8 +225,7 @@ Host *
 HRD
 
   # Make good, new, moduli...
-  echo "Want to regenerate moduli? Y/n"
-  read genmoduli
+  genmoduli=$(getkey genmoduli)
   if [[ "$genmoduli" == y* ]] || [[ "$genmoduli" == Y* ]]
   then
     awk '$5 > 2000' /etc/ssh/moduli > "${HOME}/moduli"
@@ -197,65 +246,26 @@ HRD
   popd
   
   systemctl --now enable sshd.service
-  echo "System packages installed! Press enter to continue."
-  read
+  echo "System packages installed!"
   
   # USABILITY
   ## TODO learn tmux too...
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
-  STD_PKGS="vim screen gpm ssmtp chromium"
+  UTIL_PKGS="zip unzip tar gzip less"
+  STD_PKGS="vim screen gpm chromium"
   # TODO add Vimium to Chromium automatically.
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
-  pacman --noconfirm -S $STD_PKGS $FONT_PKGS
-  
-  mailuser=cceckman.sendacct
-  maildom=gmail.com
-  echo "Enter the password for ${mailuser}@${maildom}:"
-  read mailpass
-  
-  cat - <<-HRD >/etc/ssmtp/ssmtp.conf
-	# The user that gets all the mails (UID < 1000, usually the admin)
-	root=${mailuser}@${maildom}
+  pacman --noconfirm -S $STD_PKGS $FONT_PKGS $UTIL_PKGS
+ 
 
-	# The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
-	# See also http://mail.google.com/support/bin/answer.py?answer=78799
-	mailhub=smtp.$maildom:587
-
-	# The address where the mail appears to come from for user authentication.
-	rewriteDomain=$maildom
-
-	# The full hostname
-	hostname=localhost
-
-	# Use SSL/TLS before starting negotiation
-	UseTLS=Yes
-	UseSTARTTLS=Yes
-
-	# Username/Password
-	AuthUser=${mailuser}@${maildom}
-	AuthPass=$mailpass
-
-	# Email 'From header's can override the default domain?
-	FromLineOverride=yes
-HRD
-  unset mailuser
-  unset mailpass
-  unset maildom
-  
-  chown :ssmtp /etc/ssmtp/ssmtp.conf
-  chown :ssmtp /usr/bin/ssmtp
-  chmod 640 /etc/ssmtp/ssmtp.conf
-  chmod g+s /usr/bin/ssmtp
-  
   # TODO turn on numlock by default.
-  echo "Useful packages installed! Press enter to continue."
-  read
+  echo "Useful packages installed!"
   
   # DEVELOPMENT
   DEV_PKGS="base-devel rsync git go protobuf python2"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
-  BUILD_PKGS="clang llvm-libs" # TODO add Bazel
+  BUILD_PKGS="clang llvm-libs" # TODO add Bazel- it's slightly more complicated...
   pacman --noconfirm -S $DEV_PKGS $HS_PKGS $JAVA_PKGS $BUILD_PKGS
   # TODO add private repositories
   echo "Developer packages installed! Press enter to continue."
@@ -286,10 +296,12 @@ HRD
   exit
 elif [[ "$1" == 'user-setup' ]]
 then
-  echo "Enter your e-mail for Git:"
-  read gitemail
-  echo "Enter your name for Git:"
-  echo gitname
+  # Generate a new key and add it to the GitHub account.
+  username=$(getkey githubuser)
+  token=$(getkey githubuser)
+
+  gitemail=$(getkey gitemail)
+  gitname=$(get gitname)
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
@@ -300,13 +312,18 @@ then
   edkey="$HOME/.ssh/id_ed25519"
   ssh-keygen -t ed25519 -f $edkey  -C $(hostname) -o -a 100
   ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -C $(hostname) -o -a 100
-  
-  echo -n "Enter an e-mail address you can read: "
-  read email
-  
-  echo "Add this at  https://github.com/settings/ssh: " | cat - ${edkey}.pub | mail -s "Your new SSH public key on $(hostname)" $email
-  echo "Sent public key to $email; add it to Github, then press Enter."
-  read
+ 
+  keyreq='/tmp/keyreq'
+  cat - << HRD > $keyreq
+{
+  "title": "$USER@$(hostname)",
+  "key": "$(cat $HOME/.ssh/id_rsa.pub)"
+}
+HRD
+
+  curl -X POST -d @$keyreq -u ${username}:${token} https://api.github.com/user/keys \
+    || echo "Didn't upload Github key! That's a problem."
+  bash
   
   git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . 
   rm -rf Tilde
@@ -321,6 +338,14 @@ then
   	makepkg -sri
   	popd
   done
+
+  # Make Bazel (from the official repo.)
+  # TODO(cceckman) Enable hermeticity:
+  # http://bazel.io/docs/bazel-user-manual.html#sandboxing
+  pushd /tmp
+    git clone https://github.com/bazelbuild/bazel.git && cd bazel
+    ./compile.sh all
+  popd
   
 else
   echo "Unrecognized command $1! Whoops!"
