@@ -322,8 +322,7 @@ then
 HRD
 
   curl -X POST -d @$keyreq -u ${username}:${token} https://api.github.com/user/keys \
-    || echo "Didn't upload Github key! That's a problem."
-  bash
+    || (echo "Didn't upload Github key! That's a problem." && bash)
   
   git clone git@github.com:cceckman/Tilde.git && cp -r $HOME/Tilde/* . && cp -r $HOME/Tilde/.* . 
   rm -rf Tilde
