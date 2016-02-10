@@ -132,8 +132,8 @@ then
   
   # Restart- remove the drive when it's down, then continue.
   echo 'Remove the CD image, then run `/usr/bin/arch-install.sh friendlify` when reboot is done.'
-  echo "Press enter to continue..."
-  read
+  echo 'In the mean time- here, try out this prompt to play around with!'
+  bash
   shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
