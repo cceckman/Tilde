@@ -257,7 +257,6 @@ HRD
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS $FONT_PKGS $UTIL_PKGS
  
-
   # TODO turn on numlock by default.
   echo "Useful packages installed!"
   
@@ -300,7 +299,7 @@ then
   token=$(getkey githubtoken)
 
   gitemail=$(getkey gitemail)
-  gitname=$(get gitname)
+  gitname=$(getkey gitname)
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
