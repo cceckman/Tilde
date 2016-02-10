@@ -268,8 +268,7 @@ HRD
   BUILD_PKGS="clang llvm-libs" # TODO add Bazel- it's slightly more complicated...
   pacman --noconfirm -S $DEV_PKGS $HS_PKGS $JAVA_PKGS $BUILD_PKGS
   # TODO add private repositories
-  echo "Developer packages installed! Press enter to continue."
-  read
+  echo "Developer packages installed!"
   
   # GUI
   # Set up X, display manager, and window manager.
