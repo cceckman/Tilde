@@ -298,7 +298,7 @@ elif [[ "$1" == 'user-setup' ]]
 then
   # Generate a new key and add it to the GitHub account.
   username=$(getkey githubuser)
-  token=$(getkey githubuser)
+  token=$(getkey githubtoken)
 
   gitemail=$(getkey gitemail)
   gitname=$(get gitname)
