@@ -294,6 +294,8 @@ HRD
   exit
 elif [[ "$1" == 'user-setup' ]]
 then
+  cd $HOME
+  
   # Generate a new key and add it to the GitHub account.
   username=$(getkey githubuser)
   token=$(getkey githubtoken)
