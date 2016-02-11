@@ -185,14 +185,15 @@ ExecStart=
 ExecStart=-/usr/bin/agetty --autologin root --noclear %I $TERM
 HRD
   # Start this script upon root login:
-  echo "/usr/bin/arch-install.sh friendlify" >> /root/.bash_profile
+  mv /root/.bash_profile /root/.bash_profile.bak
+  echo "/usr/bin/arch-install.sh friendlify" > /root/.bash_profile
   trap - EXIT && exit
 elif [[ "$1" == 'friendlify' ]]
 then
   # Don't start this script again when root logs in again;
   # Don't automatically log in as root;
   # In fact, don't let root log in at all.
-  rm /root/.bashrc && \
+  mv /root/.bash_profile.bak /root/.bash_profile && \
   rm /etc/systemd/system/getty@tty1.service.d/override.conf && \
   passwd -l root
   # Yep, we're kind of screwed if we break here. Keep going!
