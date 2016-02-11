@@ -69,7 +69,6 @@ then
     trap - EXIT && exit
   fi
   
-
   # Input info:
   prompt 'Hostname'
   read hostname
@@ -187,8 +186,7 @@ ExecStart=
 ExecStart=-/usr/bin/agetty --autologin root --noclear %I $TERM
 HRD
   # Start this script upon root login:
-  echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bashrc
-  
+  echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bash_profile
   trap - EXIT && exit
 elif [[ "$1" == 'friendlify' ]]
 then
