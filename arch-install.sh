@@ -25,6 +25,12 @@ echo "Hi! This script isn't necessarily ready for prime time."
 echo "If you know what you're doing, hit enter to start."
 read
 
+set -e
+for sig in INT TERM EXIT; do
+  trap "echo 'Encountered an error! Dropping into bash.' && bash; [[ $sig == EXIT ]] || (trap - $sig EXIT; kill -$sig $$)" $sig 
+done
+
+
 PROMPTFILE='/etc/newhostconfig'
 
 getkey() {
@@ -131,18 +137,13 @@ then
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
   # Restart- remove the drive when it's down, then continue.
-  echo 'Remove the CD image, then run `/usr/bin/arch-install.sh friendlify` when reboot is done.'
-  echo 'In the mean time- here, try out this prompt to play around with!'
-  bash
+  echo 'Press "enter", remove the Arch CD, and restart the machine.'
+  read
   shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
   # Second step: run from within the chroot.
   getkey hostname > /etc/hostname
-  # Set root password:
-  # TODO(cceckman) Do this in prompt?
-  echo "Set root password: "
-  passwd
 
   # Set locale settings
   # Ignore time zone; we run in UTC
@@ -167,8 +168,25 @@ then
   
   # And ensure that dhcpcd starts next time around
   systemctl enable dhcpcd@$(ip link | grep -Po '(en|eth)[^: ]*(?=:)').service
+  
+  # Auto-start the `friendlify` step upon reboot, by logging in as root and immediately running it.
+  # Is this super insecure? Totally! That's why the first thing we do on the other side is disable root logins,
+  # and disable auto-login.
+  # Auto-login as root:
+  cat - <<HRD >> /etc/systemd/system/getty@tty1.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin root --noclear %I $TERM
+HRD
+  # Start this script upon root login:
+  echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bashrc
 elif [[ "$1" == 'friendlify' ]]
 then
+  rm /root/.bashrc && \  #Don't start this script again when root logs in again;
+  rm /etc/systemd/system/getty@tty1.service.d/override.conf && \  # Don't automatically log in as root
+  passwd -l root # In fact, don't let root log in at all.
+  # Yep, we're kind of screwed if we break here. Keep going!
+  
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
   pacman --noconfirm -Syyu
   
@@ -186,10 +204,9 @@ then
   # We don't actually uncomment- just append, becase in-place edits are hard.
   echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
   groupadd ssh-users
-  groupadd ssmtp
   newuser=$(getkey newuser)
-  useradd -m -G wheel,ssh-users,ssmtp $newuser
-  passwd $newuser
+  useradd --create-home --groups wheel,ssh-users $newuser
+  passwd --expire 1 $newuser
   
   # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
   sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
@@ -289,9 +306,9 @@ HRD
   # Do this setup before GUI because it includes adding AUR.
   sudo -u $newuser -- $0 user-setup
   
-  echo "All done! Time to log out.."
+  echo "All done! Restarting one last time; press 'enter' to continue."
   read
-  exit
+  shutdown -r now
 elif [[ "$1" == 'user-setup' ]]
 then
   cd $HOME
