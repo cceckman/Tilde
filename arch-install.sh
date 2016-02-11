@@ -180,6 +180,7 @@ then
   # Is this super insecure? Totally! That's why the first thing we do on the other side is disable root logins,
   # and disable auto-login.
   # Auto-login as root:
+  mkdir -p /etc/systemd/system/getty@tty1.service.d/
   cat - <<HRD >> /etc/systemd/system/getty@tty1.service.d/override.conf
 [Service]
 ExecStart=
