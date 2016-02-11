@@ -70,7 +70,7 @@ then
   prompt 'Username'
   read newuser
 
-  prompt 'URL of an SSH pubkey (autorized_key) for that user'
+  prompt 'URL of an SSH pubkey (authorized_key) for that user'
   read authkey_url
 
   prompt 'Generate moduli [y/N]'
