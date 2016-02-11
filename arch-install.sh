@@ -62,6 +62,14 @@ then
     echo -n '>'
   }
 
+  prompt 'Skip all these prompts (re-use answers?)'
+  read reuse
+  if [[ "$reuse" == y* ]] || [[ "$reuse" == Y* ]]
+  then
+    exit
+  fi
+  
+
   # Input info:
   prompt 'Hostname'
   read hostname
