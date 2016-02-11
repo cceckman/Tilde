@@ -100,6 +100,7 @@ gitemail:$gitemail
 gitname:$gitname
 HRD
 
+  exit
 elif [[ "$1" == 'base-install' ]]
 then
   $0 prompt 
@@ -180,6 +181,8 @@ ExecStart=-/usr/bin/agetty --autologin root --noclear %I $TERM
 HRD
   # Start this script upon root login:
   echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bashrc
+  
+  exit
 elif [[ "$1" == 'friendlify' ]]
 then
   # Don't start this script again when root logs in again;
@@ -300,10 +303,6 @@ HRD
   systemctl enable lxdm.service
   # TODO Make the login prompt prettier.
   # TODO configure clipboard shortcuts.
-  # TODO Include config for xterm in Tilde.
-  # TODO Include config for xmonad in Tilde.
-  # TODO Include config for xmobar in Tilde.
-  
   
   # Now we're ready to set up the user account.
   # Do this setup before GUI because it includes adding AUR.
@@ -367,6 +366,7 @@ HRD
     ./compile
   popd
   
+  exit
 else
   echo "Unrecognized command $1! Whoops!"
 fi
