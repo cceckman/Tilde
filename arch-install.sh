@@ -100,7 +100,7 @@ gitemail:$gitemail
 gitname:$gitname
 HRD
 
-  exit
+  trap - EXIT && exit
 elif [[ "$1" == 'base-install' ]]
 then
   $0 prompt 
@@ -140,7 +140,7 @@ then
   # Restart- remove the drive when it's down, then continue.
   echo 'Press "enter", remove the Arch CD, and restart the machine.'
   read
-  shutdown now
+  trap - EXIT && shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
   # Second step: run from within the chroot.
@@ -182,7 +182,7 @@ HRD
   # Start this script upon root login:
   echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bashrc
   
-  exit
+  trap - EXIT && exit
 elif [[ "$1" == 'friendlify' ]]
 then
   # Don't start this script again when root logs in again;
@@ -310,7 +310,7 @@ HRD
   
   echo "All done! Restarting one last time; press 'enter' to continue."
   read
-  shutdown -r now
+  trap - EXIT && shutdown -r now
 elif [[ "$1" == 'user-setup' ]]
 then
   cd $HOME
@@ -366,7 +366,7 @@ HRD
     ./compile
   popd
   
-  exit
+  trap - EXIT && exit
 else
   echo "Unrecognized command $1! Whoops!"
 fi
