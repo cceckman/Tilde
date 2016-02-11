@@ -217,7 +217,7 @@ then
   groupadd ssh-users
   newuser=$(getkey newuser)
   useradd --create-home --groups wheel,ssh-users $newuser
-  passwd --expire 1 $newuser
+  passwd --expire $newuser
   
   # Configure sshd per https://stribika.github.io/2015/01/04/secure-secure-shell.html
   sed -i 's/^PermitRootLogin .*$//g' /etc/ssh/sshd_config
