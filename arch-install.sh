@@ -182,9 +182,12 @@ HRD
   echo "/usr/bin/arch-setup.sh friendlify" >> /root/.bashrc
 elif [[ "$1" == 'friendlify' ]]
 then
-  rm /root/.bashrc && \  #Don't start this script again when root logs in again;
-  rm /etc/systemd/system/getty@tty1.service.d/override.conf && \  # Don't automatically log in as root
-  passwd -l root # In fact, don't let root log in at all.
+  # Don't start this script again when root logs in again;
+  # Don't automatically log in as root;
+  # In fact, don't let root log in at all.
+  rm /root/.bashrc && \
+  rm /etc/systemd/system/getty@tty1.service.d/override.conf && \
+  passwd -l root
   # Yep, we're kind of screwed if we break here. Keep going!
   
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
@@ -360,7 +363,8 @@ HRD
   # http://bazel.io/docs/bazel-user-manual.html#sandboxing
   pushd /tmp
     git clone https://github.com/bazelbuild/bazel.git && cd bazel
-    ./compile.sh all
+    # ./compile.sh all # 'all' is a little strong here; we fail hermeticity checks, and it takes forever.
+    ./compile
   popd
   
 else
