@@ -66,7 +66,7 @@ then
   read reuse
   if [[ "$reuse" == y* ]] || [[ "$reuse" == Y* ]]
   then
-    exit
+    trap - EXIT && exit
   fi
   
 
