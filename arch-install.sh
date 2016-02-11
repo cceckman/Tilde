@@ -80,7 +80,7 @@ then
   read authkey_url
 
   prompt 'Generate moduli [y/N]'
-  read moduli
+  read genmoduli
   
   prompt 'GitHub username'
   read githubuser
@@ -99,7 +99,7 @@ then
 hostname:$hostname
 newuser:$newuser
 authkey_url:$authkey_url
-moduli:$moduli
+genmoduli:$genmoduli
 githubuser:$githubuser
 githubtoken:$githubtoken
 gitemail:$gitemail
