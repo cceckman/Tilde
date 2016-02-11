@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -i
 # Bootstrap an Arch system.
 ## Scriptification of:
 ## https://wiki.archlinux.org/index.php/Hyper-V
