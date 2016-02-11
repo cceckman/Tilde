@@ -132,8 +132,6 @@ then
   cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup # back up mirror list
   curl -o - 'https://www.archlinux.org/mirrorlist/?country=US&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sed 's/#Server/Server/' > /tmp/mirrorlist
   rankmirrors -n 10 /tmp/mirrorlist > /etc/pacman.d/mirrorlist # only grab top 10 mirrors
-  pacman --noconfirm -Syyu # update databases and system packages
-  pacman --noconfirm -Scc # clean up space
 
   # Install...
   pacstrap /mnt base || exit
