@@ -139,7 +139,7 @@ then
   # Generate /etc/fstab, and hop in to the chroot with the second part of the script.
   genfstab -p /mnt >> /mnt/etc/fstab || exit
   cp $(realpath $BASH_SOURCE) /mnt/usr/bin/arch-install.sh || exit
-  mv $PROMPTFILE /mnt${PROMPTFILE}
+  cp $PROMPTFILE /mnt${PROMPTFILE}
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
   set +x
