@@ -25,7 +25,7 @@ echo "Hi! This script isn't necessarily ready for prime time."
 echo "If you know what you're doing, hit enter to start."
 read
 
-set -e
+set -ex
 for sig in INT TERM EXIT; do
   trap "echo 'Encountered an error! Dropping into bash.' && bash; [[ $sig == EXIT ]] || (trap - $sig EXIT; kill -$sig $$)" $sig 
 done
