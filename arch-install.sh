@@ -185,6 +185,7 @@ ExecStart=
 ExecStart=-/usr/bin/agetty --autologin root --noclear %I $TERM
 HRD
   # Start this script upon root login:
+  touch /root/.bash_profile  # Transparently fix it it doesn't already exist.
   mv /root/.bash_profile /root/.bash_profile.bak
   echo "/usr/bin/arch-install.sh friendlify" > /root/.bash_profile
   trap - EXIT && exit
