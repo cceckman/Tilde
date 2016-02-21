@@ -275,8 +275,8 @@ HRD
   # Make new host keys
   pushd /etc/ssh/
     rm -f ssh_host_*key*
-    ssh-keygen -t ed25519 -f ssh_host_ed25519_key < /dev/null
-    ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
+    ssh-keygen -N '' -t ed25519 -f ssh_host_ed25519_key < /dev/null
+    ssh-keygen -N '' -t rsa -b 4096 -f ssh_host_rsa_key < /dev/null
   popd
   
   systemctl --now enable sshd.service
