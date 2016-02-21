@@ -25,7 +25,7 @@ echo "Hi! This script isn't necessarily ready for prime time."
 echo "If you know what you're doing, hit enter to start."
 read
 
-set -ex
+set -e
 for sig in INT TERM EXIT; do
   trap "echo 'Encountered an error! Dropping into bash.' && bash; [[ $sig == EXIT ]] || (trap - $sig EXIT; kill -$sig $$)" $sig 
 done
@@ -93,7 +93,8 @@ then
 
   prompt 'Name for Git commits'
   read gitname
-
+  
+  set -x
   # Write out; copy to chroot later.
   cat - << HRD > $PROMPTFILE
 hostname:$hostname
@@ -110,7 +111,7 @@ HRD
 elif [[ "$1" == 'base-install' ]]
 then
   $0 prompt 
-
+  set -x
   # Base system install.
 
   # Turn on some base services: 
@@ -141,12 +142,14 @@ then
   mv $PROMPTFILE /mnt${PROMPTFILE}
   arch-chroot /mnt /usr/bin/arch-install.sh setup-chroot
   
+  set +x
   # Restart- remove the drive when it's down, then continue.
   echo 'Press "enter", remove the Arch CD, and restart the machine.'
   read
   trap - EXIT && shutdown now
 elif [[ "$1" == "setup-chroot" ]]
 then
+  set -x
   # Second step: run from within the chroot.
   getkey hostname > /etc/hostname
 
@@ -188,12 +191,14 @@ HRD
   touch /root/.bash_profile  # Transparently fix it it doesn't already exist.
   mv /root/.bash_profile /root/.bash_profile.bak
   echo "/usr/bin/arch-install.sh friendlify" > /root/.bash_profile
+  set +x
   trap - EXIT && exit
 elif [[ "$1" == 'friendlify' ]]
 then
   # Don't start this script again when root logs in again;
   # Don't automatically log in as root;
   # In fact, don't let root log in at all.
+  set -x
   mv /root/.bash_profile.bak /root/.bash_profile && \
   rm /etc/systemd/system/getty@tty1.service.d/override.conf && \
   passwd -l root
@@ -277,6 +282,8 @@ HRD
   systemctl --now enable sshd.service
   echo "System packages installed!"
   
+  set +x
+  
   # USABILITY
   ## TODO learn tmux too...
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
@@ -304,6 +311,7 @@ HRD
   X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm xscreensaver cmatrix"
   XMONAD_PKGS="lxdm xmonad xmonad-contrib xmobar dmenu"
   pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS
+  set -x
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
   sed -i "s:^.*[^a-z]session=.*\$:session=$(which xmonad):" /etc/lxdm/lxdm.conf
   systemctl enable lxdm.service
@@ -314,6 +322,7 @@ HRD
   # Do this setup before GUI because it includes adding AUR.
   sudo -u $newuser -- $0 user-setup
   
+  set +x
   echo "All done! Restarting one last time; press 'enter' to continue."
   read
   trap - EXIT && shutdown -r now
@@ -327,6 +336,8 @@ then
 
   gitemail=$(getkey gitemail)
   gitname=$(getkey gitname)
+
+  set -x
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
@@ -372,6 +383,7 @@ HRD
     ./compile
   popd
   
+  set +x
   trap - EXIT && exit
 else
   echo "Unrecognized command $1! Whoops!"
