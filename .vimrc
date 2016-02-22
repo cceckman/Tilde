@@ -12,6 +12,9 @@ set statusline+=,\ L:%l/%L "line of how many lines
 "Show line numbers"
 set number
 
+"Don't select line numbers with mouse"
+set mouse=a
+
 "Allow backspace over EOL...like every other text editor"
 set backspace=indent,eol,start
 "Make jj escape insert mode
