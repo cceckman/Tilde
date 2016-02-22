@@ -21,7 +21,7 @@ main = xmonad =<< xmobar myConfig
 myConfig = desktopConfig
 		{	manageHook = manageDocks <+> manageHook desktopConfig
 		, layoutHook = avoidStruts  $  layoutHook desktopConfig
-    , handleEventHook = docksEventHook <=> handleEventHook desktopConfig
+    , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
     -- cceckman: worked out that last one just from http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-ManageDocks.html
 		-- Define logHook for xmonad to write information to xmobar
 		--, logHook = dynamicLogWithPP xmobarPP
