@@ -318,11 +318,19 @@ HRD
   # TODO Make the login prompt prettier.
   # TODO configure clipboard shortcuts.
   
+  set +x
+  
+  echo "Hi! From here on out, you'll be asked to enter some information (like passwords)."
+  echo "Stay at your desk- it should be quick."
+  echo "Press enter to continue..."
+  read
+  
+  passwd $newuser
+  
   # Now we're ready to set up the user account.
   # Do this setup before GUI because it includes adding AUR.
   sudo -u $newuser -- $0 user-setup
   
-  set +x
   echo "All done! Restarting one last time; press 'enter' to continue."
   read
   trap - EXIT && shutdown -r now
@@ -337,14 +345,7 @@ then
   gitemail=$(getkey gitemail)
   gitname=$(getkey gitname)
 
-  echo "Hi! From here on out, you'll be asked to enter some information (like passwords)."
-  echo "Stay at your desk- it should be quick."
-  echo "Press enter to continue..."
-  read
-
   set -x
-  
-  passwd
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
