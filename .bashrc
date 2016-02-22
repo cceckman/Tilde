@@ -34,6 +34,13 @@ e() {
   $cmd && clear && pwd && echo "Done: $cmd"
 }
 
+# http://github.com/huyng/bashmarks - thanks, @huyng!
+local bashmarks="$HOME/scripts/bashmarks.sh"
+if [ -f "$bashmarks" ]
+then
+  source $bashmarks
+fi
+
 # emacs isn't for everyone.
 export EDITOR=vim
 

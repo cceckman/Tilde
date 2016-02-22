@@ -374,6 +374,8 @@ HRD
   git clone git@github.com:cceckman/cce3.git
   git clone git@github.com:cceckman/cceckman.github.io.git
 
+  # Yay for bashmarks!
+  git clone 
 
   # Make Yaourt, but not as root.
   for repo in package-query yaourt
