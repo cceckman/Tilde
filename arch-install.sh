@@ -369,7 +369,12 @@ HRD
     || (echo "Didn't upload Github key! That's a problem." && bash)
   
   git clone git@github.com:cceckman/Tilde.git Tilde && mv Tilde/.git . && rm -rf Tilde && git reset --hard
-  
+ 
+  # And get some personal repositories
+  git clone git@github.com:cceckman/cce3.git
+  git clone git@github.com:cceckman/cceckman.github.io.git
+
+
   # Make Yaourt, but not as root.
   for repo in package-query yaourt
   do

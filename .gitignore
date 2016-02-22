@@ -9,3 +9,6 @@
 .gitconfig
 bin/
 cce3/
+cceckman.github.io/
+.xmonad/
+!.xmonad/*.hs

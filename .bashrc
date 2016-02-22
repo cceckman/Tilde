@@ -24,8 +24,15 @@ alias del='rm'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
-alias e="vim"   #Because in vim, the command is e <filename>, so...
+# alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias node="nodejs"
+
+
+e() {
+  # Invoke 'vim' with some wrapping.
+  cmd="vim $@"
+  $cmd && clear && pwd && echo "Done: $cmd"
+}
 
 # emacs isn't for everyone.
 export EDITOR=vim
