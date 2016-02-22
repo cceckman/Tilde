@@ -337,7 +337,14 @@ then
   gitemail=$(getkey gitemail)
   gitname=$(getkey gitname)
 
+  echo "Hi! From here on out, you'll be asked to enter some information (like passwords)."
+  echo "Stay at your desk- it should be quick."
+  echo "Press enter to continue..."
+  read
+
   set -x
+  
+  passwd
 
   git config --global user.email "$gitemail"
   git config --global user.name "$gitname"
