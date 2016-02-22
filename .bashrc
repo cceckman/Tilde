@@ -35,8 +35,8 @@ e() {
 }
 
 # http://github.com/huyng/bashmarks - thanks, @huyng!
-local bashmarks="$HOME/scripts/bashmarks.sh"
-if [ -f "$bashmarks" ]
+bashmarks="$HOME/scripts/bashmarks.sh"
+if [ -e "$bashmarks" ]
 then
   source $bashmarks
 fi
