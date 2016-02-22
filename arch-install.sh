@@ -297,7 +297,7 @@ HRD
   echo "Useful packages installed!"
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel rsync git go protobuf python2"
+  DEV_PKGS="base-devel rsync git go go-tools protobuf python2"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs" # TODO add Bazel- it's slightly more complicated...
