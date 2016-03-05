@@ -325,9 +325,8 @@ HRD
   DEV_PKGS="base-devel rsync git go go-tools protobuf python2 python2-pip"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
-  BUILD_PKGS="clang llvm-libs" # TODO add Bazel- it's slightly more complicated...
+  BUILD_PKGS="clang llvm-libs"
   pacman --noconfirm -S $DEV_PKGS $HS_PKGS $JAVA_PKGS $BUILD_PKGS
-  # TODO add private repositories
   echo "Developer packages installed!"
   
   # GUI
