@@ -299,7 +299,22 @@ HRD
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
   UTIL_PKGS="zip unzip tar gzip less bash-completion"
   STD_PKGS="vim screen gpm chromium"
-  # TODO add Vimium to Chromium automatically.
+  # Automatically install Vimium: http://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb
+  # Per https://developer.chrome.com/extensions/external_extensions
+  chromium-ext() {
+    path="/usr/share/chromium/extensions"
+    mkdir -p $path
+    id="$1"
+    echo <<HRD > $path/$id.json
+  {
+    "external_update_url": "https://clients2.google.com/service/update2/crx"
+  }
+HRD
+    chmod +r $path/$id.json
+  }
+  chromium-ext dbepggeogbaibhgnhhndojpepiihcmeb # Vimium
+
+
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
   pacman --noconfirm -S $STD_PKGS $FONT_PKGS $UTIL_PKGS
  
