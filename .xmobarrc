@@ -1,8 +1,8 @@
 Config {
   -- http://wiki.archlinux.org/index.php/Xmobar has a good overview
 
-    font = "xft:Bitstream Vera Sans Mono:size=10:antialias=true"
-  , lowerOnStart = False
+    --font = "xft:Bitstream Vera Sans Mono:antialias=true" -- Use the X default
+    lowerOnStart = False
   , hideOnStart = False
   , position = Top
   , template = "%date% | %kbd% || %multicpu% | %coretemp% | %memory% | %dynnetwork% || %KNUQ% }{ %StdinReader%"
