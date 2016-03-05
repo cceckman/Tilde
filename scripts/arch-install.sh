@@ -401,7 +401,7 @@ HRD
   pushd /tmp
     git clone https://github.com/bazelbuild/bazel.git && cd bazel
     # ./compile.sh all # 'all' is a little strong here; we fail hermeticity checks, and it takes forever.
-    ./compile
+    ./compile.sh
   popd
   
   set +x
