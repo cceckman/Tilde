@@ -307,7 +307,7 @@ HRD
   echo "Useful packages installed!"
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel rsync git go go-tools protobuf python2"
+  DEV_PKGS="base-devel rsync git go go-tools protobuf python2 python2-pip"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs" # TODO add Bazel- it's slightly more complicated...
@@ -317,13 +317,15 @@ HRD
   
   # GUI
   # Set up X, display manager, and window manager.
-  # Starting out with xmonad is probably a bad idea, but sure!
+  # 
   X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm xscreensaver cmatrix"
   XMONAD_PKGS="lxdm xmonad xmonad-contrib xmobar dmenu"
-  pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS
+  I3_PKGS="i3-wm i3lock i3status perl-anyevent-i3"
+  GFX_PKGS="xscreensaver cmatrix imagemagick"
+  pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS $I3_PKGS
   set -x
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
-  sed -i "s:^.*[^a-z]session=.*\$:session=$(which xmonad):" /etc/lxdm/lxdm.conf
+  sed -i "s:^.*[^a-z]session=.*\$:session=$(which i3):" /etc/lxdm/lxdm.conf
   systemctl enable lxdm.service
   # TODO Make the login prompt prettier.
   # TODO configure clipboard shortcuts.
