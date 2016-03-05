@@ -10,6 +10,10 @@
 ## When setting up the machine in Hyper-V, use a legacy network adapter, per 
 ## https://superuser.com/questions/689813/setting-up-archlinux-in-hyper-v-no-ethernet
 
+# For VirtualBox:
+## Expand the video memory & cores from the defaults.
+## http://wiki.archlinux.org/index.php/VirtualBox@Installation_stesp_for_Arch_Linux_guests
+
 # To run:
 # curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
 # chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh base-install
@@ -160,10 +164,16 @@ then
   echo LANG=en_US > /etc/locale.conf
   # OK with default elsewhere
 
+  # Set up VirtualBox.
+  pacman --noconfirm -S virtualbox-guest-modules virtualbox-guest-utils
+  systemctl enable vboxservice.service
+
   # Make init RAM disk.
   # Make sure startup modules includes Hyper-V modules... which is OK even if we aren't under Hyper-V.
+  # Likewise, VirtualBox.
   hv_modules="hv_vmbus hv_storvsc hv_netvsc hv_utils hv_balloon"
-  sed -i "s/^MODULES=\"/MODULES=\"$hv_modules /" /etc/mkinitcpio.conf
+  vbox_modules="vboxguest vboxsf vboxvideo"
+  sed -i "s/^MODULES=\"/MODULES=\"$hv_modules $vbox_modules/" /etc/mkinitcpio.conf
 
   mkinitcpio -p linux
 
