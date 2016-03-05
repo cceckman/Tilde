@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Lock, and in the background, fetch a new image from Imgur for the next lock.
+
+LID=$HOME/.lockimg
+
+INIT_IMG="CmvNKNT"
+INIT_ALB="26GWw"
+
+# First-run setup...
+mkdir -p $LID
+if [ ! -e $LID/lastdata ] || [ ! -e $LID/next ]
+then
+
+  echo '[{"album":"' "\"$INIT_ALBUM\"" ', "page": 0, "img":' "\"$INIT_IMG"\" '}]' > $LID/lastdata
+  echo "$LID/$INIT_IMG.png" > $LID/next
+fi
+if [ ! -e $(cat $LID/next) ]
+then
+  curl -so $LID/$INIT_IMG.jpg https://i.imgur.com/$INIT_IMG.jpg
+  convert $LID/$INIT_IMG.jpg $LID/$INIT_IMG.png && rm $LID/$INIT_IMG.jpg
+fi
+
+# On each run...
+## Grab the image to use
+next="$(cat $LID/next)"
+## Run the updater in the background
+## TODO implement image cycling.
+
+## Lock, and delete the most recent image when done, if there's a newer one.
+(
+  i3lock --image $next 2>/dev/null && \
+    if [[ "$next" != $(cat $LID/next) ]]
+    then rm $next
+    fi ) || (i3lock --color 00000 2>/dev/null )
+ # Fall back to locking without an image; better to lock unprettily than fail to lock.
