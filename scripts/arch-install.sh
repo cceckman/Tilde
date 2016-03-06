@@ -27,10 +27,6 @@
 ## user-setup -> Started as the new user; set up keys, password, Tilde repository, etc.
 ## prompt -> Prompt for, and write to file, configuration parameters.
 
-echo "Hi! This script isn't necessarily ready for prime time."
-echo "If you know what you're doing, hit enter to start."
-read
-
 set -e
 for sig in INT TERM EXIT; do
   trap "echo 'Encountered an error! Dropping into bash.' && bash; [[ $sig == EXIT ]] || (trap - $sig EXIT; kill -$sig $$)" $sig 
@@ -116,6 +112,11 @@ HRD
   trap - EXIT && exit
 elif [[ "$1" == 'base-install' ]]
 then
+  echo "Hi! This script isn't necessarily ready for prime time."
+  echo "If you know what you're doing, hit enter to start."
+  read
+
+
   $0 prompt 
   set -x
   # Base system install.
