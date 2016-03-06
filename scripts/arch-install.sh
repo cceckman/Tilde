@@ -216,6 +216,7 @@ then
   
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
   pacman --noconfirm -Syyu
+  pacman-key --refresh-keys
   
   # SYSTEM
   SYS_PKGS="sudo openssh intel-ucode mlocate tcpdump"
