@@ -15,8 +15,10 @@
 ## http://wiki.archlinux.org/index.php/VirtualBox@Installation_stesp_for_Arch_Linux_guests
 
 # To run:
-# curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
-# chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh base-install
+#  bash --init-file <(curl -L -o- cceckman.com/distro)
+# That does
+#  curl -o /tmp/arch-install.sh https://raw.githubusercontent.com/cceckman/Tilde/arch-setup/arch-install.sh
+#  chmod +x /tmp/arch-install.sh && /tmp/arch-install.sh base-install
 
 # Modes:
 ## base-install -> assume in live image, set up partitions, etc. on /dev/sda
