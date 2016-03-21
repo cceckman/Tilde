@@ -208,10 +208,15 @@ HRD
   trap - EXIT && exit
 elif [[ "$1" == 'friendlify' ]]
 then
+  set -x
+  # Before unsetting-up root restarting, sync Pacman.
+  # Make the system actually usable. Run from within chroot, or from the newly-booted system.
+  pacman --noconfirm -Syyu
+  pacman-key --refresh-keys
+
   # Don't start this script again when root logs in again;
   # Don't automatically log in as root;
   # In fact, don't let root log in at all.
-  set -x
   mv /root/.bash_profile.bak /root/.bash_profile && \
   rm /etc/systemd/system/getty@tty1.service.d/override.conf && \
   passwd -l root
