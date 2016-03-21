@@ -416,14 +416,15 @@ HRD
   	popd
   done
 
-  # Make Bazel (from the official repo.)
+  # Download and install bazel
+  BAZEL_V="0.2.0"
+  BAZEL_SCRIPT="bazel-${BAZEL_V}-installer-linux-x86_64.sh"
+  BAZEL_LINK="https://github.com/bazelbuild/bazel/releases/download/${BAZEL_V}/${BAZEL_SCRIPT}"
+  pushd /tmp
+    curl -L -o $BAZEL_SCRIPT $BAZEL_LINK && chmod +x $BAZEL_SCRIPT && ./$BAZEL_SCRIPT
+  popd
   # TODO(cceckman) Enable hermeticity:
   # http://bazel.io/docs/bazel-user-manual.html#sandboxing
-  pushd /tmp
-    git clone https://github.com/bazelbuild/bazel.git && cd bazel
-    # ./compile.sh all # 'all' is a little strong here; we fail hermeticity checks, and it takes forever.
-    ./compile.sh
-  popd
   
   set +x
   trap - EXIT && exit
