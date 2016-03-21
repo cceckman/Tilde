@@ -421,7 +421,7 @@ HRD
   BAZEL_SCRIPT="bazel-${BAZEL_V}-installer-linux-x86_64.sh"
   BAZEL_LINK="https://github.com/bazelbuild/bazel/releases/download/${BAZEL_V}/${BAZEL_SCRIPT}"
   pushd /tmp
-    curl -L -o $BAZEL_SCRIPT $BAZEL_LINK && chmod +x $BAZEL_SCRIPT && ./$BAZEL_SCRIPT
+    curl -L -o $BAZEL_SCRIPT $BAZEL_LINK && chmod +x $BAZEL_SCRIPT && ./$BAZEL_SCRIPT --user
   popd
   # TODO(cceckman) Enable hermeticity:
   # http://bazel.io/docs/bazel-user-manual.html#sandboxing
