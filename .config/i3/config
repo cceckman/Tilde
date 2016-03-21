@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -75,7 +75,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+T layout stacking # I don't really care for stacking; better to have tabbed.
+#bindsym $mod+Shift+T layout stacking # I don't really care for stacking; better to have tabbed.
 bindsym $mod+t layout tabbed
 bindsym $mod+g layout toggle split
 
@@ -91,7 +91,6 @@ bindsym $mod+m focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
 # focus the child container
 bindsym $mod+d focus child
 
@@ -125,6 +124,12 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+w exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Start up monitors programs
+bindsym $mod+Shift+i exec xterm -e watch -n1 i3tree
+bindsym $mod+i exec xterm -e top
+
+for_window [class="FloatingMon"] floating enable
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

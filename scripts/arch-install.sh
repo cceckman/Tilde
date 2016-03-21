@@ -303,6 +303,7 @@ HRD
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
   UTIL_PKGS="zip unzip tar gzip less bash-completion"
   STD_PKGS="vim screen gpm chromium"
+  # TODO auto-install Vimium; it doesn't actually work.
   # Automatically install Vimium: http://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb
   # Per https://developer.chrome.com/extensions/external_extensions
   chromium-ext() {
@@ -336,11 +337,11 @@ HRD
   # GUI
   # Set up X, display manager, and window manager.
   # 
-  X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm xscreensaver cmatrix"
+  X_PKGS="xorg-server xorg-server-utils xorg-drivers xterm xscreensaver cmatrix xclip"
   XMONAD_PKGS="lxdm xmonad xmonad-contrib xmobar dmenu"
   I3_PKGS="i3-wm i3lock i3status perl-anyevent-i3"
   GFX_PKGS="xscreensaver cmatrix imagemagick"
-  pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS $I3_PKGS
+  pacman --noconfirm -S  $X_PKGS $XMONAD_PKGS $I3_PKGS $GFX_PKGS
   set -x
   sed -i 's/^.*numlock=.*$/numlock=0/' /etc/lxdm/lxdm.conf
   sed -i "s:^.*[^a-z]session=.*\$:session=$(which i3):" /etc/lxdm/lxdm.conf

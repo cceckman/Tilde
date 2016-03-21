@@ -27,6 +27,10 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 # alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias node="nodejs"
 
+mdcd() {
+  # Make a directory, and move to it.
+  mkdir -p $1 && cd $1
+}
 
 e() {
   # Invoke 'vim' with some wrapping.

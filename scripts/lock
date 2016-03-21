@@ -4,32 +4,43 @@
 LID=$HOME/.lockimg
 
 INIT_IMG="CmvNKNT"
-INIT_ALB="26GWw"
+INIT_ALBUM="26GWw"
+
+getimg() {
+  link=$1
+  curl -so /tmp/convfile $link 
+  convert /tmp/convfile $LID/lockfile.png 2>/dev/null && rm /tmp/convfile
+  # TODO Use symlinks here for atomic move.
+}
 
 # First-run setup...
 mkdir -p $LID
 if [ ! -e $LID/lastdata ] || [ ! -e $LID/next ]
 then
 
-  echo '[{"album":"' "\"$INIT_ALBUM\"" ', "page": 0, "img":' "\"$INIT_IMG"\" '}]' > $LID/lastdata
+  cat - <<HRD > ${LID}/lastdata
+{
+  "album": "$INIT_ALBUM",
+  "img": "$INIT_IMG",
+  "link": "https://i.imgur.com/$INIT_IMG.jpg"
+}
+HRD
+
   echo "$LID/$INIT_IMG.png" > $LID/next
 fi
-if [ ! -e $(cat $LID/next) ]
+if [ ! -e $LID/lockfile.png ]
 then
-  curl -so $LID/$INIT_IMG.jpg https://i.imgur.com/$INIT_IMG.jpg
-  convert $LID/$INIT_IMG.jpg $LID/$INIT_IMG.png && rm $LID/$INIT_IMG.jpg
+  getimg https://i.imgur.com/$INIT_IMG.jpg
 fi
 
 # On each run...
 ## Grab the image to use
-next="$(cat $LID/next)"
 ## Run the updater in the background
-## TODO implement image cycling.
+(getimg $(lockscrn_rotate.py) ) &
 
 ## Lock, and delete the most recent image when done, if there's a newer one.
 (
-  i3lock --image $next 2>/dev/null && \
-    if [[ "$next" != $(cat $LID/next) ]]
-    then rm $next
-    fi ) || (i3lock --color 00000 2>/dev/null )
+  i3lock --image $LID/lockfile.png 2>/dev/null \
+    || i3lock --color 00000 2>/dev/null
+)
  # Fall back to locking without an image; better to lock unprettily than fail to lock.
