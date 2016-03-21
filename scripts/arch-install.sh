@@ -168,7 +168,7 @@ then
   # OK with default elsewhere
 
   # Set up VirtualBox.
-  pacman --noconfirm -S virtualbox-guest-modules virtualbox-guest-utils
+  pacman --noconfirm -S virtualbox-guest-utils
   systemctl enable vboxservice.service
 
   # Make init RAM disk.
