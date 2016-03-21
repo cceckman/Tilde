@@ -64,6 +64,9 @@ fi
 PATH="/usr/local/cuda/bin:${PATH}"
 export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
 
+# Autocomplete Bazel commands.
+source $HOME/.bazel/bin/bazel-complete.bash
+
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
 ENDCOL='\[\e[0m\]'
