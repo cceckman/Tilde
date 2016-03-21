@@ -211,6 +211,7 @@ then
   set -x
   # Before unsetting-up root restarting, sync Pacman.
   # Make the system actually usable. Run from within chroot, or from the newly-booted system.
+  # TODO: wait / poll for DNS resolution to come up before trying to sync
   pacman --noconfirm -Syyu
   pacman-key --refresh-keys
 
