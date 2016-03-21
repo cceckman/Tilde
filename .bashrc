@@ -54,6 +54,7 @@ export EDITOR=vim
 
 # To use custom bash scripts from the Tilde repo...
 PATH="$HOME/scripts:${PATH}"
+PATH="$HOME/bin:${PATH}"
 # Apparently this isn't picked up from .profile...
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
