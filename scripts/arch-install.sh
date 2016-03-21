@@ -116,7 +116,6 @@ then
   echo "If you know what you're doing, hit enter to start."
   read
 
-
   $0 prompt 
   set -x
   # Base system install.
@@ -168,7 +167,7 @@ then
   # OK with default elsewhere
 
   # Set up VirtualBox.
-  pacman --noconfirm -S virtualbox-guest-utils
+  pacman --noconfirm -S linux-headers virtualbox-guest-utils
   systemctl enable vboxservice.service
 
   # Make init RAM disk.
