@@ -174,6 +174,7 @@ then
   # Make init RAM disk.
   # Make sure startup modules includes Hyper-V modules... which is OK even if we aren't under Hyper-V.
   # Likewise, VirtualBox.
+  # TODO: Predicate on systemd-detect-virt
   hv_modules="hv_vmbus hv_storvsc hv_netvsc hv_utils hv_balloon"
   vbox_modules="vboxguest vboxsf vboxvideo"
   sed -i "s/^MODULES=\"/MODULES=\"$hv_modules $vbox_modules/" /etc/mkinitcpio.conf
