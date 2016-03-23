@@ -333,7 +333,7 @@ HRD
   echo "Useful packages installed!"
   
   # DEVELOPMENT
-  DEV_PKGS="base-devel rsync git go go-tools protobuf python2 python2-pip"
+  DEV_PKGS="base-devel rsync git go go-tools protobuf python2 python2-pip parted"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs"
