@@ -30,8 +30,9 @@ font pango:monospace 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-# bindsym $mod+backtick exec i3-sensible-terminal
+bindsym $mod+Return exec xterm
+# start a browser
+bindsym $mod+c exec chromium
 
 
 # kill focused window
