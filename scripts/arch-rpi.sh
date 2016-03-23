@@ -46,6 +46,9 @@ sync
 
 mv root/boot/* boot
 
+mkdir -p root/root/.ssh
+cat $(eval echo ~${SUDO_USER})/.ssh/id_ed25519.pub >> root/root/.ssh/authorized_keys
+
 # TODO: Copy over arch-install.sh, invoke on first boot.
 
 umount boot root
@@ -53,4 +56,8 @@ umount boot root
 set +e
 set +x
 
-# Now you can login as alarm@alarmpi.
+# Now you can login as alarm@alarmpi
+echo "Pull out the SD card, boot up the RPi, and put its IP here: "
+read rpiip
+echo "Press enter to continue..."
+ssh -o PasswordAuthentication=yes root@${rpiip}

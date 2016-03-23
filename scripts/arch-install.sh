@@ -334,7 +334,7 @@ HRD
   
   # DEVELOPMENT
   DEV_PKGS="base-devel rsync git go go-tools protobuf python2 python2-pip"
-  OS_PKGS="parted dosfstools ntfsprogs"
+  OS_PKGS="parted dosfstools ntfsprogs docker"
   HS_PKGS="ghc cabal-install haddock happy alex"
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs"
