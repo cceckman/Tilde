@@ -1,6 +1,6 @@
 #!/bin/bash
 # Per https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3,
-# install a 
+# set up an SD card with an ARM Arch image.
 
 if (( $# != 1 ))
 then
@@ -16,6 +16,10 @@ then
   exit 2
 fi
 
+for sig in INT TERM EXIT; do
+  trap "echo 'Encountered an error! Dropping into bash.' && bash; [[ $sig == EXIT ]] || (trap - $sig EXIT; kill -$sig $$)" $sig 
+done
+set -e
 set -x
 
 # Set up filesystem
@@ -27,7 +31,7 @@ parted --script $dev mklabel msdos &&
 mkdir -p /tmp/rpi && cd /tmp/rpi
 
 mkfs.vfat ${dev}1
-mkdir boot
+mkdir -p boot
 mount ${dev}1 boot
 
 mkfs.ext4 ${dev}2
@@ -35,8 +39,9 @@ mkdir -p root
 mount ${dev}2 root
 
 # Get base image
-wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+URL="http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz"
+curl -o arch-arm-latest.tar.gz -L $URL
+bsdtar -xpf arch-arm-latest.tar.gz -C root
 sync
 
 mv root/boot/* boot
@@ -45,4 +50,7 @@ mv root/boot/* boot
 
 umount boot root
 
+set +e
 set +x
+
+# Now you can login as alarm@alarmpi.
