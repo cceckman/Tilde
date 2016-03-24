@@ -339,6 +339,7 @@ HRD
   JAVA_PKGS="jre8-openjdk jdk8-openjdk openjdk8-doc"
   BUILD_PKGS="clang llvm-libs"
   pacman --noconfirm -S $DEV_PKGS $HS_PKGS $JAVA_PKGS $BUILD_PKGS $OS_PKGS
+  systemctl enable docker.service
   echo "Developer packages installed!"
   
   # GUI
