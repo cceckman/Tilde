@@ -434,7 +434,10 @@ HRD
   popd
   # TODO(cceckman) Enable hermeticity:
   # http://bazel.io/docs/bazel-user-manual.html#sandboxing
-  
+ 
+  # TODO(cceckman) Download and install Google Cloud SDK
+  # TODO(cceckman) Auth into cloud SDK (prompt!)
+
   set +x
   trap - EXIT && exit
 else
