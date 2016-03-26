@@ -309,6 +309,7 @@ HRD
   FONT_PKGS="ttf-dejavu ttf-anonymous-pro"
   UTIL_PKGS="zip unzip tar gzip less bash-completion"
   STD_PKGS="vim screen gpm chromium"
+  DBG_PKGS="dnsutils"
   # TODO auto-install Vimium; it doesn't actually work.
   # Automatically install Vimium: http://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb
   # Per https://developer.chrome.com/extensions/external_extensions
@@ -327,7 +328,7 @@ HRD
 
 
   # TODO configure gpm for mouse support: https://wiki.archlinux.org/index.php/Console_mouse_support
-  pacman --noconfirm -S $STD_PKGS $FONT_PKGS $UTIL_PKGS
+  pacman --noconfirm -S $STD_PKGS $FONT_PKGS $UTIL_PKGS $DBG_PKGS
  
   # TODO turn on numlock by default.
   echo "Useful packages installed!"
