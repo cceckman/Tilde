@@ -60,17 +60,17 @@ bind \# colon "number "
 # %{=r gk} - set attributes to reverse (r) black (k) on green (g)
 # %Y-%m-%d - e.g. 2009-09-22 (Y = 2009, m = 09, d = 22)
 # %0c      - current time HH:MM in 24h format (c), zero-padded (0) when < 10h
-# %{=b kg} - set attributes to bold (b) green (g) on black (k)
+# %{+b i}  - add (+) bold (b) attribute to existing colors (i)
 # %H       - hostname (H)
 # %l       - system load (l)
-# %{=r gk} - set attributes to reverse (r) black (k) on green (g)
+# %{0b i}  - remove (-) bold (b) attribute from existing colors (i)
 # %-Lw     - all window numbers & names (w) up to current (-), with flags (L)
-# %{=r kg} - set attributes to reverse (r) green (g) on black (b)
+# %{-r i}  - remove (-) reverse (r) from existing colors
 # %60L>    - truncate here when too many screens to fit, L means print '...'
 #            (60 means give up to 60 spaces from left margin)
 # %n       - current window number (n)
 # %t       - current window title (t)
-# %{-}     - restore attributes before last change was made ("pop" %{=r kg})
+# %{-}     - restore attributes before last change was made ("pop" %{-r i})
 # %+Lw     - all window numbers & names (w) after current (+), with flags (L)
 # %-0<     - truncate up to here, placing zero spaces (0) from right margin (-)
 # Spaces outside of escapes and other text are interpreted literally.
@@ -78,7 +78,8 @@ bind \# colon "number "
 #
 ## Backtick: Get output of a command
 #backtick 1 5 5 pmset -g batt | tail -n 1 | sed -n "s/.*\([0-9]*%\).*\([0-9]:[0-9]{2}\)/\1 \2/p"
-caption always "%{=r kg}%Y-%m-%d  %{=br kg}%0c %{=r kg} %H  %1` %{=r kg}%-Lw%{=r gk}%60L>%n* %t%{-}%+Lw%-0<"
+#backtick 2 0 0
+caption always "%{=r kg}%Y-%m-%d  %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
 bindkey -k k8 caption splitonly
