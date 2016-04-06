@@ -77,15 +77,7 @@ then
   source $HOME/.bazel/bin/bazel-complete.bash
 fi
 
-# Prompt color/look mods...
-PROMPTCOL='\[\e[32m\]'
-ENDCOL='\[\e[0m\]'
-PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \W \$:$ENDCOL"
-
-export CLICOLOR="Yes"
-
 export PATH  
-export PS1
 
 if [ "$TERM" = "screen" ]; 
 then
@@ -103,3 +95,5 @@ fi
 # Enable vi mode; hit escape to use
 set -o vi
 
+# Add prompt settings
+source $HOME/.prompt.rc.sh
