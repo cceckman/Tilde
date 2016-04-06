@@ -53,19 +53,29 @@ export EDITOR=vim
 # alias pbpaste='xclip -selection clipboard -o'
 
 # To use custom bash scripts from the Tilde repo...
-PATH="$HOME/scripts:${PATH}"
-PATH="$HOME/bin:${PATH}"
-# Apparently this isn't picked up from .profile...
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+ADDPATHS=$(echo <<EOD
+$HOME/scripts
+$HOME/bin
+/usr/local/cuda/bin
+EOD
+)
+for addpath in $ADDPATHS
+do
+  if ! [[ "$PATH" == "*${addpath}*" ]]
+  then
+    PATH="${addpath}:$PATH"
+  fi
+done
+export PATH
 
 # And to ensure CUDA is in the PATH:
-PATH="/usr/local/cuda/bin:${PATH}"
 export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
 
 # Autocomplete Bazel commands.
-source $HOME/.bazel/bin/bazel-complete.bash
+if [ -e $HOME/.bazel/bin/bazel-complete.bash ]
+then
+  source $HOME/.bazel/bin/bazel-complete.bash
+fi
 
 # Prompt color/look mods...
 PROMPTCOL='\[\e[32m\]'
