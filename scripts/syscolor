@@ -1,3 +1,4 @@
+#!/bin/bash
 # syscolor: Define a Bash function to give the color in human-readable terms.
 # Why function rather than a script? Keep evaluation in-process.
 # Why "syscolor"? Should use for Bash, screen, and whatever else.
