@@ -155,6 +155,9 @@ fi
 # Enable vi mode; hit escape to use
 set -o vi
 
+# Typing is hard; use shell autocorrect.
+shopt -s cdspell dirspell
+
 # Add prompt settings
 source $HOME/.prompt.rc.sh
 
