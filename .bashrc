@@ -26,6 +26,7 @@ alias la='ls -lah'
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 # alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias node="nodejs"
+alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
 mdcd() {
   # Make a directory, and move to it.
