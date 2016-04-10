@@ -54,15 +54,10 @@ export EDITOR=vim
 # alias pbpaste='xclip -selection clipboard -o'
 
 # To use custom bash scripts from the Tilde repo...
-ADDPATHS=$(echo <<EOD
-$HOME/scripts
-$HOME/bin
-/usr/local/cuda/bin
-EOD
-)
+ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin"
 for addpath in $ADDPATHS
 do
-  if ! [[ "$PATH" == "*${addpath}*" ]]
+  if ! [[ "$PATH" == *"${addpath}"* ]]
   then
     PATH="${addpath}:$PATH"
   fi
