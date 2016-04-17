@@ -30,7 +30,7 @@ alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
 # Fix OS X; use GNU grep if it's available.
 # (Seriously, no PCRE support?)
-if which ggrep
+if which ggrep >/dev/null
 then
   alias grep='ggrep'
 fi
