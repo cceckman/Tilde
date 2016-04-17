@@ -5,6 +5,6 @@ source $HOME/.settings.screenrc
 
 # Default windows
 screen -t top 1 top
-screen -t irc 2 irssi
+screen -t irc 2 bash -c '{ which irssi && irssi; } || bash'
 screen 3 bash
 
