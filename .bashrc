@@ -28,6 +28,13 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
+# Fix OS X; use GNU grep if it's available.
+# (Seriously, no PCRE support?)
+if which ggrep
+then
+  alias grep='ggrep'
+fi
+
 mdcd() {
   # Make a directory, and move to it.
   mkdir -p $1 && cd $1
@@ -151,8 +158,11 @@ fi
 # Enable vi mode; hit escape to use
 set -o vi
 
-# Typing is hard; use shell autocorrect.
-shopt -s cdspell dirspell
+# Typing is hard; use shell autocorrect, when available
+if bash -o dirspell >/dev/null 2>&1
+then
+  shopt -s cdspell dirspell
+fi
 
 # Add prompt settings
 source $HOME/.prompt.rc.sh
