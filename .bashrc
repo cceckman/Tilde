@@ -60,8 +60,16 @@ export EDITOR=vim
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
 
-# To use custom bash scripts from the Tilde repo...
-ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin"
+# Use $HOME/go for GOPATH / symlinks
+if ! [[ "$GOPATH" == *"$HOME/go"* ]]
+then
+  GOPATH="${GOPATH}:$HOME/go"
+fi
+export GOPATH
+
+# Add some custom elements to PATH:
+# scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
+ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin ${GOPATH//://bin:}/bin"
 for addpath in $ADDPATHS
 do
   if ! [[ "$PATH" == *"${addpath}"* ]]
@@ -69,7 +77,6 @@ do
     PATH="${addpath}:$PATH"
   fi
 done
-export PATH
 
 # And to ensure CUDA is in the PATH:
 export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
@@ -79,8 +86,6 @@ if [ -e $HOME/.bazel/bin/bazel-complete.bash ]
 then
   source $HOME/.bazel/bin/bazel-complete.bash
 fi
-
-export PATH  
 
 # Set up window title
 if echo "$TERM" | grep -Pq 'screen|xterm' 
@@ -172,3 +177,5 @@ if [ -f $HOME/.work.rc.sh ]
 then
   source $HOME/.work.rc.sh
 fi
+
+export PATH

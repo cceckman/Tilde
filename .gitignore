@@ -12,3 +12,5 @@ cce3/
 cceckman.github.io/
 .xmonad/
 !.xmonad/*.hs
+r/
+src/
