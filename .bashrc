@@ -63,7 +63,11 @@ export EDITOR=vim
 # Use $HOME/go for GOPATH / symlinks
 if ! [[ "$GOPATH" == *"$HOME/go"* ]]
 then
-  GOPATH="${GOPATH}:$HOME/go"
+  if [[ "$GOPATH" != "" ]]
+  then
+    GOPATH="${GOPATH}:"
+  fi
+  GOPATH="${GOPATH}$HOME/go"
 fi
 export GOPATH
 
