@@ -115,10 +115,12 @@ set colorcolumn=80
 " Restore line position when re-opening a file
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
+" Markdown, not modula2. Come on.
+au BufRead,BufNewFile *.md set filetype=markdown
 
 " Thanks to http://vim.wikia.com/wiki/Improved_hex_editing
 command! -bar Hex call ToggleHex()
-function ToggleHex()
+function! ToggleHex()
     let l:modified=&mod
     let l:oldreadonly=&readonly
     let &readonly=0
