@@ -18,9 +18,7 @@
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
-alias ls='ls -G'
-alias dir='ls' # In case I start using the windows CLI
-alias del='rm'
+alias ls='ls -G --color=auto'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
