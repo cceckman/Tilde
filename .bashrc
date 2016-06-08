@@ -14,6 +14,9 @@
 #            fi
             # [end of auto-screen snippet]
 
+# Enable ssh-agent with keychain.
+eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
+
 # Aliases (for mnemonics etc) 
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
