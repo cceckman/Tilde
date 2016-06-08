@@ -15,10 +15,10 @@
             # [end of auto-screen snippet]
 
 # Enable ssh-agent with keychain.
-if [[ -z "$SSH_AUTH_SOCK" ]]
-then
-  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
-fi
+#if [[ -z "$SSH_AUTH_SOCK" ]]
+#then
+#  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
+#fi
 
 # Aliases (for mnemonics etc) 
 alias where='pwd'
