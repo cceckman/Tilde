@@ -4,11 +4,19 @@
 # Why "syscolor"? Should use for Bash, screen, and whatever else.
 # Why multiple definition of the function? So that it's evaluated when the function
 #  is loaded, rather than at every invocation. We can probably do better.
+
+
 case "$OSTYPE" in
   darwin*)
     syscolor() { echo 'blue'; }
     ;;
   linux*|*)
-    syscolor() { echo 'green'; }
+    if curl -s -f -H 'Metadata-Flavor: Google' \
+      http://metadata.google.internal/computeMetadata/v1/instance/hostname
+    then
+      syscolor() { echo 'blue'; }
+    else
+      syscolor() { echo 'green'; }
+    fi
     ;;
 esac
