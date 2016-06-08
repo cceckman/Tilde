@@ -12,7 +12,8 @@ case "$OSTYPE" in
     ;;
   linux*|*)
     if curl -s -f -H 'Metadata-Flavor: Google' \
-      http://metadata.google.internal/computeMetadata/v1/instance/hostname
+      http://metadata.google.internal/computeMetadata/v1/instance/hostname \
+      >/dev/null 
     then
       syscolor() { echo 'blue'; }
     else
