@@ -57,6 +57,17 @@ vncssh() {
   vinagre localhost:8901
 }
 
+repo() {
+  # cd to a repository by a short name.
+  if [ -d $HOME/r/*/$1 ]
+  then
+    cd $HOME/r/*/$1
+    pwd
+  else
+    echo "Couldn't identify repository $1"
+  fi
+}
+
 # http://github.com/huyng/bashmarks - thanks, @huyng!
 bashmarks="$HOME/scripts/bashmarks.sh"
 if [ -e "$bashmarks" ]
