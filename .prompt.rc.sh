@@ -10,6 +10,9 @@ case "$COLOR" in
   green)
     PROMPTCOL='\[\e[32m\]'
     ;;
+  purple)
+    PROMPTCOL='\[\e[35m\]'
+    ;;
 esac
 ENDCOL='\[\e[0m\]'
 PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \W \$:$ENDCOL"

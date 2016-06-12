@@ -8,7 +8,7 @@
 
 case "$OSTYPE" in
   darwin*)
-    syscolor() { echo 'blue'; }
+    syscolor() { echo 'purple'; }
     ;;
   linux*|*)
     if curl -s -f -H 'Metadata-Flavor: Google' \
