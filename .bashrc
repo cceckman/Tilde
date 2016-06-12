@@ -24,7 +24,6 @@
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
-alias ls='ls -G --color=auto'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
@@ -38,6 +37,16 @@ if which ggrep >/dev/null 2>&1
 then
   alias grep='ggrep'
 fi
+
+# Fix OS X; only use --color=auto if on Linux.
+case "$OSTYPE" in
+  darwin*)
+    alias ls='ls -G'
+    ;;
+  *)
+    alias ls='ls -G --color=auto'
+    ;;
+esac
 
 mdcd() {
   # Make a directory, and move to it.
