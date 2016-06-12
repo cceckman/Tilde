@@ -50,6 +50,13 @@ e() {
   $cmd && clear && pwd && echo "Done: $cmd"
 }
 
+vncssh() {
+  # VNC to a machine over an SSH tunnel.
+  # Assumes the setup in "distro", that is, xvnc.socket
+  ssh $1 -L 8900:localhost:5900
+  vinagre localhost:8901
+}
+
 # http://github.com/huyng/bashmarks - thanks, @huyng!
 bashmarks="$HOME/scripts/bashmarks.sh"
 if [ -e "$bashmarks" ]
