@@ -57,7 +57,7 @@ vncssh() {
   vinagre localhost:8901
 }
 
-repo() {
+r() {
   # cd to a repository by a short name.
   if [ -d $HOME/r/*/$1 ]
   then
