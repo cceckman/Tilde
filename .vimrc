@@ -112,6 +112,8 @@ au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 set colorcolumn=80
 
+au BufRead,BufNewFile *.go set colorcolumn=100
+
 " Restore line position when re-opening a file
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 

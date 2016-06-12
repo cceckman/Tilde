@@ -14,13 +14,17 @@
 #            fi
             # [end of auto-screen snippet]
 
+# Enable ssh-agent with keychain.
+#if [[ -z "$SSH_AUTH_SOCK" ]]
+#then
+#  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
+#fi
+
 # Aliases (for mnemonics etc) 
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
-alias ls='ls -G'
-alias dir='ls' # In case I start using the windows CLI
-alias del='rm'
+alias ls='ls -G --color=auto'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
@@ -30,7 +34,7 @@ alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
 # Fix OS X; use GNU grep if it's available.
 # (Seriously, no PCRE support?)
-if which ggrep >/dev/null
+if which ggrep >/dev/null 2>&1
 then
   alias grep='ggrep'
 fi
@@ -44,6 +48,24 @@ e() {
   # Invoke 'vim' with some wrapping.
   cmd="vim $@"
   $cmd && clear && pwd && echo "Done: $cmd"
+}
+
+vncssh() {
+  # VNC to a machine over an SSH tunnel.
+  # Assumes the setup in "distro", that is, xvnc.socket
+  ssh $1 -L 8900:localhost:5900
+  vinagre localhost:8901
+}
+
+r() {
+  # cd to a repository by a short name.
+  if [ -d $HOME/r/*/$1 ]
+  then
+    cd $HOME/r/*/$1
+    pwd
+  else
+    echo "Couldn't identify repository $1"
+  fi
 }
 
 # http://github.com/huyng/bashmarks - thanks, @huyng!
@@ -183,3 +205,6 @@ then
 fi
 
 export PATH
+
+
+
