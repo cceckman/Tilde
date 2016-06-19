@@ -2,6 +2,8 @@
 
 pushd $HOME
 
+# Update submodules
+git submodule update --recursive
 
 repos=$(cat <<EOF
 cceckman/cce3
