@@ -15,6 +15,15 @@ Clone repositories as [submodules](https://git-scm.com/docs/git-submodule)
 within submdirectories of ~/.vim/bundle, and the `infect` call autoloads them on
 startup.
 
+## Tagging
+[Easytags](https://github.com/xolox/vim-easytags) and its prerequisites,
+[xolox](https://github.com/xolox/)'s vim-misc.
+
+It requires [Exuberant Ctags](http://ctags.sourceforge.net) explicitly-
+not just any old ctags. This requires a [Homebrew](http://brew.sh) install
+([like this](http://scholarslab.org/research-and-development/code-spelunking-with-ctags-and-vim/))
+for OS X.
+
 ## Additional Resources
 
 * http://sontek.net/turning-vim-into-a-modern-python-ide
