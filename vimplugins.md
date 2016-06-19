@@ -23,6 +23,8 @@ It requires [Exuberant Ctags](http://ctags.sourceforge.net) explicitly-
 not just any old ctags. This requires a [Homebrew](http://brew.sh) install
 ([like this](http://scholarslab.org/research-and-development/code-spelunking-with-ctags-and-vim/))
 for OS X.
+[Universal Ctags](http://ctags.io) appears to be an acceptable alternative, if
+`g:easytags_suppress_ctags_warning` is set in .vimrc.
 
 ## Additional Resources
 

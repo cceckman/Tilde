@@ -1,7 +1,13 @@
 "Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide for this setup."
 
-" Load with pathogen
+
+" Make easytags accept Universal Ctags (ctags.io)
+let g:easytags_suppress_ctags_warning = 1
+" Leftover from... something.
 filetype off
+
+
+" Load with pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
