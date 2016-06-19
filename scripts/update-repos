@@ -33,7 +33,7 @@ do
     ret=$(($ret + $?))
     # Support Go directory structure. Assume $HOME/go is in $GOPATH.
     GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
-    mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
+    # mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
   fi
 done
 # DONE
