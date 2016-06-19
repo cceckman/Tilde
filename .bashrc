@@ -122,10 +122,14 @@ then
   source $HOME/.bazel/bin/bazel-complete.bash
 fi
 
+# Add scripts for prompt and repo functions
+source $HOME/scripts/repo.rc.sh
+source $HOME/scripts/prompt.rc.sh
+
 # Set up window title
-if echo "$TERM" | grep -Pq 'screen|xterm' 
+if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ];
 then
-	# Get correct escape sequence.
+	# Get correct escape sequence for 'title'.
 	# Thanks to Mikel++, from
 	# http://unix.stackexchange.com/questions/7380/force-title-on-gnu-screen	
 	terminit() {
@@ -167,16 +171,6 @@ then
 			esac
 	}
 	terminit
-
-	# Get current branch, if any; followed by a colon.
-	repo() {
-		GIT=$(git branch --no-color 2>/dev/null | grep '[*]' | grep -o '[^* ]*')
-		if [ $? -eq 0 ]
-    then
-      echo "$GIT:"
-    fi
-  }
-
   set_window_title () {
     local HPWD="$PWD"
     case $HPWD in 
@@ -187,7 +181,7 @@ then
           HPWD=$(basename "$HPWD")
           ;; 
     esac
-		printf "${titlestart}%s${titlefinish}" "$(repo)$HPWD"
+    printf "${titlestart}%s${titlefinish}" "$(repo)$HPWD"
   }
   if ! echo "$PROMPT_COMMAND" | grep -Pq 'set_window_title' 
   then
@@ -203,9 +197,6 @@ if bash -o dirspell >/dev/null 2>&1
 then
   shopt -s cdspell dirspell
 fi
-
-# Add prompt settings
-source $HOME/.prompt.rc.sh
 
 # Load a work profile, if any.
 if [ -f $HOME/.work.rc.sh ]

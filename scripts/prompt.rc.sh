@@ -1,4 +1,7 @@
+#!/bin/bash
+# Provide local information on what color to use for prompts, etc.
 source $HOME/scripts/syscolor
+source $HOME/scripts/repo.rc.sh
 
 # Prompt color/look mods...
 # Provide mapping here
@@ -15,6 +18,6 @@ case "$COLOR" in
     ;;
 esac
 ENDCOL='\[\e[0m\]'
-PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \W \$:$ENDCOL"
+PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \$(repo)\W \$:$ENDCOL"
 export PS1
 export CLICOLOR="Yes"
