@@ -1,5 +1,10 @@
 "Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide for this setup."
 
+" Load with pathogen
+filetype off
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 "Status line setup"
 set laststatus=2 "alawys show
 set statusline=%t "tail of filename
@@ -19,9 +24,6 @@ set mouse=a
 set backspace=indent,eol,start
 "Make jj escape insert mode
 inoremap jj <Esc>
-
-filetype off
-call pathogen#infect()
 
 "Fix some key collision errors"
 map <Leader>] <Plug>MakeGreen
