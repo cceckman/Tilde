@@ -27,15 +27,18 @@ ret=0
 for repo in $repos
 do
   REPOPATH="${GH_PREFIX}/${repo}"
-  git clone "git@github.com:${repo}" "$REPOPATH"
-  ret=$(($ret + $?))
-  # Support Go directory structure. Assume $HOME/go is in $GOPATH.
-  GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
-  mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
+  if ! [ -d "$REPOPATH" ]
+  then
+    git clone "git@github.com:${repo}" "$REPOPATH"
+    ret=$(($ret + $?))
+    # Support Go directory structure. Assume $HOME/go is in $GOPATH.
+    GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
+    mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
+  fi
 done
 # DONE
 
 # Link for ssh-ident.
-ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi
+ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi || true
 
 popd # $HOME
