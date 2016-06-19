@@ -1,0 +1,39 @@
+#!/bin/bash
+
+pushd $HOME
+
+
+repos=$(cat <<EOF
+cceckman/cce3
+cceckman/cceckman.github.io
+cceckman/compute-archlinux-image-builder
+cceckman/distro
+cceckman/rpi-linux
+cceckman/web
+ccontavalli/ssh-ident
+EOF
+)
+
+# Clone repositories I like / own.
+GH_PREFIX="$HOME/r"
+GO_PREFIX="$HOME/go" # Keep in sync with Tilde/.bashrc
+mkdir -p $GH_PREFIX
+mkdir -p $GO_PREFIX
+
+ret=0
+
+for repo in $repos
+do
+  REPOPATH="${GH_PREFIX}/${repo}"
+  git clone "git@github.com:${repo}" "$REPOPATH"
+  ret=$(($ret + $?))
+  # Support Go directory structure. Assume $HOME/go is in $GOPATH.
+  GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
+  mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
+done
+# DONE
+
+# Link for ssh-ident.
+ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi
+
+popd # $HOME
