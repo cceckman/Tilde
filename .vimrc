@@ -45,25 +45,14 @@ set shiftwidth=2
 
 filetype indent plugin on
 
-"Space for code completion" 
-inoremap <Nul> <C-x><C-o>
+" Use space to center screen on current line in normal mode
+nmap <space> zz
 
 "Use C-hjkl controls for moving between windows
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" Use space to center screen on current line in normal mode
-nmap <space> zz
-
-" Use 'comma' shortcuts for comments
-" single-line
-map ,/ :s/^/\/\//<CR>
-map ,? :s/^\/\///<CR>
-" multi-line
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
-
 
 "When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -77,8 +66,8 @@ set foldmethod=syntax
 " But use indent-based folding for Python
 autocmd FileType python setlocal foldmethod=indent
 " And store what's been folded
-" au BufWinLeave * mkview
-" au BufWinEnter * silent loadview
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
 
 " Nice little hack; allow :W to do :w
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -92,7 +81,7 @@ set colorcolumn=80
 
 " Set a wider colorcolumn in Go, which doesn't have as strict lint
 " requirements as other languages.
-" autocmd FileType go set colorcolumn=100
+autocmd FileType go set colorcolumn=100
 
 " Restore line position when re-opening a file
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
