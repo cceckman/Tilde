@@ -119,3 +119,6 @@ function! ToggleHex()
     let &readonly=l:oldreadonly
     let &modifiable=l:oldmodifiable
 endfunction
+
+" Easily open magic.sh.
+command Magic edit ~/magic.sh
