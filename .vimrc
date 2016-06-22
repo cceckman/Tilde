@@ -79,6 +79,9 @@ au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 set colorcolumn=80
 
+" Use the X clipboard (register +) by default.
+set clipboard=unnamedplus
+
 " Set a wider colorcolumn in Go, which doesn't have as strict lint
 " requirements as other languages.
 autocmd FileType go set colorcolumn=100
