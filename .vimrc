@@ -66,8 +66,8 @@ set foldmethod=syntax
 " But use indent-based folding for Python
 autocmd FileType python setlocal foldmethod=indent
 " And store what's been folded
-au BufWinLeave ?* mkview
-au BufWinEnter ?* silent loadview
+" au BufWinLeave ?* mkview
+" au BufWinEnter ?* silent loadview
 
 " Nice little hack; allow :W to do :w
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
