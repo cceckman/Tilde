@@ -73,6 +73,9 @@ au BufWinEnter * silent loadview
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
+" Use 
+autocmd FileType markdown setlocal wrapmargin=80
+
 " Line and column hilighting
 au WinLeave * set nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
