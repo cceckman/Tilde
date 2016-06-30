@@ -73,8 +73,12 @@ autocmd FileType python setlocal foldmethod=indent
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
-" Use 
+" Use 80-character margin in markdown.
 autocmd FileType markdown setlocal textwidth=80
+
+" Don't autofmt go on save. This is a nice feature, but keeps re-folding
+" everything. Probably ultimately want to fix by saving folds.
+let g:go_fmt_autosave = 0
 
 " Line and column hilighting
 au WinLeave * set nocursorcolumn
