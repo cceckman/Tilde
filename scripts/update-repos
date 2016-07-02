@@ -2,7 +2,8 @@
 
 pushd $HOME
 
-# Update submodules
+# Update Tilde too
+git pull
 git submodule update --recursive
 
 repos=$(cat <<EOF
@@ -10,13 +11,14 @@ cceckman/cce3
 cceckman/cceckman.github.io
 cceckman/compute-archlinux-image-builder
 cceckman/distro
+cceckman/doit
 cceckman/rpi-linux
 cceckman/web
 ccontavalli/ssh-ident
 EOF
 )
 
-# Clone repositories I like / own.
+# Clone repositories I like / own; sync them.
 GH_PREFIX="$HOME/r"
 GO_PREFIX="$HOME/go" # Keep in sync with Tilde/.bashrc
 mkdir -p $GH_PREFIX
@@ -29,16 +31,39 @@ do
   REPOPATH="${GH_PREFIX}/${repo}"
   if ! [ -d "$REPOPATH" ]
   then
-    git clone "git@github.com:${repo}" "$REPOPATH"
+    # Not already cloned. Pull it down.
+    {
+      git clone "git@github.com:${repo}" "$REPOPATH" && \
+        git submodule init --recursive && \
+        git submodule update --recursive
+    } || {
+      echo "Error cloning ${repo}, dropping to shell." \
+        "Resolve any issues yourself."
+      bash -i
+    }
     ret=$(($ret + $?))
     # Support Go directory structure. Assume $HOME/go is in $GOPATH.
     GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
     # mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
+  else
+    # If it's not cloned, attempt to sync it.
+    pushd $REPOPATH
+    {
+      git pull && git submodule update --recursive
+    } || {
+      echo "error updating $REPOPATH, dropping to shell." \
+       "Resolve any sync issues yourself."
+      bash -i
+    }
+    # Not yet ready to push back up.
+    popd
   fi
 done
 # DONE
 
 # Link for ssh-ident.
-ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi || true
+# Suppress the hek out of errors.
+ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi \
+  >/dev/null 2>&1 || true
 
 popd # $HOME
