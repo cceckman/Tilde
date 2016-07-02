@@ -34,7 +34,7 @@ do
     # Not already cloned. Pull it down.
     {
       git clone "git@github.com:${repo}" "$REPOPATH" && \
-        git submodule init --recursive && \
+        git submodule init && \
         git submodule update --recursive
     } || {
       echo "Error cloning ${repo}, dropping to shell." \
