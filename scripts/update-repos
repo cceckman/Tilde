@@ -2,10 +2,6 @@
 
 pushd $HOME
 
-# Update Tilde too
-git pull
-git submodule update --recursive
-
 repos=$(cat <<EOF
 cceckman/cce3
 cceckman/cceckman.github.io
@@ -45,9 +41,9 @@ do
   fi
 done
 
-# Separately, update all of the repositories under $HOME/r.
+# Separately, update all of the repositories under $HOME/r, and $HOME itself.
 # Do this so that the default list of repositories need not be "all of them".
-for path in $(ls -d ${GH_PREFIX}/*/*)
+for path in $(ls -d ${GH_PREFIX}/*/*) $HOME
 do
   # If it's not cloned, attempt to sync it.
   pushd $path
