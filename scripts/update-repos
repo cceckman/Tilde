@@ -35,9 +35,6 @@ do
       bash -i
     }
     ret=$(($ret + $?))
-    # Support Go directory structure. Assume $HOME/go is in $GOPATH.
-    GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
-    # mkdir -p $(dirname $GOTOOLPATH) && ln -s $REPOPATH $GOTOOLPATH
   fi
 done
 
@@ -54,7 +51,20 @@ do
      "Resolve any sync issues yourself."
     bash -i
   }
-  # Not yet ready to push back up.
+
+  # Maintain gopath.
+  # Support Go directory structure. Assume $HOME/go is in $GOPATH.
+  # Get back the 'repo' part of the name...
+  repo=$(echo ${path#${GH_PREFIX}})
+  # Early-exit for $HOME
+  if [ $repo = "" ]; then popd; continue; fi
+  
+  GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
+  if ! [ "$GOTOOLPATH" -ef "$path" ]
+  then
+    mkdir -p $(dirname $GOTOOLPATH) && ln -s $path $GOTOOLPATH
+  fi
+
   popd
 done
 
