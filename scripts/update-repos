@@ -47,7 +47,7 @@ done
 
 # Separately, update all of the repositories under $HOME/r.
 # Do this so that the default list of repositories need not be "all of them".
-for path in $(ls -d "${GH_PREFIX}/*/*")
+for path in $(ls -d ${GH_PREFIX}/*/*)
 do
   # If it's not cloned, attempt to sync it.
   pushd $path
