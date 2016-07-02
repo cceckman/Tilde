@@ -1,0 +1,14 @@
+#!/bin/sh
+# Sync all git repositories under $HOME/r/*/*
+
+for repo in $(ls -d ~/r/*/*)
+do
+  pushd $repo
+  git pull || {
+    echo "error updating $repo, dropping to shell"
+    bash -i
+  }
+  # Not yet ready for push-all-by-default.
+  popd
+done
+
