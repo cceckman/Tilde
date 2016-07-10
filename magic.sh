@@ -1,4 +1,4 @@
-# magic.sh : Shell command lines to install.
+# magic.sh : Shell command lines to remember.
 exit
 
 # Per
@@ -14,3 +14,10 @@ lsblk; df -h
 umount /dev/sdc1
 read img
 dd bs=4M if=$img of=/dev/sdc
+
+# Install Buildifier.
+# TODO to make this part of update-repos or somesuch.
+go get -d -u github.com/bazelbuild/buildifier/buildifier \
+  && go generate github.com/bazelbuild/buildifier/core \
+  && go install github.com/bazelbuild/buildifier/buildifier
+
