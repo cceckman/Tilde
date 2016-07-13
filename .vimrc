@@ -69,8 +69,9 @@ autocmd FileType python setlocal foldmethod=indent
 " au BufWinLeave ?* mkview
 " au BufWinEnter ?* silent loadview
 
-" Nice little hack; allow :W to do :w
+" Nice little hack; allow :W to do :w, and :Wqa to do :wqa
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
 " Use 80-character margin in markdown.
