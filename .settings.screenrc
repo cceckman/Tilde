@@ -82,8 +82,14 @@ bind \# colon "number "
 #
 ## Backtick: Get output of a command
 #backtick 1 5 5 pmset -g batt | tail -n 1 | sed -n "s/.*\([0-9]*%\).*\([0-9]:[0-9]{2}\)/\1 \2/p"
-backtick 2 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "blue" ]] && echo " "'
-caption always "%{=r kg}%?%{=r kc}%2`%: %?%Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
+#
+# For each color, have an expression like
+# %?%{=r kg}%2`%:%?
+# where 'g' is the color code, and '2' is the backtick command.
+backtick 2 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "green" ]] && echo " "'
+backtick 3 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "blue" ]] && echo " "'
+backtick 4 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "purple" ]] && echo " "'
+caption always "%?%{=r kg}%2`%:%?%?%{=r kc}%3`%:%?%?%{=r km}%4`%:%? %Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
 bindkey -k k8 caption splitonly
