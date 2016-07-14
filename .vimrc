@@ -129,7 +129,7 @@ function! ToggleHex()
 endfunction
 
 " Easily open magic.sh.
-command! Magic edit ~/magic.sh
+command! -bar Magic sv | edit ~/magic.sh
 
 " Insert a timestamp.
 command! Now execute 'r! date "+\%F \%a \%H:\%M"'
