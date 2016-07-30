@@ -80,6 +80,15 @@ autocmd FileType markdown setlocal textwidth=80
 " Don't autofmt go on save. This is a nice feature, but keeps re-folding
 " everything. Probably ultimately want to fix by saving folds.
 let g:go_fmt_autosave = 0
+" I'm not a fan of the template here- use a different template engine.
+let g:go_template_autocreate = 0
+
+" Register templating preferences.
+let g:email = "charles@cceckman.com"
+if !exists('g:templates_directory')
+  let g:templates_directory = []
+endif
+let g:templates_directory = add(g:templates_directory, '~/.vim/templates')
 
 " Line and column hilighting
 au WinLeave * set nocursorcolumn

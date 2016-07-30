@@ -17,3 +17,6 @@
 [submodule ".vim/bundle/vim-ft-bzl"]
 	path = .vim/bundle/vim-ft-bzl
 	url = https://github.com/google/vim-ft-bzl.git
+[submodule ".vim/bundle/vim-template"]
+	path = .vim/bundle/vim-template
+	url = git://github.com/aperezdc/vim-template.git
