@@ -11,12 +11,12 @@ var(
 	help = flag.Bool("help", false, "Display a usage message.")
 )
 
-func man() {
+func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "%s:	%HERE% \nUsage:\n", os.Args[0])
 		flag.PrintDefaults()
 	}
-	flags.Parse()
+	flag.Parse()
 	if *help {
 		flag.Usage()
 		os.Exit(1)
