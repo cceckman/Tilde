@@ -1,6 +1,6 @@
 #!/bin/bash
 
-repos=$(cat <<EOF
+DEFAULT_LIST=$(cat <<EOF
 $1
 cceckman/cce3
 cceckman/cceckman.github.io
@@ -19,7 +19,7 @@ mkdir -p $GO_PREFIX
 
 ret=0
 
-for repo in $repos
+for repo in $DEFAULT_LIST
 do
   REPOPATH="${GH_PREFIX}/${repo}"
   if ! [ -d "$REPOPATH" ]

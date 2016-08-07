@@ -66,32 +66,6 @@ vncssh() {
   vinagre localhost:8901
 }
 
-r() {
-  # cd to a repository by a short name.
-  if [ -d $HOME/r/*/$1 ]
-  then
-    cd $HOME/r/*/$1
-    pwd
-  else
-    echo "Couldn't identify repository $1"
-  fi
-}
-_CompleteR() {
-  local cur
-  local repos=$(find $HOME/r -maxdepth 2 -mindepth 2 | xargs basename -a | sort | uniq)
-  COMPREPLY=()
-  cur=${COMP_WORDS[COMP_CWORD]}
-  # Yeah, this is more verbose than it needs to be because I copy-pasted from
-  # the Internet. I'm okay with that.
-  case "$cur" in
-    *)
-      COMPREPLY=( $( compgen -W "$repos" -- $cur ) )
-      ;;
-  esac
-  return 0
-}
-complete -F _CompleteR r
-
 # http://github.com/huyng/bashmarks - thanks, @huyng!
 bashmarks="$HOME/scripts/bashmarks.sh"
 if [ -e "$bashmarks" ]
