@@ -82,6 +82,26 @@ autocmd FileType markdown setlocal textwidth=80
 let g:go_fmt_autosave = 0
 " I'm not a fan of the template here- use a different template engine.
 let g:go_template_autocreate = 0
+" ...but re-create the "make with package" bit of that by adding a new
+" variable.
+let g:templates_user_variables = [
+  \   ['PACKAGE', 'GetPackage'],
+  \ ]
+
+function! GetPackage()
+  " %  Current directory
+  " :p Full path
+  " :h Head; everything but the filename
+  " :t tail; just the last element, i.e. directory
+  " But override if the filename is 'main'
+  let fpkg = matchlist(expand('%:t'), '\(.*\)\(_test\).go')
+  if (!empty(fpkg)) && (len(fpkg) >= 1) && (fpkg[1] == 'main')
+    return 'main'
+  endif
+
+  return expand('%:p:h:t')
+endfunction
+
 
 " Register templating preferences.
 let g:email = "charles@cceckman.com"
