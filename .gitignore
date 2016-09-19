@@ -13,6 +13,7 @@ cceckman.github.io/
 .xmonad/
 !.xmonad/*.hs
 r/
+go/
 src/
 distro/
 .secrets/
