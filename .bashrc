@@ -31,13 +31,6 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
-# Fix OS X; use GNU grep if it's available.
-# (Seriously, no PCRE support?)
-if which ggrep >/dev/null 2>&1
-then
-  alias grep='ggrep'
-fi
-
 # Fix OS X; only use --color=auto if on Linux.
 case "$OSTYPE" in
   darwin*)
@@ -172,7 +165,7 @@ then
     esac
     printf "${titlestart}%s${titlefinish}" "$(repo)$HPWD"
   }
-  if ! echo "$PROMPT_COMMAND" | grep -Pq 'set_window_title' 
+  if ! echo "$PROMPT_COMMAND" | grep -q 'set_window_title'
   then
     PROMPT_COMMAND="set_window_title; $PROMPT_COMMAND"
   fi

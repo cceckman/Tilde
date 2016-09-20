@@ -5,7 +5,7 @@
 
 # Define a 'repo' function that gets the current repository / branch.
 repo() {
-  GIT="$(git branch --no-color 2>/dev/null | grep '[*]' | grep -o '[^* ]*')"
+  GIT="$(git branch --no-color 2>/dev/null | egrep '[*]' | egrep -o '[^* ]+')"
   if [ $? -eq 0 ]
   then
     echo "$GIT:"
