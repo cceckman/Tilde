@@ -109,7 +109,7 @@ source $HOME/scripts/repo.rc.sh
 source $HOME/scripts/prompt.rc.sh
 
 # Set up window title
-if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ];
+if echo "$TERM" | grep -q 'screen\|xterm'
 then
 	# Get correct escape sequence for 'title'.
 	# Thanks to Mikel++, from
