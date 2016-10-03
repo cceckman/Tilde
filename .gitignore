@@ -2,6 +2,8 @@
 .bash_logout
 .bazel/
 .cache/
+.config/gcloud
+.sudo_as_admin_successful
 .oracle_jre_usage/
 .viminfo
 .ssh/
