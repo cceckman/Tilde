@@ -2,10 +2,6 @@
 
 DEFAULT_LIST=$(cat <<EOF
 $1
-cceckman/cce3
-cceckman/cceckman.github.io
-cceckman/distro
-cceckman/doit
 cceckman/web
 ccontavalli/ssh-ident
 EOF
