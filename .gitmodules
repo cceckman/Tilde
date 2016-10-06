@@ -20,3 +20,6 @@
 [submodule ".vim/bundle/vim-template"]
 	path = .vim/bundle/vim-template
 	url = git://github.com/aperezdc/vim-template.git
+[submodule "secrets"]
+	path = secrets
+	url = git@github.com:cceckman/secrets.git
