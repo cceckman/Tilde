@@ -1,0 +1,57 @@
+#! /usr/bin/env python2
+# -*- coding: utf-8 -*-
+# vim:fenc=utf-8
+#
+# Copyright © 2016 cceckman <charles@cceckman.com>
+#
+# Distributed under terms of the MIT license.
+
+"""
+Generate a new http://xkcd.com/936 style password from /usr/share/dict/words.
+"""
+
+import random
+import sys
+
+import gflags
+
+
+FLAGS = gflags.FLAGS
+gflags.DEFINE_integer('word_count', 4, 'Number of words to include in the password.',
+                      lower_bound=1)
+gflags.DEFINE_integer('min_length', 4, 'Minimum length of each word, '
+                                       'in characters.',
+                      lower_bound=1)
+gflags.DEFINE_integer('max_length', 8, 'Maximum length of each word, '
+                                       'in characters.',
+                      lower_bound=1)
+gflags.DEFINE_string('dictionary', '/usr/share/dict/words',
+                     'File (one word per line) from which to draw words.')
+gflags.DEFINE_integer('pw_count', 10, 'Number of passwords to generate.',
+                      lower_bound=1)
+
+
+class PasswordBuilder(object):
+    
+    def __init__(self, wordcount, minlen, maxlen, dictfile, *args, **kwargs):
+        super(PasswordBuilder, self).__init__(*args, **kwargs)
+        self._wordcount = wordcount
+
+        # Read in dictionary
+        self._words = set()
+        for word in open(dictfile):
+            if len(word) >= minlen and len(word) <= maxlen:
+                self._words.add(word.strip())
+
+    def NewPw(self):
+        rand = random.SystemRandom()
+        chosenWords = random.sample(self._words, self._wordcount)
+        return ''.join(w.title() for w in chosenWords)
+
+if __name__ == '__main__':
+    argv = FLAGS(sys.argv)
+    builder = PasswordBuilder(
+            FLAGS.word_count, FLAGS.min_length, FLAGS.max_length,
+            FLAGS.dictionary)
+    for i in range(FLAGS.pw_count):
+        print builder.NewPw()
