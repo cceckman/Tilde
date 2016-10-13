@@ -2,6 +2,5 @@ if [ -x /usr/bin/VBoxClient-all ]
 then
   /usr/bin/VBoxClient-all
 fi
-xscreensaver &
-xss-lock -- xscreensaver-command -lock &
+xscreensaver -no-splash &
 exec i3
