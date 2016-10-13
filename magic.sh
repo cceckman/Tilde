@@ -21,3 +21,9 @@ go get -d -u github.com/bazelbuild/buildifier/buildifier \
   && go generate github.com/bazelbuild/buildifier/core \
   && go install github.com/bazelbuild/buildifier/buildifier
 
+# Turn on and configure Wifi
+sudo ip link set dev wlan0 up
+sudo iwlist wlan0 scan
+sudo iwconfig wlan0 essid NetworkNameHere
+sudo dhclient wlan0
+# Also, wpa_supplicant for WPA connections

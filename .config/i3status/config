@@ -19,7 +19,6 @@ order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery 0"
 order += "load"
-order += "tztime UTC"
 order += "tztime MTV"
 
 wireless _first_ {
