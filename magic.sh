@@ -21,9 +21,10 @@ go get -d -u github.com/bazelbuild/buildifier/buildifier \
   && go generate github.com/bazelbuild/buildifier/core \
   && go install github.com/bazelbuild/buildifier/buildifier
 
-# Turn on and configure Wifi
-sudo ip link set dev wlan0 up
-sudo iwlist wlan0 scan
-sudo iwconfig wlan0 essid NetworkNameHere
-sudo dhclient wlan0
-# Also, wpa_supplicant for WPA connections
+# Scan for wireless networks
+nmcli dev wifi list
+# radio off / on
+nmcli radio wifi off
+# Connect to PSK network; creates persisted connection
+nmcli device wifi connect Networkname password PasswordGoesHere
+# Password is optional; skip it for insecure network
