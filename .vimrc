@@ -35,7 +35,8 @@ endif
 
 " Use 256 colors, set color scheme.
 set t_Co=256
-colorscheme xemacs
+set background=dark
+colorscheme solarized
 
 " Set indent preferences.
 set tabstop=2
