@@ -40,7 +40,7 @@ do
   # If it's not cloned, attempt to sync it.
   pushd $path
   {
-    git pull && git submodule update --recursive
+    git pull && git submodule update --init --recursive
   } || {
     echo "error updating $path, dropping to shell." \
      "Resolve any sync issues yourself."
