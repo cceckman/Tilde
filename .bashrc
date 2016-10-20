@@ -31,6 +31,10 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 
+ce() {
+  git commit -a && git push
+}
+
 # Fix OS X; only use --color=auto if on Linux.
 case "$OSTYPE" in
   darwin*)
