@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# pick whichever one(s) are installed
+if which google-chrome >/dev/null
+then
+  cmd="google-chrome"
+elif which chromium >/dev/null
+then
+  cmd="chromium"
+else
+  echo "Cannot find a browser!" 1>&2
+  exit 1
+fi
+
+# Add --disable-gpu flag if we're on a VM. Virtualbox gets sad about it.
+if cat /proc/cpuinfo | grep -q '^flags.* hypervisor.*'
+then
+  cmd="$cmd --disable-gpu"
+fi
+
+$cmd 2>&1 >/dev/null &

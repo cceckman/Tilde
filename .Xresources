@@ -3,3 +3,6 @@
 *selectToClipboard: true
 *faceName: Anonymous Pro
 *faceSize: 11
+
+! Try out hi-dpi settings
+Xft.dpi: 120
