@@ -8,4 +8,5 @@ then
 fi
 
 xscreensaver -no-splash &
+
 exec i3
