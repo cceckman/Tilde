@@ -8,6 +8,6 @@ key='wallpaper-rotate'
 crontab -l \
   | grep -v "$key" \
   | cat - \
-    <(echo "*/1 * * * *  DISPLAY=:0.0 feh --bg-fill \"\$(find ~/secrets/wallpaper/* | shuf -n1)\" # $key ") \
+    <(echo "*/5 * * * *  DISPLAY=:0.0 feh --bg-fill \"\$(find ~/secrets/wallpaper/* | shuf -n1)\" # $key ") \
   | crontab -
 
