@@ -5,4 +5,6 @@
 *faceSize: 11
 
 ! Try out hi-dpi settings
-Xft.dpi: 120
+! Xft.dpi: 120
+! Setting for a Macbook
+
