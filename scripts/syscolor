@@ -23,7 +23,7 @@ case "$OSTYPE" in
       --write-out '%{http_code}' \
       --output /dev/null \
       --header 'Metadata-Flavor: Google' \
-      --max-time '2' \
+      --max-time '1' \
       http://metadata.google.internal/computeMetadata/v1/instance/hostname)
     if test "$STATUSCODE" -eq 200
     then
