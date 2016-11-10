@@ -4,7 +4,11 @@
 *faceName: Anonymous Pro
 *faceSize: 11
 
+#ifdef CUSTOM_DPI
+Xft.dpi: CUSTOM_DPI
+#else
 ! Try out hi-dpi settings
 ! Xft.dpi: 120
 ! Setting for a Macbook
-Xft.dpi: 96
+Xft.dpi: 120
+#endif
