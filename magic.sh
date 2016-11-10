@@ -28,3 +28,9 @@ nmcli radio wifi off
 # Connect to PSK network; creates persisted connection
 nmcli device wifi connect Networkname password PasswordGoesHere
 # Password is optional; skip it for insecure network
+
+# Get DPI
+MY_DPI=$(xdpyinfo \
+  | grep dots \
+  | grep -Po '([0-9]{2,3})x\1' \
+  | grep -Po '^[^x]*' )
