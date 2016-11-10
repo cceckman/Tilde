@@ -34,3 +34,4 @@ MY_DPI=$(xdpyinfo \
   | grep dots \
   | grep -Po '([0-9]{2,3})x\1' \
   | grep -Po '^[^x]*' )
+
