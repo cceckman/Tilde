@@ -30,6 +30,7 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 # alias e="vim"   #Because in vim, the command is e <filename>, so...
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
+alias t="xterm &" # start a new terminal in the same directory
 
 ce() {
   git commit -a && git push
@@ -74,8 +75,9 @@ fi
 export EDITOR=vim
 
 # This is only for Linux
-# alias pbcopy='xclip -selection clipboard'
-# alias pbpaste='xclip -selection clipboard -o'
+alias cbcopy='xclip -selection clipboard'
+alias cbpaste='xclip -selection clipboard -o'
+alias copy='cbcopy'
 
 # Use $HOME/go for GOPATH / symlinks
 if ! [[ "$GOPATH" == *"$HOME/go"* ]]
@@ -177,6 +179,11 @@ fi
 
 # Enable vi mode; hit escape to use
 set -o vi
+
+# enable programmable completion features
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+fi
 
 # Typing is hard; use shell autocorrect, when available
 if bash -o dirspell >/dev/null 2>&1
