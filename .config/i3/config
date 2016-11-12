@@ -29,14 +29,23 @@ font pango:monospace 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+## SHORTCUTS
 # start a terminal
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec i3-sensible-terminal
 # start a browser
 bindsym $mod+c exec ~/scripts/browser
 
+# Lock screen
+bindsym XF86Mail exec xscreensaver-command -lock
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# Send window to scratchpad
+bindsym $mod+Shift+s move scratchpad
+# No "return from scratchpad"; use $mod+Shift+m to return to workspace / unfloat.
+# Show scratchpad
+bindsym $mod+s scratchpad show
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec dmenu_run
