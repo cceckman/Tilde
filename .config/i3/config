@@ -41,12 +41,6 @@ bindsym XF86Mail exec xscreensaver-command -lock
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# Send window to scratchpad
-bindsym $mod+Shift+s move scratchpad
-# No "return from scratchpad"; use $mod+Shift+m to return to workspace / unfloat.
-# Show scratchpad
-bindsym $mod+s scratchpad show
-
 # start dmenu (a program launcher)
 bindsym $mod+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
