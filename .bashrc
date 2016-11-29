@@ -39,10 +39,10 @@ ce() {
 # Fix OS X; only use --color=auto if on Linux.
 case "$OSTYPE" in
   darwin*)
-    alias ls='ls -G'
+    alias ls='ls -Gv'
     ;;
   *)
-    alias ls='ls -G --color=auto'
+    alias ls='ls -Gv --color=auto'
     ;;
 esac
 

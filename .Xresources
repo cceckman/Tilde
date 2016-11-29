@@ -10,5 +10,5 @@ Xft.dpi: CUSTOM_DPI
 ! Try out hi-dpi settings
 ! Xft.dpi: 120
 ! Setting for a Macbook
-Xft.dpi: 120
+Xft.dpi: 96
 #endif
