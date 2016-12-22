@@ -6,9 +6,14 @@ backlight="$path/$(ls $path | head -1)"
 
 max="$(cat $backlight/max_brightness)"
 pct="$1"
-setto="$(echo "$pct / 100 * $max" | bc -l | grep -o '^[^.]*')"
-echo "$setto" \
-  | sudo tee $backlight/brightness > /dev/null
 
-echo "$setto / $max" 
+if test "$pct" = '' || test "$pct" = '?'
+then
+  echo "$(cat $backlight/brightness) / $max * 100" | bc -l | grep -o '^[^.]*'
+else
+  setto="$(echo "$pct / 100 * $max" | bc -l | grep -o '^[^.]*')"
+  echo "$setto" \
+    | sudo tee $backlight/brightness > /dev/null
 
+  echo "$setto / $max" 
+fi
