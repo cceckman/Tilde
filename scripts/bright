@@ -1,19 +1,9 @@
 #!/bin/sh
-# Set the backlight brightness to a percent of the max.
+# Alias for xbacklight.
 
-path="/sys/class/backlight"
-backlight="$path/$(ls $path | head -1)"
-
-max="$(cat $backlight/max_brightness)"
-pct="$1"
-
-if test "$pct" = '' || test "$pct" = '?'
+if [ "$#" -gt 1 ]
 then
-  echo "$(cat $backlight/brightness) / $max * 100" | bc -l | grep -o '^[^.]*'
+  xbacklight -set $1
 else
-  setto="$(echo "$pct / 100 * $max" | bc -l | grep -o '^[^.]*')"
-  echo "$setto" \
-    | sudo tee $backlight/brightness > /dev/null
-
-  echo "$setto / $max" 
+  xbacklight
 fi
