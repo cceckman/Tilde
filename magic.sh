@@ -35,3 +35,10 @@ MY_DPI=$(xdpyinfo \
   | grep -Po '([0-9]{2,3})x\1' \
   | grep -Po '^[^x]*' )
 
+
+# The coolest thing I've done in a while:
+# resize encrypted logical volumes, online.
+# Hop out of X (i3 etc. keep some files open in /home) and to a TTY, then:
+sudo lvresize -r -L-10G /dev/matildai-vg/home
+sudo lvresize -r -L+10G /dev/matildai-vg/root
+# -r indicates "resize the filesystem, too."
