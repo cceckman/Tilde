@@ -92,7 +92,7 @@ export GOPATH
 
 # Add some custom elements to PATH:
 # scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin ${GOPATH//://bin:}/bin"
+ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin /usr/local/go/bin ${GOPATH//://bin:}/bin"
 for addpath in $ADDPATHS
 do
   if ! [[ "$PATH" == *"${addpath}"* ]]
