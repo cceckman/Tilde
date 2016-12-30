@@ -1,1 +1,1 @@
-trackbar.pl
+scripts.irssi.org/scripts/trackbar.pl

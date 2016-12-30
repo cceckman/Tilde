@@ -29,3 +29,6 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule ".irssi/scripts/scripts.irssi.org"]
+	path = .irssi/scripts/scripts.irssi.org
+	url = https://github.com/irssi/scripts.irssi.org
