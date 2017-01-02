@@ -208,16 +208,8 @@ hilights = (
 # file by irssi.
 # kthxbye
 windows = {
-  1 = {
-    immortal = "yes";
-    name = "(status)";
-    level = "ALL";
-  };
-  2 = {
-    immortal = "yes";
-    name = "hilight";
-    sticky = "yes";
-  };
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = { immortal = "yes"; name = "hilight"; sticky = "yes"; parent = "4"; };
   3 = {
     items = (
       {
@@ -227,11 +219,32 @@ windows = {
         tag = "Foonetic";
       }
     );
-    parent = 1;
   };
-
+  4 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#bots";
+        tag = "Foonetic";
+      }
+    );
+    sticky = "yes";
+  };
+  5 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#mybots";
+        tag = "Foonetic";
+      }
+    );
+    sticky = "yes";
+    parent = "4";
+  };
 };
 mainwindows = {
-  1 = { first_line = "23"; lines = "21"; };
-  2 = { first_line = "1"; lines = "22"; };
+  3 = { first_line = "14"; lines = "32"; };
+  4 = { first_line = "1"; lines = "13"; };
 };

@@ -1,1 +1,1 @@
-scripts.irssi.org/scripts/hilightwin.pl
+../scripts.irssi.org/scripts/hilightwin.pl
