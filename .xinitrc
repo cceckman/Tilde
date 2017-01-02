@@ -20,7 +20,7 @@ for dim in $MY_DIMS
 do
   if test $dim -gt 1000
   then
-    MY_DPI=$(echo "$MY_DPI * 2" | bc)
+    MY_DPI=$(echo "$MY_DPI * 4 / 3" | bc)
     break
   fi
 done
