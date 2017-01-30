@@ -14,7 +14,7 @@ repo() {
 
 
 _lsrepos() {
-  echo "$(find $HOME/r -maxdepth 2 -mindepth 2 | xargs basename -a | sort | uniq)"
+  echo "$(find $HOME/go/src/github.com -maxdepth 2 -mindepth 2 | xargs basename -a | sort | uniq)"
 }
 
 r() {
@@ -34,9 +34,9 @@ r() {
 
   # Normal:
   # cd to a repository by a short name.
-  if [ -d $HOME/r/*/$1 ]
+  if [ -d $HOME/go/src/github.com/*/$1 ]
   then
-    cd $HOME/r/*/$1
+    cd $HOME/go/src/github.com/*/$1
     pwd
   else
     echo "Couldn't identify repository $1"

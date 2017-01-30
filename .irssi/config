@@ -13,9 +13,6 @@
 # THIS PART HANDLES SERVERS
 servers = (
   { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
   {
     address = "irc.foonetic.net";
     chatnet = "Foonetic";
@@ -23,21 +20,11 @@ servers = (
     use_ssl = "yes";
     ssl_verify = "yes";
     autoconnect = "yes";
-  }
+  },
 );
 
 #THIS PART HANDLES CHATNETS/IRC NETWORKS
 chatnets = {
-  QuakeNet = {
-    type = "IRC";
-    # This is how one auths oneself...
-    # Though, be sure not to make this combination public. :-)
-    autosendcmd = "MSG NickServ IDENTIFY password; /MODE nick -i";
-  };
-
-  IRCnet = { type = "IRC"; };
-  EFnet = { type = "IRC"; };
-
   Foonetic = { type = "IRC"; };
   Ubuntu = { type = "IRC"; };
 };
@@ -45,11 +32,6 @@ chatnets = {
 channels = (
   { name = "#xkcd"; chatnet = "Foonetic"; autojoin = "Yes"; },
   # Define a password/keyword for channels if necessary
-  {
-    name = "#ChannelName keyword";
-    chatnet = "FreeNode";
-    autojoin = "Yes";
-  }
 );
 
 #THIS PART DEFINES COMMAND ALIASES
@@ -209,7 +191,7 @@ hilights = (
 # kthxbye
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = { immortal = "yes"; name = "hilight"; sticky = "yes"; parent = "4"; };
+  2 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
   3 = {
     items = (
       {
@@ -219,32 +201,10 @@ windows = {
         tag = "Foonetic";
       }
     );
-  };
-  4 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#bots";
-        tag = "Foonetic";
-      }
-    );
-    sticky = "yes";
-  };
-  5 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#mybots";
-        tag = "Foonetic";
-      }
-    );
-    sticky = "yes";
-    parent = "4";
+    parent = "1";
   };
 };
 mainwindows = {
-  3 = { first_line = "14"; lines = "32"; };
-  4 = { first_line = "1"; lines = "13"; };
+  1 = { first_line = "14"; lines = "32"; };
+  2 = { first_line = "1"; lines = "13"; };
 };

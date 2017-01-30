@@ -31,6 +31,7 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 alias t="xterm &" # start a new terminal in the same directory
+alias lock="xscreensaver-command -lock"
 
 ce() {
   git commit -a && git push
@@ -92,7 +93,7 @@ export GOPATH
 
 # Add some custom elements to PATH:
 # scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-ADDPATHS="$HOME/scripts $HOME/bin /usr/local/cuda/bin /usr/local/go/bin ${GOPATH//://bin:}/bin"
+ADDPATHS="$HOME/scripts $HOME/.cargo/bin $HOME/bin /usr/local/cuda/bin /usr/local/go/bin ${GOPATH//://bin:}/bin"
 for addpath in $ADDPATHS
 do
   if ! [[ "$PATH" == *"${addpath}"* ]]
