@@ -44,8 +44,9 @@ sudo lvresize -r -L+10G /dev/matildai-vg/root
 # -r indicates "resize the filesystem, too."
 
 # Install a more modern kernel, along with some more modern drivers.
-sudo apt-get update -t jessie-backports \
-  linux-image \
+sudo apt-get install -t jessie-backports \
   linux-image-amd64 \
-  linux-headers \
-  wl # WiFi driver
+  linux-headers-amd64 \
+  dkms \
+  virtualbox-guest-dkms \
+  broadcom-sta-dkms # WiFi driver
