@@ -42,3 +42,10 @@ MY_DPI=$(xdpyinfo \
 sudo lvresize -r -L-10G /dev/matildai-vg/home
 sudo lvresize -r -L+10G /dev/matildai-vg/root
 # -r indicates "resize the filesystem, too."
+
+# Install a more modern kernel, along with some more modern drivers.
+sudo apt-get update -t jessie-backports \
+  linux-image \
+  linux-image-amd64 \
+  linux-headers \
+  wl # WiFi driver
