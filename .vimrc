@@ -131,8 +131,8 @@ au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g
 " .md to Markdown, not modula2. Come on.
 au BufRead,BufNewFile *.md set filetype=markdown
 " .cl and .cool to Cool
-au BufRead,BufNewFile *.cool setf cool
-au BufRead,BufNewFile *.cl setf cool
+au BufRead,BufNewFile *.cool set filetype=cool
+au BufRead,BufNewFile *.cl set filetype=cool
 
 " Thanks to http://vim.wikia.com/wiki/Improved_hex_editing
 command! -bar Hex call ToggleHex()
