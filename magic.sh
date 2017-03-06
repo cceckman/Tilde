@@ -47,6 +47,19 @@ sudo lvresize -r -L+10G /dev/matildai-vg/root
 sudo apt-get install -t jessie-backports \
   linux-image-amd64 \
   linux-headers-amd64 \
+  linux-image-extra \
   dkms \
   virtualbox-guest-dkms \
   broadcom-sta-dkms # WiFi driver
+
+# Set BBR as the default congestion control
+export BBR="/etc/sysctl.d/50-bbr.conf"
+sudo bash -c "echo 'net.core.default_qdisc=fq' >> $BBR"
+sudo bash -c "echo 'net.ipv4.tcp_congestion_control=bbr' >> $BBR"
+
+# Use 'overlay' module for Docker.
+sudo tee /etc/docker/daemon.json <<HRD
+{
+  "storage-driver": "overlay"
+}
+HRD
