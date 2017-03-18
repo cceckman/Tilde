@@ -32,6 +32,8 @@ alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 alias t="xterm &" # start a new terminal in the same directory
 alias lock="xscreensaver-command -lock"
+# Try to use 256 colors with tmux.
+alias tmux='tmux -2'
 
 ce() {
   git commit -a && git push
@@ -116,7 +118,7 @@ source $HOME/scripts/repo.rc.sh
 source $HOME/scripts/prompt.rc.sh
 
 # Set up window title
-if echo "$TERM" | grep -q 'screen\|xterm'
+if echo "$TERM" | grep -q 'screen\|xterm\|tmux'
 then
 	# Get correct escape sequence for 'title'.
 	# Thanks to Mikel++, from
@@ -136,7 +138,7 @@ then
 					titlestart='\033]30;'
 					titlefinish='\007'
 					;;
-			screen*)
+			screen|tmux*)
 					# status line
 					#titlestart='\033_'
 					#titlefinish='\033\'

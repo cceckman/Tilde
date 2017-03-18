@@ -50,6 +50,7 @@ sudo apt-get install -t jessie-backports \
   linux-image-extra \
   dkms \
   virtualbox-guest-dkms \
+  virtualbox-guest-x11 \
   broadcom-sta-dkms # WiFi driver
 
 # Set BBR as the default congestion control
