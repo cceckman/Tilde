@@ -39,6 +39,10 @@ ce() {
   git commit -a && git push
 }
 
+ca() {
+  git commit -a -m "$1" && git push
+}
+
 # Fix OS X; only use --color=auto if on Linux.
 case "$OSTYPE" in
   darwin*)
