@@ -125,7 +125,7 @@ set colorcolumn=80
 autocmd FileType go set colorcolumn=100
 
 " Restore line position when re-opening a file
-au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 " Use the X clipboard (register +) by default.
 set clipboard=unnamedplus
