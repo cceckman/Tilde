@@ -131,7 +131,7 @@ au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g
 set clipboard=unnamedplus
 
 " .md to Markdown, not modula2. Come on.
-au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md setfiletype markdown
 " Use 80-character text wrapping in markdown.
 autocmd FileType markdown setlocal textwidth=80
 
