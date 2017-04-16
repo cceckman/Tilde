@@ -79,7 +79,7 @@ cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa')
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
 " :Trim whitespace
-cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim')) 
+cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim'))
 
 " Don't autofmt go on save. This is a nice feature, but keeps re-folding
 " everything. Probably ultimately want to fix by saving folds.
