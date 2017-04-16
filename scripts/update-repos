@@ -1,37 +1,38 @@
 #!/bin/bash
 
-DEFAULT_LIST=$(cat <<EOF
-$1
-cceckman/web
-ccontavalli/ssh-ident
-EOF
-)
-
-# Clone repositories I like / own.
 GH_PREFIX="$HOME/r"
-GO_PREFIX="$HOME/go" # Keep in sync with Tilde/.bashrc
-mkdir -p $GH_PREFIX
-mkdir -p $GO_PREFIX
+GO_PREFIX="$HOME/go/src" # Keep in sync with Tilde/.bashrc
 
 ret=0
 
-for repo in $DEFAULT_LIST
-do
-  REPOPATH="${GH_PREFIX}/${repo}"
-  if ! [ -d "$REPOPATH" ]
-  then
-    # Not already cloned. Pull it down.
-    {
-      git clone "git@github.com:${repo}" "$REPOPATH" && \
-        git submodule init
-    } || {
-      echo "Error cloning ${repo}, dropping to shell." \
-        "Resolve any issues yourself."
-      bash -i
-    }
-    ret=$(($ret + $?))
-  fi
-done
+
+# Clone any new repositories.
+if test "$#" -gt 0
+then
+  for repo in $@
+  do
+    REPOPATH="${GO_PREFIX}/github.com/${repo}"
+    LNPATH="${GH_PREFIX}/${repo}"
+    if ! [ -d "$REPOPATH" ]
+    then
+      # Not already cloned. Pull it down, and link r/.
+      {
+        mkdir -p "$REPOPATH"
+        git clone "git@github.com:${repo}" "$REPOPATH" && \
+          git submodule init && \
+          mkdir -p "$LNPATH" && \
+          rmdir "$LNPATH" && \
+          ln -s "$REPOPATH" "$LNPATH"
+      } || {
+        echo "Error cloning ${repo}, dropping to shell." \
+          "Resolve any issues yourself."
+        bash -i
+      }
+      ret=$(($ret + $?))
+    fi
+  done
+fi
+
 
 # Separately, update all of the repositories under $HOME/r, and $HOME itself.
 # Do this so that the default list of repositories need not be "all of them".
@@ -47,23 +48,10 @@ do
     bash -i
   }
 
-  # Maintain gopath.
-  # Support Go directory structure. Assume $HOME/go is in $GOPATH.
-  # Get back the 'repo' part of the name...
-  repo=$(echo ${path#${GH_PREFIX}})
-  # Early-exit for $HOME
-  if [ $repo = "" ]; then popd; continue; fi
-  
-  GOTOOLPATH="$GO_PREFIX/src/github.com/${repo}"
-  if ! [ "$GOTOOLPATH" -ef "$path" ]
-  then
-    mkdir -p $(dirname $GOTOOLPATH) && ln -s $path $GOTOOLPATH
-  fi
-
   popd
 done
 
 # Link for ssh-ident.
 # Suppress the hek out of errors.
-ln -s $GH_PREFIX/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi \
+ln -s $GO_PREFIX/src/github.com/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi \
   >/dev/null 2>&1 || true
