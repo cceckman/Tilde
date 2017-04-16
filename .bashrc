@@ -1,3 +1,6 @@
+# So that I'm always on "local" time
+export TZ=America/Los_Angeles
+
 # Auto-screen invocation. see: http://taint.org/wk/RemoteLoginAutoScreen
 # if we're coming from a remote SSH connection, in an interactive session
 # then automatically put us into a screen(1) session.   Only try once
@@ -20,7 +23,6 @@
 #  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
 #fi
 
-# Aliases (for mnemonics etc) 
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
@@ -34,13 +36,30 @@ alias t="xterm &" # start a new terminal in the same directory
 alias lock="xscreensaver-command -lock"
 # Try to use 256 colors with tmux.
 alias tmux='tmux -2'
+alias pgrep="pgrep -l"
 
 ce() {
   git commit -a && git push
 }
 
 ca() {
-  git commit -a -m "$1" && git push
+  git commit -a -m "$@"
+}
+
+# git root; or git-root push
+gr() {
+  if ! base="$(git rev-parse --show-toplevel)"
+  then
+    echo "Not under Git?"
+    return
+  fi
+  if [ "$1" == "p" ]
+  then
+    pushd "$base"
+  else
+    cd "$base"
+    pwd
+  fi
 }
 
 # Fix OS X; only use --color=auto if on Linux.
@@ -82,9 +101,8 @@ fi
 export EDITOR=vim
 
 # This is only for Linux
-alias cbcopy='xclip -selection clipboard'
+alias copy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -o'
-alias copy='cbcopy'
 
 # Use $HOME/go for GOPATH / symlinks
 if ! [[ "$GOPATH" == *"$HOME/go"* ]]
@@ -102,14 +120,17 @@ export GOPATH
 ADDPATHS="$HOME/scripts $HOME/.cargo/bin $HOME/bin /usr/local/cuda/bin /usr/local/go/bin ${GOPATH//://bin:}/bin"
 for addpath in $ADDPATHS
 do
+  # If-guard to reduce PATH-resolution times.
   if ! [[ "$PATH" == *"${addpath}"* ]]
   then
     PATH="${addpath}:$PATH"
   fi
 done
 
-# And to ensure CUDA is in the PATH:
-export DYLD_LIBRARY_PATH="/usr/local/cuda/lib:${DYLD_LIBRARY_PATH}"
+if [[ $LD_LIBRARY_PATH != */usr/local/lib/:* ]]
+then
+  LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
+fi
 
 # Autocomplete Bazel commands.
 if [ -e $HOME/.bazel/bin/bazel-complete.bash ]
@@ -124,48 +145,48 @@ source $HOME/scripts/prompt.rc.sh
 # Set up window title
 if echo "$TERM" | grep -q 'screen\|xterm\|tmux'
 then
-	# Get correct escape sequence for 'title'.
-	# Thanks to Mikel++, from
-	# http://unix.stackexchange.com/questions/7380/force-title-on-gnu-screen	
-	terminit() {
-			# determine the window title escape sequences
-			case "$TERM" in
-			aixterm|dtterm|putty|rxvt|xterm*)
-					titlestart='\033]0;'
-					titlefinish='\007'
-					;;
-			cygwin)
-					titlestart='\033];'
-					titlefinish='\007'
-					;;
-			konsole)
-					titlestart='\033]30;'
-					titlefinish='\007'
-					;;
-			screen|tmux*)
-					# status line
-					#titlestart='\033_'
-					#titlefinish='\033\'
-					# window title
-					titlestart='\033k'
-					titlefinish='\033\'
-					;;
-			*)
-					if type tput >/dev/null 2>&1
-					then
-							if tput longname >/dev/null 2>&1
-							then
-									titlestart="$(tput tsl)"
-									titlefinish="$(tput fsl)"
-							fi
-					else
-							titlestart=''
-							titlefinish=''
-					fi
-					;;
-			esac
-	}
-	terminit
+  # Get correct escape sequence for 'title'.
+  # Thanks to Mikel++, from
+  # http://unix.stackexchange.com/questions/7380/force-title-on-gnu-screen
+  terminit() {
+      # determine the window title escape sequences
+      case "$TERM" in
+      aixterm|dtterm|putty|rxvt|xterm*)
+          titlestart='\033]0;'
+          titlefinish='\007'
+          ;;
+      cygwin)
+          titlestart='\033];'
+          titlefinish='\007'
+          ;;
+      konsole)
+          titlestart='\033]30;'
+          titlefinish='\007'
+          ;;
+      screen|tmux*)
+          # status line
+          #titlestart='\033_'
+          #titlefinish='\033\'
+          # window title
+          titlestart='\033k'
+          titlefinish='\033\'
+          ;;
+      *)
+          if type tput >/dev/null 2>&1
+          then
+              if tput longname >/dev/null 2>&1
+              then
+                  titlestart="$(tput tsl)"
+                  titlefinish="$(tput fsl)"
+              fi
+          else
+              titlestart=''
+              titlefinish=''
+          fi
+          ;;
+      esac
+  }
+  terminit
   set_window_title () {
     local HPWD="$PWD"
     case $HPWD in 
@@ -199,12 +220,11 @@ then
 fi
 
 # Load a work profile, if any.
+# Load it last, so that it can ovverride the above as needed.
 if [ -f $HOME/.work.rc.sh ]
 then
   source $HOME/.work.rc.sh
 fi
 
 export PATH
-
-
 

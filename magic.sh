@@ -1,4 +1,6 @@
+#!/bin/sh
 # magic.sh : Shell command lines to remember.
+vim ~/magic.sh
 exit
 
 # Per
@@ -25,9 +27,10 @@ go get -d -u github.com/bazelbuild/buildifier/buildifier \
 nmcli dev wifi list
 # radio off / on
 nmcli radio wifi off
-# Connect to PSK network; creates persisted connection
-nmcli device wifi connect Networkname password PasswordGoesHere
-# Password is optional; skip it for insecure network
+# Connect to PSK network; creates persisted connection to an insecure network.
+nmcli device wifi connect Networkname
+# -a to ask for a password. Use this instead of a trailing password arg.
+nmcli -a device wifi connect NetworkName
 
 # Get DPI
 MY_DPI=$(xdpyinfo \

@@ -1,5 +1,7 @@
 "Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide for this setup.
-
+if filereadable("~/.vim/work.vim")
+  source ~/.vim/work.vim
+endif
 
 " Make easytags accept Universal Ctags (ctags.io)
 let g:easytags_suppress_ctags_warning = 1
@@ -76,8 +78,8 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
-" Use 80-character margin in markdown.
-autocmd FileType markdown setlocal textwidth=80
+" :Trim whitespace
+cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim'))
 
 " Don't autofmt go on save. This is a nice feature, but keeps re-folding
 " everything. Probably ultimately want to fix by saving folds.
@@ -104,7 +106,6 @@ function! GetPackage()
   return expand('%:p:h:t')
 endfunction
 
-
 " Register templating preferences.
 let g:email = "charles@cceckman.com"
 if !exists('g:templates_directory')
@@ -112,24 +113,28 @@ if !exists('g:templates_directory')
 endif
 let g:templates_directory = add(g:templates_directory, '~/.vim/templates')
 
+
 " Line and column hilighting
 au WinLeave * set nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 set colorcolumn=80
 
-" Use the X clipboard (register +) by default.
-set clipboard=unnamedplus
-
 " Set a wider colorcolumn in Go, which doesn't have as strict lint
 " requirements as other languages.
 autocmd FileType go set colorcolumn=100
 
 " Restore line position when re-opening a file
-au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
+" Use the X clipboard (register +) by default.
+set clipboard=unnamedplus
 
 " .md to Markdown, not modula2. Come on.
-au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md setfiletype markdown
+" Use 80-character text wrapping in markdown.
+autocmd FileType markdown setlocal textwidth=80
+
 " .cl and .cool to Cool
 au BufRead,BufNewFile *.cool set filetype=cool
 au BufRead,BufNewFile *.cl set filetype=cool
@@ -162,9 +167,13 @@ function! ToggleHex()
     let &modifiable=l:oldmodifiable
 endfunction
 
+nmap <F5> :TagbarToggle<CR>
+
+" Use tabstop 2, even when our language's default is different.
+autocmd FileType go setlocal tabstop=2
+
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
 
 " Insert a timestamp.
 command! Now execute 'r! date "+\%F \%a \%H:\%M"'
-
