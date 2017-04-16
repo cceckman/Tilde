@@ -23,7 +23,6 @@ export TZ=America/Los_Angeles
 #  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
 #fi
 
-# Aliases (for mnemonics etc) 
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
@@ -49,7 +48,7 @@ ca() {
 
 # git root; or git-root push
 gr() {
-  if ! base="$(get rev-parse --show-toplevel)"
+  if ! base="$(git rev-parse --show-toplevel)"
   then
     echo "Not under Git?"
     return
@@ -221,6 +220,7 @@ then
 fi
 
 # Load a work profile, if any.
+# Load it last, so that it can ovverride the above as needed.
 if [ -f $HOME/.work.rc.sh ]
 then
   source $HOME/.work.rc.sh
