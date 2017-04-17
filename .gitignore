@@ -2,6 +2,7 @@
 .bash_logout
 .bazel/
 .cache/
+.cargo/
 .config/gcloud
 .sudo_as_admin_successful
 .oracle_jre_usage/
@@ -10,12 +11,8 @@
 .profile
 .gitconfig
 bin/
-cce3/
-cceckman.github.io/
 .xmonad/
 !.xmonad/*.hs
 r/
 go/
-src/
-distro/
 .secrets/
