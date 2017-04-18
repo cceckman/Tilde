@@ -1,6 +1,9 @@
 #!/bin/bash
 # Provide local information on what color to use for prompts, etc.
-source $HOME/scripts/syscolor
+
+# Default color
+syscolor() { echo 'green'; }
+source $HOME/secrets/syscolor.rc.sh
 source $HOME/scripts/repo.rc.sh
 
 # Prompt color/look mods...
