@@ -67,3 +67,6 @@ sudo tee /etc/docker/daemon.json <<HRD
   "storage-driver": "overlay"
 }
 HRD
+
+# Keyboard options: at
+# https://wiki.archlinux.org/index.php/Keyboard_configuration_in_Xorg#Frequently_used_XKB_options
