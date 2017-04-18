@@ -33,7 +33,6 @@ alias vimc="vim *.cpp *.c *.h" # Edit all C/CPP files in the current directory
 alias node="nodejs"
 alias fixssh="source $HOME/scripts/fixssh" # see scripts/attach
 alias t="xterm &" # start a new terminal in the same directory
-alias lock="xscreensaver-command -lock"
 # Try to use 256 colors with tmux.
 alias tmux='tmux -2'
 alias pgrep="pgrep -l"
