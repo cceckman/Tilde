@@ -85,9 +85,9 @@ bind \# colon "number "
 # For each color, have an expression like
 # %?%{=r kg}%2`%:%?
 # where 'g' is the color code, and '2' is the backtick command.
-backtick 2 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "green" ]] && echo " "'
-backtick 3 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "blue" ]] && echo " "'
-backtick 4 0 0 bash -c 'source $HOME/scripts/syscolor; x=$(syscolor); [[ "$x" == "purple" ]] && echo " "'
+backtick 2 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "green" ]] && echo " "'
+backtick 3 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "blue" ]] && echo " "'
+backtick 4 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "purple" ]] && echo " "'
 caption always "%?%{=r kg}%2`%:%?%?%{=r kc}%3`%:%?%?%{=r km}%4`%:%? %Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
