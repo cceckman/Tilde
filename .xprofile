@@ -10,11 +10,11 @@ fi
 # Don't believe DPI reporting...or size reporting of the display.
 # Use a manual map of hostname to desired DPI, or the default.
 
-CUSTOM_DPI="$($HOME/secrets/dpi.sh)"
-if [ "$CUSTOM_DPI" != "" ]
-then
-  FLAG="-DCUSTOM_DPI=$CUSTOM_DPI"
-fi
+# CUSTOM_DPI="$($HOME/secrets/dpi.sh)"
+# if [ "$CUSTOM_DPI" != "" ]
+# then
+#  FLAG="-DCUSTOM_DPI=$CUSTOM_DPI"
+# fi
 
 xrdb "$FLAG" -merge $HOME/.Xresources
 
