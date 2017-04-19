@@ -25,6 +25,17 @@ if which synclient && [ -x $(which synclient) ]
 then
   synclient PalmDetect=1
 fi
+# Additional approach: syndaemon.
+# https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Using_syndaemon
+if which syndaemon && [ -x $(which syndaemon) ]
+then
+  # Disable touchpad taps / scrolls for 0.2s after each non-modifier keypress.
+  # This seems, empirically, like a pretty good balance between concerns.
+  syndaemon -d -i 0.2  -t -K -R
+fi
+# Yet another possible solution: set TapButton{1,2,3} to 0, disabling taps.
+# That seems to be the main issue that I'm getting :-/
+
 
 if ! which gnome-screensaver-command >/dev/null
 then
