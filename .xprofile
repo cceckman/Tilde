@@ -36,6 +36,8 @@ fi
 # Yet another possible solution: set TapButton{1,2,3} to 0, disabling taps.
 # That seems to be the main issue that I'm getting :-/
 
+# Set background
+feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
 if ! which gnome-screensaver-command >/dev/null
 then
