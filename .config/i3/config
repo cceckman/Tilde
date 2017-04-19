@@ -59,6 +59,9 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && k
 bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
 
+# Toggle touchpad
+bindsym Print exec "touchpad.sh"
+
 # kill focused window
 bindsym $mod+Shift+q kill
 

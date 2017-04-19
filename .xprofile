@@ -20,6 +20,12 @@ xrdb "$FLAG" -merge $HOME/.Xresources
 
 xmodmap ~/.xmodmaprc
 
+# Ensure palm detection is enabled for synaptic touchpads.
+if which synclient && [ -x $(which synclient) ]
+then
+  synclient PalmDetect=1
+fi
+
 if ! which gnome-screensaver-command >/dev/null
 then
   xscreensaver -no-splash &
