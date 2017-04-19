@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Should be a better conditional;
+# check /proc/cpuinfo for 'hypervisor'
+if [ -x /usr/bin/VBoxClient-all ]
+then
+  /usr/bin/VBoxClient-all
+fi
+
+# Don't believe DPI reporting...or size reporting of the display.
+# Use a manual map of hostname to desired DPI, or the default.
+
+CUSTOM_DPI="$($HOME/secrets/dpi.sh)"
+if [ "$CUSTOM_DPI" != "" ]
+then
+  FLAG="-DCUSTOM_DPI=$CUSTOM_DPI"
+fi
+
+xrdb "$FLAG" -merge $HOME/.Xresources
+
+xmodmap ~/.xmodmaprc
+
+if ! which gnome-screensaver-command >/dev/null
+then
+  xscreensaver -no-splash &
+fi
+

@@ -1,8 +1,18 @@
 ! Hey, cool guide: http://www.in-ulm.de/~mascheck/X11/XTerm
-#include "include/solarized/xresources/Xresources.dark"
+*foreground: rgb:b2/b2/b2
+*background: rgb:08/08/08
 *selectToClipboard: true
-*faceName: Anonymous Pro
-*faceSize: 11
+
+! This is nice, but does not have mappings for the bouncing dots.
+! Fix one or the other.
+! *faceName: Anonymous Pro:size=8:antialias=false
+! *faceName: mono:size=8:antialias=false
+
+! These are nice, but make irssi look horrible.
+! http://sunaku.github.io/zenburn-terminal-color-scheme.html
+! via https://wiki.mpich.org/mpich/index.php/Configure_xterm_Fonts_and_Colors_for_Your_Eyeball
+
+XTerm*metaSendsEscape: true
 
 #ifdef CUSTOM_DPI
 Xft.dpi: CUSTOM_DPI
@@ -10,5 +20,6 @@ Xft.dpi: CUSTOM_DPI
 ! Try out hi-dpi settings
 ! Xft.dpi: 120
 ! Setting for a Macbook
-Xft.dpi: 96
+! Xft.dpi: 96
 #endif
+

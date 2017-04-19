@@ -1,5 +1,4 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.30 for cceckman on Wed Oct 12 19:34:16 2016.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -26,9 +25,9 @@ ignoreUninstalledPrograms:False
 font:		*-medium-r-*-140-*-m-*
 dpmsEnabled:    True
 dpmsQuickOff:	False
-dpmsStandby:    0:30:00
-dpmsSuspend:    0:30:00
-dpmsOff:        0:30:00
+dpmsStandby:	0:30:00
+dpmsSuspend:	0:30:00
+dpmsOff:	0:30:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: False
@@ -263,4 +262,7 @@ GetViewPortIsFullOfLies:False
 procInterrupts:	True
 xinputExtensionDev: False
 overlayStderr:	True
+<<<<<<< Updated upstream
 authWarningSlack:   20
+=======
+>>>>>>> Stashed changes
