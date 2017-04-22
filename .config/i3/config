@@ -60,7 +60,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
 
 # Toggle touchpad
-bindsym Print exec "touchpad.sh"
+bindsym Print exec "~/scripts/touchpad.sh"
 
 # kill focused window
 bindsym $mod+Shift+q kill
