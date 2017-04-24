@@ -88,7 +88,8 @@ bind \# colon "number "
 backtick 2 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "green" ]] && echo " "'
 backtick 3 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "blue" ]] && echo " "'
 backtick 4 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "purple" ]] && echo " "'
-caption always "%?%{=r kg}%2`%:%?%?%{=r kc}%3`%:%?%?%{=r km}%4`%:%? %Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
+backtick 5 0 0 bash -c 'source $HOME/secrets/syscolor.rc.sh; x=$(syscolor); [[ "$x" == "red" ]] && echo " "'
+caption always "%?%{=r kg}%2`%:%?%?%{=r kc}%3`%:%?%?%{=r km}%4`%:%?%?%{=r kr}%5`%:%? %Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
 
 # Use F8 to turn the status bar *off* at the bottom of the screen.
 bindkey -k k8 caption splitonly
