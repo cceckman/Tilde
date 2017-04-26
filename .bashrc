@@ -168,7 +168,7 @@ then
           titlestart='\033]30;'
           titlefinish='\007'
           ;;
-      screen|tmux*)
+      screen*|tmux*)
           # status line
           #titlestart='\033_'
           #titlefinish='\033\'
