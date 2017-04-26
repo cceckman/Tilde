@@ -38,7 +38,13 @@ alias tmux='tmux -2'
 alias pgrep="pgrep -l"
 
 ce() {
-  git commit -a && git push
+  if test "$#" -gt 0
+  then
+    git commit -a -m "$@"
+  else
+    git commit -a
+  fi
+  git push
 }
 
 ca() {
