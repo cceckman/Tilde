@@ -23,6 +23,9 @@ export TZ=America/Los_Angeles
 #  eval $( keychain --eval --quiet --timeout 15 id_ed25519 id_rsa)
 #fi
 
+# Set up syscolor.
+
+
 alias where='pwd'
 alias makeLocalhost='python -m SimpleHTTPServer'
 alias cl='clear; pwd; ls'
@@ -141,6 +144,13 @@ fi
 if [ -e $HOME/.bazel/bin/bazel-complete.bash ]
 then
   source $HOME/.bazel/bin/bazel-complete.bash
+fi
+
+if [ -x $HOME/secrets/syscolor ]
+then
+  export THEME="$($HOME/secrets/syscolor)"
+else
+  export THEME="red"
 fi
 
 # Add scripts for prompt and repo functions

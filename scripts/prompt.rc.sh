@@ -1,14 +1,11 @@
 #!/bin/bash
-# Provide local information on what color to use for prompts, etc.
+# Set up Bash prompt.
 
-# Default color
-syscolor() { echo 'green'; }
-source $HOME/secrets/syscolor.rc.sh
 source $HOME/scripts/repo.rc.sh
 
 # Prompt color/look mods...
 # Provide mapping here
-COLOR="$(syscolor)"
+COLOR="$THEME"
 case "$COLOR" in
   blue)
     PROMPTCOL='\[\e[36m\]'
