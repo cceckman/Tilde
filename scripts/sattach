@@ -1,6 +1,6 @@
 #!/bin/bash
 # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:
-# Attach to a tmux session, while forarding SSH agent.
+# Attach to a screen session, while forarding SSH agent.
 SSHV="SSH_CLIENT SSH_TTY SSH_AUTH_SOCK SSH_CONNECTION DISPLAY"
 
 for x in ${SSHV} ; do
@@ -9,4 +9,4 @@ for x in ${SSHV} ; do
                                 s/^/export /'
 done 1>$HOME/scripts/fixssh && chmod +x $HOME/scripts/fixssh
 
-tmux -2 new-session -A -s $1
+screen -d -R $1
