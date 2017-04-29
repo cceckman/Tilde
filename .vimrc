@@ -3,6 +3,10 @@ if filereadable("~/.vim/work.vim")
   source ~/.vim/work.vim
 endif
 
+" Use UTF-8 by default. Apparently LANG is insufficient...
+set encoding=utf-8
+set termencoding=utf8
+
 " Make easytags accept Universal Ctags (ctags.io)
 let g:easytags_suppress_ctags_warning = 1
 
