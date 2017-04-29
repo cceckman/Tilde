@@ -20,9 +20,13 @@ gr() {
   if ! base="$(git rev-parse --show-toplevel)"
   then
     echo "Not under Git?"
-    return
+    return 1
   fi
-  if test "$1" = "p"
+  echo "$base"
+}
+
+ggr() {
+  if test "$1" = "p" && base=$(gr)
   then
     pushd "$base"
   else

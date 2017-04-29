@@ -196,7 +196,7 @@ then
           HPWD=$(basename "$HPWD")
           ;; 
     esac
-    printf "${titlestart}%s${titlefinish}" "$(repo)$HPWD"
+    printf "${titlestart}%s${titlefinish}" "$HPWD"
   }
   if ! echo "$PROMPT_COMMAND" | grep -q 'set_window_title'
   then
