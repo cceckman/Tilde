@@ -7,7 +7,7 @@
 # Provide mapping here
 COLOR="$THEME"
 case "$COLOR" in
-  blue)
+  cyan)
     PROMPTCOL='\[\e[36m\]'
     ;;
   green)
