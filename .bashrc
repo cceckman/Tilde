@@ -109,7 +109,7 @@ fi
 export EDITOR=vim
 
 # This is only for Linux
-alias copy='xclip -selection clipboard'
+alias copy='xclip -selection clipboard && echo '✂''
 alias cbpaste='xclip -selection clipboard -o'
 
 # Use $HOME/go for GOPATH / symlinks

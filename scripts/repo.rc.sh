@@ -6,12 +6,29 @@
 # Define a 'repo' function that gets the current repository / branch.
 repo() {
   GIT="$(git branch --no-color 2>/dev/null | egrep '[*]' | egrep -o '[^* ]+')"
-  if [ $? -eq 0 ]
+  a="$?"
+  root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if test $? -eq 0 && test $a -eq 0
   then
-    echo "$GIT:"
+    echo "$GIT:$(basename $root)…"
   fi
 }
 
+# git root; or git-root push
+gr() {
+  if ! base="$(git rev-parse --show-toplevel)"
+  then
+    echo "Not under Git?"
+    return
+  fi
+  if [ "$1" == "p" ]
+  then
+    pushd "$base"
+  else
+    cd "$base"
+    pwd
+  fi
+}
 
 _lsrepos() {
   echo "$(find $HOME/go/src/github.com -maxdepth 2 -mindepth 2 | xargs basename -a | sort | uniq)"

@@ -21,6 +21,6 @@ case "$COLOR" in
     ;;
 esac
 ENDCOL='\[\e[0m\]'
-PS1="$ENDCOL$PROMPTCOL(\A)[\$?] \$(repo)\W \$:$ENDCOL"
+PS1="$ENDCOL$PROMPTCOL∴ \$? \$(repo)\W \n∵ $ENDCOL"
 export PS1
 export CLICOLOR="Yes"
