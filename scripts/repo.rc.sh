@@ -1,3 +1,4 @@
+#!/bin/bash
 # Utility functions for dealing with repositories.
 # Include in an startup file.
 
@@ -21,7 +22,7 @@ gr() {
     echo "Not under Git?"
     return
   fi
-  if [ "$1" == "p" ]
+  if test "$1" = "p"
   then
     pushd "$base"
   else
@@ -43,7 +44,7 @@ r() {
   fi
 
   # List my repositories on Github
-  if [ "$1" == "r" ]
+  if test "$1" = "r"
   then
     curl -s https://api.github.com/users/cceckman/repos | jq '.[] | .full_name' | sed 's/"//g' 
     return
@@ -51,7 +52,7 @@ r() {
 
   # Normal:
   # cd to a repository by a short name.
-  if [ -d $HOME/go/src/github.com/*/$1 ]
+  if test -d $HOME/go/src/github.com/*/$1
   then
     cd $HOME/go/src/github.com/*/$1
     pwd

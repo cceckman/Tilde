@@ -54,22 +54,6 @@ ca() {
   git commit -a -m "$@"
 }
 
-# git root; or git-root push
-gr() {
-  if ! base="$(git rev-parse --show-toplevel)"
-  then
-    echo "Not under Git?"
-    return
-  fi
-  if [ "$1" == "p" ]
-  then
-    pushd "$base"
-  else
-    cd "$base"
-    pwd
-  fi
-}
-
 # Fix OS X; only use --color=auto if on Linux.
 case "$OSTYPE" in
   darwin*)
