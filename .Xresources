@@ -12,6 +12,9 @@
 
 *selectToClipboard: true
 
+! While experimenting with urxvt, disable scrollbar.
+URxvt*scrollBar: false
+
 ! This is nice, but does not have mappings for the bouncing dots.
 ! Fix one or the other.
 ! *faceName: Anonymous Pro:size=8:antialias=false

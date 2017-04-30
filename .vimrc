@@ -46,7 +46,7 @@ endif
 
 " Use 256 colors, set color scheme.
 " set t_Co=256
-" set background=dark
+set background=dark
 colorscheme solarized
 " colorscheme xemacs
 
