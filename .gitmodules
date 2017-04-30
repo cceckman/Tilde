@@ -38,3 +38,6 @@
 [submodule ".vim/bundle/ScrollColors"]
 	path = .vim/bundle/ScrollColors
 	url = git://github.com/vim-scripts/ScrollColors
+[submodule "solarized/xresources"]
+	path = solarized/xresources
+	url = git://github.com/solarized/xresources
