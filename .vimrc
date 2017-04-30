@@ -34,6 +34,11 @@ set backspace=indent,eol,start
 "Make jj escape insert mode
 inoremap jj <Esc>
 
+" Enable hard mode...
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+" ...by default
+autocmd VimEnter * silent! call HardMode()
+
 "Set up syntax preferences
 if has("syntax")
     syntax on

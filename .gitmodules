@@ -32,3 +32,6 @@
 [submodule ".irssi/scripts/scripts.irssi.org"]
 	path = .irssi/scripts/scripts.irssi.org
 	url = https://github.com/irssi/scripts.irssi.org
+[submodule ".vim/bundle/hardmode"]
+	path = .vim/bundle/hardmode
+	url = git://github.com/wikitopian/hardmode.git
