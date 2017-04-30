@@ -45,10 +45,10 @@ if has("syntax")
 endif
 
 " Use 256 colors, set color scheme.
-set t_Co=256
+" set t_Co=256
 " set background=dark
-" colorscheme solarized
-colorscheme xemacs
+colorscheme solarized
+" colorscheme xemacs
 
 " Set indent preferences.
 set tabstop=2
