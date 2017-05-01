@@ -1,12 +1,17 @@
-# Set up the prompt
+#!/bin/zsh
+# zsh initialization file.
 
+# Load Posix-compatible bits at startup.
+. $HOME/.posixrc
+
+# Set up the prompt.
 autoload -Uz promptinit
 promptinit
 prompt adam1
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
+# Use Vim keybindings in ZLE.
 bindkey -v
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
