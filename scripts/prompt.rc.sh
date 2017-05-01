@@ -1,12 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 # Set up Bash prompt.
 
 . $HOME/scripts/repo.rc.sh
 
 # Prompt color/look mods...
 # Provide mapping here
-COLOR="$THEME"
-case "$COLOR" in
+case "$THEME" in
   cyan)
     PROMPTCOL='\[\e[36m\]'
     ;;
