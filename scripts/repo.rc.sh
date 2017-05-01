@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+# Not actually POSIX; but bash/zsh compatible
+
 # Utility functions for dealing with repositories.
 # Include in an startup file.
 
@@ -66,17 +68,3 @@ r() {
 }
 
 
-_CompleteR() {
-  local cur
-  COMPREPLY=()
-  cur=${COMP_WORDS[COMP_CWORD]}
-  # Yeah, this is more verbose than it needs to be because I copy-pasted from
-  # the Internet. I'm okay with that.
-  case "$cur" in
-    *)
-      COMPREPLY=( $( compgen -W "$(_lsrepos)" -- $cur ) )
-      ;;
-  esac
-  return 0
-}
-complete -F _CompleteR r

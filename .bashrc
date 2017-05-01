@@ -16,9 +16,8 @@ then
   source $HOME/.bazel/bin/bazel-complete.bash
 fi
 
-# Add scripts for prompt and repo functions
-source $HOME/scripts/repo.rc.sh
-source $HOME/scripts/prompt.rc.sh
+# Add completion for repo
+source $HOME/scripts/completerepo.bash
 
 # Set up window title
 if echo "$TERM" | grep -q 'screen\|xterm\|tmux'

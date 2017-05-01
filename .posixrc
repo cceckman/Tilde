@@ -85,3 +85,5 @@ else
   export THEME="red"
 fi
 
+. $HOME/scripts/repo.rc.sh
+. $HOME/scripts/prompt.rc.sh
