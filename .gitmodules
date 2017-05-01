@@ -41,3 +41,6 @@
 [submodule "solarized/xresources"]
 	path = solarized/xresources
 	url = git://github.com/solarized/xresources
+[submodule ".irssi/irssi-colors-solarized"]
+	path = .irssi/irssi-colors-solarized
+	url = git://github.com/huyz/irssi-colors-solarized.git

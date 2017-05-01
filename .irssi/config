@@ -106,9 +106,9 @@ statusbar = {
         user = { };
         window = { };
         window_empty = { };
-        lag = { priority = "-1"; };
-        act = { priority = "10"; };
-        more = { priority = "-1"; alignment = "right"; };
+        lag = "{sb Lag: %m$0-%n}";
+        act = "{sb Act: $0-}";
+        more = "%k%3-- more --%n";
         barend = { priority = "100"; alignment = "right"; };
       };
     };
@@ -145,6 +145,9 @@ settings = {
     autolog = "yes";
     #    term_charset = "ISO-8859-15";
     activity_hide_level = "= JOINS QUITS";
+    # Use Solarized theme
+    theme = "solarized-universal";
+    hilight_color = "= %R";
   };
 
   "irc/core" = {
