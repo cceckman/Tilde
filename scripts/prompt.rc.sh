@@ -13,7 +13,7 @@ case "$COLOR" in
   green)
     PROMPTCOL='\[\e[32m\]'
     ;;
-  purple)
+  magenta)
     PROMPTCOL='\[\e[35m\]'
     ;;
   red)

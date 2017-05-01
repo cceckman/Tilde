@@ -87,7 +87,7 @@ bind \# colon "number "
 # where 'g' is the color code, and '2' is the backtick command.
 backtick 2 0 0 bash -c '[[ "$THEME" == "green" ]] && echo " "'
 backtick 3 0 0 bash -c '[[ "$THEME" == "cyan" ]] && echo " "'
-backtick 4 0 0 bash -c '[[ "$THEME" == "purple" ]] && echo " "'
+backtick 4 0 0 bash -c '[[ "$THEME" == "magenta" ]] && echo " "'
 backtick 5 0 0 bash -c '[[ "$THEME" == "red" ]] && echo " "'
 caption always "%?%{=r kg}%2`%:%?%?%{=r kc}%3`%:%?%?%{=r km}%4`%:%?%?%{=r kr}%5`%:%? %Y-%m-%d %{+b i}%0c %{-b i} %H %-Lw%{-r i}%60L>%n* %t%{-}%+Lw%-0<"
 
