@@ -5,11 +5,11 @@
 . $HOME/.posixrc
 
 # Set up the prompt.
-autoload -Uz promptinit
-promptinit
-prompt adam1
-# set -o PROMPT_SUBST
-# . $HOME/scripts/prompt.rc.sh
+# autoload -Uz promptinit
+# promptinit
+# prompt adam1
+set -o PROMPT_SUBST
+. $HOME/scripts/prompt.zsh
 
 # Use Vim keybindings in ZLE.
 bindkey -v
