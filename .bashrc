@@ -104,3 +104,5 @@ then
   source $HOME/.work.rc.sh
 fi
 
+echo "Friendly reminder: your default shell is not ZSH."
+echo "Run 'chsh -s \$(which zsh) to change.'"
