@@ -2,6 +2,7 @@
 # Bash-only initialization / aliases.
 
 . $HOME/.posixrc
+. $HOME/scripts/prompt.bash
 
 # http://github.com/huyng/bashmarks - thanks, @huyng!
 bashmarks="$HOME/scripts/bashmarks.sh"
