@@ -51,7 +51,7 @@ aliases = {
   WI = "whois";
   WII = "whois $0 $0";
   WW = "whowas";
-  W = "who";
+  W = "window";
   N = "names";
   M = "msg";
   T = "topic";
@@ -74,24 +74,125 @@ aliases = {
   GOTO = "sb goto";
   CHAT = "dcc chat";
   RUN = "SCRIPT LOAD";
-  CALC = "exec - if which bc &>/dev/null\\; then echo '$*' | bc | awk '{print \"$*=\"$$1}'\\; else echo bc was not found\\; fi";
+  CALC = "exec - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
   SBAR = "STATUSBAR";
   INVITELIST = "mode $C +I";
   Q = "QUERY";
   "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
   EXEMPTLIST = "mode $C +e";
   ATAG = "WINDOW SERVER";
+  UNSET = "set -clear";
+  RESET = "set -default";
+  addtopic = "/TOPIC $topic$*";
+  shrug = "¯\\_(ツ)_/¯";
+  logsb = "eval lastlog -file ~/irclogs/${tag}/${C}.${F}_${Z}.scrollback.log";
 };
 
 # THIS PART CONFIGURES THE STATUS BAR
 
-# formats:
-# when using {templates}, the template is shown only if it's argument isn't
-# empty unless no argument is given. for example {sb} is printed always,
-# but {sb $T} is printed only if $T isn't empty.
 statusbar = {
+  # formats:
+  # when using {templates}, the template is shown only if it's argument isn't
+  # empty unless no argument is given. for example {sb} is printed always,
+  # but {sb $T} is printed only if $T isn't empty.
+
+  items = {
+    # start/end text in statusbars
+    barstart = "{sbstart}";
+    barend = "{sbend}";
+
+    topicbarstart = "{topicsbstart}";
+    topicbarend = "{topicsbend}";
+
+    # treated "normally", you could change the time/user name to whatever
+    time = "{sb $Z}";
+    user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+
+    # treated specially .. window is printed with non-empty windows,
+    # window_empty is printed with empty windows
+    window = "{sb $winref:$tag/$itemname{sbmode $M}}";
+    window_empty = "{sb $winref{sbservertag $tag}}";
+    prompt = "{prompt $[.15]itemname}";
+    prompt_empty = "{prompt $winname}";
+    topic = " $topic";
+    topic_empty = " Irssi v$J - http://www.irssi.org";
+
+    # all of these treated specially, they're only displayed when needed
+    # Solarized
+    lag = "{sb Lag: %m$0-%n}";
+    act = "{sb Act: $0-}";
+    more = "%k%3-- more --%n";
+  };
+
+  # there's two type of statusbars. root statusbars are either at the top
+  # of the screen or at the bottom of the screen. window statusbars are at
+  # the top/bottom of each split window in screen.
   default = {
+    # the "default statusbar" to be displayed at the bottom of the window.
+    # contains all the normal items.
+    window = {
+      disabled = "no";
+
+      # window, root
+      type = "window";
+      # top, bottom
+      placement = "bottom";
+      # number
+      position = "1";
+      # active, inactive, always
+      visible = "active";
+
+      # list of items in statusbar in the display order
+      items = {
+        barstart = { priority = "100"; };
+        time = { };
+        user = { };
+        window = { };
+        window_empty = { };
+        lag = { priority = "-1"; };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+        usercount = { };
+      };
+    };
+
+    # statusbar to use in inactive split windows
+    window_inact = {
+      type = "window";
+      placement = "bottom";
+      position = "1";
+      visible = "inactive";
+      items = {
+        barstart = { priority = "100"; };
+        window = { };
+        window_empty = { };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+
+    # we treat input line as yet another statusbar :) It's possible to
+    # add other items before or after the input line item.
+    prompt = {
+      type = "root";
+      placement = "bottom";
+      # we want to be at the bottom always
+      position = "100";
+      visible = "always";
+      items = {
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
+        # treated specially, this is the real input line.
+        input = { priority = "10"; };
+      };
+    };
+
+    # topicbar
     topic = {
+      type = "root";
+      placement = "top";
+      position = "1";
+      visible = "always";
       items = {
         topicbarstart = { priority = "100"; };
         topic = { };
@@ -99,21 +200,18 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
-    window = {
+    awl_0 = {
       items = {
         barstart = { priority = "100"; };
-        time = { };
-        user = { };
-        window = { };
-        window_empty = { };
-        lag = "{sb Lag: %m$0-%n}";
-        act = "{sb Act: $0-}";
-        more = "%k%3-- more --%n";
+        awl_0 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
   };
 };
+
+# Modify to unignore.
+# ignores = ( { level = "JOINS PARTS QUITS"; } );
 
 # THIS PART CONFIGURES IRSSI'S MOST CENTRAL PARTS
 
@@ -129,72 +227,62 @@ conversions = {
 
 settings = {
   core = {
-    real_name = "Charles";
+    real_name = "Charles Eckman";
     user_name = "cceckman";
     nick = "cceckman";
-    timestamp_format = "%H:%M";
-    recode = "yes";
-    recode_autodetect_utf8 = "yes";
-    #   recode_fallback = "= CP1252";
-    recode_out_default_charset = "= UTF-8";
-    recode_transliterate = "no";
-    log_timestamp = "%H:%M:%S ";
-  };
-
-  "fe-common/core" = {
-    autolog = "yes";
-    #    term_charset = "ISO-8859-15";
-    activity_hide_level = "= JOINS QUITS";
-    # Use Solarized theme
-    theme = "solarized-universal";
-    hilight_color = "= %R";
-  };
-
-  "irc/core" = {
-    lag_max_before_disconnect = "0";
-    ctcp_version_reply = "irssi";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "perl/core/scripts" = {
+    awl_shared_sbar = "OFF";
+    awl_viewer = "no";
+    screen_away_active = "yes";
+    screen_away_message = "Idling gently.";
+    screen_away_nick = "cceckman_idle";
+
+    ### For Solarized adv_windowlist.pl script
+    awl_display_key_active = "%k%2[$Q=$N:$C]%n";
+    awl_display_nokey_active = "%k%2[$N:$C]%n";
+    awl_display_key = "[$Q:$H$C$S]";
+    awl_display_nokey = "[$N:$H$C$S]";
+
+    ### For Solarized trackbar.pl script
+    trackbar_style = "%B";
+  };
+  "fe-common/core" = {
+    theme = "solarized-universal";
+    hilight_color = "= %R";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
+  };
 };
-logs = { };
 hilights = (
+  { text = "cceckman"; nick = "yes"; word = "yes"; color = "%M"; },
+  { text = "Charles"; nick = "yes"; word = "yes"; color = "%M"; },
+  { text = "charles"; nick = "yes"; word = "yes"; color = "%M"; },
   {
-    # URL hilighting by Stig Gronroos, http://www.waino.org
-    # Used with a terminal emulator that provides clickable URLs, this is a real sanity saver. 
-    # Unless you adore 80's style GUIs, *don't* use a terminal emulator without URL detection. 
-    # Some free/open terminal emulators with URL detection:
-    #
-    # MS Windows: 
-    # PuTTY Tray (patched PuTTY)
-    # http://haanstra.eu/putty/
-    #
-    # UNIX, GNU/Linux and similar:
-    # Gnome-terminal (installed by default in most Gnome distributions)
-    # http://directory.fsf.org/project/gnome-terminal/
-    #
-    # Apple OSX
-    # iTerm
-    # http://iterm.sourceforge.net/
-    #
-    text = "http(s)?://[A-Za-z0-9_/&?=%.;~#)(+-]*";
-    color = "%G";
-    act_color = "%n";
-    nick = "no";
+    text = "cce";
+    nick = "yes";
     word = "yes";
-    regexp = "yes";
-  },
-  # important words you want to be miss
-  { text = "cceckman"; nick = "yes"; word = "yes"; },
-  { text = "charles"; nick = "yes"; word = "yes"; }
+    fullword = "yes";
+    color = "%M";
+  }
 );
+logs = { };
+
 # THAT'S IT
 # When you've organized your irssi according to your taste (/window move [number], etc.),
 # run /layout save and /save. Your window layout will be added to the end of this 
 # file by irssi.
 # kthxbye
 windows = {
-  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
+  1 = {
+    immortal = "yes";
+    name = "(status)";
+    level = "ALL";
+    sticky = "yes";
+    parent = "1";
+  };
+  2 = { name = "hilight"; sticky = "yes"; parent = "2"; };
   3 = {
     items = (
       {
@@ -204,10 +292,10 @@ windows = {
         tag = "Foonetic";
       }
     );
+    sticky = "yes";
     parent = "1";
   };
-};
 mainwindows = {
-  1 = { first_line = "14"; lines = "32"; };
-  2 = { first_line = "1"; lines = "13"; };
+  2 = { first_line = "1"; lines = "11"; };
+  1 = { first_line = "12"; lines = "54"; };
 };
