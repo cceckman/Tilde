@@ -295,6 +295,7 @@ windows = {
     sticky = "yes";
     parent = "1";
   };
+};
 mainwindows = {
   2 = { first_line = "1"; lines = "11"; };
   1 = { first_line = "12"; lines = "54"; };
