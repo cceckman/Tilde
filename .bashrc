@@ -5,7 +5,7 @@
 . $HOME/rcfiles/prompt.bash
 
 # http://github.com/huyng/bashmarks - thanks, @huyng!
-bashmarks="$HOME/scripts/bashmarks.sh"
+bashmarks="$HOME/rcfiles/bashmarks/bashmarks.sh"
 if [ -e "$bashmarks" ]
 then
   source $bashmarks

@@ -44,3 +44,6 @@
 [submodule ".irssi/irssi-colors-solarized"]
 	path = .irssi/irssi-colors-solarized
 	url = git://github.com/huyz/irssi-colors-solarized.git
+[submodule "rcfiles/bashmarks"]
+	path = rcfiles/bashmarks
+	url = git://github.com/huyng/bashmarks.git
