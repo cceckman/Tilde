@@ -4,6 +4,9 @@
 # Load Posix-compatible bits at startup.
 . $HOME/rcfiles/rc.sh
 
+# Include my own functions.
+fpath+=($HOME/functions)
+
 # Set up the prompt.
 set -o PROMPT_SUBST
 . $HOME/rcfiles/prompt.zsh
