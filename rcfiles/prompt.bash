@@ -1,7 +1,7 @@
 #!/bin/bash
 # Set up Bash prompt.
 
-. $HOME/scripts/repo.rc.sh
+. $HOME/rcfiles/repo.sh
 
 # Prompt color/look mods...
 # Provide mapping here
