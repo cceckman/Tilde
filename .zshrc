@@ -2,7 +2,7 @@
 # zsh initialization file.
 
 # Load Posix-compatible bits at startup.
-. $HOME/rcfiles/shrc
+. $HOME/rcfiles/rc.sh
 
 # Set up the prompt.
 set -o PROMPT_SUBST
