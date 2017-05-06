@@ -3,7 +3,7 @@
 # completerepo.bash
 # Bash completion for the r() function in repo.sh
 
-. $HOME/scripts/repo.rc.sh
+. $HOME/rcfiles/repo.sh
 
 _CompleteR() {
   local cur
