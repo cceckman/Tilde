@@ -18,7 +18,7 @@ then
 fi
 
 # Add completion for repo
-source $HOME/scripts/completerepo.bash
+source $HOME/rcfiles/completerepo.bash
 
 # Set up window title
 if echo "$TERM" | grep -q 'screen\|xterm\|tmux'
