@@ -105,4 +105,4 @@ then
 fi
 
 echo "Friendly reminder: your default shell is not ZSH."
-echo "Run 'chsh -s \$(which zsh) to change.'"
+echo "Run 'sudo chsh -s \$(which zsh) \$USER' to change."
