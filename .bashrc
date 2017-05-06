@@ -2,7 +2,7 @@
 # Bash-only initialization / aliases.
 
 . $HOME/rcfiles/shrc
-. $HOME/scripts/prompt.bash
+. $HOME/rcfiles/prompt.bash
 
 # http://github.com/huyng/bashmarks - thanks, @huyng!
 bashmarks="$HOME/scripts/bashmarks.sh"
