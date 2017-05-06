@@ -7,4 +7,4 @@ for x in ${SSHV} ; do
     (eval echo $x=\$$x) | sed  -e 's/=/="/' -e 's/$/"/' -e 's/^/export /'
 done 1>$HOME/scripts/fixssh && chmod +x $HOME/scripts/fixssh
 
-tmux -u2 new-session -A -s $1
+tmux -u2 new-session -DA -s $1
