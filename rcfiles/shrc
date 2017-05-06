@@ -85,5 +85,5 @@ else
   export THEME="red"
 fi
 
-. $HOME/scripts/repo.rc.sh
+. $HOME/rcfiles/repo.sh
 
