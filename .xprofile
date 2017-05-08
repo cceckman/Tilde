@@ -21,12 +21,12 @@ xrdb "$FLAG" -merge $HOME/.Xresources
 xmodmap ~/.xmodmaprc
 
 # Ensure palm detection is enabled for synaptic touchpads.
-if which synclient && [ -x $(which synclient) ] && synclient -l 2>/dev/null
+if which synclient >/dev/null && [ -x $(which synclient) ] && synclient -l 2>/dev/null
 then
   synclient PalmDetect=1
   # Additional approach: syndaemon.
   # https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Using_syndaemon
-  if which syndaemon && [ -x $(which syndaemon) ]
+  if which syndaemon >/dev/null && [ -x $(which syndaemon) ]
   then
     # Disable touchpad taps / scrolls for 0.2s after each non-modifier keypress.
     # This seems, empirically, like a pretty good balance between concerns.
@@ -44,3 +44,7 @@ then
   xscreensaver -no-splash &
 fi
 
+if ! which redshift >/dev/null
+then
+  nohup redshift & disown
+fi
