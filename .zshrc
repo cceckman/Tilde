@@ -4,6 +4,11 @@
 # Load Posix-compatible bits at startup.
 . $HOME/rcfiles/rc.sh
 
+if test -e $HOME/rcfiles/work.rc.zsh
+then
+  . $HOME/rcfiles/work.rc.zsh
+fi
+
 # Include my own functions.
 fpath+=($HOME/functions)
 
