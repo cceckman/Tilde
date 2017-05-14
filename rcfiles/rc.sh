@@ -67,7 +67,7 @@ export GOPATH
 
 # Add some custom elements to PATH:
 # scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-ADDPATHS="$HOME/scripts:$HOME/.cargo/bin:$HOME/bin:/usr/local/cuda/bin:/usr/local/go/bin:$(echo "$GOPATH" | sed -e 's-:-/bin:-' -e 's-$-/bin-' )"
+ADDPATHS="$HOME/secrets/scripts:$HOME/scripts:$HOME/.cargo/bin:$HOME/bin:/usr/local/cuda/bin:/usr/local/go/bin:$(echo "$GOPATH" | sed -e 's-:-/bin:-' -e 's-$-/bin-' )"
 echo "$ADDPATHS" | tr ':' '\n' | while read x
 do
   case ":$PATH:" in
