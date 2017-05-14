@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 GH_PREFIX="$HOME/r"
 GO_PREFIX="$HOME/go/src" # Keep in sync with Tilde/.bashrc
@@ -26,7 +26,7 @@ then
       } || {
         echo "Error cloning ${repo}, dropping to shell." \
           "Resolve any issues yourself."
-        bash -i
+        sh -i
       }
       ret=$(($ret + $?))
     fi
@@ -39,16 +39,17 @@ fi
 for path in $(ls -d ${GH_PREFIX}/*/*) $HOME
 do
   # If it's not cloned, attempt to sync it.
-  pushd $path
+  WD="$(pwd)"
+  cd $path
   {
     git pull && git submodule update --init --recursive
   } || {
     echo "error updating $path, dropping to shell." \
      "Resolve any sync issues yourself."
-    bash -i
+    sh -i
   }
 
-  popd
+  cd "$WD"
 done
 
 # Link for ssh-ident.
