@@ -46,6 +46,7 @@ endif
 
 " Use 256 colors, set color scheme.
 " set t_Co=256
+let g:solarized_bold = 0
 set background=dark
 colorscheme solarized
 " colorscheme xemacs
