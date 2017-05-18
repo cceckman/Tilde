@@ -13,7 +13,7 @@ repo() {
   root="$(git rev-parse --show-toplevel 2>/dev/null)"
   if test $? -eq 0 && test $a -eq 0
   then
-    echo "$GIT:$(basename $root)…"
+    echo "$(basename $root):$GIT…"
   fi
 }
 
