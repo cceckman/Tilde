@@ -28,7 +28,11 @@ gr() {
 }
 
 ggr() {
-  if test "$1" = "p" && base=$(gr)
+  if ! base=$(gr)
+  then
+    return 1
+  fi
+  if test "$1" = "p"
   then
     pushd "$base"
   else
