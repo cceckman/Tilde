@@ -72,6 +72,6 @@ HRD
 # https://wiki.archlinux.org/index.php/Keyboard_configuration_in_Xorg#Frequently_used_XKB_options
 
 # And even more keyboard options from Ergodox:
-# http://configure.ergodox-ez.com/keyboard_layouts/klypnl
+# http://configure.ergodox-ez.com/keyboard_layouts/komzbp/edit
 # Windows version:
 teensy_loader_cli.exe -mcu=atmega32u4 -w -v ergodox_firmware_klypnl.hex
