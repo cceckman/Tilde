@@ -4,7 +4,7 @@
 
 Windows version:
 
-  teensy_loader_cli.exe --mcu=atmega32u4 -w -v ergodox_ez_firmware_foo.hex
+`teensy_loader_cli.exe --mcu=atmega32u4 -w -v ergodox_ez_firmware_foo.hex`
 
 
 # Changelog
