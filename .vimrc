@@ -32,7 +32,7 @@ set mouse=a
 "Allow backspace over EOL...like every other text editor
 set backspace=indent,eol,start
 "Make jj escape insert mode
-inoremap jj <Esc>
+"inoremap jj <Esc>
 
 " Enable hard mode...
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
