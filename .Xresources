@@ -25,9 +25,13 @@ URxvt*scrollBar: false
 ! via https://wiki.mpich.org/mpich/index.php/Configure_xterm_Fonts_and_Colors_for_Your_Eyeball
 
 XTerm*metaSendsEscape: true
+! Use truetype fonts. Makes it scale up properly on my home desktop, at least...
+XTerm.vt100.renderFont: true
+XTerm*faceName: DejaVu Sans Mono
 
 #ifdef CUSTOM_DPI
 Xft.dpi: CUSTOM_DPI
+! XTerm*font: *-fixed-*-*-*-
 #else
 ! Try out hi-dpi settings
 ! Xft.dpi: 120
