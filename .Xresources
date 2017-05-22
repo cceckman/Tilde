@@ -27,7 +27,7 @@ URxvt*scrollBar: false
 XTerm*metaSendsEscape: true
 ! Use truetype fonts. Makes it scale up properly on my home desktop, at least...
 XTerm.vt100.renderFont: true
-XTerm*faceName: DejaVu Sans Mono
+XTerm*faceName: DejaVu Sans Mono:size=10:antialias=false
 
 #ifdef CUSTOM_DPI
 Xft.dpi: CUSTOM_DPI
