@@ -12,6 +12,9 @@ alias la='ls -lah'
 alias fixssh=". $HOME/scripts/fixssh" # see scripts/attach
 alias t="xterm &" # start a new terminal in the same directory
 alias pgrep="pgrep -l"
+# Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
+# Fix irssi scrolling with tmux
+alias irssi="TERM=screen irssi"
 
 ce() {
   if test "$#" -gt 0
