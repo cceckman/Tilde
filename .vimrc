@@ -90,6 +90,13 @@ cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
 
 " :Trim whitespace
 cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim'))
+" Hilight trailing whitespace when out of insert mode
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " Don't autofmt go on save. This is a nice feature, but keeps re-folding
 " everything. Probably ultimately want to fix by saving folds.
