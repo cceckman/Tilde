@@ -56,7 +56,7 @@ r() {
   # List my repositories on Github
   if test "$1" = "r"
   then
-    curl -s https://api.github.com/users/cceckman/repos | jq '.[] | .full_name' | sed 's/"//g' 
+    curl -s https://api.github.com/users/cceckman/repos | jq '.[] | .full_name' | sed 's/"//g'
     return
   fi
 
@@ -68,6 +68,7 @@ r() {
     pwd
   else
     echo "Couldn't identify repository $1"
+    return 1
   fi
 }
 

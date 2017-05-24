@@ -57,7 +57,7 @@ alias copy='xclip -selection clipboard && echo '✂''
 alias cbpaste='xclip -selection clipboard -o'
 
 # Use $HOME/go for GOPATH.
-if ! echo "$GOPATH" | grep -q "$HOME/go" 
+if ! echo "$GOPATH" | grep -q "$HOME/go"
 then
   if test -z "$GOPATH"
   then
@@ -78,7 +78,7 @@ do
     *) PATH="$x:$PATH";;
   esac
 done
- 
+
 export PATH
 
 if [ -x $HOME/secrets/syscolor ]
@@ -90,3 +90,9 @@ fi
 
 . $HOME/rcfiles/repo.sh
 
+ws () {
+  r $1 || {
+    echo "repository $1 not found" && return 1
+  }
+  attach $1
+}
