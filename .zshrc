@@ -4,6 +4,10 @@
 # Load Posix-compatible bits at startup.
 . $HOME/rcfiles/rc.sh
 
+# Set up the prompt.
+set -o PROMPT_SUBST
+. $HOME/rcfiles/prompt.zsh
+
 if test -e $HOME/rcfiles/work.rc.zsh
 then
   . $HOME/rcfiles/work.rc.zsh
@@ -11,10 +15,6 @@ fi
 
 # Include my own functions.
 fpath+=($HOME/functions)
-
-# Set up the prompt.
-set -o PROMPT_SUBST
-. $HOME/rcfiles/prompt.zsh
 
 # Use Vim keybindings in ZLE.
 bindkey -v
@@ -25,6 +25,18 @@ setopt histignorealldups sharehistory
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
+# Enable $EDITOR to edit command line.
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+# Vi style:
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+
 
 # Use modern completion system
 autoload -Uz compinit
