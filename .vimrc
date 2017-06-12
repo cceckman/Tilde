@@ -9,6 +9,8 @@ set termencoding=utf8
 
 " Make easytags accept Universal Ctags (ctags.io)
 let g:easytags_suppress_ctags_warning = 1
+" Run easytags asynchronously; necessary for large files
+let g:easytags_async = 1
 
 " Load with pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
