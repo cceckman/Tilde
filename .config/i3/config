@@ -39,7 +39,7 @@ floating_modifier $mod
 ## SHORTCUTS
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec ~/scripts/term
 # TODO the below doesn't work.
 bindsym $mod+Shift+Return exec --no-startup-id xterm --name scratchpad; [instance='scratchpad'] move window to scratchpad
 # start a browser

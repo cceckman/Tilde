@@ -10,7 +10,7 @@ alias cl='clear; pwd; ls'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias fixssh=". $HOME/scripts/fixssh" # see scripts/attach
-alias t="xterm &" # start a new terminal in the same directory
+alias t="$HOME/scripts/term &" # start a new terminal in the same directory
 alias pgrep="pgrep -l"
 # Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
 # Fix irssi scrolling with tmux
