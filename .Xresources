@@ -12,9 +12,6 @@
 
 *selectToClipboard: true
 
-! While experimenting with urxvt, disable scrollbar.
-URxvt*scrollBar: false
-
 ! This is nice, but does not have mappings for the bouncing dots.
 ! Fix one or the other.
 ! *faceName: Anonymous Pro:size=8:antialias=false
@@ -28,6 +25,20 @@ XTerm*metaSendsEscape: true
 ! Use truetype fonts. Makes it scale up properly on my home desktop, at least...
 XTerm.vt100.renderFont: true
 XTerm*faceName: DejaVu Sans Mono:size=10:antialias=false
+
+! Similar options for URxvt
+URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=false
+! Fix letter spacing
+URxvt.letterSpace: -2
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+! While experimenting with urxvt, disable scrollbar.
+URxvt*scrollBar: false
+
 
 #ifdef CUSTOM_DPI
 Xft.dpi: CUSTOM_DPI
