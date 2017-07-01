@@ -7,6 +7,9 @@ then
 elif which chromium >/dev/null
 then
   cmd="chromium"
+elif which chromium-browser >/dev/null
+then
+  cmd="chromium-browser"
 else
   echo "Cannot find a browser!" 1>&2
   exit 1
