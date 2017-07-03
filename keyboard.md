@@ -9,6 +9,13 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.7
+http://configure.ergodox-ez.com/keyboard_layouts/qbpyaa/edit
+
+- Add F1-12 keys to layer 1.
+  - I've hit these being unavailable in a couple of cases (BIOS, fullscreen Chrome.)
+  - F1-9 are on the respective num keys; 10-12 on the right bars.
+
 ## cceckman v0.6
 http://configure.ergodox-ez.com/keyboard_layouts/komdla/edit
 
