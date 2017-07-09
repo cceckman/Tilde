@@ -16,6 +16,14 @@ alias pgrep="pgrep -l"
 # Fix irssi scrolling with tmux
 alias irssi="TERM=screen irssi"
 
+g() {
+  case "$1" in
+    c) shift; git commit "$@";;
+    p) shift; git pullall "$@";;
+    *) git "$@";;
+  esac
+}
+
 ce() {
   if test "$#" -gt 0
   then
