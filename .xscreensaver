@@ -1,8 +1,8 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.30 for pi on Sun Jul  2 13:12:49 2017.
-# http://www.jwz.org/xscreensaver/
+# Written by xscreensaver-demo 5.36 for cceckman on Sat Jul  8 18:12:17 2017.
+# https://www.jwz.org/xscreensaver/
 
-timeout:	0:01:00
+timeout:	0:05:00
 cycle:		0:10:00
 lock:		True
 lockTimeout:	0:00:00
@@ -253,6 +253,21 @@ programs:								      \
 - GL: 				projectiveplane -root			    \n\
 				tessellimage -root			    \n\
 - GL: 				winduprobot -root			    \n\
+				binaryring -root			    \n\
+- GL: 				cityflow -root				    \n\
+- GL: 				geodesicgears -root			    \n\
+- GL: 				romanboy -root				    \n\
+- GL: 				splitflap -root				    \n\
+- GL: 				cubestack -root				    \n\
+- GL: 				cubetwist -root				    \n\
+- GL: 				discoball -root				    \n\
+- GL: 				dymaxionmap -root			    \n\
+- GL: 				energystream -root			    \n\
+- GL: 				hexstrut -root				    \n\
+- GL: 				hydrostat -root				    \n\
+- GL: 				raverhoop -root				    \n\
+- GL: 				splodesic -root				    \n\
+- GL: 				unicrud -root				    \n\
 
 
 pointerPollTime:    0:00:05
