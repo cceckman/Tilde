@@ -26,3 +26,5 @@
 
   ` d   Detach from current session.
   ` N   Attach to (maybe starting) the session with a given name.
+
+  attach-session -c $dir  Set the working directory for the session.
