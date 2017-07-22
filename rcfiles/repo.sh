@@ -62,7 +62,7 @@ r() {
 
   # Normal:
   # cd to a repository by a short name.
-  if test -d $HOME/go/src/github.com/*/$1
+  if sh -c "test -d $HOME/go/src/github.com/*/$1"
   then
     cd $HOME/go/src/github.com/*/$1
     pwd
