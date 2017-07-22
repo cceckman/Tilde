@@ -11,6 +11,8 @@ set termencoding=utf8
 let g:easytags_suppress_ctags_warning = 1
 " Run easytags asynchronously; necessary for large files
 let g:easytags_async = 1
+" Improve performance; only update easytags hilighting after save
+let g:easytags_events = ['BufWritePost']
 
 " Load with pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
