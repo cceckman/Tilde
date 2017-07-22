@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ ! -f ~/Downloads/airports.data ]
+then
+  wget -O  ~/Downloads/airports.data https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
+fi
+grep -wi "$1" ~/Downloads/airports.data
