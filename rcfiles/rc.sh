@@ -17,6 +17,7 @@ alias pgrep="pgrep -l"
 alias irssi="TERM=screen irssi"
 # Don't reach over for -
 alias lesss="less -S"
+alias md="mkdir"
 
 g() {
   case "$1" in
