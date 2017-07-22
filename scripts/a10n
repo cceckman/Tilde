@@ -1,0 +1,8 @@
+#!/bin/sh
+# a10n: create an a10n style abbreviation for the argument
+
+word="$1"
+a="$(expr substr "$word" 1 1)"
+n="$(expr substr "$word" ${#word} 1)"
+ten="$(expr ${#word} - 2)"
+echo "${a}${ten}${n}"
