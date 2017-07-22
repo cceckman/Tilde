@@ -15,6 +15,8 @@ alias pgrep="pgrep -l"
 # Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
 # Fix irssi scrolling with tmux
 alias irssi="TERM=screen irssi"
+# Don't reach over for -
+alias lesss="less -S"
 
 g() {
   case "$1" in
