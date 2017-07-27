@@ -10,7 +10,7 @@ alias cl='clear; pwd; ls'
 alias matrix='cmatrix -sab'
 alias la='ls -lah'
 alias fixssh=". $HOME/scripts/fixssh" # see scripts/attach
-alias t="$HOME/scripts/term &" # start a new terminal in the same directory
+# alias t="$HOME/scripts/term &" # start a new terminal in the same directory
 alias pgrep="pgrep -l"
 # Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
 # Fix irssi scrolling with tmux
@@ -18,6 +18,21 @@ alias irssi="TERM=screen irssi"
 # Don't reach over for -
 alias lesss="less -S"
 alias md="mkdir"
+
+parent() {
+  # Get the parent process's command line.
+  ps -p $(ps -p "$$" -o ppid=) -o cmd=
+}
+
+t() {
+  # Open the current window manager... kind of.
+  if parent | grep -q '^tmux'
+  then
+    tmux split-window
+  else
+    $HOME/scripts/term &
+  fi
+}
 
 g() {
   case "$1" in
@@ -58,6 +73,10 @@ e() {
   # Invoke 'vim' with some wrapping.
   cmd="vim $@"
   $cmd && clear && pwd && echo "Done: $cmd"
+}
+
+helpless() {
+  "$@" --help 2>&1 | less
 }
 
 # emacs isn't for everyone.
