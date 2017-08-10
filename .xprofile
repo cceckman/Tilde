@@ -39,7 +39,7 @@ fi
 # Set background
 feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
-if which gnome-screensaver-command >/dev/null
+if ! which gnome-screensaver-command >/dev/null
 then
   xscreensaver -no-splash &
 fi
