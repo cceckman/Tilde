@@ -48,3 +48,8 @@ if which redshift  >/dev/null
 then
   nohup redshift -l 37.421:-122.084 & disown
 fi
+
+if [ -x $HOME/.work.xprofile ]
+then
+  source $HOME/.work.xprofile
+fi
