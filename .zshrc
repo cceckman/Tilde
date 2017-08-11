@@ -7,6 +7,8 @@
 # Set up the prompt.
 set -o PROMPT_SUBST
 . $HOME/rcfiles/prompt.zsh
+# Add completions.
+. $HOME/rcfiles/completions.zsh
 
 if test -e $HOME/rcfiles/work.rc.zsh
 then
