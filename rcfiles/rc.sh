@@ -71,7 +71,7 @@ mdcd() {
 
 e() {
   # Invoke 'vim' with some wrapping.
-  vim "$@" && && clear && pwd && echo "Done: $cmd"
+  vim "$@" && clear && pwd && echo "Done: $cmd"
 }
 
 helpless() {
