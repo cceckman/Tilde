@@ -1,5 +1,15 @@
 # Keyboard Layout
 
+I've got an [Ergodox](https://www.ergodox.io/) that I do rather like.
+
+One of the nice things about it is its reprogrammability; I've done a bit of tweaking to its standard layout to get something that
+works well for me. Nothing too crazy- it's slower enough than my
+[habitual keyboard](https://www.amazon.com/gp/product/B004SUIM4E/ref=s9_dcacsd_dcoop_bw_c_x_2_w)
+without also introducing Dvorak or somesuch - but stuff to fit [my bindgings for](https://github.com/cceckman/Tilde)
+[Vim](https://vim.sourceforge.io/), [i3](https://i3wm.org/), [tmux](https://vim.sourceforge.io/), etc.
+
+The version numbers are based on [semantic versioning](http://semver.org/) but don't actually follow it, because I'm still putting everything under v0 for now. The second numeral indicates a backwards-incompatible change, i.e. changing the meaning of a key; a patch adds meaning to a key that didn't have one previously. In theory, at least.
+
 ## Reset instructions
 
 Windows version:
