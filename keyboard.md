@@ -1,5 +1,15 @@
 # Keyboard Layout
 
+I've got an [Ergodox](https://www.ergodox.io/) that I do rather like.
+
+One of the nice things about it is its reprogrammability; I've done a bit of tweaking to its standard layout to get something that
+works well for me. Nothing too crazy- it's slower enough than my
+[habitual keyboard](https://www.amazon.com/gp/product/B004SUIM4E/ref=s9_dcacsd_dcoop_bw_c_x_2_w)
+without also introducing Dvorak or somesuch - but stuff to fit [my bindgings for](https://github.com/cceckman/Tilde)
+[Vim](https://vim.sourceforge.io/), [i3](https://i3wm.org/), [tmux](https://vim.sourceforge.io/), etc.
+
+The version numbers are based on [semantic versioning](http://semver.org/) but don't actually follow it, because I'm still putting everything under v0 for now. The second numeral indicates a backwards-incompatible change, i.e. changing the meaning of a key; a patch adds meaning to a key that didn't have one previously. In theory, at least.
+
 ## Reset instructions
 
 Windows version:
@@ -8,6 +18,33 @@ Windows version:
 
 
 # Changelog
+
+## cceckman v0.8.1
+http://configure.ergodox-ez.com/keyboard_layouts/kwpjjp/edit
+
+- Add back DEL
+  - Noticed I'd removed this while doing the writeup for 0.8 below.
+  - I do use this sometimes, so keep it handy - in the nicely mnemonic location of "like backspace, but not quite."
+- Add back capslock
+  - Yes, it's the most useless key on the keyboard and it's rebound to Control under Linux.
+  - But maybe I'll unbind when this keyboard is in use. I do occasionally want to spell variable names (usually in shell) in ALL CAPS, and that's even more difficult than usual on the Ergodox.
+
+## cceckman v0.8
+http://configure.ergodox-ez.com/keyboard_layouts/krpddg/edit
+
+Mostly, address asymmetry in modifiers.
+
+- Use middle keys on either side for layer switching
+  - Annoying to always use the left hand to switch. 
+  - Make switching symmetric, the same method for both aux layers
+  - and on bigger buttons (easier targets!)
+- Provide an alt on either hand
+  - Alt becomes Win, which is my i3 modifier, under Linux. Nice to have that on the same hand sometimes.
+  - But, it's still pretty out of the way - on my hands, RAlt + L is not the easiest on the wrist.
+  - Let's see how this goes.
+- Cleanup of color modifiers on layer 1
+- Move home and end on layer 1
+  - To more memorable - hopefully more useful - locations.
 
 ## cceckman v0.7
 http://configure.ergodox-ez.com/keyboard_layouts/qbpyaa/edit

@@ -1,5 +1,8 @@
 #!/usr/bin/zsh
 # Completion functions for zsh.
 
-compdef _lsrepos r
+_r() {
+  _alternative "args:custom args:_lsrepos"
+}
 
+compdef _lsrepos r
