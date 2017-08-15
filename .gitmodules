@@ -53,3 +53,6 @@
 [submodule ".vim/bundle/vim-prometheus"]
 	path = .vim/bundle/vim-prometheus
 	url = https://github.com/bracki/vim-prometheus.git
+[submodule ".zsh/zsh-autosuggestions"]
+	path = .zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

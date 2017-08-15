@@ -7,6 +7,8 @@
 # Set up the prompt.
 set -o PROMPT_SUBST
 . $HOME/rcfiles/prompt.zsh
+# Add completions.
+. $HOME/rcfiles/completions.zsh
 
 if test -e $HOME/rcfiles/work.rc.zsh
 then
@@ -25,6 +27,11 @@ setopt histignorealldups sharehistory
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
+# Use history for zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_USE_ASYNC='yes, please! async is usually better.'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$THEME"
 
 # Enable $EDITOR to edit command line.
 autoload -U edit-command-line
