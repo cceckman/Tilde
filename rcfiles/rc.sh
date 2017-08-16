@@ -18,6 +18,7 @@ alias irssi="TERM=screen irssi"
 # Don't reach over for -
 alias lesss="less -S"
 alias md="mkdir"
+alias z="exec zsh"
 
 parent() {
   # Get the parent process's command line.
@@ -38,6 +39,7 @@ g() {
   case "$1" in
     c) shift; git commit "$@";;
     p) shift; git pullall "$@";;
+    co) shift; git checkout "$@";;
     *) git "$@";;
   esac
 }
