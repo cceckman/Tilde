@@ -39,6 +39,7 @@ g() {
   case "$1" in
     c) shift; git commit "$@";;
     p) shift; git pullall "$@";;
+    s) shift; git status "$@";;
     co) shift; git checkout "$@";;
     *) git "$@";;
   esac
