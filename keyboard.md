@@ -23,7 +23,7 @@ Windows version:
 http://configure.ergodox-ez.com/keyboard_layouts/kowpzz/edit
 
 - Add INS on top of ALT
-  Shift + Insert is important on Linux.
+  - Shift + Insert is important on Linux.
 
 ## cceckman v0.8.1
 http://configure.ergodox-ez.com/keyboard_layouts/kwpjjp/edit
