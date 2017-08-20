@@ -19,6 +19,7 @@ alias irssi="TERM=screen irssi"
 alias lesss="less -S"
 alias md="mkdir"
 alias z="exec zsh"
+alias mtr="mtr -t"
 
 parent() {
   # Get the parent process's command line.
