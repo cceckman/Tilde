@@ -16,3 +16,5 @@
 [difftool]
 	prompt = false
 	prompt = false
+[gui]
+	tabsize = 2
