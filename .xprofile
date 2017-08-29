@@ -46,7 +46,7 @@ fi
 
 if which redshift  >/dev/null && ! pgrep redshift
 then
-  nohup redshift -l '37.421:-122.084' & disown
+  nohup redshift -c ~/.config/redshift.conf & disown
 fi
 
 if [ -x $HOME/.work.xprofile ]
