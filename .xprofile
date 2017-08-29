@@ -44,7 +44,7 @@ then
   xscreensaver -no-splash &
 fi
 
-if which redshift  >/dev/null
+if which redshift  >/dev/null && ! pgrep redshift
 then
   nohup redshift -l 37.421:-122.084 & disown
 fi
