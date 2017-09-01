@@ -30,6 +30,7 @@ then
   then
     # Disable touchpad taps / scrolls for 0.2s after each non-modifier keypress.
     # This seems, empirically, like a pretty good balance between concerns.
+    pkill syndaemon
     syndaemon -d -i 0.2  -t -K -R
   fi
   # Yet another possible solution: set TapButton{1,2,3} to 0, disabling taps.

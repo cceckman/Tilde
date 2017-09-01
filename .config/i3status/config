@@ -59,7 +59,6 @@ tztime UTC {
 tztime MTV {
         format = "%Y-%m-%d %H:%M:%S"
         timezone = "America/Los_Angeles"
-        
 }
 
 load {
