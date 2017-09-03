@@ -56,3 +56,6 @@
 [submodule ".zsh/zsh-autosuggestions"]
 	path = .zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule ".vim/bundle/vim-beancount"]
+	path = .vim/bundle/vim-beancount
+	url = https://github.com/nathangrigg/vim-beancount
