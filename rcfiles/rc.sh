@@ -26,15 +26,17 @@ parent() {
   ps -p $(ps -p "$$" -o ppid=) -o cmd=
 }
 
-t() {
+split() {
   # Open the current window manager... kind of.
   if parent | grep -q '^tmux'
   then
-    tmux split-window
+    tmux split-window "$1"
   else
     $HOME/scripts/term &
   fi
 }
+alias h="split -h"
+alias v="split -v"
 
 g() {
   case "$1" in
