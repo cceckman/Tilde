@@ -129,9 +129,5 @@ ws () {
   r $1 || {
     echo "repository $1 not found" && return 1
   }
-  if test -f .wsrc
-  then
-    source .wsrc
-  fi
   attach $1
 }
