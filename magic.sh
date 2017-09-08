@@ -68,5 +68,7 @@ sudo tee /etc/docker/daemon.json <<HRD
 }
 HRD
 
-# Keyboard options: at
-# https://wiki.archlinux.org/index.php/Keyboard_configuration_in_Xorg#Frequently_used_XKB_options
+# Run a command, started in the background, that runs on the X display
+export DISPLAY=:0 && (cmd)
+# Alternative?
+env DISPLAY=:0 cmd
