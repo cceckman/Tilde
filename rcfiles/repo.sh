@@ -65,9 +65,9 @@ r() {
 
   # Normal:
   # cd to a repository by a short name.
-  if sh -c "test -d $HOME/go/src/github.com/*/$1"
+  if sh -c "test -d $HOME/go/src/*/*/$1"
   then
-    cd $HOME/go/src/github.com/*/$1
+    cd $HOME/go/src/*/*/$1
     pwd
   else
     echo "Couldn't identify repository $1"
