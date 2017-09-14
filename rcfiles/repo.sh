@@ -42,7 +42,10 @@ ggr() {
 }
 
 _lsrepos() {
-  echo "$(find $HOME/go/src/github.com -maxdepth 2 -mindepth 2 | xargs basename -a | sort | uniq)"
+  find $HOME/go/src -maxdepth 3 -mindepth 3 \
+    | xargs basename -a \
+    | sort \
+    | uniq
 }
 
 r() {
