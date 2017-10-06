@@ -72,3 +72,6 @@ HRD
 export DISPLAY=:0 && (cmd)
 # Alternative?
 env DISPLAY=:0 cmd
+
+# VPN setup on GCE (using pritunl)
+# https://serverfault.com/questions/590530/vpn-server-on-google-compute-engine-with-openvpn
