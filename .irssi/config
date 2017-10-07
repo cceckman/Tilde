@@ -20,14 +20,11 @@ servers = (
     use_ssl = "yes";
     ssl_verify = "yes";
     autoconnect = "yes";
-  },
+  }
 );
 
 #THIS PART HANDLES CHATNETS/IRC NETWORKS
-chatnets = {
-  Foonetic = { type = "IRC"; };
-  Ubuntu = { type = "IRC"; };
-};
+chatnets = { Foonetic = { type = "IRC"; }; Ubuntu = { type = "IRC"; }; };
 
 channels = (
   { name = "#xkcd"; chatnet = "Foonetic"; autojoin = "Yes"; },
@@ -258,7 +255,6 @@ settings = {
   "fe-common/core" = {
     theme = "solarized-universal";
     hilight_color = "= %R";
-    bell_beeps = "yes";
     beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
   };
 };
