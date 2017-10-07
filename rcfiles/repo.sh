@@ -2,31 +2,38 @@
 # Not actually POSIX; but bash/zsh compatible
 
 # Utility functions for dealing with repositories.
-# Include in an startup file.
+# Include in a startup file.
 
 # See also update-repos.
+
+# git root.
+gr() {
+  if base="$(git rev-parse --show-toplevel)" && [ "$base" != "" ]
+  then
+    echo "$base"
+    return 0
+  elif pwd | grep -q '[.]git'
+  then
+    echo "$(pwd | grep -Pho '.*(?=/.git)')"
+    return 0
+  else
+    echo 1>&2 "Not under Git?"
+    return 1
+  fi
+}
 
 # Define a 'repo' function that gets the current repository / branch.
 repo() {
   GIT="$(git branch --no-color 2>/dev/null | egrep '[*]' | egrep -o '[^* ]+')"
   a="$?"
-  root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  root="$(gr 2>/dev/null)"
   if test $? -eq 0 && test $a -eq 0
   then
     echo "$(basename $root):$GIT…"
   fi
 }
 
-# git root; or git-root push
-gr() {
-  if ! base="$(git rev-parse --show-toplevel)"
-  then
-    echo "Not under Git?"
-    return 1
-  fi
-  echo "$base"
-}
-
+# go to git root, or push to git root
 ggr() {
   if ! base=$(gr)
   then
