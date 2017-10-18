@@ -3,65 +3,143 @@ if filereadable("~/.vim/work.vim")
   source ~/.vim/work.vim
 endif
 
-" Use UTF-8 by default. Apparently LANG is insufficient...
-set encoding=utf-8
-set termencoding=utf8
+""""""""""""""""""""
+" Part 1: Flags
+""""""""""""""""""""
 
-" Make easytags accept Universal Ctags (ctags.io)
-let g:easytags_suppress_ctags_warning = 1
-" Run easytags asynchronously; necessary for large files
-let g:easytags_async = 1
-" Improve performance; only update easytags hilighting after save
-let g:easytags_events = ['BufWritePost']
+" Some tips from
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#making-vim-more-useful:
 
-" Load with pathogen
+" Load plugins with pathogen.
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-"Status line setup
-set laststatus=2 "alawys show
-set statusline=%t "tail of filename
-set statusline+=%m "whether edited
-set statusline+=%y "filetype
-set statusline+=%= "L/R separator; align following items right
-set statusline+=C:%c "Column
-set statusline+=,\ L:%l/%L "line of how many lines
+" Don't try to be vi-compatible.
+set nocompatible
+" Prevent some security issues.
+set modelines=0
+" Make regexes easier: don't have to escape as much.
+nnoremap / /\v
+vnoremap / /\v
+" Use correct case matching: insensitive unless there's a capital.
+set ignorecase
+set smartcase
+" Invert the sense of g in s///g: default to all matches on a line.
+set gdefault
+" Hilight search results as you type.
+set incsearch
+set showmatch
+set hlsearch
+" Clear out hilighting of search results with <leader><space>.
+nnoremap <leader><space> :noh<cr>
+" Use tab rather than % to swap to matching bracket.
+nnoremap <tab> %
+vnoremap <tab> %
 
-"Show line numbers
-set number
+" Long-line handling; I do this slightly differently, so skipping.
+" set wrap
+" set textwidth=79
+" set formatoptions=qrn1
+" set colorcolumn=85
 
-"Don't select line numbers with mouse
-set mouse=a
-
-"Allow backspace over EOL...like every other text editor
-set backspace=indent,eol,start
-"Make jj escape insert mode
-"inoremap jj <Esc>
-
-" Enable hard mode...
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-" ...by default
-autocmd VimEnter * silent! call HardMode()
-
-"Set up syntax preferences
-if has("syntax")
-    syntax on
-endif
-
-" Use 256 colors, set color scheme.
-" set t_Co=256
-let g:solarized_bold = 0
-set background=dark
-colorscheme solarized
-" colorscheme xemacs
+" Show invisible characters. Not entirely sure that I like this.
+set list
+set listchars=tab:▸\ ,eol:¬
 
 " Set indent preferences.
 set tabstop=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
+" Use UTF-8 by default. Apparently LANG is insufficient...
+set encoding=utf-8
+set termencoding=utf8
+" Have a buffer of 3 lines on either side of the cursor.
+set scrolloff=3
+" Copy indent from the current line when starting a new line.
+" Compare to smartindent.
+set autoindent
+" Show the current mode.
+set showmode
 
+" Some options I don't understand, and don't seem applicable.
+" set showcmd
+" set hidden
+
+" Do tab-completion with options on the line above.
+set wildmenu
+set wildmode=list:longest
+
+" Flash the screen instead of displaying a bell. I don't like this.
+" set visualbell
+" Hilight the current line. I do this slightly differently, see below.
+" set cursorline
+
+" Improve performance when using a local terminal. May or may not want this; I
+" do stuff over SSH.
+set ttyfast
+
+" Shows what position of the current file is shown: Top, Bot, All, or XX%.
+" Doesn't show when statusline is set, it seems.
+" set ruler
+
+" Allow backspace over EOL...like every other text editor
+set backspace=indent,eol,start
+" Always show the status bar for the last window in a file.
+set laststatus=2
+
+" Use relative line numbers. I don't like this
+" set relativenumber
+
+" Create an 'undo' file that lives past closing / reopening it.
+set undofile
+
+" Use comma as leader. Easier to reach than \.
+let mapleader = ","
+
+
+
+" Hilight the line and column in the current window.
+au WinLeave * set nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+" Mark column 80.
+set colorcolumn=80
+
+" Show line numbers
+set number
+
+" Don't select line numbers with mouse
+set mouse=a
+
+" Use syntax hilighting.
+if has("syntax")
+    syntax on
+endif
+
+" Indent by filetype.
 filetype indent plugin on
+
+" Set things to fold automatically
+set foldmethod=syntax
+" And store what's been folded
+" au BufWinLeave ?* mkview
+" au BufWinEnter ?* silent loadview
+
+" Autosave on losing focus.
+au FocusLost * :wa
+
+
+""""""""""""""""""""
+" Part 2: Personalization
+""""""""""""""""""""
+
+" Use 256 colors, with the solarized color scheme.
+" set t_Co=256
+let g:solarized_bold = 0
+set background=dark
+colorscheme solarized
+" colorscheme xemacs
 
 " Use space to center screen on current line in normal mode
 nmap <space> zz
@@ -72,25 +150,86 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-"When vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vimrc
+" Configure the status line.
+set statusline=%t "tail of filename
+set statusline+=%m "whether edited
+set statusline+=%y "filetype
+set statusline+=%= "L/R separator; align following items right
+set statusline+=C:%c "Column
+set statusline+=,\ L:%l/%L "line of how many lines
 
-"Set default printer to PDF
-set pdev=pdf
-set printoptions=paper:letter,syntax:y,number:y,wrap:y
 
-" Set things to fold automatically
-set foldmethod=syntax
-" But use indent-based folding for Python
+""""""""""""""""""""
+" Part 3: Hacks
+""""""""""""""""""""
+
+" Use the X clipboard (register +) by default.
+set clipboard=unnamedplus
+
+" Use tabstop 2, even when our language's default is different.
+autocmd FileType go setlocal tabstop=2
+
+" Use indent-based folding for Python
 autocmd FileType python setlocal foldmethod=indent
-" And store what's been folded
-" au BufWinLeave ?* mkview
-" au BufWinEnter ?* silent loadview
+
+" .md to Markdown, not modula2. Come on.
+au BufRead,BufNewFile *.md setfiletype markdown
+" Use 80-character text wrapping in markdown.
+autocmd FileType markdown setlocal textwidth=80
+
+" Restore line position when re-opening a file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
+" Make easytags accept Universal Ctags (ctags.io)
+let g:easytags_suppress_ctags_warning = 1
+" Run easytags asynchronously; necessary for large files
+let g:easytags_async = 1
+" Improve performance; only update easytags hilighting after save
+let g:easytags_events = ['BufWritePost']
+
+" Have j/k scroll by screen line rather than file line.
+nnoremap j gj
+nnoremap k gk
+
+" Let ; act as :
+nnoremap ; :
+
+
+" Remap numpad keys to the proper keys: hack around
+" https://apple.stackexchange.com/questions/201337/number-pad-does-not-work-in-vim-and-less
+inoremap <Esc>Oq 1
+inoremap <Esc>Or 2
+inoremap <Esc>Os 3
+inoremap <Esc>Ot 4
+inoremap <Esc>Ou 5
+inoremap <Esc>Ov 6
+inoremap <Esc>Ow 7
+inoremap <Esc>Ox 8
+inoremap <Esc>Oy 9
+inoremap <Esc>Op 0
+inoremap <Esc>On .
+inoremap <Esc>OQ /
+inoremap <Esc>OR *
+inoremap <Esc>Ol +
+inoremap <Esc>OS -
+inoremap <Esc>OM <Enter>
 
 " Nice little hack; allow :W to do :w, and :Wqa to do :wqa
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
 cnoreabbrev <expr> dir ((getcmdtype() is# ':' )?('NERDTree'):('dir'))
+
+" When vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source ~/.vimrc
+
+""""""""""""""""""""
+" Part 4: Macros
+""""""""""""""""""""
+
+" Enable hard mode...
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+" ...by default
+autocmd VimEnter * silent! call HardMode()
 
 " :Trim whitespace
 cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim'))
@@ -112,7 +251,6 @@ let g:go_template_autocreate = 0
 let g:templates_user_variables = [
   \   ['PACKAGE', 'GetPackage'],
   \ ]
-
 function! GetPackage()
   " %  Current directory
   " :p Full path
@@ -134,64 +272,12 @@ if !exists('g:templates_directory')
 endif
 let g:templates_directory = add(g:templates_directory, '~/.vim/templates')
 
-
-" Line and column hilighting
-au WinLeave * set nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
-set colorcolumn=80
-
-" Set a wider colorcolumn in Go, which doesn't have as strict lint
-" requirements as other languages.
-autocmd FileType go set colorcolumn=100
-
-" Restore line position when re-opening a file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-
-" Use the X clipboard (register +) by default.
-set clipboard=unnamedplus
-
-" .md to Markdown, not modula2. Come on.
-au BufRead,BufNewFile *.md setfiletype markdown
-" Use 80-character text wrapping in markdown.
-autocmd FileType markdown setlocal textwidth=80
-
 " .cl and .cool to Cool
 au BufRead,BufNewFile *.cool set filetype=cool
 au BufRead,BufNewFile *.cl set filetype=cool
 
-" Thanks to http://vim.wikia.com/wiki/Improved_hex_editing
-command! -bar Hex call ToggleHex()
-function! ToggleHex()
-    let l:modified=&mod
-    let l:oldreadonly=&readonly
-    let &readonly=0
-    let l:oldmodifiable=&modifiable
-    let &modifiable=1
-    if !exists("b:editHex") || !b:editHex
-        let b:oldft=&ft
-        let b:oldbin=&bin
-        setlocal binary
-        let &ft="xxd"
-        let b:editHex=1
-        %!xxd
-    else
-        let &ft=b:oldft
-        if !b:oldbin
-            setlocal nobinary
-        endif
-        let b:editHex=0
-        %!xxd -r
-    endif
-    let &mod=l:modified
-    let &readonly=l:oldreadonly
-    let &modifiable=l:oldmodifiable
-endfunction
-
-nmap <F5> :TagbarToggle<CR>
-
-" Use tabstop 2, even when our language's default is different.
-autocmd FileType go setlocal tabstop=2
+" Toggle tagbar.
+nmap <leader>t :TagbarToggle<CR>
 
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
@@ -199,21 +285,3 @@ command! -bar Magic sv | edit ~/magic.sh
 " Insert a timestamp.
 command! Now execute 'r! date "+\%F \%a \%H:\%M"'
 
-" Remap numpad keys to the proper keys: hack around
-" https://apple.stackexchange.com/questions/201337/number-pad-does-not-work-in-vim-and-less
-inoremap <Esc>Oq 1
-inoremap <Esc>Or 2
-inoremap <Esc>Os 3
-inoremap <Esc>Ot 4
-inoremap <Esc>Ou 5
-inoremap <Esc>Ov 6
-inoremap <Esc>Ow 7
-inoremap <Esc>Ox 8
-inoremap <Esc>Oy 9
-inoremap <Esc>Op 0
-inoremap <Esc>On .
-inoremap <Esc>OQ /
-inoremap <Esc>OR *
-inoremap <Esc>Ol +
-inoremap <Esc>OS -
-inoremap <Esc>OM <Enter>
