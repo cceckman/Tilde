@@ -142,7 +142,7 @@ colorscheme solarized
 " colorscheme xemacs
 
 " Use space to center screen on current line in normal mode
-nmap <space> zz
+nnoremap <space> zz
 
 "Use C-hjkl controls for moving between windows
 map <c-j> <c-w>j
@@ -277,7 +277,7 @@ au BufRead,BufNewFile *.cool set filetype=cool
 au BufRead,BufNewFile *.cl set filetype=cool
 
 " Toggle tagbar.
-nmap <leader>t :TagbarToggle<CR>
+nnoremap <leader>t :TagbarToggle<CR>
 
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
