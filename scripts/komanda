@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Install and/or invoke Komanda
+
+if ! test -e komanda-cli
+then
+  echo 2>&1 "Komanda not installed: check https://github.com/mephux/komanda-cli"
+  exit 1
+fi
+
+exec komanda-cli -c $HOME/secrets/komanda.cfg
