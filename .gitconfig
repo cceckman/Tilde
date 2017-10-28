@@ -16,4 +16,6 @@
 [difftool]
 	prompt = false
 [gui]
-	tabsize = 2
+  tabsize = 2
+[core]
+  excludesfile = ~/.gitignore_global
