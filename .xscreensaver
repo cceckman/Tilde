@@ -1,10 +1,10 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.36 for cceckman on Sat Jul  8 18:12:17 2017.
+# Written by xscreensaver-demo 5.36 for cceckman on Fri Oct 27 22:05:31 2017.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
 cycle:		0:10:00
-lock:           True
+lock:		False
 lockTimeout:	0:00:00
 passwdTimeout:	0:00:30
 visualID:	default
@@ -24,7 +24,7 @@ fadeTicks:	20
 captureStderr:	True
 ignoreUninstalledPrograms:False
 font:		*-medium-r-*-140-*-m-*
-dpmsEnabled:    True
+dpmsEnabled:	True
 dpmsQuickOff:	False
 dpmsStandby:	0:30:00
 dpmsSuspend:	0:30:00
@@ -279,3 +279,4 @@ procInterrupts:	True
 xinputExtensionDev: False
 overlayStderr:	True
 authWarningSlack:   20
+
