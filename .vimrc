@@ -159,6 +159,34 @@ set statusline+=%= "L/R separator; align following items right
 set statusline+=C:%c "Column
 set statusline+=,\ L:%l/%L "line of how many lines
 
+" Enable rainbow parentheses:
+" Mix of https://github.com/junegunn/rainbow_parentheses.vim and
+" https://gist.github.com/Janiczek/add6d4a313d4a9700b24
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+augroup rainbow
+  autocmd!
+  autocmd Syntax go RainbowParenthesesLoadRound
+  autocmd Syntax go RainbowParenthesesLoadBraces
+  autocmd Syntax go RainbowParenthesesLoadSquare
+  autocmd Syntax go RainbowParenthesesLoadChevrons
+  autocmd Syntax go RainbowParenthesesActivate
+augroup END
+
 
 """"""""""""""""""""
 " Part 3: Hacks
