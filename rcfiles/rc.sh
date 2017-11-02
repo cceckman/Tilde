@@ -38,19 +38,6 @@ split() {
 alias h="split -h"
 alias v="split -v"
 
-cpane() {
-  # Create a "commit pane" in tmux.
-  if parent | grep -q '^tmux'
-  then
-    split -h
-    local pane="$(tmux list-panes | tail -1 | grep -o '^[0-9]\+')"
-    # 50-character commit message, plus room for line numbers, plus one.
-    tmux resize-pane -t "$pane" -x 54
-  else
-    $HOME/scripts/term &
-  fi
-}
-
 g() {
   case "$1" in
     c) shift; git commit "$@";;
