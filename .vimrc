@@ -154,6 +154,7 @@ map <c-h> <c-w>h
 set statusline=%t "tail of filename
 set statusline+=%m "whether edited
 set statusline+=%y "filetype
+set statusline+=wc:%{WordCount()}
 set statusline+=%= "L/R separator; align following items right
 set statusline+=C:%c "Column
 set statusline+=,\ L:%l/%L "line of how many lines
@@ -284,3 +285,24 @@ command! -bar Magic sv | edit ~/magic.sh
 " Insert a timestamp.
 command! Now execute 'r! date "+\%F \%a \%H:\%M"'
 
+" Word-count functions: from " https://cromwell-intl.com/linux/vim-word-count.html
+let g:word_count="<unknown>"
+function! WordCount()
+	return g:word_count
+endfunction
+function! UpdateWordCount()
+	let lnum = 1
+	let n = 0
+	while lnum <= line('$')
+		let n = n + len(split(getline(lnum)))
+		let lnum = lnum + 1
+	endwhile
+	let g:word_count = n
+endfunction
+" Update the count when cursor is idle in command or insert mode.
+" Update when idle for 1000 msec (default is 4000 msec).
+set updatetime=1000
+augroup WordCounter
+	au! CursorHold,CursorHoldI * call UpdateWordCount()
+augroup END
+autocmd BufWritePost * call UpdateWordCount()
