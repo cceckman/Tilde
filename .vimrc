@@ -31,7 +31,7 @@ set incsearch
 set showmatch
 set hlsearch
 " Clear out hilighting of search results with <leader><space>.
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader>c :noh<cr>
 " Use tab rather than % to swap to matching bracket.
 nnoremap <tab> %
 vnoremap <tab> %
