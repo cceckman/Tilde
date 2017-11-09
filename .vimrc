@@ -307,6 +307,8 @@ au BufRead,BufNewFile *.cl set filetype=cool
 
 " Toggle tagbar.
 nnoremap <leader>t :TagbarToggle<CR>
+" pause tagbar: lock to current file, so navigation doesn't mess it up.
+nnoremap <leader>l :TagbarTogglePause<CR>
 
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
