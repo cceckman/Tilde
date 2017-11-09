@@ -66,10 +66,10 @@ bindsym Print exec "~/scripts/touchpad.sh"
 bindsym $mod+Shift+q kill
 
 # Send window to scratchpad
-bindsym $mod+Shift+s move scratchpad
+bindsym $mod+Shift+v move scratchpad
 # Return from scratchpad? No, that's send to workspace / unfloat.
 # Show scratchpad
-bindsym $mod+s scratchpad show
+bindsym $mod+v scratchpad show
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec dmenu_run
@@ -79,7 +79,14 @@ bindsym $mod+space exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-# Match Vim's defaults rather than home row, because muscle memory
+
+# focus the parent container
+bindsym $mod+q focus parent
+# focus the child container
+bindsym $mod+z focus child
+
+# LRUD, three ways:#
+# Right hand: use vim bindings
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -90,6 +97,12 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# or the left-hand version
+bindsym $mod+a focus left
+bindsym $mod+s focus down
+bindsym $mod+w focus up
+bindsym $mod+d focus right
 
 
 # move focused window
@@ -122,12 +135,6 @@ bindsym $mod+Shift+m floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+m focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -193,13 +200,11 @@ bar {
         tray_output primary
 }
 
-# Fun usability things...
+
 
 # Jump to urgent window
 bindsym $mod+x [urgent-latest] focus
 
 # Allow swap back to last workspace, when re-pressing the workspace key
 workspace_auto_back_and_forth yes
-# Toggle between two most recent workspaces
-bindsym $mod+z workspace back_and_forth
 # More at http://slackword.net/?p=657
