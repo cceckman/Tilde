@@ -197,6 +197,7 @@ set clipboard=unnamedplus
 
 " Use tabstop 2, even when our language's default is different.
 autocmd FileType go setlocal tabstop=2
+autocmd FileType python setlocal tabstop=2
 
 " Use indent-based folding for Python
 autocmd FileType python setlocal foldmethod=indent
