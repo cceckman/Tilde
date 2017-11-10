@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+"""base: convert between various bases."""
+
+import argparse
+
+ARGS = argparse.ArgumentParser()
+ARGS.add_argument(
+        '--to',
+        type=int,
+        help="Base to convert result to.",
+        default=10)
+ARGS.add_argument(
+        '--prefix',
+        type=bool,
+        help="Include base-2,8,16 prefix if applicable.",
+        default=True)
+ARGS.add_argument(
+        'value',
+        help='A value to convert between bases. '
+             'Bases are inferred as Python literals, e.g 0b, 0o, 0x indicating '
+             'base-2, -8, and -16.')
+
+VALUES = [
+        str(x) for x in range(0, 10)
+    ] + [
+        chr(x) for x in range(ord('A'), ord('Z')+1)
+    ]
+PREFIXES = {2: '0b', 8: '0o', 16: '0x'}
+
+def toBase(i, base, use_prefix):
+    v = VALUES[0:base]
+    result = ""
+    # Build right-to-left.
+    while i != 0:
+        result = v[i%base] + result
+        i = int(i / base)
+    if use_prefix and base in PREFIXES:
+        result = PREFIXES[base] + result
+    return result
+
+
+def main(args):
+  v = int(args.value, base=0)
+  s = toBase(v, args.to, args.prefix)
+  print(s)
+
+if __name__ == "__main__":
+  main(ARGS.parse_args())
