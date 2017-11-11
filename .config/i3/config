@@ -40,8 +40,9 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec ~/scripts/term
-# TODO the below doesn't work.
-bindsym $mod+Shift+Return exec --no-startup-id xterm --name scratchpad; [instance='scratchpad'] move window to scratchpad
+# Start a terminal to log in to remote desktop
+bindsym $mod+Shift+Return exec ~/scripts/term
+
 # start a browser
 bindsym $mod+c exec ~/scripts/browser
 
