@@ -129,5 +129,5 @@ ws () {
   r $1 || {
     echo "repository $1 not found" && return 1
   }
-  attach $1
+  attach $(echo "$1" | tr ':.' '-')
 }
