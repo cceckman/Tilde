@@ -49,7 +49,7 @@ ggr() {
 }
 
 _lsrepos() {
-  find $HOME/go/src -maxdepth 3 -mindepth 3 \
+  find $HOME/r -maxdepth 2 -mindepth 2 \
     | xargs basename -a \
     | sort \
     | uniq
