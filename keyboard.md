@@ -19,6 +19,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.8.3
+http://configure.ergodox-ez.com/keyboard_layouts/qbmxbj/edit
+
+- Use digit 0 rather than numpad 0
+  - The layer-2 zero was not registering properly a lot of the time. Realized all the other "numpad" characters are being sent as digit-row characters, rather than numpad. Since numlock is irrelevant in the modern age, just tweaked this way instead.
+
 ## cceckman v.0.8.2
 http://configure.ergodox-ez.com/keyboard_layouts/kowpzz/edit
 
