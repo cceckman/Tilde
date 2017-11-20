@@ -154,7 +154,7 @@ map <c-h> <c-w>h
 set statusline=%t "tail of filename
 set statusline+=%m "whether edited
 set statusline+=%y "filetype
-set statusline+=wc:%{WordCount()}
+set statusline+=\ wc:%{WordCount()}
 set statusline+=%= "L/R separator; align following items right
 set statusline+=C:%c "Column
 set statusline+=,\ L:%l/%L "line of how many lines
