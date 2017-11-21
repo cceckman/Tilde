@@ -1,7 +1,4 @@
 "Many thanks to http://sontek.net/turning-vim-into-a-modern-python-ide for this setup.
-if filereadable("~/.vim/work.vim")
-  source ~/.vim/work.vim
-endif
 
 """"""""""""""""""""
 " Part 1: Flags
