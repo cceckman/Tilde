@@ -258,7 +258,7 @@ nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 autocmd VimEnter * silent! call HardMode()
 
 " :Trim whitespace
-cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//g'):('Trim'))
+cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//'):('Trim'))
 " Hilight trailing whitespace when out of insert mode
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
