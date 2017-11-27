@@ -7,7 +7,7 @@
 export TZ=America/Los_Angeles
 
 alias cl='clear; pwd; ls'
-alias matrix='cmatrix -sab'
+alias matrix="cmatrix -sab -C $THEME"
 alias la='ls -lah'
 alias fixssh=". $HOME/scripts/fixssh" # see scripts/attach
 # alias t="$HOME/scripts/term &" # start a new terminal in the same directory
