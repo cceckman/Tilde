@@ -68,4 +68,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Add my own completions.
 . $HOME/rcfiles/completions.zsh
 
-
+if which helm >/dev/null
+then
+  source <(helm completion zsh)
+fi
