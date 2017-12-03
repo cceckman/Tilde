@@ -19,6 +19,17 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.9.0
+http://configure.ergodox-ez.com/keyboard_layouts/qypwxr/edit
+
+- Replace right-thumb tab with shift/esc
+  - I've just about never used that tab.
+- Cleanup: Remove some stuff from layer 1 that just duplicated layer 0
+- Use digit punctuation rather than numpad punctuation
+  - Same as 0.8.3 issue.
+- Add home/end to layer 1
+  - A more mnemoic place than the thumb keys, which I can't really reach anyway.
+
 ## cceckman v.0.8.3
 http://configure.ergodox-ez.com/keyboard_layouts/qbmxbj/edit
 
