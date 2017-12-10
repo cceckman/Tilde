@@ -39,6 +39,10 @@ vnoremap <tab> %
 " set formatoptions=qrn1
 " set colorcolumn=85
 
+" Use UTF-8 by default. Apparently LANG is insufficient...
+set encoding=utf-8
+set termencoding=utf8
+
 " Show invisible characters. Not entirely sure that I like this.
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -48,9 +52,7 @@ set tabstop=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
-" Use UTF-8 by default. Apparently LANG is insufficient...
-set encoding=utf-8
-set termencoding=utf8
+
 " Have a buffer of 3 lines on either side of the cursor.
 set scrolloff=3
 " Copy indent from the current line when starting a new line.
