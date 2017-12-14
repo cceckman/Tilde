@@ -1,5 +1,5 @@
-#!/bin/sh
-# Not actually POSIX; but bash/zsh compatible
+# Not actually POSIX; but bash/zsh compatible.
+# To be sourced rather than executed.
 
 # Utility functions for dealing with repositories.
 # Include in a startup file.
@@ -51,8 +51,7 @@ ggr() {
 _lsrepos() {
   find $HOME/r -maxdepth 2 -mindepth 2 \
     | xargs basename -a \
-    | sort \
-    | uniq
+    | sort -u
 }
 
 r() {
@@ -72,12 +71,32 @@ r() {
 
   # Normal:
   # cd to a repository by a short name.
-  if sh -c "test -d $HOME/go/src/*/*/$1"
+  # If there are duplicates of that name, pick mine.
+
+  if test -d $HOME/go/src/*/cceckman/$1
+  then
+    cd $HOME/go/src/*/cceckman/$1
+    pwd
+    return
+  fi
+
+  local matches="$(echo $HOME/go/src/*/*/$1)"
+  local n="$(echo $matches | wc -w)"
+  if test "$n" -eq 1
   then
     cd $HOME/go/src/*/*/$1
     pwd
-  else
-    echo "Couldn't identify repository $1"
+    return
+  fi
+
+  if test "$n" -gt 1
+  then
+    echo "Couldn't unambiguously identify ${1}: $matches"
+    return 1
+  fi
+  if test "$n" -lt 1
+  then
+    echo "Couldn't find any repository ${1}!"
     return 1
   fi
 }
