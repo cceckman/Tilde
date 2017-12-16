@@ -9,7 +9,6 @@ export TZ=America/Los_Angeles
 alias cl='clear; pwd; ls'
 alias matrix="cmatrix -sab -C $THEME"
 alias la='ls -lah'
-alias fixssh=". $HOME/scripts/fixssh" # see scripts/attach
 # alias t="$HOME/scripts/term &" # start a new terminal in the same directory
 alias pgrep="pgrep -l"
 # Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
@@ -131,3 +130,5 @@ ws () {
   }
   attach $(echo "$1" | tr ':.' '-')
 }
+
+. $HOME/rcfiles/s.sh
