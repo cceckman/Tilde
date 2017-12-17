@@ -63,7 +63,7 @@ r() {
   fi
 
   # List my repositories on Github
-  if test "$1" = "r"
+  if test "$1" = "ls"
   then
     curl -s https://api.github.com/users/cceckman/repos | jq '.[] | .full_name' | sed 's/"//g'
     return
@@ -72,7 +72,6 @@ r() {
   # Normal:
   # cd to a repository by a short name.
   # If there are duplicates of that name, pick mine.
-
   if test -d $HOME/go/src/*/cceckman/$1
   then
     cd $HOME/go/src/*/cceckman/$1
