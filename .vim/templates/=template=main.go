@@ -1,7 +1,7 @@
 // %DATE% %USER% <%MAIL%>
 package main
 
-import(
+import (
 	"flag"
 	"fmt"
 	"os"

@@ -1,7 +1,6 @@
-// %DATE% %USER% <%MAIL%>
 package %PACKAGE%
 
-import(
+import (
 	"testing"
 )
 
