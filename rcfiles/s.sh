@@ -69,7 +69,7 @@ addkeys() {
     echo "adding keys to agent $SSH_AGENT_PID"
     for key in $(ls $HOME/.ssh | grep '^id_' | grep -v '.pub$')
     do
-      ssh-add -t 3600 $HOME/.ssh/${key}
+      ssh-add -t 7200 $HOME/.ssh/${key}
     done
   fi
 }
