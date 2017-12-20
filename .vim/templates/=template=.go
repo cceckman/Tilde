@@ -1,0 +1,7 @@
+package %PACKAGE%
+
+import (
+	%HERE%
+)
+
+
