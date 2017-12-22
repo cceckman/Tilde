@@ -19,6 +19,7 @@ alias lesss="less -S"
 alias md="mkdir"
 alias z="exec zsh"
 alias mtr="mtr -t"
+alias g="git"
 
 parent() {
   # Get the parent process's command line.
@@ -36,16 +37,6 @@ split() {
 }
 alias h="split -h"
 alias v="split -v"
-
-g() {
-  case "$1" in
-    c) shift; git commit "$@";;
-    p) shift; git pullall "$@";;
-    s) shift; git status "$@";;
-    co) shift; git checkout "$@";;
-    *) git "$@";;
-  esac
-}
 
 ce() {
   if test "$#" -gt 0
