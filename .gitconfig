@@ -5,6 +5,9 @@
 	email = charles@cceckman.com
 [alias]
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+	co = checkout
+	br = branch
+	s = status
 [status]
 	showUntrackedFiles = no
 [diff]
