@@ -1,1 +1,1 @@
-scripts.irssi.org/scripts/adv_windowlist.pl
+../scripts.irssi.org/scripts/adv_windowlist.pl
