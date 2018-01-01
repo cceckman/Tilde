@@ -121,10 +121,7 @@ fi
 . $HOME/rcfiles/repo.sh
 
 ws () {
-  r $1 || {
-    echo "repository $1 not found" && return 1
-  }
-  attach $(echo "$1" | tr ':.' '-')
+  r $1 && attach $(echo "$1" | tr ':.' '-')
 }
 
 . $HOME/rcfiles/s.sh

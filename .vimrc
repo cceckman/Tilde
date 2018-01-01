@@ -53,6 +53,12 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 
+" Set them particularly for go.
+autocmd FileType go setlocal tabstop=8
+autocmd FileType go setlocal noexpandtab
+autocmd FileType go setlocal softtabstop=8
+autocmd FileType go setlocal shiftwidth=8
+
 " Have a buffer of 3 lines on either side of the cursor.
 set scrolloff=3
 " Copy indent from the current line when starting a new line.
@@ -194,8 +200,7 @@ augroup END
 " Use the X clipboard (register +) by default.
 set clipboard=unnamedplus
 
-" Use tabstop 2, even when our language's default is different.
-autocmd FileType go setlocal tabstop=2
+" Use tabstop 2, for Python.
 autocmd FileType python setlocal tabstop=2
 
 " Use indent-based folding for Python
