@@ -30,6 +30,7 @@ HISTFILE=~/.zsh_history
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_USE_ASYNC='yes, please! async is usually better.'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$THEME"
+bindkey '^ ' autosuggest-accept # Because the right-arrow key is too far away.
 
 # Enable $EDITOR to edit command line.
 autoload -U edit-command-line
@@ -64,6 +65,7 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
 
 # Add my own completions.
 . $HOME/rcfiles/completions.zsh
