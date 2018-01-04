@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-var(
+var (
 	help = flag.Bool("help", false, "Display a usage message.")
 )
 
