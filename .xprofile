@@ -18,25 +18,6 @@ fi
 
 xrdb "$FLAG" -merge $HOME/.Xresources
 
-xmodmap ~/.xmodmaprc
-
-# Ensure palm detection is enabled for synaptic touchpads.
-if which synclient >/dev/null && [ -x $(which synclient) ] && synclient -l 2>/dev/null
-then
-  synclient PalmDetect=1
-  # Additional approach: syndaemon.
-  # https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Using_syndaemon
-  if which syndaemon >/dev/null && [ -x $(which syndaemon) ]
-  then
-    # Disable touchpad taps / scrolls for 0.2s after each non-modifier keypress.
-    # This seems, empirically, like a pretty good balance between concerns.
-    pkill syndaemon
-    syndaemon -d -i 0.2  -t -K -R
-  fi
-  # Yet another possible solution: set TapButton{1,2,3} to 0, disabling taps.
-  # That seems to be the main issue that I'm getting :-/
-fi
-
 # Set background
 feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
@@ -53,4 +34,9 @@ fi
 if [ -x $HOME/.work.xprofile ]
 then
   source $HOME/.work.xprofile
+fi
+
+if [ -x "$HOME/secrets/xsetup/$(hostname)" ]
+then
+  source "$HOME/secrets/xsetup/$(hostname)"
 fi
