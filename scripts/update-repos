@@ -22,7 +22,7 @@ then
           mkdir -p "$LNPATH" && \
           rmdir "$LNPATH" && \
           ln -s "$REPOPATH" "$LNPATH" && \
-          cd"$REPOPATH" && git submodule update --init --recursive
+          cd "$REPOPATH" && git submodule update --init --recursive
       } || {
         echo "Error cloning ${repo}, dropping to shell." \
           "Resolve any issues yourself."
