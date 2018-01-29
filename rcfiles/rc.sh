@@ -20,7 +20,6 @@ alias md="mkdir"
 alias z="exec zsh"
 alias mtr="mtr -t"
 alias g="git"
-alias weechat="TERM=tmux-256color weechat"
 
 parent() {
   # Get the parent process's command line.
