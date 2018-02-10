@@ -21,6 +21,13 @@ alias z="exec zsh"
 alias mtr="mtr -t"
 alias g="git"
 
+eixt() {
+  echo "I think you mean 'exit'."
+  echo "Well, I *hope* you mean 'exit'- here goes nothing..."
+  sleep 0.5
+  exit
+}
+
 parent() {
   # Get the parent process's command line.
   ps -p $(ps -p "$$" -o ppid=) -o cmd=
