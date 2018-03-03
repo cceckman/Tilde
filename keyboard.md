@@ -19,6 +19,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.10.0
+https://configure.ergodox-ez.com/keyboard_layouts/knwlyj/edit
+
+- Move around modifiers; make them available to either pinky
+- Make equals and minus more immediately available
+
 ## cceckman v.0.9.0
 http://configure.ergodox-ez.com/keyboard_layouts/qypwxr/edit
 
