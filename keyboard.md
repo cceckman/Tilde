@@ -19,6 +19,20 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.11.0
+https://configure.ergodox-ez.com/keyboard_layouts/kweelw/edit
+
+- Add TT(1,2) on the top-inner row. (Previously ~unused.)
+- Add LT1 on outer thumb keys.
+
+I didn't realize that "LT" was a thing:
+
+  Momentary Layer Toggle: Switch to the selected layer when held, send the selected key when tapped.
+  
+It's basically dual-funciton keys, but with layers. This would be really nice for the thumb keys- at the moment, I have to move my hand to tap anything in the inner row, which is where the layer-switch keys are.
+It also matches the default behavior of a [Model01](https://keyboard.io) better- where the thumbs are primarily modifier keys.
+
+
 ## cceckman v.0.10.0
 https://configure.ergodox-ez.com/keyboard_layouts/knwlyj/edit
 
