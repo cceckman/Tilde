@@ -19,6 +19,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.12.0
+https://configure.ergodox-ez.com/keyboard_layouts/qdybgy/edit
+
+- Remove overloads of A, Space, Z
+  - Interfere with gaming; "hold A" needs to mean "keep going right".
+
 ## cceckman v.0.11.1
 https://configure.ergodox-ez.com/keyboard_layouts/kzympa/edit
 
