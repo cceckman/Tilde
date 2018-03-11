@@ -19,6 +19,11 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.11.1
+https://configure.ergodox-ez.com/keyboard_layouts/kzympa/edit
+
+- Move around 'reeset' key
+
 ## cceckman v.0.11.0
 https://configure.ergodox-ez.com/keyboard_layouts/kweelw/edit
 
