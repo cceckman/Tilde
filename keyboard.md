@@ -1,14 +1,19 @@
-# Keyboard Layout
+ # Keyboard Layout
 
-I've got an [Ergodox](https://www.ergodox.io/) that I do rather like.
+I've got some fancy keyboards: of the [Ergodox](https://www.ergodox.io) and
+[Model01](https://keyboard.io) varieties.
 
-One of the nice things about it is its reprogrammability; I've done a bit of tweaking to its standard layout to get something that
-works well for me. Nothing too crazy- it's slower enough than my
-[habitual keyboard](https://www.amazon.com/gp/product/B004SUIM4E/ref=s9_dcacsd_dcoop_bw_c_x_2_w)
-without also introducing Dvorak or somesuch - but stuff to fit [my bindgings for](https://github.com/cceckman/Tilde)
-[Vim](https://vim.sourceforge.io/), [i3](https://i3wm.org/), [tmux](https://vim.sourceforge.io/), etc.
+These are awesome because they're reprogrammable; you can basically make any key
+do any old thing. While I haven't dived deep into either firmware, I do
+continually tweak the layout to try to make it more comfortable.
 
-The version numbers are based on [semantic versioning](http://semver.org/) but don't actually follow it, because I'm still putting everything under v0 for now. The second numeral indicates a backwards-incompatible change, i.e. changing the meaning of a key; a patch adds meaning to a key that didn't have one previously. In theory, at least.
+# Model01
+I have a forked copy of the Model01 source [here](https://github.com/cceckman/Model01-Firmware).
+It's approximately based on the Ergodox layout, with some allowances for the
+different geometry and for not changing the existing firmware too much at once.
+See that repository for its changelog.
+
+# Ergodox
 
 ## Reset instructions
 
@@ -39,7 +44,7 @@ https://configure.ergodox-ez.com/keyboard_layouts/kweelw/edit
 I didn't realize that "LT" was a thing:
 
   Momentary Layer Toggle: Switch to the selected layer when held, send the selected key when tapped.
-  
+
 It's basically dual-funciton keys, but with layers. This would be really nice for the thumb keys- at the moment, I have to move my hand to tap anything in the inner row, which is where the layer-switch keys are.
 It also matches the default behavior of a [Model01](https://keyboard.io) better- where the thumbs are primarily modifier keys.
 
