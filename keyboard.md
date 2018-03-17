@@ -1,7 +1,7 @@
  # Keyboard Layout
 
 I've got some fancy keyboards: of the [Ergodox](https://www.ergodox.io) and
-[Model01](https://keyboard.io) varieties.
+[Model01](https://www.keyboard.io) varieties.
 
 These are awesome because they're reprogrammable; you can basically make any key
 do any old thing. While I haven't dived deep into either firmware, I do
