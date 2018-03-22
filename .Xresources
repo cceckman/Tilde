@@ -24,10 +24,10 @@
 XTerm*metaSendsEscape: true
 ! Use truetype fonts. Makes it scale up properly on my home desktop, at least...
 XTerm.vt100.renderFont: true
-XTerm*faceName: DejaVu Sans Mono:size=10:antialias=false
+XTerm*faceName: DejaVu Sans Mono:size=10:antialias=true
 
 ! Similar options for URxvt
-URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=false
+URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
 ! Fix letter spacing
 URxvt.letterSpace: -2
 ! do not scroll with output
