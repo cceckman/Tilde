@@ -20,7 +20,7 @@ alias md="mkdir"
 alias z="exec zsh"
 alias mtr="mtr -t"
 alias g="git"
-alias gazelle="bazel run //:gazelle"
+alias gazelle="bazel run //:gazelle -- "
 
 eixt() {
   echo "I think you mean 'exit'."
