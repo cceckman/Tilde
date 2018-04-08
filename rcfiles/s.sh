@@ -67,7 +67,7 @@ addkeys() {
   if (ssh-add -l >/dev/null ; test "$?" -eq 1 )
   then
     echo "adding keys to agent $SSH_AGENT_PID"
-    for key in $(ls $HOME/.ssh | grep '^id_' | grep -v '.pub$')
+    for key in $(ls $HOME/.ssh | grep '[.]pub$' | sed 's/.pub$//')
     do
       ssh-add -t 7200 $HOME/.ssh/${key}
     done

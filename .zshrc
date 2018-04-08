@@ -74,3 +74,5 @@ if which helm >/dev/null
 then
   source <(helm completion zsh)
 fi
+
+if [ -f "$HOME/rcfiles/gcloud.zsh" ]; then source "$HOME/rcfiles/gcloud.zsh"; fi
