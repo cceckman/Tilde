@@ -24,6 +24,14 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.13.0
+https://configure.ergodox-ez.com/keyboard_layouts/kynwbv/edit
+
+- Move LH mouse
+  - WASD rather than EDSF
+- Make RH L3 into arrow keys rather than mouse
+  - I think I do prefer the Model01 default behavior- arrows on one hand, mouse on the other- here.
+
 ## cceckman v.0.12.0
 https://configure.ergodox-ez.com/keyboard_layouts/qdybgy/edit
 
