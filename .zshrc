@@ -8,9 +8,9 @@
 set -o PROMPT_SUBST
 . $HOME/rcfiles/prompt.zsh
 
-if test -e $HOME/rcfiles/work.rc.zsh
+if test -e $HOME/rcfiles/work.rc.sh
 then
-  . $HOME/rcfiles/work.rc.zsh
+  . $HOME/rcfiles/work.rc.sh
 fi
 
 # Include my own functions.
