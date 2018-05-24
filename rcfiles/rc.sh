@@ -7,20 +7,17 @@
 export TZ=America/Los_Angeles
 
 alias cl='clear; pwd; ls'
-alias matrix="cmatrix -sab -C $THEME"
-alias la='ls -lah'
-# alias t="$HOME/scripts/term &" # start a new terminal in the same directory
-alias pgrep="pgrep -l"
-# Per https://www.wisdomandwonder.com/link/7784/making-irssi-refresh-work-with-tmux
-# Fix irssi scrolling with tmux
-alias irssi="TERM=screen irssi"
-# Don't reach over for -
-alias lesss="less -S"
-alias md="mkdir"
-alias z="exec zsh"
-alias mtr="mtr -t"
 alias g="git"
 alias gazelle="bazel run //:gazelle -- "
+alias la='ls -lah'
+# Don't reach over for -
+alias lesss="less -S"
+alias matrix="cmatrix -sab -C $THEME"
+alias md="mkdir"
+alias mtr="mtr -t"
+alias pgrep="pgrep -l"
+alias weechat="TERM=tmux-256color weechat"
+alias z="exec zsh"
 
 eixt() {
   echo "I think you mean 'exit'."
