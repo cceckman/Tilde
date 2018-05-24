@@ -6,3 +6,7 @@ _r() {
 }
 
 compdef _lsrepos r
+
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
