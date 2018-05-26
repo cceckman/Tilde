@@ -29,9 +29,6 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
-[submodule ".irssi/scripts/scripts.irssi.org"]
-	path = .irssi/scripts/scripts.irssi.org
-	url = https://github.com/irssi/scripts.irssi.org
 [submodule ".vim/bundle/hardmode"]
 	path = .vim/bundle/hardmode
 	url = git://github.com/wikitopian/hardmode.git
@@ -41,9 +38,6 @@
 [submodule "solarized/xresources"]
 	path = solarized/xresources
 	url = git://github.com/solarized/xresources
-[submodule ".irssi/irssi-colors-solarized"]
-	path = .irssi/irssi-colors-solarized
-	url = git://github.com/huyz/irssi-colors-solarized.git
 [submodule "scripts/ssh-ident"]
 	path = scripts/ssh-ident
 	url = git@github.com:ccontavalli/ssh-ident
