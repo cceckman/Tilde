@@ -23,7 +23,7 @@ gr() {
 }
 
 # Define a 'repo' function that gets the current repository / branch.
-repo() {
+_repo() {
   GIT="$(git branch --no-color 2>/dev/null | egrep '[*]' | egrep -o '[^* ]+')"
   a="$?"
   root="$(gr 2>/dev/null)"
