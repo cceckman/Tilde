@@ -12,7 +12,6 @@ alias gazelle="bazel run //:gazelle -- "
 alias la='ls -lah'
 # Don't reach over for -
 alias lesss="less -S"
-alias matrix="cmatrix -sab -C $THEME"
 alias md="mkdir"
 alias mtr="mtr -t"
 alias pgrep="pgrep -l"
@@ -124,6 +123,8 @@ then
 else
   export THEME="red"
 fi
+
+alias matrix="cmatrix -ab -C $THEME"
 
 . $HOME/rcfiles/repo.sh
 
