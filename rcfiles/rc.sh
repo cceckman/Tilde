@@ -125,6 +125,8 @@ else
 fi
 alias matrix="cmatrix -ab -C $THEME"
 
+alias matrix="cmatrix -ab -C $THEME"
+
 . $HOME/rcfiles/repo.sh
 
 ws () {

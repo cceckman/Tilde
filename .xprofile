@@ -23,11 +23,6 @@ feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
 xset s 300 5
 
-if ! which gnome-screensaver-command >/dev/null
-then
-  xscreensaver -no-splash &
-fi
-
 if which redshift  >/dev/null && ! pgrep redshift
 then
   nohup redshift -c ~/.config/redshift.conf & disown
