@@ -6,6 +6,14 @@
 # So that I'm always on "local" time
 export TZ=America/Los_Angeles
 
+# Keep this early, so subsequent includes can access THEME
+if [ -x $HOME/secrets/syscolor ]
+then
+  export THEME="$($HOME/secrets/syscolor)"
+else
+  export THEME="red"
+fi
+
 alias cl='clear; pwd; ls'
 alias g="git"
 alias gazelle="bazel run //:gazelle -- "
@@ -17,6 +25,8 @@ alias mtr="mtr -t"
 alias pgrep="pgrep -l"
 alias weechat="TERM=tmux-256color weechat"
 alias z="exec zsh"
+alias matrix="cmatrix -ab -C $THEME"
+
 
 eixt() {
   echo "I think you mean 'exit'."
@@ -116,16 +126,6 @@ do
 done
 
 export PATH
-
-if [ -x $HOME/secrets/syscolor ]
-then
-  export THEME="$($HOME/secrets/syscolor)"
-else
-  export THEME="red"
-fi
-alias matrix="cmatrix -ab -C $THEME"
-
-alias matrix="cmatrix -ab -C $THEME"
 
 . $HOME/rcfiles/repo.sh
 
