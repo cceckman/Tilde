@@ -1,9 +1,9 @@
 # This is Git's per-user configuration file.
 [user]
 # Please adapt and uncomment the following lines:
-	name = Charles Eckman
+  name = Charles Eckman
   email = cceckman@google.com
-  signingkey = F3C98967
+  signingkey = DE3A0323
 [alias]
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	co = checkout
