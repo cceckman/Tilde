@@ -3,27 +3,29 @@
 # Please adapt and uncomment the following lines:
   name = Charles Eckman
   email = cceckman@google.com
-  signingkey = DE3A0323
+  signingkey = F3C98967
 [alias]
-	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
-	co = checkout
-	br = branch
+  pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+  co = checkout
+  br = branch
   s = status
   h = help
-	t = tag -s
+  t = tag -s
 [status]
-	showUntrackedFiles = no
+  showUntrackedFiles = no
 [diff]
-	tool = vimdiff
+  tool = vimdiff
 [merge]
-	tool = vimdiff
+  tool = vimdiff
 [push]
-	default = simple
+  default = simple
 [difftool]
-	prompt = false
+  prompt = false
 [gui]
   tabsize = 2
 [core]
   excludesfile = ~/.gitignore_global
 [commit]
   gpgsign = true
+[gpg]
+  program = gpg2
