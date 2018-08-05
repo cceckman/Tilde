@@ -16,7 +16,6 @@ fixssh() {
   fi
 
   ssh-add -L 2>&1 >/dev/null && {
-    echo "ssh-add found keys using SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
     return
   }
   echo "no SSH agent found"
