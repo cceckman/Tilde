@@ -133,4 +133,4 @@ ws () {
   r $1 && attach $(echo "$1" | tr ':.' '-')
 }
 
-. $HOME/rcfiles/s.sh
+. $HOME/rcfiles/portable.sh
