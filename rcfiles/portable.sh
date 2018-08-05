@@ -78,4 +78,10 @@ fixssh() {
   getagent && writesshsettings && addkeys
 }
 
+attach () {
+  # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:
+  # Attach to a tmux session, while forwarding SSH agent.
 
+  fixssh
+  tmux -u2 new-session -DA -s $1
+}
