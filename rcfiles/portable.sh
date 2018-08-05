@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# Run or attach to ssh agent. Kill the agent on exit.
+# Run or attach to GPG/SSH agent. Kill the agent on exit.
 
 # part 1: get an agent
 getagent() {
@@ -67,10 +67,10 @@ addkeys() {
   if (ssh-add -l >/dev/null ; test "$?" -eq 1 )
   then
     echo "adding keys to agent $SSH_AGENT_PID"
-    for key in $(ls $HOME/.ssh | grep '[.]pub$' | sed 's/.pub$//')
-    do
-      ssh-add -t 7200 $HOME/.ssh/${key}
-    done
+    ssh-add -t 7200 $(ls $HOME/.ssh \
+      | grep '[.]pub$' \
+      | sed 's/.pub$//' \
+      | sed "s!^!$HOME/.ssh/!" )
   fi
 }
 
