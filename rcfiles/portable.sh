@@ -12,8 +12,9 @@ fixssh() {
   then
     # Create a gpg-agent and use its SSH-agent.
     eval $(gpg-agent --daemon)
-    SSH_AUTH_SOCK=$(gpgconf --list-dir agent-ssh-socket)
+    SSH_AUTH_SOCK=$(gpgconf --list-dir agent-ssh-socket | tr -d '\n')
   fi
+  export SSH_AUTH_SOCK
 
   ssh-add -L 2>&1 >/dev/null && {
     return
