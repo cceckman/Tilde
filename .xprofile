@@ -12,8 +12,6 @@ xrdb -merge $HOME/.Xresources
 # Set background
 feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
-xset s 300 5
-
 if which redshift  >/dev/null && ! pgrep redshift
 then
   nohup redshift -c ~/.config/redshift.conf & disown
