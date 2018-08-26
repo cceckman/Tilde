@@ -116,7 +116,7 @@ export ARDUINO_PATH=/usr/local/arduino
 
 # Add some custom elements to PATH:
 # scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-ADDPATHS="$(if test -d /usr/local/google-cloud-sdk/bin; then echo "/usr/local/google-cloud-sdk/bin:"; fi)$(if test -d $HOME/r/chromium/depot_tools; then echo "$HOME/r/chromium/depot_tools:"; fi)$HOME/secrets/scripts:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:/usr/local/cuda/bin:/usr/lib/go-1.8/bin:/usr/local/go/bin:$(echo "$GOPATH" | sed -e 's-:-/bin:-' -e 's-$-/bin-' )"
+ADDPATHS="$(if test -d /usr/local/google-cloud-sdk/bin; then echo "/usr/local/google-cloud-sdk/bin:"; fi)$(if test -d $HOME/r/chromium/depot_tools; then echo "$HOME/r/chromium/depot_tools:"; fi)$HOME/secrets/scripts:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:/usr/local/go/bin:$(echo "$GOPATH" | sed -e 's-:-/bin:-' -e 's-$-/bin-' )"
 echo "$ADDPATHS" | tr ':' '\n' | while read x
 do
   case ":$PATH:" in
