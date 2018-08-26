@@ -15,11 +15,6 @@ fixssh() {
     SSH_AUTH_SOCK=$(gpgconf --list-dir agent-ssh-socket | tr -d '\n')
   fi
   export SSH_AUTH_SOCK
-
-  ssh-add -L 2>&1 >/dev/null && {
-    return
-  }
-  echo "no SSH agent found"
 }
 
 attach () {
