@@ -6,7 +6,15 @@ fixssh() {
   stty sane
   GPG_TTY=$(tty)
   export GPG_TTY
-  echo UPDATESTARTUPTTY | gpg-connect-agent 2>&1 >/dev/null
+
+  if test -S "$HOME/.gnupg/S.gpg-agent.remote"
+  then
+    # Agent forwarding enabled.
+    # Forward the local version.
+    ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$(gpgconf --list-dir socketdir)/S.gpg-agent" 2>&1 >/dev/null
+  fi
+
+  echo UPDATESTARTUPTTY | gpg-connect-agent --no-autostart 2>&1 >/dev/null
 
   if test -z "$SSH_AUTH_SOCK"
   then
@@ -14,6 +22,7 @@ fixssh() {
     eval $(gpg-agent --daemon)
     SSH_AUTH_SOCK=$(gpgconf --list-dir agent-ssh-socket | tr -d '\n')
   fi
+
   export SSH_AUTH_SOCK
 }
 
@@ -32,5 +41,6 @@ addkeys() {
     | sed "s!^!$HOME/.ssh/!" )
 }
 
+export SSH_AUTH_SOCK
 # 'fixssh' upon entering a shell
 fixssh
