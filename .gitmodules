@@ -23,9 +23,6 @@
 [submodule "secrets"]
 	path = secrets
 	url = git@github.com:cceckman/secrets.git
-[submodule "include/solarized/xresources"]
-	path = include/solarized/xresources
-	url = git@github.com:solarized/xresources.git
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
