@@ -53,7 +53,3 @@ do
   cd "$WD"
 done
 
-# Link for ssh-ident.
-# Suppress the hek out of errors.
-ln -s $GO_PREFIX/src/github.com/ccontavalli/ssh-ident/ssh-ident $HOME/scripts/sshi \
-  >/dev/null 2>&1 || true
