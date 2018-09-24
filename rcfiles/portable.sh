@@ -1,7 +1,34 @@
 #! /bin/sh
 #
-# Run or attach to GPG/SSH agent.
+# Portable shell config- to local or remote hosts.
 
+
+## Common aliases
+alias cl='clear; pwd; ls'
+alias la='ls -lah'
+# Don't reach over for -
+alias lesss="less -S"
+alias md="mkdir"
+alias g="git"
+
+# Fix OS X; only use --color=auto if on Linux.
+if uname -a | grep -q '[dD]arwin'
+then
+  alias ls='ls -Gv'
+else
+  alias ls='ls -Gv --color=auto'
+fi
+
+mdcd() {
+  # Make a directory, and move to it.
+  mkdir -p $1 && cd $1
+}
+
+# emacs isn't for everyone.
+export EDITOR=vim
+
+
+# Run or attach to GPG/SSH agent.
 fixssh() {
   stty sane
   GPG_TTY=$(tty)
@@ -25,6 +52,25 @@ fixssh() {
 
   export SSH_AUTH_SOCK
 }
+
+# tmux management
+parent() {
+  # Get the parent process's command line.
+  ps -p $(ps -p "$$" -o ppid=) -o cmd=
+}
+
+split() {
+  # Open the current window manager... kind of.
+  if parent | grep -q '^tmux'
+  then
+    tmux split-window "$1"
+  else
+    $HOME/scripts/term &
+  fi
+}
+alias h="split -h"
+alias v="split -v"
+
 
 attach () {
   # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:

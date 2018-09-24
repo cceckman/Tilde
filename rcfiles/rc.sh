@@ -14,19 +14,11 @@ else
   export THEME="red"
 fi
 
-alias cl='clear; pwd; ls'
-alias g="git"
 alias gazelle="bazel run //:gazelle -- "
-alias la='ls -lah'
-# Don't reach over for -
-alias lesss="less -S"
-alias md="mkdir"
-alias mtr="mtr -t"
 alias pgrep="pgrep -l"
 alias weechat="TERM=tmux-256color weechat"
 alias z="exec zsh"
 alias matrix="cmatrix -ab -C $THEME"
-
 
 eixt() {
   echo "I think you mean 'exit'."
@@ -34,23 +26,6 @@ eixt() {
   sleep 0.5
   exit
 }
-
-parent() {
-  # Get the parent process's command line.
-  ps -p $(ps -p "$$" -o ppid=) -o cmd=
-}
-
-split() {
-  # Open the current window manager... kind of.
-  if parent | grep -q '^tmux'
-  then
-    tmux split-window "$1"
-  else
-    $HOME/scripts/term &
-  fi
-}
-alias h="split -h"
-alias v="split -v"
 
 if which hub 2>&1 >/dev/null
 then
@@ -71,19 +46,6 @@ ca() {
   git commit -a -m "$@"
 }
 
-# Fix OS X; only use --color=auto if on Linux.
-if uname -a | grep -q '[dD]arwin'
-then
-  alias ls='ls -Gv'
-else
-  alias ls='ls -Gv --color=auto'
-fi
-
-mdcd() {
-  # Make a directory, and move to it.
-  mkdir -p $1 && cd $1
-}
-
 e() {
   # Invoke 'vim' with some wrapping.
   vim "$@" && clear && pwd && echo "Done: $cmd"
@@ -92,9 +54,6 @@ e() {
 helpless() {
   "$@" --help 2>&1 | less
 }
-
-# emacs isn't for everyone.
-export EDITOR=vim
 
 # This is only for Linux
 alias copy='xclip -selection clipboard && echo '✂''
