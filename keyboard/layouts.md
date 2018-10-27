@@ -24,6 +24,12 @@ Windows version:
 
 # Changelog
 
+## cceckman. v0.14.0
+https://configure.ergodox-ez.com/layouts/eVeE
+
+- Add a Dvorak layer-3.
+  - This is going to take some practice.
+
 ## cceckman v.0.13.0
 https://configure.ergodox-ez.com/keyboard_layouts/kynwbv/edit
 
