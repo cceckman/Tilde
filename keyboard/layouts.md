@@ -24,6 +24,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.14.2
+https://configure.ergodox-ez.com/layouts/NWza
+
+- Don't overload backspace key
+  - This just makes it harder to backspace several characters by holding down the key.
+
 ## cceckman v0.14.1
 https://configure.ergodox-ez.com/layouts/v9Mb
 
