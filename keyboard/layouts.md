@@ -24,7 +24,13 @@ Windows version:
 
 # Changelog
 
-## cceckman. v0.14.0
+## cceckman v0.14.1
+https://configure.ergodox-ez.com/layouts/v9Mb
+
+- Fix "Lock" key
+  - i3config is $mod+Shift+Tab, not Alt+Shift+Tab. My laptop variation confused me, since "Alt" is swapped with "Win".
+
+## cceckman v0.14.0
 https://configure.ergodox-ez.com/layouts/eVeE
 
 - Add a Dvorak layer-3.
