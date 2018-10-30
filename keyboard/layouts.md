@@ -24,6 +24,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.14.3
+https://configure.ergodox-ez.com/layouts/Wajj
+
+- Swap thumb Win and Alt
+  - I had Alt on the left in a previous layout, and do generally use the R. pinky key for Win anyway.  
+
 ## cceckman v0.14.2
 https://configure.ergodox-ez.com/layouts/NWza
 
