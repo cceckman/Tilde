@@ -24,6 +24,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.14.4
+https://configure.ergodox-ez.com/layouts/PAd9
+
+- Actually for real fix lock key
+  - Not Alt+Super, Super+Shift.
+
 ## cceckman v0.14.3
 https://configure.ergodox-ez.com/layouts/Wajj
 
