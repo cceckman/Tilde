@@ -14,9 +14,9 @@ alias g="git"
 # Fix OS X; only use --color=auto if on Linux.
 if uname -a | grep -q '[dD]arwin'
 then
-  alias ls='ls -Gv'
+  alias ls='ls -v'
 else
-  alias ls='ls -Gv --color=auto'
+  alias ls='ls -v --color=auto'
 fi
 
 mdcd() {
