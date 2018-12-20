@@ -24,6 +24,36 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.14.4
+https://configure.ergodox-ez.com/layouts/PAd9
+
+- Actually for real fix lock key
+  - Not Alt+Super, Super+Shift.
+
+## cceckman v0.14.3
+https://configure.ergodox-ez.com/layouts/Wajj
+
+- Swap thumb Win and Alt
+  - I had Alt on the left in a previous layout, and do generally use the R. pinky key for Win anyway.  
+
+## cceckman v0.14.2
+https://configure.ergodox-ez.com/layouts/NWza
+
+- Don't overload backspace key
+  - This just makes it harder to backspace several characters by holding down the key.
+
+## cceckman v0.14.1
+https://configure.ergodox-ez.com/layouts/v9Mb
+
+- Fix "Lock" key
+  - i3config is $mod+Shift+Tab, not Alt+Shift+Tab. My laptop variation confused me, since "Alt" is swapped with "Win".
+
+## cceckman v0.14.0
+https://configure.ergodox-ez.com/layouts/eVeE
+
+- Add a Dvorak layer-3.
+  - This is going to take some practice.
+
 ## cceckman v.0.13.0
 https://configure.ergodox-ez.com/keyboard_layouts/kynwbv/edit
 

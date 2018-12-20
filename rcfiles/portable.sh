@@ -10,6 +10,7 @@ alias la='ls -lah'
 alias lesss="less -S"
 alias md="mkdir"
 alias g="git"
+alias mtr="mtr --curses"
 
 # Fix OS X; only use --color=auto if on Linux.
 if uname -a | grep -q '[dD]arwin'
