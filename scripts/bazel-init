@@ -32,7 +32,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 gazelle_dependencies()
 EOF
 
-cat <<EOF | sed "s!github.com/example/project!$IMPORTPATH!" | tee BUILD
+cat <<EOF | sed "s!github.com/example/project!$IMPORTPATH!" | tee BUILD.bazel
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 gazelle(
