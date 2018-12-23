@@ -1,0 +1,3 @@
+#!/bin/sh
+# Clean `undo` files from the current directory.
+rm .*.un~
