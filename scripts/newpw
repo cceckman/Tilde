@@ -17,7 +17,7 @@ import gflags
 
 
 FLAGS = gflags.FLAGS
-gflags.DEFINE_integer('word_count', 4, 'Number of words to include in the password.',
+gflags.DEFINE_integer('word_count', 6, 'Number of words to include in the password.',
                       lower_bound=1)
 gflags.DEFINE_integer('min_length', 4, 'Minimum length of each word, '
                                        'in characters.',
@@ -40,8 +40,13 @@ class PasswordBuilder(object):
         # Read in dictionary
         self._words = set()
         for word in open(dictfile):
-            if len(word) >= minlen and len(word) <= maxlen:
-                self._words.add(word.strip())
+            if len(word) < minlen:
+                continue
+            if len(word) > maxlen:
+                continue
+            if "'" in word:
+                continue
+            self._words.add(word.strip())
 
     def NewPw(self):
         rand = random.SystemRandom()
