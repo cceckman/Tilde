@@ -11,6 +11,8 @@
   s = status
   h = help
   t = tag -s
+  tree = log --graph --format='format:%C(auto)%h %Cblue%G?%C(auto)%d %s' --all
+  tr = tree -n 20
 [status]
   showUntrackedFiles = no
 [diff]
