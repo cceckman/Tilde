@@ -5,12 +5,6 @@
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
-[submodule ".vim/bundle/vim-misc"]
-	path = .vim/bundle/vim-misc
-	url = https://github.com/xolox/vim-misc
-[submodule ".vim/bundle/vim-easytags"]
-	path = .vim/bundle/vim-easytags
-	url = https://github.com/xolox/vim-easytags
 [submodule ".vim/bundle/vim-go"]
 	path = .vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
@@ -26,18 +20,9 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
-[submodule ".vim/bundle/hardmode"]
-	path = .vim/bundle/hardmode
-	url = git://github.com/wikitopian/hardmode.git
-[submodule ".vim/bundle/ScrollColors"]
-	path = .vim/bundle/ScrollColors
-	url = git://github.com/vim-scripts/ScrollColors
 [submodule "solarized/xresources"]
 	path = solarized/xresources
 	url = git://github.com/solarized/xresources
-[submodule ".vim/bundle/vim-prometheus"]
-	path = .vim/bundle/vim-prometheus
-	url = https://github.com/bracki/vim-prometheus.git
 [submodule ".zsh/zsh-autosuggestions"]
 	path = .zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
