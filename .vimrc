@@ -102,8 +102,6 @@ set undofile
 " Use comma as leader. Easier to reach than \.
 let mapleader = ","
 
-
-
 " Hilight the line and column in the current window.
 au WinLeave * set nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
@@ -134,6 +132,14 @@ set foldmethod=syntax
 " Autosave on losing focus.
 au FocusLost * :wa
 
+" Install language servers.
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+endif
 
 """"""""""""""""""""
 " Part 2: Personalization
