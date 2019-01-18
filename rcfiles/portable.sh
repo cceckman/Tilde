@@ -40,7 +40,9 @@ fixssh() {
   then
     # Agent forwarding enabled.
     # Forward the local version.
-    ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$(gpgconf --list-dir socketdir)/S.gpg-agent" 2>&1 >/dev/null
+    agent="$(gpgconf --list-dir socketdir)/S.gpg-agent"
+    rm -rf "$agent"
+    ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$agent" 2>&1 >/dev/null
   fi
 
   echo UPDATESTARTUPTTY | gpg-connect-agent --no-autostart 2>&1 >/dev/null
