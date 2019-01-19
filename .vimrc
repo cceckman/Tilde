@@ -28,7 +28,7 @@ set incsearch
 set showmatch
 set hlsearch
 " Clear out hilighting of search results with <leader><space>.
-nnoremap <leader>c :noh<cr>
+nnoremap <leader><space> :noh<cr>
 " Use tab rather than % to swap to matching bracket.
 nnoremap <tab> %
 vnoremap <tab> %
@@ -133,10 +133,11 @@ set foldmethod=syntax
 au FocusLost * :wa
 
 " Install language servers.
+let g:lsp_diagnostics_enabled = 1
 if executable('gopls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'cmd': {server_info->['gopls', '-logfile', '/tmp/golangs.log']},
         \ 'whitelist': ['go'],
         \ })
 endif
@@ -265,10 +266,12 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 " Part 4: Macros
 """"""""""""""""""""
 
-" Enable hard mode...
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-" ...by default
-autocmd VimEnter * silent! call HardMode()
+" Keybindings for LSP:
+nnoremap <leader>g <Esc>:LspDefinition<cr>
+nnoremap <leader>f <Esc>:LspDocumentFormat<cr>
+nnoremap <leader>td <Esc>:LspTypeDefinition<cr>
+nnoremap <leader>r <Esc>:LspReferences<cr>
+
 
 " :Trim whitespace
 cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//'):('Trim'))
