@@ -75,14 +75,26 @@ export ARDUINO_PATH=/usr/local/arduino
 
 # Add some custom elements to PATH:
 # scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-ADDPATHS="$(if test -d /usr/local/google-cloud-sdk/bin; then echo "/usr/local/google-cloud-sdk/bin:"; fi)$(if test -d $HOME/r/chromium/depot_tools; then echo "$HOME/r/chromium/depot_tools:"; fi)$HOME/secrets/scripts:$HOME/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:/usr/local/go/bin:$(echo "$GOPATH" | sed -e 's-:-/bin:-' -e 's-$-/bin-' )"
-echo "$ADDPATHS" | tr ':' '\n' | while read x
+while read x
 do
   case ":$PATH:" in
     *":$x:"*) :;;
-    *) PATH="$x:$PATH";;
+    *) if test -d "$x";
+       then
+         PATH="$x:$PATH"
+       fi
+       ;;
   esac
-done
+done <<ADDPATHS
+$HOME/.cargo/bin
+$HOME/.local/bin
+$HOME/bin
+$HOME/r/chromium/depot_tools
+$HOME/scripts
+$HOME/secrets/scripts
+/usr/local/go/bin
+/usr/local/google-cloud-sdk/bin
+ADDPATHS
 
 export PATH
 
