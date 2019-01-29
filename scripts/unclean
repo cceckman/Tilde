@@ -1,3 +1,3 @@
-#!/bin/sh
-# Clean `undo` files from the current directory.
-rm .*.un~
+#!/bin/bash
+# Clean `undo` files from the current directory and subdirectories
+find . -name '.*.un~' | tee >(xargs rm)

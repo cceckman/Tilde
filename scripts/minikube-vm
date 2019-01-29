@@ -1,0 +1,81 @@
+#!/bin/sh
+
+VMNAME=minikube
+DISKNAME=temp-disk
+IMAGENAME=debian-9-vmx
+ZONE=us-west1-a
+
+set -x
+
+# 1. Create image to boot from
+# 2. Create VM
+# 3. Install minikube on VM
+# 4. SSH to VM
+
+# Set up the image; needs VMX
+# https://www.googleapis.com/compute/v1/projects/vm-options/global/licenses/enable-vmx
+if ! gcloud -q compute images describe $IMAGENAME >/dev/null
+then
+  gcloud -q compute disks create \
+    $DISKNAME \
+    --image-project debian-cloud \
+    --image-family debian-9 \
+    --zone $ZONE
+  gcloud -q compute images create \
+    $IMAGENAME \
+    --source-disk $DISKNAME \
+    --source-disk-zone $ZONE \
+    --licenses "https://www.googleapis.com/compute/v1/projects/vm-options/global/licenses/enable-vmx" \
+  || {
+    echo >&2 "could not create disk"
+    exit 1
+  }
+  gcloud -q compute disks delete $DISKNAME
+fi
+
+if ! gcloud compute instances describe --zone $ZONE $VMNAME 2>&1 >/dev/null
+then
+  gcloud compute instances create \
+    $VMNAME \
+    --zone $ZONE \
+    --image $IMAGENAME \
+    --machine-type n1-standard-4 \
+  || {
+    echo >&2 "could not create instance"
+    exit 1
+  }
+fi
+
+cat <<EOF | gcloud -q compute ssh --zone $ZONE $VMNAME
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+
+# install kubectl repo
+if ! test -f /etc/apt/sources.list.d/kubernetes.list
+then
+  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+fi
+
+# install virtualbox repo
+if ! test -f /etc/apt/sources.list.d/virtualbox.list
+then
+  curl -s https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo apt-key add -
+  echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" | sudo tee -a /etc/apt/sources.list.d/virtualbox.list
+fi
+
+sudo apt-get update
+sudo apt-get install -y kubectl virtualbox-6.0
+
+# Install minikube
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && sudo install minikube /usr/local/bin
+EOF
+
+gcloud compute ssh --zone $ZONE $VMNAME -- \
+  minikube start \
+    --extra-config=apiserver.Authorization.Mode=RBAC
+EOF
+gcloud compute ssh --zone $ZONE $VMNAME
+gcloud compute ssh --zone $ZONE $VMNAME -- \
+  minikube stop
+
