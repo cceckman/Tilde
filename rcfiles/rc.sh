@@ -27,11 +27,6 @@ eixt() {
   exit
 }
 
-if which hub 2>&1 >/dev/null
-then
-  eval "$(hub alias -s)"
-fi
-
 ce() {
   if test "$#" -gt 0
   then
