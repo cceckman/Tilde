@@ -24,12 +24,16 @@ gr() {
 
 # Define a 'repo' function that gets the current repository / branch.
 _repo() {
-  GIT="$(git branch --no-color 2>/dev/null | grep -Po '(?<=^[*] ).+')"
-  a="$?"
-  root="$(gr 2>/dev/null)"
-  if test $? -eq 0 && test $a -eq 0
+  if which git 2>&1 >/dev/null
   then
-    echo "$(basename $root):$GIT…"
+    GITINFO="$(basename $(git rev-parse --show-toplevel 2>/dev/null)):$(git rev-parse --abbrev-ref HEAD 2>/dev/null)…"
+  fi
+
+  if test "$GITINFO" != ""
+  then
+    echo "$GITINFO"
+  else
+    basename $PWD
   fi
 }
 
