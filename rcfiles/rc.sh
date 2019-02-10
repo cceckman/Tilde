@@ -84,6 +84,7 @@ done <<ADDPATHS
 $HOME/.cargo/bin
 $HOME/.local/bin
 $HOME/bin
+$GOPATH/bin
 $HOME/r/chromium/depot_tools
 $HOME/scripts
 $HOME/secrets/scripts
