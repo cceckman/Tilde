@@ -26,14 +26,13 @@ gr() {
 _repo() {
   if which git 2>&1 >/dev/null
   then
-    GITINFO="$(basename $(git rev-parse --show-toplevel 2>/dev/null)):$(git rev-parse --abbrev-ref HEAD 2>/dev/null)…"
+    GITBASE="$(basename $(git rev-parse --show-toplevel 2>/dev/null) 2>/dev/null)" || return
+    GITBRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" || return
   fi
 
-  if test "$GITINFO" != ""
+  if test "$GITBASE" != "" && test "$GITBRANCH" != ""
   then
-    echo "$GITINFO"
-  else
-    basename $PWD
+    echo "${GITBASE}:${GITBRANCH}…"
   fi
 }
 
