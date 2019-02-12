@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Master pre-commit hook
+. $(dirname $0)/util.sh
+
+for script in $(ls $(dirname $0)/pre-commit.*.sh)
+do
+  if !test -x $script
+  then
+    ERROR "$script is not executable; check git hooks setup"
+    continue
+  fi
+  if ! "$script"
+  then
+    ERROR "$script failed"
+  else
+    OK "$script passed"
+  fi
+done
+
+exit $CANCEL

@@ -27,6 +27,7 @@
   tabsize = 2
 [core]
   excludesfile = ~/.gitignore_global
+  hooksPath = ~/hooks
 [commit]
   gpgsign = true
 [credential "https://source.developers.google.com"]
