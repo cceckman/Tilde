@@ -5,7 +5,7 @@
 
 for script in $(ls $(dirname $0)/pre-commit.*.sh)
 do
-  if !test -x $script
+  if ! test -x $script
   then
     ERROR "$script is not executable; check git hooks setup"
     continue
