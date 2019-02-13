@@ -165,6 +165,7 @@ let g:go_list_type = 'quickfix'
 " 'go vet' not installed, at the moment, as its own tool.
 let g:syntastic_go_checkers = ['golint', 'gometalinter', 'gofmt']
 let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
+let g:syntastic_go_gofmt_args = ['-s']
 
 " rust: enabled via rust.vim plugin
 " YAML
