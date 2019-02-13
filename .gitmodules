@@ -41,3 +41,6 @@
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "/home/cceckman/.vim/bundle/rust.vim"]
+	path = /home/cceckman/.vim/bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
