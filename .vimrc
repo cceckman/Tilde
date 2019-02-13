@@ -171,6 +171,9 @@ let g:syntastic_go_gofmt_args = ['-s']
 " YAML
 let g:syntastic_yaml_checkers = ['yamllint']
 
+" (z)sh
+let g:syntastic_enable_zsh_checker = 1
+
 " Use 256 colors, with the solarized color scheme.
 " set t_Co=256
 let g:solarized_bold = 0
