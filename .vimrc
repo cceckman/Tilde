@@ -166,6 +166,10 @@ let g:go_list_type = 'quickfix'
 let g:syntastic_go_checkers = ['golint', 'gometalinter', 'gofmt']
 let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
 
+" rust: enabled via rust.vim plugin
+" YAML
+let g:syntastic_yaml_checkers = ['yamllint']
+
 " Use 256 colors, with the solarized color scheme.
 " set t_Co=256
 let g:solarized_bold = 0
