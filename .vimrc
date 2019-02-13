@@ -142,9 +142,29 @@ if executable('gopls')
         \ })
 endif
 
+" Syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 """"""""""""""""""""
 " Part 2: Personalization
 """"""""""""""""""""
+
+" Enable Syntastic checkers for...
+
+" golang:
+let g:godef_split = 0
+let g:go_fmt_fail_silently = 1
+let g:go_list_type = 'quickfix'
+" 'go vet' not installed, at the moment, as its own tool.
+let g:syntastic_go_checkers = ['golint', 'gometalinter', 'gofmt']
+let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
 
 " Use 256 colors, with the solarized color scheme.
 " set t_Co=256
@@ -261,6 +281,14 @@ cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa')
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
+
+" Set the location list (Syntastic) to a reasonable height
+" see :h syntastic-loclist-callback
+function! SyntasticCheckHook(errors)
+    if !empty(a:errors)
+        let g:syntastic_loc_list_height = min([len(a:errors), 10])
+    endif
+endfunction
 
 """"""""""""""""""""
 " Part 4: Macros
