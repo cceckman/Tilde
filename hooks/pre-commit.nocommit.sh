@@ -14,7 +14,7 @@
 difffiles=$(git diff --cached --name-only --diff-filter=ACM)
 [ -z "$difffiles" ] && exit 0
 
-diff="$(grep -PH 'DO NOT (CO[MI]+T|SU[BMI]+T)' $difffiles 2>&1)"
+diff="$(grep --directories=skip -PH 'DO NOT (CO[MI]+T|SU[BMI]+T)' $difffiles 2>&1)"
 [ -z "$diff" ] && exit 0
 
 echo >&2 "Some files indicate they should not be committed: "
