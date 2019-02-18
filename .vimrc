@@ -308,6 +308,8 @@ nnoremap <leader>f <Esc>:LspDocumentFormat<cr>
 nnoremap <leader>td <Esc>:LspTypeDefinition<cr>
 nnoremap <leader>r <Esc>:LspReferences<cr>
 
+" Keybindings for syntastic
+nnoremap <leader>n <Esc>:SyntasticToggleMode<cr>
 
 " :Trim whitespace
 cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//'):('Trim'))
