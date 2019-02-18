@@ -1,10 +1,6 @@
-.bash_history
-.bash_logout
-.bazel/
+.*
 bin/
+githost/
 go/
-.profile
 r/
-.secrets/
-.ssh/
-.viminfo
+Downloads/
