@@ -92,5 +92,3 @@ addkeys() {
 }
 
 export SSH_AUTH_SOCK
-# 'fixssh' upon entering a shell
-fixssh
