@@ -31,4 +31,4 @@
 [commit]
   gpgsign = true
 [credential "https://source.developers.google.com"]
-	helper = gcloud.sh
+  helper = gcloud.sh
