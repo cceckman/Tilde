@@ -6,6 +6,7 @@
   signingkey = F3C98967
 [alias]
   pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+  par = "!f(){ git pull --rebase=true \"$@\" && git submodule update --init --recursive; }; f"
   co = checkout
   br = branch
   s = status
