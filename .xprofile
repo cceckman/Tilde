@@ -9,6 +9,9 @@ fi
 
 xrdb -merge $HOME/.Xresources
 
+xset s 60
+xss-lock -l -- $HOME/scripts/lock & disown
+
 # Set background
 feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
 
