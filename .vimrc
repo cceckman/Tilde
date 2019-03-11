@@ -321,6 +321,22 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Add timestamps to the begginning of the line:
+" https://www.codesections.com/blog/vim-timestamped/
+let g:time_stamp_enabled = 0
+command! TimeStampToggle let g:time_stamp_enabled = !g:time_stamp_enabled
+
+inoremap <expr> <CR> g:time_stamp_enabled ? "\<ESC>:call TimeStamp()\<CR>a" : "\<CR>"
+
+function! TimeStamp()
+     let l:current_time = strftime("%H:%M:%S")
+     execute "normal! 0i\<SPACE>\<ESC>0dwi\
+          \<C-R>=l:current_time\<CR>\
+          \<SPACE>\<SPACE>—\<SPACE>\<SPACE>\<ESC>o\<SPACE>\<SPACE>\<SPACE>\<SPACE>\
+          \<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>"
+
+endfunction
+
 " Don't autofmt go on save. This is a nice feature, but keeps re-folding
 " everything. Probably ultimately want to fix by saving folds.
 let g:go_fmt_autosave = 0
