@@ -13,13 +13,15 @@ alias g="git"
 alias mtr="mtr --curses"
 alias make="/usr/bin/make -j $(grep -c '^processor' /proc/cpuinfo)"
 
-# Fix OS X; only use --color=auto if on Linux.
-if uname -a | grep -q '[dD]arwin'
+if ls -v 2>&1 >/dev/null
 then
-  alias ls='ls -v'
-else
-  alias ls='ls -v --color=auto'
+  LSARGS="$LSARGS -v"
 fi
+if ls --color=auto 2>&1 >/dev/null
+then
+  LSARGS="$LSARGS --color=auto"
+fi
+alias ls="ls $LSARGS"
 
 mdcd() {
   # Make a directory, and move to it.
