@@ -20,11 +20,11 @@ alias md="mkdir"
 alias g="git"
 alias mtr="mtr --curses"
 
-if ls -v 2>&1 >/dev/null
+if ls -v >/dev/null 2>&1
 then
   LSARGS="$LSARGS -v"
 fi
-if ls --color=auto 2>&1 >/dev/null
+if ls --color=auto >/dev/null 2>&1
 then
   LSARGS="$LSARGS --color=auto"
 fi
