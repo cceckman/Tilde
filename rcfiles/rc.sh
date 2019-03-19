@@ -1,7 +1,9 @@
 #!/bin/sh
 # vim: ft=sh
 
-# Posix-compatible shell initialization; so that it can be shared across bash/zsh/?
+# Here's the bits I want for every machine...
+. $HOME/rcfiles/portable.sh
+# ...and here's the ones I want for customized-to-me machines.
 
 # So that I'm always on "local" time
 export TZ=America/Los_Angeles
@@ -19,6 +21,13 @@ alias pgrep="pgrep -l"
 alias weechat="TERM=tmux-256color weechat"
 alias z="exec zsh"
 alias matrix="cmatrix -ab -C $THEME"
+
+if test -f /proc/cpuinfo
+then
+  alias make="/usr/bin/make -j $(grep -c '^processor' /proc/cpuinfo 2>&1)"
+else
+  alias make="/usr/bin/make -j $(sysctl -n hw.ncpu)"
+fi
 
 eixt() {
   echo "I think you mean 'exit'."
@@ -96,8 +105,32 @@ export PATH
 
 . $HOME/rcfiles/repo.sh
 
+# tmux management
+parent() {
+  # Get the parent process's command line.
+  ps -p $(ps -p "$$" -o ppid=) -o cmd=
+}
+
+split() {
+  # Open the current window manager... kind of.
+  if parent | grep -q '^tmux'
+  then
+    tmux split-window "$1"
+  else
+    $HOME/scripts/term &
+  fi
+}
+alias h="split -h"
+alias v="split -v"
+
+attach () {
+  # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:
+  # Attach to a tmux session, while forwarding SSH agent.
+  fixssh
+  tmux -u2 new-session -DA -s $1
+}
+
 ws () {
   r $1 && attach $(echo "$1" | tr ':.' '-')
 }
 
-. $HOME/rcfiles/portable.sh

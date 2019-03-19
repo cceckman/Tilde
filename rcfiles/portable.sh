@@ -2,6 +2,14 @@
 #
 # Portable shell config- to local or remote hosts.
 
+# I like vi mode.
+set -o vi
+# emacs isn't for everyone.
+export EDITOR=vim
+
+
+export PS1="\$(printf '∴ %i %s@%s:%s\n∵ ' \$? \$USER \$(hostname) \$PWD)"
+export CLICOLOR="Yes"
 
 ## Common aliases
 alias cl='clear; pwd; ls'
@@ -11,7 +19,6 @@ alias lesss="less -S"
 alias md="mkdir"
 alias g="git"
 alias mtr="mtr --curses"
-alias make="/usr/bin/make -j $(grep -c '^processor' /proc/cpuinfo)"
 
 if ls -v 2>&1 >/dev/null
 then
@@ -27,9 +34,6 @@ mdcd() {
   # Make a directory, and move to it.
   mkdir -p $1 && cd $1
 }
-
-# emacs isn't for everyone.
-export EDITOR=vim
 
 
 # Run or attach to GPG/SSH agent.
@@ -57,32 +61,6 @@ fixssh() {
   fi
 
   export SSH_AUTH_SOCK
-}
-
-# tmux management
-parent() {
-  # Get the parent process's command line.
-  ps -p $(ps -p "$$" -o ppid=) -o cmd=
-}
-
-split() {
-  # Open the current window manager... kind of.
-  if parent | grep -q '^tmux'
-  then
-    tmux split-window "$1"
-  else
-    $HOME/scripts/term &
-  fi
-}
-alias h="split -h"
-alias v="split -v"
-
-
-attach () {
-  # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:
-  # Attach to a tmux session, while forwarding SSH agent.
-  fixssh
-  tmux -u2 new-session -DA -s $1
 }
 
 addkeys() {
