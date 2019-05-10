@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DURATION="${1:-3600}"
+
+xset s "$DURATION" || exit $?
+
+{ sleep "$DURATION"; xset s 60; } & disown
