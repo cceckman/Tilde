@@ -75,3 +75,13 @@ env DISPLAY=:0 cmd
 
 # VPN setup on GCE (using pritunl)
 # https://serverfault.com/questions/590530/vpn-server-on-google-compute-engine-with-openvpn
+
+# Forward extra SSH socket
+cat >.ssh/config <<EOF
+Host gpgtunnel
+HostName server.domain
+  RemoteForward /home/$USER/.gnupg/S.gpg-agent.remote /home/$USER/.gnupg/S.gpg-agent.extra
+EOF
+
+# List the filesystem of the most-recently-run container - thanks, StackOverflow!
+docker export $(docker ps -lq) | tar -tvf -
