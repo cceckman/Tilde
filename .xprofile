@@ -2,9 +2,10 @@
 
 # Should be a better conditional;
 # check /proc/cpuinfo for 'hypervisor'
-if [ -x /usr/bin/VBoxClient-all ]
+if [ -x /usr/bin/VBoxClient ]
 then
-  /usr/bin/VBoxClient-all
+  /usr/bin/VBoxClient --clipboard
+  /usr/bin/VBoxClient --display
 fi
 
 xrdb -merge $HOME/.Xresources
