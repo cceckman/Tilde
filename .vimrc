@@ -227,6 +227,11 @@ augroup rainbow
   autocmd Syntax go RainbowParenthesesActivate
 augroup END
 
+" Don't pollute the working directory with files.
+" Use ~/.vim/swap for swap files...
+set directory^=$HOME/.vim/swap
+" ...and ~/.vim/undo for undo files
+set undodir=~/.vim/undo
 
 """"""""""""""""""""
 " Part 3: Hacks

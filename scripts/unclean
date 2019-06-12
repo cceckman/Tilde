@@ -1,3 +1,5 @@
 #!/bin/bash
 # Clean `undo` files from the current directory and subdirectories
 find . -name '.*.un~' | tee >(xargs rm)
+# ...and from the dedicated home directories
+rm $HOME/.vim/swap/.* $HOME/.vim/undo/.*
