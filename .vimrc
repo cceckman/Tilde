@@ -382,6 +382,9 @@ nnoremap <leader>t :TagbarToggle<CR>
 " pause tagbar: lock to current file, so navigation doesn't mess it up.
 nnoremap <leader>l :TagbarTogglePause<CR>
 
+" Shorten apparent width of tabs (e.g. for reading heavily-indented code)
+nnoremap <leader>h :set tabstop=2 shiftwidth=2<CR>
+
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
 
