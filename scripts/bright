@@ -1,6 +1,23 @@
 #!/bin/sh
-# Alias for xbacklight.
+# Brightness control
 
+set -e
+
+backlight=/sys/class/backlight/intel_backlight/brightness
+
+if test -e "$backlight"
+then
+  # Skip xbacklight
+  if test "$#" -eq 1
+  then
+    echo "$1" | sudo tee "$backlight"
+  else
+    cat "$backlight"
+  fi
+  exit
+fi
+
+# Fall back to xbacklight
 if [ "$#" -eq 1 ]
 then
   xbacklight -set $1
