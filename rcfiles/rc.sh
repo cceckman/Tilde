@@ -9,9 +9,9 @@
 export TZ=America/Los_Angeles
 
 # Keep this early, so subsequent includes can access THEME
-if [ -x $HOME/secrets/syscolor ]
+if [ -x $HOME/scripts/syscolor ]
 then
-  export THEME="$($HOME/secrets/syscolor)"
+  export THEME="$($HOME/scripts/syscolor)"
 else
   export THEME="red"
 fi

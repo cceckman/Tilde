@@ -13,9 +13,6 @@ xrdb -merge $HOME/.Xresources
 xset s 60
 xss-lock -l -- $HOME/scripts/lock & disown
 
-# Set background
-feh  --bg-fill "$HOME/secrets/wallpaper/_DSC4583.NEF.jpg"
-
 if which redshift  >/dev/null && ! pgrep redshift
 then
   nohup redshift -c ~/.config/redshift.conf & disown
@@ -26,7 +23,12 @@ then
   source $HOME/.work.xprofile
 fi
 
-if [ -x "$HOME/secrets/xsetup/$(hostname)" ]
-then
-  source "$HOME/secrets/xsetup/$(hostname)"
-fi
+case "$(hostname | sha256sum)" in
+  *311c607e6d3612e581f*)
+    xrdb -merge <<EOF
+XTerm*faceName: DejaVu Sans Mono:size=16:antialias=true
+URxvt*font: xft:DejaVu Sans Mono:size=16:antialias=true
+Xft.dpi: 120
+EOF
+    ;;
+esac
