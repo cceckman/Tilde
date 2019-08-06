@@ -15,6 +15,10 @@ IFS=$'\n'
 OK="true"
 for file in $(git diff --cached --name-only --diff-filter=ACM)
 do
+  if test -d "$file"
+  then
+    continue
+  fi
   if grep -q -P "$MATCH" "$file"
   then
     echo >&2 "$file indicates it should not be committed:"
@@ -29,4 +33,4 @@ then
   exit 1
 fi
 
-exit 1
+exit 0
