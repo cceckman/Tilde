@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Detect if a modified file has "DO NOT COMMIT" (or mispellings thereof).
 #
 # Based on pre-commit.gofmt.sh, which is:
@@ -7,17 +7,26 @@
 # license that can be found in the LICENSE file.
 
 # git nocommit pre-commit hook
-#
-# This script does not handle file names that contain spaces.
-# This script dete
 
-difffiles=$(git diff --cached --name-only --diff-filter=ACM)
-[ -z "$difffiles" ] && exit 0
+MATCH='DO NOT (CO[MI]+T|SU[BMI]+T)'
 
-diff="$(grep --directories=skip -PH 'DO NOT (CO[MI]+T|SU[BMI]+T)' $difffiles 2>&1)"
-[ -z "$diff" ] && exit 0
+OLDIFS="$IFS"
+IFS=$'\n'
+OK="true"
+for file in $(git diff --cached --name-only --diff-filter=ACM)
+do
+  if grep -q -P "$MATCH" "$file"
+  then
+    echo >&2 "$file indicates it should not be committed:"
+    grep -Pn "$MATCH" "$file" >&2
+    OK="false"
+  fi
+done
+IFS="$OLDIFS"
 
-echo >&2 "Some files indicate they should not be committed: "
-echo >&2 "$diff"
+if ! "$OK"
+then
+  exit 1
+fi
 
 exit 1
