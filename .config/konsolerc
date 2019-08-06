@@ -1,0 +1,15 @@
+[Desktop Entry]
+DefaultProfile=Better Defaults.profile
+
+[Favorite Profiles]
+Favorites=
+
+[KonsoleWindow]
+SaveGeometryOnExit=false
+ShowMenuBarByDefault=false
+ShowWindowTitleOnTitleBar=true
+
+[MainWindow]
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAABssAAAQTAAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled

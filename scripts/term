@@ -1,2 +1,8 @@
 #!/bin/sh
+
+if command -v konsole >/dev/null
+then
+  exec konsole "$@"
+fi
+
 exec xterm "$@"
