@@ -103,9 +103,11 @@ set undofile
 let mapleader = ","
 
 " Hilight the line and column in the current window.
-au WinLeave * set nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
+" Disabled after starting to use Fira Code; it breaks up ligatures on other
+" lines.
+" au WinLeave * set nocursorcolumn
+" au WinEnter * set cursorline cursorcolumn
+set cursorline nocursorcolumn
 " Mark column 80.
 set colorcolumn=80
 
@@ -307,6 +309,9 @@ endfunction
 " Part 4: Macros
 """"""""""""""""""""
 
+" Toggle cursor column
+nnoremap <leader>q <Esc>:set cursorcolumn!<cr>
+
 " Keybindings for LSP:
 nnoremap <leader>g <Esc>:LspDefinition<cr>
 nnoremap <leader>f <Esc>:LspDocumentFormat<cr>
@@ -315,6 +320,14 @@ nnoremap <leader>r <Esc>:LspReferences<cr>
 
 " Keybindings for syntastic
 nnoremap <leader>n <Esc>:SyntasticToggleMode<cr>
+
+" Toggle tagbar.
+nnoremap <leader>t :TagbarToggle<CR>
+" pause tagbar: lock to current file, so navigation doesn't mess it up.
+nnoremap <leader>l :TagbarTogglePause<CR>
+
+" Shorten apparent width of tabs (e.g. for reading heavily-indented code)
+nnoremap <leader>h :set tabstop=2 shiftwidth=2<CR>
 
 " :Trim whitespace
 cnoreabbrev <expr> Trim ((getcmdtype() is# ':' && getcmdline() is# 'Trim')?('%s/[ ]*$//'):('Trim'))
@@ -376,14 +389,6 @@ let g:templates_directory = add(g:templates_directory, '~/.vim/templates')
 " .cl and .cool to Cool
 au BufRead,BufNewFile *.cool set filetype=cool
 au BufRead,BufNewFile *.cl set filetype=cool
-
-" Toggle tagbar.
-nnoremap <leader>t :TagbarToggle<CR>
-" pause tagbar: lock to current file, so navigation doesn't mess it up.
-nnoremap <leader>l :TagbarTogglePause<CR>
-
-" Shorten apparent width of tabs (e.g. for reading heavily-indented code)
-nnoremap <leader>h :set tabstop=2 shiftwidth=2<CR>
 
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
