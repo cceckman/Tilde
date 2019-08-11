@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Solarized
-Font=Fira Code Retina,13,-1,5,53,0,0,0,0,0,Regular
+Font=Fira Code,13,-1,5,50,0,0,0,0,0,Regular
 UseFontLineChararacters=true
 
 [General]
