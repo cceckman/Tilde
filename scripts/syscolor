@@ -12,7 +12,7 @@ case "$(hostname | sha256sum | awk '{print $1}')" in
   1334c13*|021a2476d*|bfa820ad3*)
     echo 'magenta'
     ;;
-  f5004d7*|80c1bf5da*|f5f3ee24e*)
+  a033cd9*|80c1bf5da*|f5f3ee24e*)
     echo 'blue'
     ;;
   7b7b323*|2f1d3d82b*|aebeec14a*)

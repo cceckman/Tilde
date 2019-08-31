@@ -45,7 +45,9 @@ set termencoding=utf8
 
 " Show invisible characters. Not entirely sure that I like this.
 set list
-set listchars=tab:▸\ ,eol:¬
+" set listchars=tab:▸\ ,eol:¬
+" The right-triangle renders as a little less than full width in Fira Code.
+set listchars=tab:␉\ \ ,eol:¬
 
 " Set indent preferences.
 set tabstop=2
