@@ -311,6 +311,10 @@ endfunction
 " Part 4: Macros
 """"""""""""""""""""
 
+" Easy access to directory of current file
+cabbr <expr> %% expand('%:p:h')
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
+
 " Toggle cursor column
 nnoremap <leader>q <Esc>:set cursorcolumn!<cr>
 
