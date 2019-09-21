@@ -97,6 +97,7 @@ $GOPATH/bin
 $HOME/r/chromium/depot_tools
 $HOME/scripts
 $HOME/secrets/scripts
+$HOME/bin/fomu-toolchain/bin
 /usr/local/go/bin
 /usr/local/google-cloud-sdk/bin
 ADDPATHS
