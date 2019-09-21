@@ -9,7 +9,9 @@ Parent=FALLBACK/
 ShowTerminalSizeHint=false
 
 [Interaction Options]
+AutoCopySelectedText=true
 CopyTextAsHTML=false
+MiddleClickPasteMode=1
 
 [Scrolling]
 ScrollBarPosition=2
