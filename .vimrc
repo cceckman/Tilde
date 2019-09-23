@@ -396,6 +396,9 @@ let g:templates_directory = add(g:templates_directory, '~/.vim/templates')
 au BufRead,BufNewFile *.cool set filetype=cool
 au BufRead,BufNewFile *.cl set filetype=cool
 
+" .do to redo, AKA shell
+au BufRead,BufNewFile *.do set filetype=sh
+
 " Easily open magic.sh.
 command! -bar Magic sv | edit ~/magic.sh
 
