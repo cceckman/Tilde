@@ -315,6 +315,9 @@ endfunction
 cabbr <expr> %% expand('%:p:h')
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
+" Single-line switch between .h and .cc in same directory
+nnoremap <leader>s :e %:p:s,.h$,.X123X,:s,.cc$,.h,:s,.X123X$,.cc,<CR>
+
 " Toggle cursor column
 nnoremap <leader>q <Esc>:set cursorcolumn!<cr>
 
