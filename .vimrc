@@ -153,7 +153,9 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+" Keep Syntastic off by default
+let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 """"""""""""""""""""
@@ -328,8 +330,8 @@ nnoremap <leader>f <Esc>:LspDocumentFormat<cr>
 nnoremap <leader>td <Esc>:LspTypeDefinition<cr>
 nnoremap <leader>r <Esc>:LspReferences<cr>
 
-" Keybindings for syntastic
-nnoremap <leader>n <Esc>:SyntasticToggleMode<cr>
+" Keybindings for syntastic: Run & enable
+nnoremap <leader>c <Esc>:SyntasticCheck<cr> :SyntasticToggleMode<cr>
 
 " Toggle tagbar.
 nnoremap <leader>t :TagbarToggle<CR>
