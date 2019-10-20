@@ -226,12 +226,12 @@ let g:rbpt_colorpairs = [
 
 augroup rainbow
   autocmd!
-  autocmd Syntax go\|cpp RainbowParenthesesLoadRound
-  autocmd Syntax go\|cpp RainbowParenthesesLoadBraces
-  autocmd Syntax go\|cpp RainbowParenthesesLoadSquare
+  autocmd Syntax go\|cpp\|rust RainbowParenthesesLoadRound
+  autocmd Syntax go\|cpp\|rust RainbowParenthesesLoadBraces
+  autocmd Syntax go\|cpp\|rust RainbowParenthesesLoadSquare
   " Skip chevrons on C++, since stream operators (<<, >>) are common
-  autocmd Syntax go      RainbowParenthesesLoadChevrons
-  autocmd Syntax go\|cpp RainbowParenthesesActivate
+  autocmd Syntax go\|rust      RainbowParenthesesLoadChevrons
+  autocmd Syntax go\|cpp\|rust RainbowParenthesesActivate
 augroup END
 
 " Don't pollute the working directory with files.
