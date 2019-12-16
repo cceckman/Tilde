@@ -1,0 +1,14 @@
+#!/bin/sh -ex
+
+GOFILES="$(find . -name '*.go')"
+RUSTFILES="$(find . -name '*.rs')"
+
+if test -n "$GOFILES"
+then
+  gofmt -w -s $GOFILES
+fi
+
+if test -n "$RUSTFILES"
+then
+  rustfmt "$RUSTFILES"
+fi
