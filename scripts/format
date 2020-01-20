@@ -1,7 +1,7 @@
 #!/bin/sh -ex
 
-GOFILES="$(find . -name '*.go')"
-RUSTFILES="$(find . -name '*.rs')"
+GOFILES="$(find . -name '*.go' | tr '\n' ' ')"
+RUSTFILES="$(find . -name '*.rs' | tr '\n' ' ')"
 
 if test -n "$GOFILES"
 then
@@ -10,5 +10,5 @@ fi
 
 if test -n "$RUSTFILES"
 then
-  rustfmt "$RUSTFILES"
+  rustfmt $RUSTFILES
 fi
