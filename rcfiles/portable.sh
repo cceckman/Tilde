@@ -35,6 +35,18 @@ mdcd() {
   mkdir -p $1 && cd $1
 }
 
+s() {
+  # ls or cat? Now you don't have to choose!
+  for arg in "$@"
+  do
+    if test -d "$arg"
+    then
+      ls "$arg"
+    else
+      cat "$arg"
+    fi
+  done
+}
 
 # Run or attach to GPG/SSH agent.
 fixssh() {
