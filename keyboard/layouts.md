@@ -24,6 +24,12 @@ Windows version:
 
 # Changelog
 
+## cceckman v0.14.5
+https://configure.ergodox-ez.com/ergodox-ez/layouts/vAbml
+
+- Change layer 3 to swap enter and shift
+
+
 ## cceckman v0.14.4
 https://configure.ergodox-ez.com/layouts/PAd9
 
