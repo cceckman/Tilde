@@ -32,6 +32,6 @@
   excludesfile = ~/.gitignore_global
   hooksPath = ~/hooks
 [commit]
-  gpgsign = true
+  # gpgsign = true
 [credential "https://source.developers.google.com"]
   helper = gcloud.sh
