@@ -52,7 +52,8 @@ ggr() {
 }
 
 _lsrepos() {
-  find $HOME/r -maxdepth 2 -mindepth 2 \
+  # r/<host>/<user>/<repo>
+  find $HOME/r -maxdepth 3 -mindepth 3 \
     | xargs basename -a \
     | sort -u
 }
@@ -75,11 +76,31 @@ r() {
   # Normal:
   # cd to a repository by a short name.
   # If there are duplicates of that name, pick mine.
+  if test -d $HOME/r/*/cceckman/$1
+  then
+    cd $HOME/r/*/cceckman/$1
+    pwd
+    return
+  fi
   if test -d $HOME/go/src/*/cceckman/$1
   then
     cd $HOME/go/src/*/cceckman/$1
     pwd
     return
+  fi
+
+  local matches="$(echo $HOME/r/*/*/$1)"
+  local n="$(echo $matches | wc -w)"
+  if test "$n" -eq 1
+  then
+    cd $HOME/r/*/*/$1
+    pwd
+    return
+  fi
+  if test "$n" -gt 1
+  then
+    echo "Couldn't unambiguously identify ${1}: $matches"
+    return 1
   fi
 
   local matches="$(echo $HOME/go/src/*/*/$1)"
@@ -90,17 +111,14 @@ r() {
     pwd
     return
   fi
-
   if test "$n" -gt 1
   then
     echo "Couldn't unambiguously identify ${1}: $matches"
     return 1
   fi
-  if test "$n" -lt 1
-  then
-    echo "Couldn't find any repository ${1}!"
-    return 1
-  fi
+
+  echo "Couldn't find any repository ${1}!"
+  return 1
 }
 
 

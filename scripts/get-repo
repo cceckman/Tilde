@@ -1,0 +1,28 @@
+#!/bin/sh -u
+
+GH_PREFIX="$HOME/r/github.com"
+
+ret=0
+
+# Clone any new repositories.
+if test "$#" -gt 0
+then
+  for repo in $@
+  do
+    REPOPATH="${GH_PREFIX}/${repo}"
+    if ! [ -d "$REPOPATH" ]
+    then
+      # Not already cloned. Pull it down, and link r/.
+      {
+        mkdir -p "$REPOPATH"
+        git clone "git@github.com:${repo}" "$REPOPATH" && \
+          cd "$REPOPATH" && git submodule update --init --recursive
+      } || {
+        echo >&2 "Error cloning ${repo}, aborting."
+        exit 1
+      }
+      ret=$(($ret + $?))
+    fi
+  done
+  exit
+fi
