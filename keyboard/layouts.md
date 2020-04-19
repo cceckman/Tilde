@@ -24,6 +24,11 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.14.6
+https://configure.ergodox-ez.com/ergodox-ez/layouts/EWPeQ
+
+- Reconfigure layer 3
+
 ## cceckman v0.14.5
 https://configure.ergodox-ez.com/ergodox-ez/layouts/vAbml
 
