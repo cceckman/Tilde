@@ -51,25 +51,24 @@ s() {
 # Run or attach to GPG/SSH agent.
 fixssh() {
   stty sane
-  GPG_TTY=$(tty)
-  export GPG_TTY
+  # GPG_TTY=$(tty)
+  # export GPG_TTY
 
-  if test -S "$HOME/.gnupg/S.gpg-agent.remote"
-  then
-    # Agent forwarding enabled.
-    # Forward the local version.
-    agent="$(gpgconf --list-dir socketdir)/S.gpg-agent"
-    rm -rf "$agent"
-    ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$agent" 2>&1 >/dev/null
-  fi
+  # if test -S "$HOME/.gnupg/S.gpg-agent.remote"
+  # then
+  #   # Agent forwarding enabled.
+  #   # Forward the local version.
+  #   agent="$(gpgconf --list-dir socketdir)/S.gpg-agent"
+  #   rm -rf "$agent"
+  #   ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$agent" 2>&1 >/dev/null
+  # fi
 
-  echo UPDATESTARTUPTTY | gpg-connect-agent --no-autostart 2>&1 >/dev/null
+  # echo UPDATESTARTUPTTY | gpg-connect-agent --no-autostart 2>&1 >/dev/null
 
   if test -z "$SSH_AUTH_SOCK"
   then
-    # Create a gpg-agent and use its SSH-agent.
-    eval $(gpg-agent --daemon)
-    SSH_AUTH_SOCK=$(gpgconf --list-dir agent-ssh-socket | tr -d '\n')
+    # Create an SSH-agent
+    eval $(ssh-agent)
   fi
 
   export SSH_AUTH_SOCK
