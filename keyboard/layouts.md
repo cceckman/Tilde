@@ -24,6 +24,11 @@ Windows version:
 
 # Changelog
 
+## cceckman v.0.15.0
+https://configure.ergodox-ez.com/ergodox-ez/layouts/64mKR/
+
+Add a Dvorak layer 4
+
 ## cceckman v.0.14.6
 https://configure.ergodox-ez.com/ergodox-ez/layouts/EWPeQ
 
