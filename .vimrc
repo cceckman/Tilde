@@ -33,12 +33,6 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Long-line handling; I do this slightly differently, so skipping.
-" set wrap
-" set textwidth=79
-" set formatoptions=qrn1
-" set colorcolumn=85
-
 " Use UTF-8 by default. Apparently LANG is insufficient...
 set encoding=utf-8
 set termencoding=utf8
@@ -243,6 +237,9 @@ augroup rainbow
   autocmd Syntax go\|rust      RainbowParenthesesLoadChevrons
   autocmd Syntax go\|cpp\|rust RainbowParenthesesActivate
 augroup END
+
+" Change color column in some languages.
+autocmd Syntax go\|rust set colorcolumn=100
 
 " Don't pollute the working directory with files.
 " Use ~/.vim/swap for swap files...

@@ -1,4 +1,4 @@
-#!/bin/sh -u
+#!/bin/sh -eu
 
 GH_PREFIX="$HOME/r/github.com"
 
@@ -12,9 +12,8 @@ then
     REPOPATH="${GH_PREFIX}/${repo}"
     if ! [ -d "$REPOPATH" ]
     then
-      # Not already cloned. Pull it down, and link r/.
+      # Not already cloned. Pull it down into r/.
       {
-        mkdir -p "$REPOPATH"
         git clone "git@github.com:${repo}" "$REPOPATH" && \
           cd "$REPOPATH" && git submodule update --init --recursive
       } || {
