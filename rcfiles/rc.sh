@@ -18,7 +18,6 @@ fi
 
 alias gazelle="bazel run //:gazelle -- "
 alias pgrep="pgrep -l"
-alias weechat="TERM=tmux-256color weechat"
 alias z="exec zsh"
 alias matrix="cmatrix -ab -C $THEME"
 
@@ -135,3 +134,6 @@ ws () {
   r $1 && attach $(echo "$1" | tr ':.' '-')
 }
 
+predo() {
+  redo -j$(nproc) "$@"
+}
