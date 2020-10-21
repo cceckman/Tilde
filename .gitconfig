@@ -2,7 +2,7 @@
 [user]
 # Please adapt and uncomment the following lines:
   name = Charles Eckman
-  email = cceckman@google.com
+  email = charles@cceckman.com
   signingkey = F3C98967
 [alias]
   pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
@@ -23,7 +23,7 @@
 [merge]
   tool = vimdiff
 [push]
-  default = simple
+	default = current
 [difftool]
   prompt = false
 [gui]

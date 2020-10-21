@@ -21,13 +21,6 @@ alias pgrep="pgrep -l"
 alias z="exec zsh"
 alias matrix="cmatrix -ab -C $THEME"
 
-if test -f /proc/cpuinfo
-then
-  alias make="/usr/bin/make -j $(grep -c '^processor' /proc/cpuinfo 2>&1)"
-else
-  alias make="/usr/bin/make -j $(sysctl -n hw.ncpu)"
-fi
-
 eixt() {
   echo "I think you mean 'exit'."
   echo "Well, I *hope* you mean 'exit'- here goes nothing..."
@@ -50,8 +43,13 @@ ca() {
 }
 
 e() {
-  # Invoke 'vim' with some wrapping.
-  vim "$@" && clear && pwd && echo "Done: $cmd"
+  # Invoke the "current" editor
+  if test "$TERM_PROGRAM" = "vscode"
+  then
+    code "$@"
+  else
+    vim "$@"
+  fi
 }
 
 helpless() {
@@ -93,10 +91,7 @@ $HOME/.cargo/bin
 $HOME/.local/bin
 $HOME/bin
 $GOPATH/bin
-$HOME/r/chromium/depot_tools
 $HOME/scripts
-$HOME/secrets/scripts
-$HOME/bin/fomu-toolchain/bin
 /usr/local/go/bin
 /usr/local/google-cloud-sdk/bin
 ADDPATHS
@@ -124,8 +119,6 @@ alias h="split -h"
 alias v="split -v"
 
 attach () {
-  # From http://samrowe.com/wordpress/ssh-agent-and-gnu-screen/:
-  # Attach to a tmux session, while forwarding SSH agent.
   fixssh
   tmux -u2 new-session -DA -s $1
 }
