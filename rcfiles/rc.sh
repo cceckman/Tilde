@@ -130,3 +130,8 @@ ws () {
 predo() {
   redo -j$(nproc) "$@"
 }
+
+loadup() {
+  fixssh
+  addkeys
+}

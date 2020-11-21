@@ -48,27 +48,39 @@ s() {
   done
 }
 
-# Run or attach to GPG/SSH agent.
+# Run or attach to an SSH agent.
 fixssh() {
   stty sane
-  # GPG_TTY=$(tty)
-  # export GPG_TTY
 
-  # if test -S "$HOME/.gnupg/S.gpg-agent.remote"
-  # then
-  #   # Agent forwarding enabled.
-  #   # Forward the local version.
-  #   agent="$(gpgconf --list-dir socketdir)/S.gpg-agent"
-  #   rm -rf "$agent"
-  #   ln -s "$HOME/.gnupg/S.gpg-agent.remote" "$agent" 2>&1 >/dev/null
-  # fi
-
-  # echo UPDATESTARTUPTTY | gpg-connect-agent --no-autostart 2>&1 >/dev/null
-
-  if test -z "$SSH_AUTH_SOCK"
+  if test "$1" = '-f'
   then
-    # Create an SSH-agent
-    eval $(ssh-agent)
+    FORCE=true
+  else
+    FORCE=false
+  fi
+
+  SOCKPATH="$HOME/.ssh/agent.sock"
+
+  if test -n "$SSH_AUTH_SOCK" && ! "$FORCE"
+  then
+    echo >&2 "Looks like we already have an ssh-agent; not starting a new one."
+    return 1
+  fi
+
+  if test -S "$SOCKPATH"
+  then
+    GOT_PERMS="$(stat -c '%a' "$SOCKPATH")"
+    WANT_PERMS="600"
+    if test "$GOT_PERMS" != "$WANT_PERMS"
+    then
+      echo >&2 "Refusing to adopt SSH agent via socket $SOCKPATH with permissions: $GOT_PERMS != $WANT_PERMS"
+      return 1
+    fi
+    # Looks OK. Adopt the socket.
+    SSH_AUTH_SOCK="$SOCKPATH"
+  else
+    # Launch a new agent.
+    eval $(ssh-agent -a "$SOCKPATH")
   fi
 
   export SSH_AUTH_SOCK
