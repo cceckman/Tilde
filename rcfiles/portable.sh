@@ -59,30 +59,51 @@ fixssh() {
     FORCE=false
   fi
 
+  ssh-add -L >/dev/null 2>&1
+  if test "$?" -ne "2"
+  then
+    echo >&2 "Looks like we have a working SSH agent."
+    return
+  fi
+
   SOCKPATH="$HOME/.ssh/agent.sock"
 
-  if test -n "$SSH_AUTH_SOCK" && ! "$FORCE"
+  # *Something* is broken. Start repairs at this end, with SSH_AUTH_SOCK
+  if test -z "$SSH_AUTH_SOCK"
   then
-    echo >&2 "Looks like we already have an ssh-agent; not starting a new one."
-    return 1
-  fi
-
-  if test -S "$SOCKPATH"
-  then
-    GOT_PERMS="$(stat -c '%a' "$SOCKPATH")"
-    WANT_PERMS="600"
-    if test "$GOT_PERMS" != "$WANT_PERMS"
+    echo >&2 "SSH_AUTH_SOCK not set; setting to $SOCKPATH."
+    if test -S "$SOCKPATH"
     then
-      echo >&2 "Refusing to adopt SSH agent via socket $SOCKPATH with permissions: $GOT_PERMS != $WANT_PERMS"
-      return 1
+      # There's something there, it looks like.
+      GOT_PERMS="$(stat -c '%a' "$SOCKPATH")"
+      WANT_PERMS="600"
+      if test "$GOT_PERMS" != "$WANT_PERMS"
+      then
+        echo >&2 "Refusing to adopt SSH agent via socket $SOCKPATH with permissions: $GOT_PERMS != $WANT_PERMS"
+        return 1
+      fi
+      # Looks OK. Adopt the socket.
+      export SSH_AUTH_SOCK="$SOCKPATH"
     fi
-    # Looks OK. Adopt the socket.
-    SSH_AUTH_SOCK="$SOCKPATH"
-  else
-    # Launch a new agent.
-    eval $(ssh-agent -a "$SOCKPATH")
   fi
 
+  # Did that fix it?
+  ssh-add -L >/dev/null 2>&1
+  if test "$?" -ne "2"
+  then
+    echo >&2 "SSH agent found at $SSH_AUTH_SOCK."
+    return
+  fi
+
+  # Not fixed yet. Disconnect the old agent and launch a new one.
+  if "$FORCE"
+  then
+    echo >&2 "Removing exising agent's socket, $SOCKPATH"
+    rm -f "$SOCKPATH"
+  fi
+
+  # Launch a new agent.
+  eval $(ssh-agent -a "$SOCKPATH")
   export SSH_AUTH_SOCK
 }
 
