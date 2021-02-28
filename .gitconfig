@@ -16,6 +16,7 @@
   tr = log --graph --format='format:%C(auto)%h %Cblue%G?%C(auto)%d %s' --all -n 20
   df = diff --name-only
   sha = rev-parse HEAD
+  reword = commit --amend
 [status]
   showUntrackedFiles = no
 [diff]

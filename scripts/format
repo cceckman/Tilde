@@ -2,6 +2,7 @@
 
 GOFILES="$(find . -name '*.go' | tr '\n' ' ')"
 RUSTFILES="$(find . -name '*.rs' | tr '\n' ' ')"
+BAZELFILES="$(find . -name '*.bzl' -o -name '*.bazel' | tr '\n' ' ')"
 
 if test -n "$GOFILES"
 then
@@ -11,4 +12,9 @@ fi
 if test -n "$RUSTFILES"
 then
   rustfmt $RUSTFILES
+fi
+
+if test -n "$BAZELFILES"
+then
+  buildifier $BAZELFILES
 fi
