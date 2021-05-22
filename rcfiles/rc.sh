@@ -100,6 +100,21 @@ export PATH
 
 . $HOME/rcfiles/repo.sh
 
+title() {
+  # change the title of the current window or tab.
+  # Default:
+  if test "$#" -eq 0
+  then
+    title "$USER"@"$(hostname)"
+    return
+  fi
+
+  # Use the XTerm code: https://tldp.org/HOWTO/Xterm-Title-3.html
+  # but it seems to work for other graphical terminals as well.
+  # Octally-encoded: <ESC>]0;<title><BELL>
+  echo -ne "\033]0;$*\007"
+}
+
 # tmux management
 parent() {
   # Get the parent process's command line.
@@ -120,7 +135,10 @@ alias v="split -v"
 
 attach () {
   fixssh
+  title "$1"
   tmux -u2 new-session -DA -s $1
+  # Reset the title after exiting.
+  title
 }
 
 ws () {
@@ -136,9 +154,10 @@ loadup() {
   addkeys
 }
 
-title() {
-   # change the title of the current window or tab
-   # Octally-encoded: <ESC>]0;<title><BELL>
-   echo -ne "\033]0;$*\007"
-}
+# Set title to user-at-host when starting a new shell.
+title "$USER"@"$(hostname)"
 
+ssh() {
+  /usr/bin/ssh "$@"
+  title
+}
