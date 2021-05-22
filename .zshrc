@@ -16,7 +16,7 @@ then
 fi
 
 # Include my own functions.
-fpath+=($HOME/functions)
+fpath+=($HOME/.zsh_functions)
 
 # Use Vim keybindings in ZLE.
 bindkey -v
@@ -45,4 +45,3 @@ if [ -f "$HOME/rcfiles/gcloud.zsh" ]; then source "$HOME/rcfiles/gcloud.zsh"; fi
 # Allow comments in interactive scripts, e.g. if copy+pasted
 setopt interactivecomments
 
-# zprof

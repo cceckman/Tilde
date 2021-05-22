@@ -135,3 +135,10 @@ loadup() {
   fixssh
   addkeys
 }
+
+title() {
+   # change the title of the current window or tab
+   # Octally-encoded: <ESC>]0;<title><BELL>
+   echo -ne "\033]0;$*\007"
+}
+
