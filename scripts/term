@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if command -v alacritty >/dev/null
+then
+  exec alacritty "$@"
+fi
+
 if command -v konsole >/dev/null
 then
   exec konsole "$@"
