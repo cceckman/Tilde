@@ -10,10 +10,12 @@ then
 elif which chromium-browser >/dev/null
 then
   cmd="chromium-browser"
+elif which firefox >/dev/null
+then
+  cmd="firefox"
 else
   echo "Cannot find a browser!" 1>&2
   exit 1
-fi
 
 # Add --disable-gpu flag if we're on a VM. Virtualbox gets sad about it.
 if cat /proc/cpuinfo | grep -q '^flags.* hypervisor.*'
