@@ -1,5 +1,14 @@
 #!/bin/sh
 
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
+
+# Debugging:
+exec 2>&1
+exec >/tmp/log
+
 # List all git repositories and modified times;
 # Sort in reverse order;
 # Remove the time;
@@ -12,10 +21,43 @@ find ~/r \
 | sort -nr \
 | cut -d' ' -f1 --complement \
 | xargs dirname \
-| dmenu)"
+| xargs -I{} sh -c 'echo $(basename {})\\t{}' \
+| column -t \
+| dmenu -l 10 -p "Repository: ")"
 
 # Only launch if dmenu made a selection.
-if test -n "$ITEM"
+if test -z "$ITEM"
 then
-  code "$ITEM"
+  exit 1
 fi
+
+ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
+
+# What do we want to do with it?
+WHATDO=$(cat <<EOF | dmenu -l 3 -p "Open $ITEM: " | cut -f1
+1 tmux + code
+2 tmux
+3 code
+EOF
+)
+
+SHORTNAME="$(basename $ITEM)"
+
+dotmux() {
+  alacritty -e tmux -u2 new-session -DA -s "$SHORTNAME" -c "$ITEM"
+}
+
+case "$WHATDO" in
+  1*)
+    code "$ITEM"
+    dotmux
+    ;;
+  2*)
+    dotmux
+    ;;
+  3*)
+    code "$ITEM"
+    ;;
+  *) swaynag -m "Unknown action: $ITEM"
+    ;;
+esac
