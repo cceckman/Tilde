@@ -1,5 +1,7 @@
 #!/bin/sh
 
+env=""
+
 # pick whichever one(s) are installed
 if which google-chrome >/dev/null
 then
@@ -16,11 +18,18 @@ then
 else
   echo "Cannot find a browser!" 1>&2
   exit 1
+fi
 
 # Add --disable-gpu flag if we're on a VM. Virtualbox gets sad about it.
 if cat /proc/cpuinfo | grep -q '^flags.* hypervisor.*'
 then
   cmd="$cmd --disable-gpu"
+fi
+
+# Let Firefox use Wayland, if available.
+if test -n "$WAYLAND_DISPLAY"
+then
+  export MOZ_ENABLE_WAYLAND=1
 fi
 
 $cmd "$@" 2>&1 >/dev/null &

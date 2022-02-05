@@ -60,44 +60,8 @@ helpless() {
 alias copy='xclip -selection clipboard && echo '✂''
 alias cbpaste='xclip -selection clipboard -o'
 
-# Use $HOME/go for GOPATH.
-if ! echo "$GOPATH" | grep -q "$HOME/go"
-then
-  if test -z "$GOPATH"
-  then
-    GOPATH="$HOME/go"
-  else
-    GOPATH="$GOPATH:$HOME/go"
-  fi
-fi
-export GOPATH
-
 export ARDUINO_PATH=/usr/local/arduino
-
-# Add some custom elements to PATH:
-# scripts from Tilde repo; me-owned directories; CUDA; and `go`-built binaries.
-while read x
-do
-  case ":$PATH:" in
-    *":$x:"*) :;;
-    *) if test -d "$x";
-       then
-         PATH="$x:$PATH"
-       fi
-       ;;
-  esac
-done <<ADDPATHS
-$HOME/.cargo/bin
-$HOME/.local/bin
-$HOME/bin
-$GOPATH/bin
-$HOME/scripts
-/usr/local/go/bin
-/usr/local/google-cloud-sdk/bin
-ADDPATHS
-
-export PATH
-
+. $HOME/rcfiles/path.sh
 . $HOME/rcfiles/repo.sh
 
 title() {

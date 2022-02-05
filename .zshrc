@@ -40,8 +40,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-if [ -f "$HOME/rcfiles/gcloud.zsh" ]; then source "$HOME/rcfiles/gcloud.zsh"; fi
-
 # Allow comments in interactive scripts, e.g. if copy+pasted
 setopt interactivecomments
 

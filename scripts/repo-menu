@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# List all git repositories and modified times;
+# Sort in reverse order;
+# Remove the time;
+# Go back to the main directory rather than git;
+# and pass to dmenu.
+ITEM="$(
+find ~/r \
+  -name .git -type d \
+  -printf "%T@ %p\n" 2>/dev/null \
+| sort -nr \
+| cut -d' ' -f1 --complement \
+| xargs dirname \
+| dmenu)"
+
+# Only launch if dmenu made a selection.
+if test -n "$ITEM"
+then
+  code "$ITEM"
+fi

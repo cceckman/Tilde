@@ -36,3 +36,5 @@
   # gpgsign = true
 [credential "https://source.developers.google.com"]
   helper = gcloud.sh
+[pull]
+	ff = only

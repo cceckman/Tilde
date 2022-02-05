@@ -1,5 +1,7 @@
 #!/bin/sh
 
+touch /tmp/xprofile-executed
+
 # Should be a better conditional;
 # check /proc/cpuinfo for 'hypervisor'
 if [ -x /usr/bin/VBoxClient ]
@@ -32,3 +34,7 @@ Xft.dpi: 120
 EOF
     ;;
 esac
+
+# Update $PATH at login, so e.g. dmenu picks it up
+. $HOME/rcfiles/path.sh
+echo "$PATH" >/tmp/path
