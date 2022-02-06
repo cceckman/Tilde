@@ -26,10 +26,4 @@ then
   cmd="$cmd --disable-gpu"
 fi
 
-# Let Firefox use Wayland, if available.
-if test -n "$WAYLAND_DISPLAY"
-then
-  export MOZ_ENABLE_WAYLAND=1
-fi
-
 $cmd "$@" 2>&1 >/dev/null &

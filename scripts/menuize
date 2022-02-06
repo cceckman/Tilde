@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# dmenu wrapper: "menuize" a list, making the first items easy to reach.
+# Argument 1 is the prompt to use; items are passed through via stdin.
+
+INDEX=1
+
+while read ITEM
+do
+  echo "$INDEX\\t$ITEM"
+  INDEX="$(( INDEX + 1 ))"
+done \
+| column -t \
+| dmenu -l 20 -p "$1" \
+| sed 's/^[0-9]\+ \+//'
+

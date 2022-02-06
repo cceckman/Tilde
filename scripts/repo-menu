@@ -6,8 +6,8 @@ then
 fi
 
 # Debugging:
-exec 2>&1
-exec >/tmp/log
+# exec 2>&1
+# exec >>/tmp/log
 
 # List all git repositories and modified times;
 # Sort in reverse order;
@@ -22,14 +22,10 @@ find ~/r \
 | cut -d' ' -f1 --complement \
 | xargs dirname \
 | xargs -I{} sh -c 'echo $(basename {})\\t{}' \
-| column -t \
-| dmenu -l 10 -p "Repository: ")"
+| ~/scripts/menuize "Repository: ")"
 
 # Only launch if dmenu made a selection.
-if test -z "$ITEM"
-then
-  exit 1
-fi
+test -n "$ITEM" || exit 1
 
 ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
 
@@ -44,20 +40,19 @@ EOF
 SHORTNAME="$(basename $ITEM)"
 
 dotmux() {
-  alacritty -e tmux -u2 new-session -DA -s "$SHORTNAME" -c "$ITEM"
+  # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
+  alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
+}
+
+docode() {
+  # code --enable-features=UseOzonePlatform --ozone-platform=wayland "$ITEM"
+  code "$ITEM"
 }
 
 case "$WHATDO" in
-  1*)
-    code "$ITEM"
-    dotmux
-    ;;
-  2*)
-    dotmux
-    ;;
-  3*)
-    code "$ITEM"
-    ;;
+  1*) docode; dotmux;;
+  2*) dotmux ;;
+  3*) docode ;;
   *) swaynag -m "Unknown action: $ITEM"
     ;;
 esac

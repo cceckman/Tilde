@@ -8,18 +8,18 @@
 # So that I'm always on "local" time
 export TZ=America/Los_Angeles
 
-# Keep this early, so subsequent includes can access THEME
+# Keep this early, so subsequent includes can access COLOR
 if [ -x $HOME/scripts/syscolor ]
 then
-  export THEME="$($HOME/scripts/syscolor)"
+  export SYSCOLOR="$($HOME/scripts/syscolor)"
 else
-  export THEME="red"
+  export SYSCOLOR="red"
 fi
 
 alias gazelle="bazel run //:gazelle -- "
 alias pgrep="pgrep -l"
 alias z="exec zsh"
-alias matrix="cmatrix -ab -C $THEME"
+alias matrix="cmatrix -ab -C $SYSCOLOR"
 
 eixt() {
   echo "I think you mean 'exit'."

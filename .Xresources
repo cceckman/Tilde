@@ -3,7 +3,7 @@
 ! *background: rgb:08/08/08
 
 ! Use Solarized-dark palette:
-#include "solarized/xresources/Xresources.dark"
+#include "theme/Xresources"
 ! /etc/X11/Xresources/x11-common adds *customization: -color if COLOR is
 ! defined. For some reason, that disables the above scheme.
 ! Unset it and clear the property.

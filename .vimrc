@@ -177,9 +177,10 @@ let g:syntastic_enable_zsh_checker = 1
 " Use 256 colors, with the solarized color scheme.
 " set t_Co=256
 let g:solarized_bold = 0
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 " colorscheme xemacs
+runtime themeselect.vim
 
 " Use space to center screen on current line in normal mode
 nnoremap <space> zz
@@ -308,6 +309,8 @@ cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa')
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
+" Also manually trigger
+nnoremap <leader>r <Esc>:source ~/.vimrc<CR>
 
 " Set the location list (Syntastic) to a reasonable height
 " see :h syntastic-loclist-callback
@@ -339,7 +342,7 @@ nnoremap <leader>q <Esc>:set cursorcolumn!<cr>
 nnoremap <leader>g <Esc>:LspDefinition<cr>
 nnoremap <leader>f <Esc>:LspDocumentFormat<cr>
 nnoremap <leader>td <Esc>:LspTypeDefinition<cr>
-nnoremap <leader>r <Esc>:LspReferences<cr>
+" nnoremap <leader>r <Esc>:LspReferences<cr>
 
 " Keybindings for syntastic: Run & enable
 nnoremap <leader>c <Esc>:SyntasticCheck<cr> :SyntasticToggleMode<cr>
