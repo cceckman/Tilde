@@ -1,0 +1,13 @@
+[Unit]
+Description=Redshift GTK
+PartOf=graphical-session.target
+
+
+[Install]
+WantedBy=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/redshift-gtk
+# Somewhat unreliabl startup...
+Restart=on-failure
+RestartSec=2
