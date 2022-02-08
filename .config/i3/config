@@ -72,8 +72,9 @@ bindsym $mod+Shift+v move scratchpad
 # Show scratchpad
 bindsym $mod+v scratchpad show
 
-# start dmenu (a program launcher)
-bindsym $mod+space exec dmenu_run
+# Menu-of-menus:
+bindsym $mod+space exec "~/scripts/menu"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -100,10 +101,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # or the left-hand version
-bindsym $mod+a focus left
-bindsym $mod+s focus down
-bindsym $mod+w focus up
-bindsym $mod+d focus right
+# bindsym $mod+a focus left
+# bindsym $mod+s focus down
+# bindsym $mod+w focus up
+# bindsym $mod+d focus right
 
 
 # move focused window
