@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# dmenu wrapper: "menuize" a list, making the first items easy to reach.
+# dmenu/bemenu wrapper: "menuize" a list, making the first items easy to reach.
 # Argument 1 is the prompt to use; items are passed through via stdin.
 
 INDEX=1
@@ -11,6 +11,6 @@ do
   INDEX="$(( INDEX + 1 ))"
 done \
 | column -t \
-| dmenu -l 20 -p "$1" \
+| ~/scripts/somemenu -l 20 -p "$1" \
 | sed 's/^[0-9]\+ \+//'
 

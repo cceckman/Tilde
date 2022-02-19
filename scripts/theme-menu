@@ -47,6 +47,22 @@ dovim() {
   echo >>"$VIMSETUP" "set background=${ALTVARIANT}"
 }
 
+domenu() {
+  MENUFILE="$HOME/themes/$THEME-$VARIANT.menu"
+  ALTMENUFILE="$HOME/themes/$THEME-$ALTVARIANT.menu"
+  if test -f "$MENUFILE"
+  then
+    echo >&2 "Found menu file: $MENUFILE"
+    ln -sf $MENUFILE ~/themes/menu
+  elif test -f "$ALTMENUFILE"
+  then
+    echo >&2 "Found menu file: $ALTMENUFILE"
+    ln -sf $ALTMENUFILE ~/themes/menu
+  else
+    echo >&2 "Found no menu file: $MENUFILE or $ALTMENUFILE"
+  fi
+}
+
 docode() {
   # Themes in Code are title-case, generally.
   NAME="$(echo $THEME $ALTVARIANT | sed 's/\b\(.\)/\u\1/g')"
@@ -61,4 +77,6 @@ docode() {
 
 doalacritty
 dovim
+domenu
 docode
+

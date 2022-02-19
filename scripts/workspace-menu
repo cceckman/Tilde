@@ -13,7 +13,7 @@ fi
 # Sort in reverse order;
 # Remove the time;
 # Go back to the main directory rather than git;
-# and pass to dmenu.
+# and pass to the menuizer
 ITEM="$(
 find ~/r \
   -name .git -type d \
@@ -24,13 +24,13 @@ find ~/r \
 | xargs -I{} sh -c 'echo $(basename {})\\t{}' \
 | ~/scripts/menuize "Repository: ")"
 
-# Only launch if dmenu made a selection.
+# Only launch if menu made a selection.
 test -n "$ITEM" || exit 1
 
 ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
 
 # What do we want to do with it?
-WHATDO=$(cat <<EOF | dmenu -l 3 -p "Open $ITEM: " | cut -f1
+WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $ITEM: " | cut -f1
 1 tmux + code
 2 tmux
 3 code
