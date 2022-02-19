@@ -6,6 +6,7 @@ MENU="$(
   find ~/scripts -regex '.*-menu' \
 | xargs -n1 basename \
 | cut -d'-' -f1 \
+| sort \
 | ~/scripts/menuize "Menu: ")"
 
 test -n "$MENU" || exit 1
