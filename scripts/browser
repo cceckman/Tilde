@@ -5,6 +5,10 @@ env=""
 # pick whichever one(s) are installed
 if which firefox >/dev/null
 then
+  if test -n "$WAYLAND_DISPLAY"
+  then
+    export MOZ_ENABLE_WAYLAND=1
+  fi
   cmd="firefox"
 elif which google-chrome >/dev/null
 then

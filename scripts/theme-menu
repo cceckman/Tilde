@@ -10,6 +10,7 @@ test -n "$THEME" || exit 1
 VARIANT="$(ls ~/themes | grep -Po "(?<=${THEME}-)[^.]+" | sort -u | ~/scripts/menuize 'Variant: ')"
 test -n "$VARIANT" || exit 1
 
+~/scripts/retheme "$THEME" "$VARIANT"
 
 # Selenized also has "black" and "white";
 # sometimes we have to tweak that to "dark" / "light".
@@ -74,9 +75,4 @@ docode() {
   cat "$CODETMP"
   mv "$CODETMP" "$CODESETUP"
 }
-
-doalacritty
-dovim
-domenu
-docode
 

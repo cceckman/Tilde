@@ -1,6 +1,9 @@
 #!/bin/sh
 
-PATH="$HOME/.cargo/bin:$PATH"
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
 
 if command -v alacritty >/dev/null
 then

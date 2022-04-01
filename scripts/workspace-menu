@@ -41,13 +41,21 @@ SHORTNAME="$(basename $ITEM)"
 
 dotmux() {
   # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
+  # TODO
   alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
 }
 
 docode() {
+  # Wayland wrapped code is still not working well...
   # code --enable-features=UseOzonePlatform --ozone-platform=wayland "$ITEM"
   code "$ITEM"
 }
+
+# Ensure PATH is up to date before launching any UI apps.
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
 
 case "$WHATDO" in
   1*) docode; dotmux;;

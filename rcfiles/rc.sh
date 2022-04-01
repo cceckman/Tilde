@@ -15,6 +15,10 @@ then
 else
   export SYSCOLOR="red"
 fi
+if test -f $HOME/themes/terminal.inc.sh
+then
+  . $HOME/themes/terminal.inc.sh
+fi
 
 alias gazelle="bazel run //:gazelle -- "
 alias pgrep="pgrep -l"
