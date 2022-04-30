@@ -41,3 +41,6 @@
 [submodule ".vim/bundle/vim-tmux-navigator"]
 	path = .vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule ".vim/bundle/vim-solarized"]
+	path = .vim/bundle/vim-solarized
+	url = https://github.com/ericbn/vim-solarized.git
