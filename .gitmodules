@@ -11,9 +11,6 @@
 [submodule ".vim/bundle/vim-template"]
 	path = .vim/bundle/vim-template
 	url = https://github.com/aperezdc/vim-template.git
-[submodule ".vim/bundle/vim-colors-solarized"]
-	path = .vim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "solarized/xresources"]
 	path = solarized/xresources
 	url = https://github.com/solarized/xresources
