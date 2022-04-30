@@ -174,9 +174,24 @@ let g:syntastic_yaml_checkers = ['yamllint']
 " (z)sh
 let g:syntastic_enable_zsh_checker = 1
 
-" Use 256 colors, with the solarized color scheme.
-" set t_Co=256
+" ~Force true-color, because I actually use modern terminals
+" https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6,
+" plus alacritty stuff.
+"
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\|alacritty\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+syntax on
+set termguicolors
+
+" Use the terminal's colors for Solarized
+set termguicolors
 let g:solarized_bold = 0
+let g:solarized_truecolor = 1
 " set background=dark
 " colorscheme solarized
 " colorscheme xemacs
@@ -446,3 +461,4 @@ augroup WordCounter
 	au! CursorHold,CursorHoldI * call UpdateWordCount()
 augroup END
 autocmd BufWritePost * call UpdateWordCount()
+

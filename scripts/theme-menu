@@ -4,75 +4,11 @@
 exec 2>&1
 exec 1>/tmp/log
 
-THEME="$(ls ~/themes | grep '-' | cut -d'-' -f1 | sort -u | ~/scripts/menuize 'Theme: ')"
+THEME="$(~/scripts/retheme | ~/scripts/menuize 'Theme: ')"
 test -n "$THEME" || exit 1
 
-VARIANT="$(ls ~/themes | grep -Po "(?<=${THEME}-)[^.]+" | sort -u | ~/scripts/menuize 'Variant: ')"
+VARIANT="$(~/scripts/retheme $THEME | ~/scripts/menuize 'Variant: ')"
 test -n "$VARIANT" || exit 1
 
 ~/scripts/retheme "$THEME" "$VARIANT"
-
-# Selenized also has "black" and "white";
-# sometimes we have to tweak that to "dark" / "light".
-ALTVARIANT="$VARIANT"
-if test "$THEME" = "selenized"
-then
-  case "$VARIANT" in
-    black) ALTVARIANT="dark"
-      ;;
-    white) ALTVARIANT="light"
-      ;;
-  esac
-fi
-
-doalacritty() {
-  ALACRITTY="$HOME/themes/${THEME}-${VARIANT}.alacritty.yml"
-  if test -e "$ALACRITTY"
-  then
-    echo "found $ALACRITTY"
-    ln -sf "$ALACRITTY" ~/themes/alacritty.yml || echo >&2 "error"
-    touch ~/.config/alacritty/alacritty.yml
-  else
-    echo "$ALACRITTY" does not exist
-  fi
-}
-
-dovim() {
-  VIMSETUP="$HOME/.vim/themeselect.vim"
-  if test "$ALTVARIANT" = "$VARIANT"
-  then
-    echo >"$VIMSETUP" "colorscheme $THEME"
-  else
-    echo >"$VIMSETUP" "colorscheme ${THEME}_bw"
-  fi
-  echo >>"$VIMSETUP" "set background=${ALTVARIANT}"
-}
-
-domenu() {
-  MENUFILE="$HOME/themes/$THEME-$VARIANT.menu"
-  ALTMENUFILE="$HOME/themes/$THEME-$ALTVARIANT.menu"
-  if test -f "$MENUFILE"
-  then
-    echo >&2 "Found menu file: $MENUFILE"
-    ln -sf $MENUFILE ~/themes/menu
-  elif test -f "$ALTMENUFILE"
-  then
-    echo >&2 "Found menu file: $ALTMENUFILE"
-    ln -sf $ALTMENUFILE ~/themes/menu
-  else
-    echo >&2 "Found no menu file: $MENUFILE or $ALTMENUFILE"
-  fi
-}
-
-docode() {
-  # Themes in Code are title-case, generally.
-  NAME="$(echo $THEME $ALTVARIANT | sed 's/\b\(.\)/\u\1/g')"
-  CODESETUP="$HOME/.config/Code/User/settings.json"
-  CODETMP="$(mktemp)"
-  echo "using $CODETMP"
-  jq ".\"workbench.colorTheme\" = \"$NAME\"" \
-    "$CODESETUP" >"$CODETMP"
-  cat "$CODETMP"
-  mv "$CODETMP" "$CODESETUP"
-}
 

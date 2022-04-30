@@ -38,3 +38,5 @@
   helper = gcloud.sh
 [pull]
 	ff = only
+[init]
+	defaultBranch = main

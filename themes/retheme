@@ -68,8 +68,7 @@ retheme() {
   # Some themes are auto-filled based on included fragments:
   theme_alacritty
   theme_menu
-  # This messes Vim and Tmux up. :-(
-  # theme_terminal
+  theme_terminal
   theme_x
 
   # Others require their own includes, and operate based on the name:
@@ -141,8 +140,9 @@ theme_code() {
   CODESETUP="$HOME/.config/Code/User/settings.json"
   CODETMP="$(mktemp)"
   # echo "using $CODETMP"
-  jq ".\"workbench.colorTheme\" = \"$NAME\"" \
-    "$CODESETUP" >"$CODETMP"
+  tee <"$CODESETUP" /dev/stderr \
+  | jq ".\"workbench.colorTheme\" = \"$NAME\"" \
+  >"$CODETMP"
   # cat "$CODETMP"
   mv "$CODETMP" "$CODESETUP"
 }
