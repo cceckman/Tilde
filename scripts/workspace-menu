@@ -30,7 +30,7 @@ test -n "$ITEM" || exit 1
 ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
 
 # What do we want to do with it?
-WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $ITEM: " | cut -f1
+WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): " | cut -f1
 1 tmux + code
 2 tmux
 3 code
@@ -61,6 +61,5 @@ case "$WHATDO" in
   1*) docode; dotmux;;
   2*) dotmux ;;
   3*) docode ;;
-  *) swaynag -m "Unknown action: $ITEM"
     ;;
 esac
