@@ -138,6 +138,7 @@ theme_code() {
   # Themes in Code are title-case, generally.
   NAME="$(echo $THEME $ALTVARIANT | sed 's/\b\(.\)/\u\1/g')"
   CODESETUP="$HOME/.config/Code/User/settings.json"
+  mkdir -p $(dirname $CODESETUP)
   CODETMP="$(mktemp)"
   # echo "using $CODETMP"
   tee <"$CODESETUP" /dev/stderr \
