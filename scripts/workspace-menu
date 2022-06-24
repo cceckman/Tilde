@@ -61,5 +61,4 @@ case "$WHATDO" in
   1*) docode; dotmux;;
   2*) dotmux ;;
   3*) docode ;;
-    ;;
 esac
