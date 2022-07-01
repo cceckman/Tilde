@@ -14,8 +14,9 @@ then
     then
       # Not already cloned. Pull it down into r/.
       {
-        git clone "git@github.com:${repo}" "$REPOPATH" && \
-          cd "$REPOPATH" && git submodule update --init --recursive
+        git clone "git@github.com:${repo}" "$REPOPATH" \
+          --depth 1 --shallow-submodules \
+        && cd "$REPOPATH" && git submodule update --init --recursive
       } || {
         echo >&2 "Error cloning ${repo}, aborting."
         exit 1
