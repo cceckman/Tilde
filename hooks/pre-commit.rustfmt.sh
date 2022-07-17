@@ -11,7 +11,7 @@
 rustfiles=$(git diff --cached --name-only --diff-filter=ACM | grep '\.rs$')
 [ -z "$rustfiles" ] && exit 0
 
-diff=$(rustfmt --check $rustfiles 2>&1)
+diff=$(cargo fmt --check -- $rustfiles 2>&1)
 [ -z "$diff" ] && exit 0
 
 # Some files are not rustfmt'd. Print message and fail.
