@@ -40,3 +40,6 @@
 	ff = only
 [init]
 	defaultBranch = main
+[maintenance]
+	repo = /home/cceckman
+	repo = /home/cceckman/r/github.com/cceckman/peekatoo

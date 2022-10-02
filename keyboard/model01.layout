@@ -1,11 +1,7 @@
 {
   "keymaps": [
     [
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
+      {"code": 43, "label": {"base": "Tab"}},
       {"code": 30, "label": {"base": "1", "shifted": "!"}},
       {"code": 31, "label": {"base": "2", "shifted": "@"}},
       {"code": 32, "label": {"base": "3", "shifted": "#"}},
@@ -39,13 +35,7 @@
       {"code": 37, "label": {"base": "8", "shifted": "*"}},
       {"code": 38, "label": {"base": "9", "shifted": "("}},
       {"code": 39, "label": {"base": "0", "shifted": ")"}},
-      {
-        "code": 17409,
-        "label": {"hint": "LockTo", "base": "#1"},
-        "target": 1,
-        "rangeStart": 17408,
-        "categories": ["layer", "locktolayer"]
-      },
+      {"code": 49, "label": {"base": "\\", "shifted": "|"}},
       {"code": 43, "label": {"base": "Tab"}},
       {"code": 20, "label": {"base": "q", "shifted": "Q"}},
       {"code": 26, "label": {"base": "w", "shifted": "W"}},
@@ -79,7 +69,7 @@
       {"code": 18, "label": {"base": "o", "shifted": "O"}},
       {"code": 19, "label": {"base": "p", "shifted": "P"}},
       {"code": 46, "label": {"base": "=", "shifted": "+"}},
-      {"code": 75, "label": {"base": {"full": "Page Up", "1u": "PgUp"}}},
+      {"code": 53, "label": {"base": "`", "shifted": "~"}},
       {"code": 4, "label": {"base": "a", "shifted": "A"}},
       {"code": 22, "label": {"base": "s", "shifted": "S"}},
       {"code": 7, "label": {"base": "d", "shifted": "D"}},
@@ -123,17 +113,17 @@
         "categories": ["layer", "shifttolayer"]
       },
       {
-        "code": 49726,
-        "baseCode": 45,
-        "label": {"hint": "Alt/", "base": "-"},
+        "code": 49727,
+        "baseCode": 46,
+        "label": {"hint": "Alt/", "base": "="},
         "modifier": "Alt",
         "rangeStart": 49169,
         "categories": ["modifier", "dualuse", "alt"]
       },
       {
-        "code": 49727,
-        "baseCode": 46,
-        "label": {"hint": "Alt/", "base": "="},
+        "code": 49726,
+        "baseCode": 45,
+        "label": {"hint": "Alt/", "base": "-"},
         "modifier": "Alt",
         "rangeStart": 49169,
         "categories": ["modifier", "dualuse", "alt"]
@@ -234,19 +224,14 @@
         "categories": ["blanks"]
       },
       {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
         "code": 2086,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "9"},
+        "label": {"hint": null, "base": "("},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 38
       },
       {
         "code": 2087,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "0"},
+        "label": {"hint": null, "base": ")"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 39
       },
@@ -275,15 +260,15 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 33, "label": {"base": "4", "shifted": "$"}},
-      {"code": 34, "label": {"base": "5", "shifted": "%"}},
-      {"code": 35, "label": {"base": "6", "shifted": "^"}},
-      {"code": 87, "label": {"base": "+"}, "location": "numpad"},
       {
         "code": 65535,
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
+      {"code": 36, "label": {"base": "7", "shifted": "&"}},
+      {"code": 37, "label": {"base": "8", "shifted": "*"}},
+      {"code": 38, "label": {"base": "9", "shifted": "("}},
+      {"code": 87, "label": {"base": "+"}, "location": "numpad"},
       {
         "code": 65535,
         "label": {"base": {"full": "Transparent", "1u": " "}},
@@ -321,6 +306,7 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
+      {"code": 39, "label": {"base": "0", "shifted": ")"}},
       {
         "code": 65535,
         "label": {"base": {"full": "Transparent", "1u": " "}},
@@ -331,9 +317,9 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 30, "label": {"base": "1", "shifted": "!"}},
-      {"code": 31, "label": {"base": "2", "shifted": "@"}},
-      {"code": 32, "label": {"base": "3", "shifted": "#"}},
+      {"code": 33, "label": {"base": "4", "shifted": "$"}},
+      {"code": 34, "label": {"base": "5", "shifted": "%"}},
+      {"code": 35, "label": {"base": "6", "shifted": "^"}},
       {"code": 46, "label": {"base": "=", "shifted": "+"}},
       {
         "code": 65535,
@@ -356,19 +342,14 @@
         "categories": ["blanks"]
       },
       {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
         "code": 2095,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "["},
+        "label": {"hint": null, "base": "{"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 47
       },
       {
         "code": 2096,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "]"},
+        "label": {"hint": null, "base": "}"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 48
       },
@@ -397,9 +378,14 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 39, "label": {"base": "0", "shifted": ")"}},
-      {"code": 55, "label": {"base": ".", "shifted": ">"}},
-      {"code": 85, "label": {"base": "*"}, "location": "numpad"},
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {"code": 30, "label": {"base": "1", "shifted": "!"}},
+      {"code": 31, "label": {"base": "2", "shifted": "@"}},
+      {"code": 32, "label": {"base": "3", "shifted": "#"}},
       {"code": 84, "label": {"base": "/"}, "location": "numpad"},
       {"code": 40, "label": {"base": "Enter"}}
     ],
@@ -483,24 +469,34 @@
         "categories": ["consumer"]
       },
       {
-        "code": 18613,
-        "legacyCode": 22709,
-        "label": {"base": {"full": "Next track", "1u": "⏭"}},
-        "categories": ["consumer"]
+        "code": 20500,
+        "label": {
+          "hint": {"full": "Mouse Wheel", "1u": "M.Whl"},
+          "base": "Left"
+        },
+        "categories": ["mousekeys"]
       },
       {
-        "code": 2095,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "["},
-        "categories": ["with-modifiers", "shift"],
-        "baseCode": 47
+        "code": 20498,
+        "label": {
+          "hint": {"full": "Mouse Wheel", "1u": "M.Whl"},
+          "base": "Down"
+        },
+        "categories": ["mousekeys"]
       },
       {
-        "code": 2096,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "]"},
-        "categories": ["with-modifiers", "shift"],
-        "baseCode": 48
+        "code": 20497,
+        "label": {"hint": {"full": "Mouse Wheel", "1u": "M.Whl"}, "base": "Up"},
+        "categories": ["mousekeys"]
       },
-      {"code": 47, "label": {"base": "[", "shifted": "{"}},
+      {
+        "code": 20504,
+        "label": {
+          "hint": {"full": "Mouse Wheel", "1u": "M.Whl"},
+          "base": "Right"
+        },
+        "categories": ["mousekeys"]
+      },
       {"code": 48, "label": {"base": "]", "shifted": "}"}},
       {"code": 69, "label": {"base": "F12"}},
       {"code": 74, "label": {"base": "Home"}},
@@ -644,7 +640,7 @@
       {"code": 49, "label": {"base": "\\", "shifted": "|"}},
       {
         "code": 2097,
-        "label": {"hint": {"full": "Ctrl+", "1u": "C+"}, "base": "\\"},
+        "label": {"hint": null, "base": "|"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 49
       }

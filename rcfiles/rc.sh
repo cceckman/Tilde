@@ -5,9 +5,6 @@
 . $HOME/rcfiles/portable.sh
 # ...and here's the ones I want for customized-to-me machines.
 
-# So that I'm always on "local" time
-export TZ=America/Los_Angeles
-
 # Keep this early, so subsequent includes can access COLOR
 if [ -x $HOME/scripts/syscolor ]
 then
