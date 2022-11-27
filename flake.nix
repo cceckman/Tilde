@@ -12,9 +12,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, homelab, ... }: {
     homeConfigurations.cceckman = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs;
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      stateVersion = homelab.outputs.nixosConfigurations.cromwell-nix.system.stateVersion;
       modules = [];
     };
   };
