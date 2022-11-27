@@ -1,11 +1,15 @@
 {
   description = "Flake for cceckman's home directory";
 
-  # Pick up the nixpkgs dependency from homelab - which should match our system
-  inputs.homelab = "github.com:cceckman/homelab";
-  inputs.home-manager = {
-    url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = inputs.homelab.inputs.nixos;
+  # Pick up the nixpkgs dependency from homelab - which should match our system.
+  # From: https://discourse.nixos.org/t/nix-flake-to-aggregate-and-concurrently-update-some-dependencies/10774/6
+  inputs = {
+    homelab.url = "git+https://github.com/cceckman/homelab.git";
+    nixpkgs.follows = "homelab/nixos";
+    home-manager = {
+      url = "git+https://github.com/nix-community/home-manager.git";
+      inputs.nixpkgs.follows = "homelab/nixos";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: {
