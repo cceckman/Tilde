@@ -1,7 +1,7 @@
 {
   "keymaps": [
     [
-      {"code": 43, "label": {"base": "Tab"}},
+      {"code": 75, "label": {"base": {"full": "Page Up", "1u": "PgUp"}}},
       {"code": 30, "label": {"base": "1", "shifted": "!"}},
       {"code": 31, "label": {"base": "2", "shifted": "@"}},
       {"code": 32, "label": {"base": "3", "shifted": "#"}},
@@ -199,9 +199,21 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 36, "label": {"base": "7", "shifted": "&"}},
-      {"code": 37, "label": {"base": "8", "shifted": "*"}},
-      {"code": 38, "label": {"base": "9", "shifted": "("}},
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
       {"code": 86, "label": {"base": "-"}, "location": "numpad"},
       {
         "code": 65535,
