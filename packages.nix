@@ -4,6 +4,7 @@
 } : let
   always = [
     pkgs.curl
+    pkgs.ripgrep
     pkgs.git
     pkgs.gzip
     pkgs.htop

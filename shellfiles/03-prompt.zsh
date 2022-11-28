@@ -1,7 +1,7 @@
 #!/bin/zsh
 # Set up ZSH prompt.
-#
-. $HOME/rcfiles/repo.sh
+
+set -o PROMPT_SUBST
 
 if test "$SYSCOLOR" = "red"
 then

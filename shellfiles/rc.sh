@@ -1,18 +1,6 @@
 #!/bin/sh
 # vim: ft=sh
 
-# Here's the bits I want for every machine...
-. $HOME/rcfiles/portable.sh
-# ...and here's the ones I want for customized-to-me machines.
-
-# Keep this early, so subsequent includes can access COLOR
-if [ -x $HOME/scripts/syscolor ]
-then
-  export SYSCOLOR="$($HOME/scripts/syscolor)"
-else
-  export SYSCOLOR="red"
-fi
-
 # if test -f $HOME/themes/terminal.inc.sh
 # then
 #   . $HOME/themes/terminal.inc.sh
@@ -62,10 +50,6 @@ helpless() {
 # This is only for Linux
 alias copy='xclip -selection clipboard && echo '✂''
 alias cbpaste='xclip -selection clipboard -o'
-
-export ARDUINO_PATH=/usr/local/arduino
-. $HOME/rcfiles/path.sh
-. $HOME/rcfiles/repo.sh
 
 title() {
   # change the title of the current window or tab.
