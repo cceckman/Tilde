@@ -12,6 +12,18 @@
     isDev = true;
   };
 
+  home.file = {
+    allSecrets = {
+      source = ./secrets;
+      recursive = true;
+      target = ".local/allSecrets";
+    };
+  };
+
+  home.activation = {
+    decryptSecrets = lib.hm.dag.entryAfter ["onFilesChange"] (builtins.readFile ./secrets/activation);
+  };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;

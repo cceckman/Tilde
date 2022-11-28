@@ -3,6 +3,7 @@
 , isDev ? false # True for machines I develop on
 } : let
   always = [
+    pkgs.age
     pkgs.curl
     pkgs.ripgrep
     pkgs.git
