@@ -15,7 +15,9 @@
   outputs = { self, nixpkgs, home-manager, homelab, ... }: {
     homeConfigurations.cceckman = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      modules = [];
+      modules = [
+        ./cceckman.nix
+      ];
     };
   };
 }
