@@ -18,6 +18,10 @@
       recursive = true;
       target = ".local/allSecrets";
     };
+    tmux = {
+      source = ./config/tmux/tmux.conf;
+      target = ".tmux.conf";
+    };
   };
 
   home.activation = {
