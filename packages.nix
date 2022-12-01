@@ -11,7 +11,6 @@
     pkgs.htop
     pkgs.mtr
     pkgs.tmux
-    pkgs.vim
     pkgs.zip
     pkgs.jq
   ];

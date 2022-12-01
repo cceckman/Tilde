@@ -25,8 +25,10 @@
   };
 
   home.activation = {
-    decryptSecrets = lib.hm.dag.entryAfter ["onFilesChange"] (builtins.readFile ./secrets/activation);
+  # decryptSecrets = lib.hm.dag.entryAfter ["onFilesChange"] (builtins.readFile ./secrets/activation);
   };
+
+  programs.vim = (import ./vim.nix) { inherit pkgs; };
 
   programs.zsh = {
     enable = true;
