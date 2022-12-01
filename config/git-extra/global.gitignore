@@ -1,0 +1,6 @@
+*.swp
+*.un~
+bazel-*
+.redo/**
+.gcloudignore
+*.pem

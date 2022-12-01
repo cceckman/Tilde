@@ -31,6 +31,11 @@
       target = "themes";
       recursive = true;
     };
+    gitConfig = {
+      source = ./config/git-extra;
+      target = ".config/git-extra";
+      recursive = true;
+    };
   };
 
   home.activation = {

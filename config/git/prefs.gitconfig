@@ -1,0 +1,22 @@
+[status]
+  showUntrackedFiles = no
+[diff]
+  tool = vimdiff
+[merge]
+  tool = vimdiff
+[push]
+  default = current
+[difftool]
+  prompt = false
+[gui]
+  tabsize = 2
+[core]
+  excludesfile = ~/.config/git-extra/global.gitignore
+  hooksPath = ~/hooks
+[credential "https://source.developers.google.com"]
+  helper = gcloud.sh
+[pull]
+  ff = only
+[init]
+  defaultBranch = main
+
