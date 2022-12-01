@@ -85,7 +85,6 @@ alias h="split -h"
 alias v="split -v"
 
 attach () {
-  fixssh
   title "$1"
   tmux -u2 new-session -DA -s $1
   # Reset the title after exiting.
@@ -98,11 +97,6 @@ ws () {
 
 predo() {
   redo -j$(nproc) "$@"
-}
-
-loadup() {
-  fixssh
-  addkeys
 }
 
 # Set title to user-at-host when starting a new shell.
