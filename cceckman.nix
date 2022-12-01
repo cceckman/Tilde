@@ -36,7 +36,14 @@
       target = ".config/git-extra";
       recursive = true;
     };
+    scripts = {
+      source = ./scripts;
+      target = "scripts";
+      recursive = true;
+    };
   };
+
+  home.sessionPath = ["$HOME/scripts"];
 
   home.activation = {
   # decryptSecrets = lib.hm.dag.entryAfter ["onFilesChange"] (builtins.readFile ./secrets/activation);

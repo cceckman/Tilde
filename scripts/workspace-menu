@@ -1,0 +1,64 @@
+#!/bin/sh
+
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
+
+# Debugging:
+# exec 2>&1
+# exec >>/tmp/log
+
+# List all git repositories and modified times;
+# Sort in reverse order;
+# Remove the time;
+# Go back to the main directory rather than git;
+# and pass to the menuizer
+ITEM="$(
+find ~/r \
+  -name .git -type d \
+  -printf "%T@ %p\n" 2>/dev/null \
+| sort -nr \
+| cut -d' ' -f1 --complement \
+| xargs dirname \
+| xargs -I{} sh -c 'echo $(basename {})\\t{}' \
+| ~/scripts/menuize "Repository: ")"
+
+# Only launch if menu made a selection.
+test -n "$ITEM" || exit 1
+
+ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
+
+# What do we want to do with it?
+WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): " | cut -f1
+1 tmux + code
+2 tmux
+3 code
+EOF
+)
+
+SHORTNAME="$(basename $ITEM)"
+
+dotmux() {
+  # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
+  # TODO
+  alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
+}
+
+docode() {
+  # Wayland wrapped code is still not working well...
+  # code --enable-features=UseOzonePlatform --ozone-platform=wayland "$ITEM"
+  code "$ITEM"
+}
+
+# Ensure PATH is up to date before launching any UI apps.
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
+
+case "$WHATDO" in
+  1*) docode; dotmux;;
+  2*) dotmux ;;
+  3*) docode ;;
+esac

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -x
+
+if test -f ~/themes/menu
+then
+  THEMEOPTS="$(cat ~/themes/menu)"
+fi
+
+
+# Prefer bemenu under Wayland.
+# Running dmenu through xwayland, we sometimes get launches on the wrong
+# monitor; I prefer this wrapper to e.g.
+# https://robbyzambito.me/posts/how-to-set-primary-x-display-on-sway/
+if test -n "$WAYLAND_DISPLAY" && type bemenu 2>&1 >/dev/null
+then
+  export BEMENU_OPTS="$THEMEOPTS"
+  exec bemenu "$@"
+fi
+
+if type dmenu 2>&1 >/dev/null
+then
+  exec dmenu $THEMEOPTS "$@"
+fi
+
+echo >&2 "No menu program installed!"
+exit 1

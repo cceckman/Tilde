@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Automatically reconfigure screen layouts.
+
+xlayout() {
+
+  # Look for wide/tall layout
+  WIDE="$(xrandr | grep '^DP\(-[0-9]\+\)\+ connected.*3840' | cut -d' ' -f1)"
+  TALL="$(xrandr | grep '^DP\(-[0-9]\+\)\+ connected.*2560' | cut -d' ' -f1)"
+  if test -n "$WIDE" && test -n "$TALL"
+  then
+    echo >&2 "Using layout ($TALL as tall, $WIDE as wide)"
+    OTHERS="$(xrandr | cut -d' ' -f1 | grep -v -e "$WIDE" -e "$TALL" -e "Screen")"
+    xrandr \
+      --output "$TALL" --rotate right \
+      --output "$WIDE" --rotate normal --right-of "$TALL" \
+      $(for output in $OTHERS; do echo "--output "$output" --off"; done)
+  else
+    echo >&2 "Unrecognized monitor configuration; making no changes."
+    exit 1
+  fi
+}
+
+
+waylay() {
+  echo >&2 "Wayland not (yet) supported!"
+  exit 2
+}
+
+if test -n "$WAYLAND_DISPLAY"
+then
+  waylay
+else
+  xlayout
+fi

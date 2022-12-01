@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. ~/rcfiles/path.sh
+
+if test -f ~/themes/menu
+then
+  THEMEOPTS="$(cat ~/themes/menu)"
+fi
+
+if test -n "$WAYLAND_DISPLAY" && type bemenu-run 2>&1 >/dev/null
+then
+  export BEMENU_OPTS="$THEMEOPTS"
+  exec bemenu-run "$@"
+elif type demenu_run 2>&1 >/dev/null
+then
+  exec demenu_run $THEMEOPTS "$@"
+else
+  echo >&2 "No runner available!"
+  exit 1
+fi
+

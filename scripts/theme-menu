@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Reconfigure the current theme, where we can.
+exec 2>&1
+exec 1>/tmp/log
+
+THEME="$(~/scripts/retheme | ~/scripts/menuize 'Theme: ')"
+test -n "$THEME" || exit 1
+
+VARIANT="$(~/scripts/retheme $THEME | ~/scripts/menuize 'Variant: ')"
+test -n "$VARIANT" || exit 1
+
+~/scripts/retheme "$THEME" "$VARIANT"
+

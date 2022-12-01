@@ -1,0 +1,20 @@
+#!/bin/sh -ex
+
+GOFILES="$(find . -name '*.go' | tr '\n' ' ')"
+RUSTFILES="$(find . -name '*.rs' | grep -v '/target/' | tr '\n' ' ')"
+BAZELFILES="$(find . -name '*.bzl' -o -name '*.bazel' | tr '\n' ' ')"
+
+if test -n "$GOFILES"
+then
+  gofmt -w -s $GOFILES
+fi
+
+if test -n "$RUSTFILES"
+then
+  cargo fmt -- $RUSTFILES
+fi
+
+if test -n "$BAZELFILES"
+then
+  buildifier $BAZELFILES
+fi

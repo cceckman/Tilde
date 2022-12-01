@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if test -e ~/rcfiles/path.sh
+then
+  . ~/rcfiles/path.sh
+fi
+
+if command -v alacritty >/dev/null
+then
+  exec alacritty "$@"
+fi
+
+if command -v konsole >/dev/null
+then
+  exec konsole "$@"
+fi
+
+exec xterm "$@"
