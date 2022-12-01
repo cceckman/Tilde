@@ -22,6 +22,15 @@
       source = ./config/tmux/tmux.conf;
       target = ".tmux.conf";
     };
+    selenized = {
+      source = ./config/vim/selenized.vim;
+      target = ".vim/colors/selenized.vim";
+    };
+    theme = {
+      source = ./themes;
+      target = "themes";
+      recursive = true;
+    };
   };
 
   home.activation = {

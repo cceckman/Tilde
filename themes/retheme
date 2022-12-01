@@ -1,0 +1,262 @@
+#!/bin/sh -e
+#
+# Reconfigure the theme directory.
+PROGRAM="$0"
+REALDIR="$(dirname $(realpath $PROGRAM))"
+
+usage() {
+  echo >&2 "Configure the current theme for various programs."
+  echo >&2 "Usage: "
+  echo >&2 "$PROGRAM"
+  echo >&2 "  Lists available themes."
+  echo >&2 "$PROGRAM <theme> :"
+  echo >&2 "  Lists available variants for the given theme (e.g. light/dark)."
+  echo >&2 "$PROGRAM <theme> <variant>:"
+  echo >&2 "  Sets the theme to <theme>-<variant>".
+}
+
+main() {
+  case "$#" in
+    0) lstheme
+      ;;
+    1) lsvariant "$1"
+      ;;
+    2) retheme "$1" "$2"
+      ;;
+    **)
+      usage;
+      exit 1;
+  esac
+}
+
+
+lstheme() {
+  find "$REALDIR" -mindepth 1 -type d -exec basename '{}' \;
+}
+
+lsvariant() {
+  find "$REALDIR/$1" -name '*.inc.sh' -exec basename -s.inc.sh '{}' \;
+}
+
+retheme() {
+  set -x
+  THEME="$1"
+  VARIANT="$2"
+  # Selenized also has "black" and "white";
+  # sometimes we have to tweak that to "dark" / "light".
+  ALTVARIANT="$VARIANT"
+  if test "$THEME" = "selenized"
+  then
+    case "$VARIANT" in
+      black) ALTVARIANT="dark"
+        ;;
+      white) ALTVARIANT="light"
+        ;;
+    esac
+  fi
+  echo >&2 "$ALTVARIANT"
+
+  INC="$REALDIR/$THEME/$VARIANT.inc.sh"
+  if ! test -f "$INC"
+  then
+    echo >&2 "theme $THEME variant $VARIANT is not valid: $INC does not exist"
+    exit 1
+  fi
+  . $INC
+  echo >&2 "$ALTVARIANT"
+
+  # Some themes are auto-filled based on included fragments:
+  theme_alacritty
+  theme_menu
+  theme_terminal
+  theme_x
+
+  # Others require their own includes, and operate based on the name:
+  theme_code "$THEME" "$VARIANT" "$ALTVARIANT"
+  theme_vim "$THEME" "$VARIANT" "$ALTVARIANT"
+  set +x
+}
+
+
+theme_alacritty() {
+  cat <<EOF >"$REALDIR"/alacritty.yml
+colors:
+  primary:
+    background: '0x${BACKGROUND}'
+    foreground: '0x${FOREGROUND}'
+  cursor:
+    text: '0x${BACKGROUND}'
+    cursor: '0x${FOREGROUND}'
+  normal:
+    black:    '0x${BLACK_NR}'
+    red:      '0x${RED_NR}'
+    green:    '0x${GREEN_NR}'
+    yellow:   '0x${YELLOW_NR}'
+    blue:     '0x${BLUE_NR}'
+    magenta:  '0x${MAGENTA_NR}'
+    cyan:     '0x${CYAN_NR}'
+    white:    '0x${WHITE_NR}'
+  bright:
+    black:    '0x${BLACK_BR}'
+    red:      '0x${RED_BR}'
+    green:    '0x${GREEN_BR}'
+    yellow:   '0x${YELLOW_BR}'
+    blue:     '0x${BLUE_BR}'
+    magenta:  '0x${MAGENTA_BR}'
+    cyan:     '0x${CYAN_BR}'
+    white:    '0x${WHITE_BR}'
+EOF
+}
+
+theme_vim() {
+  THEME="$1"
+  VARIANT="$2"
+  ALTVARIANT="$3"
+
+  VIMSETUP="$HOME/.vim/themeselect.vim"
+  mkdir -p "$(dirname $VIMSETUP)"
+  if test "$ALTVARIANT" = "$VARIANT"
+  then
+    echo >"$VIMSETUP" "colorscheme $THEME"
+  else
+    echo >"$VIMSETUP" "colorscheme ${THEME}_bw"
+  fi
+  echo >>"$VIMSETUP" "set background=${ALTVARIANT}"
+}
+
+theme_menu() {
+  MENUFILE="$REALDIR/menu.flags"
+  cat <<-EOF >$MENUFILE
+  --nb '#${BACKGROUND}' --nf '#${FOREGROUND}' --hb '#${FOREGROUND}' --nf '#${BACKGROUND}'
+EOF
+}
+
+theme_code() {
+  THEME="$1"
+  VARIANT="$2"
+  ALTVARIANT="$3"
+
+  # Themes in Code are title-case, generally.
+  NAME="$(echo $THEME $ALTVARIANT | sed 's/\b\(.\)/\u\1/g')"
+  CODESETUP="$HOME/.config/Code/User/settings.json"
+  mkdir -p "$(dirname $CODESETUP)"
+  mkdir -p $(dirname $CODESETUP)
+  CODETMP="$(mktemp)"
+  # echo "using $CODETMP"
+  tee <"$CODESETUP" /dev/stderr \
+  | jq ".\"workbench.colorTheme\" = \"$NAME\"" \
+  >"$CODETMP"
+  # cat "$CODETMP"
+  mv "$CODETMP" "$CODESETUP"
+}
+
+osc_split() {
+  echo "$1" | \
+    sed 's/\(..\)\(..\)\(..\)/\1\/\2\/\3/'
+}
+
+theme_terminal() {
+  cat <<EOF >"$REALDIR/terminal.inc.sh"
+# Terminal retheming: from https://gist.github.com/johnbender/5018685
+cset() {
+  ANSI=\$1
+  RGB=\$2
+  printf "\x1b]4;\$ANSI;rgb:\${RGB}\\a"
+}
+
+theme_terminal() {
+  if test "\$TERM" = "alacritty"
+  then
+    # Should already be themed.
+    return 0
+  fi
+
+  cset 0 "$(osc_split $BLACK_NR)"
+  cset 8 "$(osc_split $BLACK_BR)"
+  cset 1 "$(osc_split $RED_NR)"
+  cset 9 "$(osc_split $RED_BR)"
+  cset 2 "$(osc_split $GREEN_NR)"
+  cset 10 "$(osc_split $GREEN_BR)"
+  cset 3 "$(osc_split $YELLOW_NR)"
+  cset 11 "$(osc_split $YELLOW_BR)"
+  cset 4 "$(osc_split $BLUE_NR)"
+  cset 12 "$(osc_split $BLUE_BR)"
+  cset 5 "$(osc_split $MAGENTA_NR)"
+  cset 13 "$(osc_split $MAGENTA_BR)"
+  cset 6 "$(osc_split $CYAN_NR)"
+  cset 14 "$(osc_split $CYAN_BR)"
+  cset 7 "$(osc_split $WHITE_NR)"
+  cset 15 "$(osc_split $WHITE_BR)"
+  # FG and BG per escape codes at
+  # https://chromium.googlesource.com/apps/libapps/+/a5fb83c190aa9d74f4a9bca233dac6be2664e9e9/hterm/doc/ControlSequences.md#OSC
+  printf "\x1b]10;#${FOREGROUND}\\a"
+  printf "\x1b]11;#${BACKGROUND}\\a"
+}
+theme_terminal
+EOF
+}
+
+theme_x() {
+  echo >&2 "X theming not implemented"
+  return 0
+  cat <<EOF >"$REALDIR/theme.Xresources"
+#define S_base03        #${BACKGROUND}
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #${FOREGROUND}
+#define S_base1         #${CURSOR}
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+*background:            S_base03
+*foreground:            S_base0
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+#define S_yellow        #${YELLOW_NR}
+#define S_orange        #${ORANGE_NR}
+#define S_red           #${RED_NR}
+#define S_magenta       #${MAGENTA_NR}
+#define S_violet        #${VIOLET_NR}
+#define S_blue          #${BLUE_NR}
+#define S_cyan          #${CYAN_NR}
+#define S_green         #${GREEN_NR}
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+
+!! red dark/light
+*color1:                S_red
+*color9:                S_orange
+
+!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+
+!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+
+!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+
+!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+
+!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+
+!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
+EOF
+}
+
+main "$@"
