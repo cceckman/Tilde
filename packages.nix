@@ -25,6 +25,10 @@
     pkgs.lld
     pkgs.llvm
     pkgs.parted
+    # TODO: Make this part of a hermetic build for image-building
+    pkgs.libguestfs-with-appliance
+    pkgs.guestfs-tools
+    pkgs.qemu
   ];
 in
   always ++ dev
