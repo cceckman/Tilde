@@ -103,6 +103,6 @@ predo() {
 title "$USER"@"$(hostname)"
 
 ssh() {
-  /usr/bin/ssh "$@"
+  command ssh "$@"
   title
 }
