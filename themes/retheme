@@ -2,7 +2,9 @@
 #
 # Reconfigure the theme directory.
 PROGRAM="$0"
-REALDIR="$(dirname $(realpath $PROGRAM))"
+# realpath is, alas, not compatible with Nix-
+# the script itself lives in the read-only Nix store.
+REALDIR="$HOME/themes"
 
 usage() {
   echo >&2 "Configure the current theme for various programs."
