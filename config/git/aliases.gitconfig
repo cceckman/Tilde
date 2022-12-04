@@ -11,4 +11,6 @@
   df = diff --name-only
   sha = rev-parse HEAD
   reword = commit --amend
+  fetchall = "!f() { git remote | while read REMOTE; do git config remote.${REMOTE}.fetch \"+refs/heads/*:refs/remotes/${REMOTE}/*\"; done ; git fetch; }; f"
+
 
