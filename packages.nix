@@ -6,7 +6,9 @@
     pkgs.age
     pkgs.curl
     pkgs.ripgrep
+    pkgs.file
     pkgs.git
+    pkgs.gitAndTools.gh
     pkgs.gzip
     pkgs.htop
     pkgs.mtr
