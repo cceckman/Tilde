@@ -41,6 +41,10 @@
       target = "scripts";
       recursive = true;
     };
+    vscode-setup = {
+      source = ./config/vscode-setup/server-env-setup;
+      target = ".vscode-server/server-env-setup";
+    };
   };
 
   home.sessionPath = ["$HOME/scripts"];
