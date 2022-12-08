@@ -13,6 +13,7 @@
     pkgs.htop
     pkgs.mtr
     pkgs.tmux
+    pkgs.wget
     pkgs.zip
     pkgs.jq
   ];
@@ -31,6 +32,8 @@
     pkgs.libguestfs-with-appliance
     pkgs.guestfs-tools
     pkgs.qemu
+    # TODO: Make this part of a hermetic build of Pidp11
+    pkgs.gnumake
   ];
 in
   always ++ dev
