@@ -59,11 +59,11 @@
         "nixos-wsl": "nixos-wsl"
       },
       "locked": {
-        "lastModified": 1670174139,
-        "narHash": "sha256-HV7MopIlCP3vTIYwWbcLyhCqWPLI7gLx6VuNOONfysY=",
+        "lastModified": 1670545418,
+        "narHash": "sha256-e5gF4NJDD5N+YMWIubyT8w0+KKSQPgmDro/Xb89d8F0=",
         "ref": "refs/heads/main",
-        "rev": "15f7ac8fcf54b0f60554c4521db7d8faaabac4c4",
-        "revCount": 21,
+        "rev": "bcdd3e5df5a72fbad61d9d6b7985af10a4da13fc",
+        "revCount": 25,
         "type": "git",
         "url": "https://github.com/cceckman/homelab.git"
       },
@@ -74,11 +74,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1670064435,
-        "narHash": "sha256-+ELoY30UN+Pl3Yn7RWRPabykwebsVK/kYE9JsIsUMxQ=",
+        "lastModified": 1670332253,
+        "narHash": "sha256-O5SmhlIUt1s+vK4NXeGYqwcBIMwbBPAEZ3GHE3XT28c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "61a8a98e6d557e6dd7ed0cdb54c3a3e3bbc5e25c",
+        "rev": "1c9ffcf70786f0966982ce0fc76ec05df2e1dec2",
         "type": "github"
       },
       "original": {
