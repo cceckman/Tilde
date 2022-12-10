@@ -6,7 +6,10 @@
   home.stateVersion = "22.05";
 
   programs.home-manager.enable = true;
+
+  # From direnv setup guide:
   programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   home.packages = (import ./packages.nix) {
     inherit pkgs;

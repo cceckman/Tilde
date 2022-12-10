@@ -81,11 +81,11 @@
         "nixos-wsl": "nixos-wsl"
       },
       "locked": {
-        "lastModified": 1670545418,
-        "narHash": "sha256-e5gF4NJDD5N+YMWIubyT8w0+KKSQPgmDro/Xb89d8F0=",
+        "lastModified": 1670687727,
+        "narHash": "sha256-U//EngEUOpT+IF1Rj/05F8bBSyyx6VXsfbnbElpKmUc=",
         "ref": "refs/heads/main",
-        "rev": "bcdd3e5df5a72fbad61d9d6b7985af10a4da13fc",
-        "revCount": 25,
+        "rev": "a0bdd56fcb1f9c5ec074fe0cb69a7d446b6cdff7",
+        "revCount": 26,
         "type": "git",
         "url": "https://github.com/cceckman/homelab.git"
       },
