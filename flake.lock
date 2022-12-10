@@ -1,5 +1,27 @@
 {
   "nodes": {
+    "ack": {
+      "inputs": {
+        "nixpkgs": [
+          "homelab",
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1670686663,
+        "narHash": "sha256-ER5RCDPF/e4ooksWvINeQ1e8d6ldHeBRU7kE112BkgI=",
+        "owner": "cceckman",
+        "repo": "ack",
+        "rev": "372a5fdb8e5e57acf8f35ee08566ec6ca3bcb739",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cceckman",
+        "ref": "nix",
+        "repo": "ack",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -125,6 +147,7 @@
     },
     "root": {
       "inputs": {
+        "ack": "ack",
         "home-manager": "home-manager",
         "homelab": "homelab",
         "nixpkgs": [

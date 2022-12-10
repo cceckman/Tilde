@@ -34,6 +34,7 @@
     pkgs.qemu
     # TODO: Make this part of a hermetic build of Pidp11
     pkgs.gnumake
+    pkgs.amsterdam-compiler-kit
   ];
 in
   always ++ dev

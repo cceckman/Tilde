@@ -10,11 +10,18 @@
       url = "git+https://github.com/nix-community/home-manager.git";
       inputs.nixpkgs.follows = "homelab/nixos";
     };
+    ack = {
+      url = "github:cceckman/ack/nix";
+      inputs.nixpkgs.follows = "homelab/nixos";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, homelab, ... }: {
+  outputs = { self, nixpkgs, home-manager, homelab, ack, ... }: {
     homeConfigurations.cceckman = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        overlays = [ ack.overlay ];
+      };
       modules = [
         ./cceckman.nix
       ];
