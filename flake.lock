@@ -81,11 +81,11 @@
         "nixos-wsl": "nixos-wsl"
       },
       "locked": {
-        "lastModified": 1670687727,
-        "narHash": "sha256-U//EngEUOpT+IF1Rj/05F8bBSyyx6VXsfbnbElpKmUc=",
+        "lastModified": 1670688179,
+        "narHash": "sha256-1LaPX0LZREyBe4W254VRFHitVBQ2xFDOowjnqg+zdLg=",
         "ref": "refs/heads/main",
-        "rev": "a0bdd56fcb1f9c5ec074fe0cb69a7d446b6cdff7",
-        "revCount": 26,
+        "rev": "5bd662df0497a243efca28464c61d0bc75aac646",
+        "revCount": 27,
         "type": "git",
         "url": "https://github.com/cceckman/homelab.git"
       },
@@ -96,16 +96,16 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1670332253,
-        "narHash": "sha256-O5SmhlIUt1s+vK4NXeGYqwcBIMwbBPAEZ3GHE3XT28c=",
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1c9ffcf70786f0966982ce0fc76ec05df2e1dec2",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
