@@ -27,6 +27,7 @@
     pkgs.graphviz
     pkgs.lld
     pkgs.llvm
+    pkgs.google-cloud-sdk
     pkgs.parted
     # TODO: Make this part of a hermetic build for image-building
     pkgs.libguestfs-with-appliance
