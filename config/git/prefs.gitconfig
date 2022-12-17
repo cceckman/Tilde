@@ -19,4 +19,6 @@
   ff = only
 [init]
   defaultBranch = main
-
+[gpg]
+  # Disable signature checking; I don't have gpg installed.
+  program = true
