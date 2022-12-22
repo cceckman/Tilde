@@ -16,6 +16,7 @@
     pkgs.wget
     pkgs.zip
     pkgs.jq
+    pkgs.restic
   ];
   dev = if ! isDev then [] else [
     pkgs.clang
