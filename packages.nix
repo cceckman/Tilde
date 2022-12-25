@@ -17,6 +17,7 @@
     pkgs.zip
     pkgs.jq
     pkgs.restic
+    pkgs.ffmpeg
   ];
   dev = if ! isDev then [] else [
     pkgs.clang
