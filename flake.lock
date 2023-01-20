@@ -77,11 +77,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1672318366,
-        "narHash": "sha256-DBUVFooXtE4boZk1LvJ8sTg3nxMmJvNAJQ4lpjxDH5U=",
+        "lastModified": 1674082145,
+        "narHash": "sha256-4IpEt5Jc6VrNcpIcrKMCZAyeJMLXaaHk+yOV9HusO/A=",
         "ref": "refs/heads/master",
-        "rev": "cbacdaba3c7b361defb36e1cdfa03ae4e74eb4a8",
-        "revCount": 2455,
+        "rev": "7026e1a934abfa02623c9870378dbcdac3cd7f80",
+        "revCount": 2486,
         "type": "git",
         "url": "https://github.com/nix-community/home-manager.git"
       },
@@ -98,11 +98,11 @@
         "tsproxy": "tsproxy"
       },
       "locked": {
-        "lastModified": 1672336356,
-        "narHash": "sha256-fSJPa1afQpZX+kEh+IirJI826iUbj0hKQSNXgwketRI=",
+        "lastModified": 1674187498,
+        "narHash": "sha256-vb6ocaWtJ1yKrlnqhaNkF7JTAd1RxK9t90w/ZhiUBnw=",
         "ref": "refs/heads/main",
-        "rev": "5f63161a6a7a65a9cd0aae065fb5e460c084a035",
-        "revCount": 61,
+        "rev": "71e29825fee872b71cb2fb4e7d86efca39600f63",
+        "revCount": 92,
         "type": "git",
         "url": "https://github.com/cceckman/homelab.git"
       },
@@ -120,28 +120,31 @@
         ]
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-SkWvoQeu0csFmTGIFPCJ0RBrD8t82Z6T5FIfCuhrwh0=",
-        "path": "./music-triage",
-        "type": "path"
+        "lastModified": 1672415906,
+        "narHash": "sha256-HIYBfR2sBkr9LDTh0EnH1mAw4lj7icjLAD7HRA3PC48=",
+        "owner": "cceckman",
+        "repo": "music-triage",
+        "rev": "6b808e5bf6b6071a0e33fde7680dbb83ec03bafd",
+        "type": "github"
       },
       "original": {
-        "path": "./music-triage",
-        "type": "path"
+        "owner": "cceckman",
+        "repo": "music-triage",
+        "type": "github"
       }
     },
     "nixos": {
       "locked": {
-        "lastModified": 1669833724,
-        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
+        "lastModified": 1673957332,
+        "narHash": "sha256-njH7Szk1BLVWGMw7IRibgGejSlxXHj9saZHfH20gHdk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "rev": "b83e7f5a04a3acc8e92228b0c4bae68933d504eb",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "22.11",
+        "ref": "nixos-22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -153,11 +156,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1672225470,
-        "narHash": "sha256-CL81URMZdjwCbqYY+WqIZAo1aj9moWNPISJaRw2YwV4=",
+        "lastModified": 1673339198,
+        "narHash": "sha256-5EAIJq89sTFooJ5vhsnaw7mDtKVDICvCv2ul7+BXAgA=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "79fa1eb78f746c30e41f1be76a209a407b25dc9d",
+        "rev": "217178edb1127fb41ac4fd534d8a513c3dd3d81b",
         "type": "github"
       },
       "original": {
@@ -202,11 +205,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1671635272,
-        "narHash": "sha256-3HNTR6i023+sdMeA1vDukUjU0l5x/uRDwNu5GwW/oGk=",
+        "lastModified": 1672336663,
+        "narHash": "sha256-/0xqwGCK5Ao/DqfYt6fphkVuHmUpm9BadR2RqrE0SIY=",
         "owner": "cceckman",
         "repo": "tsproxy",
-        "rev": "8228fe789c2ed24cdf7a7e170a5fee19ec673802",
+        "rev": "d929ee551121edf79d16ab2207d45e541089df9d",
         "type": "github"
       },
       "original": {

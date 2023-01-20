@@ -20,6 +20,7 @@
     pkgs.ffmpeg
   ];
   dev = if ! isDev then [] else [
+    pkgs.cmatrix # TODO: Make an "interactive" set- not quite the same...
     pkgs.clang
     pkgs.go
     pkgs.python311
