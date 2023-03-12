@@ -45,6 +45,10 @@
       target = "scripts";
       recursive = true;
     };
+    nanorc = {
+      source = ./config/nano/nanorc;
+      target = ".config/nano/nanorc";
+    };
     vscode-setup = {
       source = ./config/vscode-setup/server-env-setup;
       target = ".vscode-server/server-env-setup";
