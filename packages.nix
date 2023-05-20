@@ -32,6 +32,7 @@
     pkgs.llvm
     pkgs.google-cloud-sdk
     pkgs.parted
+    pkgs.sqlite
     # TODO: Make this part of a hermetic build for image-building
     pkgs.libguestfs-with-appliance
     pkgs.guestfs-tools
