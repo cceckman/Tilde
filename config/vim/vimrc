@@ -11,6 +11,10 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+" home-manager uses sensible.vim.
+" I have somewhat different preferences, so have to load it first. Eugh.
+runtime! pack/home-manager/start/vim-sensible/plugin/sensible.vim
+
 " Don't try to be vi-compatible.
 set nocompatible
 " Prevent some security issues.
@@ -41,8 +45,8 @@ set termencoding=utf8
 set list
 " set listchars=tab:▸\ ,eol:¬
 " The right-triangle renders as a little less than full width in Fira Code.
-set listchars=tab:␉\ \ ,eol:¬
-
+set listchars=tab:␉\ ,eol:¬
+		
 " Set indent preferences.
 set tabstop=2
 set expandtab
@@ -220,7 +224,6 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 set statusline=%t "tail of filename
 set statusline+=%m "whether edited
 set statusline+=%y "filetype
-set statusline+=\ wc:%{WordCount()}
 set statusline+=%= "L/R separator; align following items right
 set statusline+=C:%c "Column
 set statusline+=,\ L:%l/%L "line of how many lines
@@ -323,9 +326,10 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
 
 " When vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vimrc
+" autocmd! bufwritepost .vimrc source ~/.vim/vimrc
 " Also manually trigger
-nnoremap <leader>r <Esc>:source ~/.vimrc<CR>
+" nnoremap <leader>r <Esc>:source ~/.vimrc<CR>
+" Doesn't work on home-manager
 
 " Set the location list (Syntastic) to a reasonable height
 " see :h syntastic-loclist-callback
@@ -434,31 +438,7 @@ au BufRead,BufNewFile *.cl set filetype=cool
 " .do to redo, AKA shell
 au BufRead,BufNewFile *.do set filetype=sh
 
-" Easily open magic.sh.
-command! -bar Magic sv | edit ~/magic.sh
-
 " Insert a timestamp.
 command! Now execute 'r! date "+\%F \%a \%H:\%M"'
 
-" Word-count functions: from " https://cromwell-intl.com/linux/vim-word-count.html
-let g:word_count="<unknown>"
-function! WordCount()
-	return g:word_count
-endfunction
-function! UpdateWordCount()
-	let lnum = 1
-	let n = 0
-	while lnum <= line('$')
-		let n = n + len(split(getline(lnum)))
-		let lnum = lnum + 1
-	endwhile
-	let g:word_count = n
-endfunction
-" Update the count when cursor is idle in command or insert mode.
-" Update when idle for 1000 msec (default is 4000 msec).
-set updatetime=1000
-augroup WordCounter
-	au! CursorHold,CursorHoldI * call UpdateWordCount()
-augroup END
-autocmd BufWritePost * call UpdateWordCount()
 
