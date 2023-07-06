@@ -5,6 +5,12 @@
 set -o vi
 export EDITOR=vim
 
+case "$SHELL" in
+  */zsh)
+    set -o PROMPT_SUBST
+    ;;
+esac
+
 export PS1="\$(printf '∴ %i %s@%s:%s\n∵ ' \$? \$USER \$(hostname) \$PWD)"
 export CLICOLOR="Yes"
 
