@@ -2,11 +2,8 @@
 #
 # Portable shell config- to local or remote hosts.
 
-# I like vi mode.
 set -o vi
-# emacs isn't for everyone.
 export EDITOR=vim
-
 
 export PS1="\$(printf '∴ %i %s@%s:%s\n∵ ' \$? \$USER \$(hostname) \$PWD)"
 export CLICOLOR="Yes"
@@ -19,6 +16,7 @@ alias lesss="less -S"
 alias md="mkdir"
 alias g="git"
 alias mtr="mtr --curses"
+alias z="exec zsh"
 
 if ls -v >/dev/null 2>&1
 then
@@ -48,71 +46,67 @@ s() {
   done
 }
 
-# Run or attach to an SSH agent.
-fixssh() {
-  stty sane
-
-  if test "$1" = '-f'
+e() {
+  # Invoke the "current" editor
+  if test "$TERM_PROGRAM" = "vscode"
   then
-    FORCE=true
+    code "$@"
   else
-    FORCE=false
+    vim "$@"
   fi
+}
 
-  ssh-add -L >/dev/null 2>&1
-  if test "$?" -ne "2"
+title() {
+  # change the title of the current window or tab.
+  # Default:
+  if test "$#" -eq 0
   then
-    echo >&2 "Looks like we have a working SSH agent."
+    title "$USER"@"$(hostname)"
     return
   fi
 
-  SOCKPATH="$HOME/.ssh/agent.sock"
+  # Use the XTerm code: https://tldp.org/HOWTO/Xterm-Title-3.html
+  # but it seems to work for other graphical terminals as well.
+  # Octally-encoded: <ESC>]0;<title><BELL>
+  echo -ne "\033]0;$*\007"
+}
+# Set title to user-at-host when starting a new shell.
+title "$USER"@"$(hostname)"
 
-  # *Something* is broken. Start repairs at this end, with SSH_AUTH_SOCK
-  if test -z "$SSH_AUTH_SOCK"
-  then
-    echo >&2 "SSH_AUTH_SOCK not set; setting to $SOCKPATH."
-    if test -S "$SOCKPATH"
+# Keep this early, so subsequent includes can access SYSCOLOR.
+if test -x $HOME/scripts/syscolor
+then
+  export SYSCOLOR="$($HOME/scripts/syscolor)"
+else
+  export SYSCOLOR="red"
+fi
+
+attach () {
+  fixssh
+  title "$1"
+  tmux -u2 new-session -DA -s $1
+  # Reset the title after exiting.
+  title
+}
+
+# Load additional, optional posix-compatible stuff
+if test -e "$HOME"/rcfiles/rc.sh
+then
+  . "$HOME"/rcfiles/rc.sh
+fi
+
+# Load additional, work-specific stuff
+if test -e $HOME/rcfiles/work.rc.sh
+then
+  . $HOME/rcfiles/work.rc.sh
+fi
+
+# Jump to the next rcfile, if deployed
+case "$SHELL" in
+  */zsh)
+    if test -e "$HOME"/rcfiles/rc.zsh
     then
-      # There's something there, it looks like.
-      GOT_PERMS="$(stat -c '%a' "$SOCKPATH")"
-      WANT_PERMS="600"
-      if test "$GOT_PERMS" != "$WANT_PERMS"
-      then
-        echo >&2 "Refusing to adopt SSH agent via socket $SOCKPATH with permissions: $GOT_PERMS != $WANT_PERMS"
-        return 1
-      fi
-      # Looks OK. Adopt the socket.
-      export SSH_AUTH_SOCK="$SOCKPATH"
+      . "$HOME"/rcfiles/rc.zsh
     fi
-  fi
-
-  # Did that fix it?
-  ssh-add -L >/dev/null 2>&1
-  if test "$?" -ne "2"
-  then
-    echo >&2 "SSH agent found at $SSH_AUTH_SOCK."
-    return
-  fi
-
-  # Not fixed yet. Disconnect the old agent and launch a new one.
-  if "$FORCE"
-  then
-    echo >&2 "Removing exising agent's socket, $SOCKPATH"
-    rm -f "$SOCKPATH"
-  fi
-
-  # Launch a new agent.
-  eval $(ssh-agent -a "$SOCKPATH")
-  export SSH_AUTH_SOCK
-}
-
-addkeys() {
-  echo "adding keys to agent $SSH_AGENT_PID"
-  ssh-add -t 7200 $(ls $HOME/.ssh \
-    | grep '[.]pub$' \
-    | sed 's/.pub$//' \
-    | sed "s!^!$HOME/.ssh/!" )
-}
-
-export SSH_AUTH_SOCK
+    ;;
+esac

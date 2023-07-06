@@ -1,22 +1,15 @@
 #!/bin/zsh
 # zsh initialization file.
+# Assume we're coming here from the "portable" configuration.
 
 # zmodload zsh/zprof
 
-# Load Posix-compatible bits at startup.
-. $HOME/rcfiles/rc.sh
-
 # Set up the prompt.
 set -o PROMPT_SUBST
-. $HOME/rcfiles/prompt.zsh
-
-if test -e $HOME/rcfiles/work.rc.sh
+if test -e "$HOME"/rcfiles/prompt.zsh
 then
-  . $HOME/rcfiles/work.rc.sh
+  . "$HOME"/rcfiles/prompt.zsh
 fi
-
-# Include my own functions.
-fpath+=($HOME/.zsh_functions)
 
 # Use Vim keybindings in ZLE.
 bindkey -v
