@@ -11,9 +11,6 @@
 [submodule ".vim/bundle/vim-template"]
 	path = .vim/bundle/vim-template
 	url = https://github.com/aperezdc/vim-template.git
-[submodule "solarized/xresources"]
-	path = solarized/xresources
-	url = https://github.com/solarized/xresources
 [submodule ".zsh/zsh-autosuggestions"]
 	path = .zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git

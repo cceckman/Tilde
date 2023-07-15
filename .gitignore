@@ -1,13 +1,4 @@
-.*
-bin/
-githost/
-go/
-r/
-Downloads/
-Downloads
-var/
-gdrive/
 themes/Xresources
 themes/alacritty.yml
 themes/menu
-.npm-global/
+
