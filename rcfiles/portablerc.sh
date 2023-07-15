@@ -92,7 +92,6 @@ else
 fi
 
 attach () {
-  fixssh
   title "$1"
   tmux -u2 new-session -DA -s $1
   # Reset the title after exiting.
