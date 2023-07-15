@@ -39,8 +39,8 @@ main() {
 
   TILDE="$(dirname "$(readlink -f "$0")")"
   ln -sf "$TILDE"/tmux.conf "$HOME"/.tmux.conf
-  ln -sf "$TILDE"/rcfiles/portablerc.sh "$HOME"/.portablerc.sh
-  ln -sf "$HOME"/.portablerc.sh "$HOME"/.zshrc
+  ln -sf "$TILDE"/rcfiles/ "$HOME"/rcfiles
+  ln -sf "$HOME"/rcfiles/portablerc.sh "$HOME"/.zshrc
 }
 
 main "$@"

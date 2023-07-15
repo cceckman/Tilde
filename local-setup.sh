@@ -28,7 +28,6 @@ upgrade_links() {
     ln -sf "$TILDE"/.vim "$HOME"/.vim
     ln -sf "$TILDE"/.vimrc "$HOME"/.vimrc
     ln -sf "$TILDE"/.zsh "$HOME"/.zsh
-    ln -sf "$TILDE"/rcfiles "$HOME"/rcfiles
     ln -sf "$TILDE"/scripts "$HOME"/scripts
     ln -sf "$TILDE"/themes "$HOME"/themes
 
