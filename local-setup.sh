@@ -2,4 +2,4 @@
 
 set -eu
 
-echo >&2 "Running minimal setup..."
+echo >&2 "Running local setup..."

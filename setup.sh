@@ -24,11 +24,11 @@ LOCAL="false"
 parse_args() {
   for ARG in "$@"
   do
-    case "ARG" in
+    case "$ARG" in
       "--local")
         LOCAL=true
         ;;
-      "-"*)
+      "--"*)
         stderr "Unrecognized flag $ARG"
         usage
         ;;
@@ -65,28 +65,36 @@ bounce() {
 }
 
 minimal() {
+  stderr "Performing minimal setup"
   local TILDEDIR
   TILDEDIR="$HOME/r/github.com/cceckman/Tilde"
   mkdir -p "$(dirname "$TILDEDIR")"
 
   if ! test -d "$TILDEDIR"
   then
+    stderr "Tilde not found; cloning..."
     git clone --depth=1 \
       https://github.com/cceckman/Tilde \
       "$HOME"/r/github.com/cceckman/Tilde
+  else
+    stderr "Tilde already cloned; not overwriting"
   fi
   "$HOME"/r/github.com/cceckman/Tilde/minimal-setup.sh
+  stderr "Completed minimal setup"
 }
 
-full() {
+local_setup() {
+  stderr "Beginning local setup"
   # Assume minimal is already done...
   "$HOME"/r/github.com/cceckman/Tilde/local-setup.sh
+  stderr "Completed local setup"
 }
 
 main() {
   parse_args "$@"
   if test -n "$TARGET"
   then
+    stderr "Performing setup on remote host $TARGET"
     bounce
     exit $?
   fi
@@ -94,7 +102,8 @@ main() {
   minimal
   if "$LOCAL"
   then
-
-
-
+    local_setup
+  fi
 }
+
+main "$@"
