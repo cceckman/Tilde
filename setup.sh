@@ -74,6 +74,7 @@ minimal() {
   then
     stderr "Tilde not found; cloning..."
     git clone --depth=1 \
+      -b claimer \
       https://github.com/cceckman/Tilde \
       "$HOME"/r/github.com/cceckman/Tilde
   else
