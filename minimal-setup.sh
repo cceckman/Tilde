@@ -32,7 +32,7 @@ main() {
   check_sudo
 
   set +x
-  sudo -n apt-get install -y tmux zsh
+  sudo -n apt-get install -y tmux zsh vim
   ZSH="$(cat /etc/shells | grep zsh | head -1)"
   sudo -n usermod --shell "$ZSH" "$USER"
   set -x

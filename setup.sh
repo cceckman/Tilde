@@ -73,6 +73,9 @@ minimal() {
   if ! test -d "$TILDEDIR"
   then
     stderr "Tilde not found; cloning..."
+    sudo -n apt-get -y install git || {
+      stderr "Could not achieve noninteractive sudo mode to install git"
+    }
     git clone --depth=1 \
       -b claimer \
       https://github.com/cceckman/Tilde \
