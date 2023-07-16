@@ -69,7 +69,6 @@ retheme() {
   theme_alacritty
   theme_menu
   theme_terminal
-  theme_x
 
   # Others require their own includes, and operate based on the name:
   theme_code "$THEME" "$VARIANT" "$ALTVARIANT"

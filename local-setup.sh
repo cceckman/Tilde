@@ -32,13 +32,13 @@ upgrade_tilde() {
 upgrade_links() {
   (
     stderr "Updating homedir links"
-    ln -sf "$TILDE"/.config "$HOME"/.config
-    ln -sf "$TILDE"/.gitignore_global "$HOME"/.gitignore_global
-    ln -sf "$TILDE"/.vim "$HOME"/.vim
-    ln -sf "$TILDE"/.vimrc "$HOME"/.vimrc
-    ln -sf "$TILDE"/.zsh "$HOME"/.zsh
-    ln -sf "$TILDE"/scripts "$HOME"/scripts
-    ln -sf "$TILDE"/themes "$HOME"/themes
+    ln -sf "$TILDE"/.config/ "$HOME"
+    ln -sf "$TILDE"/.gitignore_global "$HOME"
+    ln -sf "$TILDE"/.vim "$HOME"
+    ln -sf "$TILDE"/.vimrc "$HOME"
+    ln -sf "$TILDE"/.zsh "$HOME"
+    ln -sf "$TILDE"/scripts "$HOME"
+    ln -sf "$TILDE"/themes "$HOME"
 
     mkdir -p "$HOME"/.vscode/extensions/
     ln -sf \
