@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
@@ -50,7 +50,7 @@ class PasswordBuilder(object):
 
     def NewPw(self):
         rand = random.SystemRandom()
-        chosenWords = random.sample(self._words, self._wordcount)
+        chosenWords = random.sample(sorted(self._words), self._wordcount)
         return ''.join(w.title() for w in chosenWords)
 
 if __name__ == '__main__':
