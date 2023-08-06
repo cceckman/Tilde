@@ -77,7 +77,6 @@ minimal() {
       stderr "Could not achieve noninteractive sudo mode to install git"
     }
     git clone --depth=1 \
-      -b claimer \
       https://github.com/cceckman/Tilde \
       "$HOME"/r/github.com/cceckman/Tilde
   else
