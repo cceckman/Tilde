@@ -32,7 +32,7 @@ init_ssh() {
   if ! test -f ~/.ssh/authorized_keys
   then
     stderr "No authorized_keys present; seeding with init key"
-    (umask 0077; mkdir -p ~/.ssh; cp "$1" >~/.ssh/authorized_keys)
+    (umask 0077; mkdir -p ~/.ssh; cp "$1" ~/.ssh/authorized_keys)
   fi
 }
 
