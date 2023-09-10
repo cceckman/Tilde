@@ -1,10 +1,10 @@
 #!/bin/sh
 # vim: ft=sh
 
-# if test -f $HOME/themes/terminal.inc.sh
-# then
-#   . $HOME/themes/terminal.inc.sh
-# fi
+if test -f $HOME/themes/terminal.inc.sh
+then
+  . $HOME/themes/terminal.inc.sh
+fi
 
 helpless() {
   "$@" --help 2>&1 | less
