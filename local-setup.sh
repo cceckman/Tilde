@@ -74,6 +74,7 @@ upgrade_links() {
     stderr "Updating homedir links"
     ln -sf "$TILDE"/.config/ "$HOME"
     ln -sf "$TILDE"/.gitignore_global "$HOME"
+    ln -sf "$TILDE"/.gitconfig "$HOME"
     ln -sf "$TILDE"/.vim "$HOME"
     ln -sf "$TILDE"/.vimrc "$HOME"
     ln -sf "$TILDE"/.zsh "$HOME"
@@ -123,12 +124,19 @@ install_tools() {
   sudo apt-get -y install gh
 }
 
+install_theme() {
+  # Prerequisite for retheme script
+  sudo apt-get -y install jq
+  "$HOME"/scripts/retheme selenized dark
+}
+
 main() {
   upgrade_tilde
   upgrade_links
   install_toolchains
   install_tools
   ssh_config
+  install_theme
 }
 
 main

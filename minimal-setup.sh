@@ -49,7 +49,7 @@ main() {
   TILDE="$(dirname "$(readlink -f "$0")")"
   init_ssh "$TILDE"/id_init.pub
   ln -sf "$TILDE"/tmux.conf "$HOME"/.tmux.conf
-  ln -sf "$TILDE"/rcfiles/ "$HOME"/rcfiles
+  ln -sf "$TILDE"/rcfiles "$HOME"
   ln -sf "$HOME"/rcfiles/portablerc.sh "$HOME"/.zshrc
 }
 
