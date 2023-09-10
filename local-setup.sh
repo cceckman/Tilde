@@ -14,11 +14,6 @@ upgrade_tilde() {
   (
     set +x
     cd "$TILDE"
-    if git remote get-url origin | grep -q 'http'
-    then
-      stderr "Upgrading Tilde to SSH"
-      git remote set-url origin git@github.com:cceckman/Tilde.git
-    fi
     if test "$(git rev-parse --is-shallow-repository)" = true
     then
       stderr "Unshallowing Tilde"
@@ -26,6 +21,51 @@ upgrade_tilde() {
     fi
     git submodule update --init --recursive
     git remote prune origin
+    # Unshallow, then promote to SSH;
+    # We likely haven't minted or enrolled a pubkey for Github
+    if git remote get-url origin | grep -q 'http'
+    then
+      stderr "Upgrading Tilde to SSH"
+      git remote set-url origin git@github.com:cceckman/Tilde.git
+    fi
+  )
+}
+
+ssh_config() {
+  (
+    set +x
+    cd
+
+    if ! test -f .ssh/config
+    then
+      cat <<EOF >.ssh/config
+Host *
+  PasswordAuthentication no
+  # Only use identity files, not any identity loaded in ssh-agent
+  IdentitiesOnly yes
+  ControlPath ~/.ssh/control-%h-%p-%r
+  ControlMaster=auto
+  ControlPersist=10
+
+EOF
+    fi
+
+    if ! test -f .ssh/id_github.pub
+    then
+      stderr "Generating an SSH keypair for github.com"
+      ssh-keygen -t ed25519 -C cceckman@"$(hostname)" -f .ssh/id_github
+    fi
+    if ! grep "^Host github.com" .ssh/config
+    then
+      stderr "Adding GH stanza to .ssh/config"
+      cat <<EOF >>.ssh/config
+Host github.com
+  PasswordAuthentication no
+  IdentitiesOnly yes
+  IdentityFile %d/.ssh/id_github
+
+EOF
+    fi
   )
 }
 
@@ -88,6 +128,7 @@ main() {
   upgrade_links
   install_toolchains
   install_tools
+  ssh_config
 }
 
 main
