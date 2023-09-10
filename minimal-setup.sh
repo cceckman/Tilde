@@ -27,6 +27,15 @@ check_sudo() {
   stderr "Can use sudo."
 }
 
+init_ssh() {
+  stderr "Seeding authorized_keys..."
+  if ! test -f ~/.ssh/authorized_keys
+  then
+    stderr "No authorized_keys present; seeding with init key"
+    (umask 0077; mkdir -p ~/.ssh; cp "$1" >~/.ssh/authorized_keys)
+  fi
+}
+
 main() {
   check_user
   check_sudo
@@ -38,6 +47,7 @@ main() {
   set -x
 
   TILDE="$(dirname "$(readlink -f "$0")")"
+  init_ssh "$TILDE"/id_init.pub
   ln -sf "$TILDE"/tmux.conf "$HOME"/.tmux.conf
   ln -sf "$TILDE"/rcfiles/ "$HOME"/rcfiles
   ln -sf "$HOME"/rcfiles/portablerc.sh "$HOME"/.zshrc
