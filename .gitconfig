@@ -1,9 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
   name = Charles Eckman
   email = charles@cceckman.com
-  signingkey = F3C98967
 [alias]
   pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive && git remote prune origin; }; f"
   par = "!f(){ git pull --rebase=true \"$@\" && git submodule update --init --recursive; }; f"
@@ -31,7 +29,6 @@
   tabsize = 2
 [core]
   excludesfile = ~/.gitignore_global
-  hooksPath = ~/hooks
 [commit]
   # gpgsign = true
 [credential "https://source.developers.google.com"]
@@ -41,5 +38,4 @@
 [init]
 	defaultBranch = main
 [maintenance]
-	repo = /home/cceckman
-	repo = /home/cceckman/r/github.com/cceckman/peekatoo
+	repo = /home/cceckman/r/github.com/Tilde
