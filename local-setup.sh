@@ -89,9 +89,13 @@ upgrade_links() {
 }
 
 install_toolchains() {
+  stderr "Installing toolchains"
   (
-    if ! type cargo 2>&1 >/dev/null
+    if type cargo 2>&1 >/dev/null
     then
+      stderr "Found Cargo:"
+      type cargo
+    else
       stderr "Installing Rust via Rustup"
       curl https://sh.rustup.rs -sSf | sh -s -- \
         --no-modify-path \
@@ -102,8 +106,11 @@ install_toolchains() {
     fi
   )
   (
-    if ! type go 2>&1 >/dev/null
+    if type go 2>&1 >/dev/null
     then
+      stderr "Found Go:"
+      type go
+    else
       stderr "Installing Go"
       GOFILE="$(mktemp -d)/go.tar.gz"
       curl --fail -Lo "$GOFILE" \
@@ -112,8 +119,21 @@ install_toolchains() {
       sudo tar -C /usr/local -xzf "$GOFILE"
     fi
   )
+  (
+    if type bazel 2>&1 >/dev/null
+    then
+      stderr "Found bazel:"
+      type bazel
+    else
+      stderr "Installing bazelisk (as bazel)"
+      mkdir -p ~/.local/bin
+      curl --fail -Lo ~/.local/bin/bazel \
+        https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
+      chmod +x ~/.local/bin/bazel
+    fi
+  )
   sudo apt-get -y install clang llvm python3 lldb
-  # TODO: sccache:
+  # TODO: sccache?
   # https://github.com/mozilla/sccache/blob/main/docs/DistributedQuickstart.md
   . "$HOME"/rcfiles/path.sh
 }
