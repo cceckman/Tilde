@@ -39,7 +39,6 @@ lsvariant() {
 }
 
 retheme() {
-  set -x
   THEME="$1"
   VARIANT="$2"
   # Selenized also has "black" and "white";
@@ -54,7 +53,6 @@ retheme() {
         ;;
     esac
   fi
-  echo >&2 "$ALTVARIANT"
 
   INC="$REALDIR/$THEME/$VARIANT.inc.sh"
   if ! test -f "$INC"
@@ -63,7 +61,6 @@ retheme() {
     exit 1
   fi
   . $INC
-  echo >&2 "$ALTVARIANT"
 
   # Some themes are auto-filled based on included fragments:
   theme_alacritty
@@ -73,7 +70,6 @@ retheme() {
   # Others require their own includes, and operate based on the name:
   theme_code "$THEME" "$VARIANT" "$ALTVARIANT"
   theme_vim "$THEME" "$VARIANT" "$ALTVARIANT"
-  set +x
 }
 
 
