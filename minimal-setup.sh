@@ -41,7 +41,7 @@ main() {
   check_sudo
 
   set +x
-  sudo -n apt-get install -y tmux zsh vim ripgrep
+  sudo -n apt-get install -y tmux zsh vim ripgrep moreutils
   ZSH="$(cat /etc/shells | grep zsh | head -1)"
   sudo -n usermod --shell "$ZSH" "$USER"
   set -x
