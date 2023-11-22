@@ -155,7 +155,7 @@ install_gcloud() {
 install_tools() {
   # Various tools I like...
   cargo install git-branchless
-  sudo apt-get -y install gh
+  sudo apt-get -y install gh file inotify-tools
 
   install_gcloud
 }
