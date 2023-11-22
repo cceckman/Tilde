@@ -1,0 +1,4 @@
+# Ignore extensions etc. unless explicitly added;
+# VS Code has its own sync mechanisms
+**
+!.gitignore

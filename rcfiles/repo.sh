@@ -82,32 +82,12 @@ r() {
     pwd
     return
   fi
-  if test -d $HOME/go/src/*/cceckman/$1
-  then
-    cd $HOME/go/src/*/cceckman/$1
-    pwd
-    return
-  fi
 
-  local matches="$(echo $HOME/r/*/*/$1)"
+  local matches="$(ls $HOME/r/*/*/$1)"
   local n="$(echo $matches | wc -w)"
   if test "$n" -eq 1
   then
     cd $HOME/r/*/*/$1
-    pwd
-    return
-  fi
-  if test "$n" -gt 1
-  then
-    echo "Couldn't unambiguously identify ${1}: $matches"
-    return 1
-  fi
-
-  local matches="$(echo $HOME/go/src/*/*/$1)"
-  local n="$(echo $matches | wc -w)"
-  if test "$n" -eq 1
-  then
-    cd $HOME/go/src/*/*/$1
     pwd
     return
   fi
