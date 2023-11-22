@@ -138,10 +138,26 @@ install_toolchains() {
   . "$HOME"/rcfiles/path.sh
 }
 
+install_gcloud() {
+  # gcloud stanza: https://cloud.google.com/sdk/docs/install#deb
+  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+    | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
+    | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+  # We have to --no-install-recommends because it wants to install
+  # app-engine-python, which still requires python2.7 apparently? Wild.
+  sudo apt-get update && sudo apt-get install google-cloud-cli
+  # This doesn't work - requires python2.7 (!!)
+  # Filed b/312491174 for this.
+  # sudo apt-get install google-cloud-cli-app-engine-go
+}
+
 install_tools() {
   # Various tools I like...
   cargo install git-branchless
   sudo apt-get -y install gh
+
+  install_gcloud
 }
 
 install_theme() {
