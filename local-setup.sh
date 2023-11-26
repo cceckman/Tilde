@@ -88,6 +88,27 @@ upgrade_links() {
   )
 }
 
+install_go() {
+  VERSION="go1.21.4"
+  if type go 2>&1 >/dev/null
+  then
+    stderr "Found Go:"
+    type go
+
+    if test "$(go version | cut -d' ' -f3)" = "$VERSION"
+    then
+      stderr "$VERSION installed"
+      return 0
+    fi
+  fi
+
+  stderr "Installing Go $VERSION"
+  GOFILE="$(mktemp -d)/go.tar.gz"
+  curl --fail -Lo "$GOFILE" \
+    https://go.dev/dl/"$VERSION".linux-amd64.tar.gz
+  sudo rm -rf /usr/local/go
+}
+
 install_toolchains() {
   stderr "Installing toolchains"
   (
@@ -105,20 +126,7 @@ install_toolchains() {
         --target x86_64-unknown-linux-gnu
     fi
   )
-  (
-    if type go 2>&1 >/dev/null
-    then
-      stderr "Found Go:"
-      type go
-    else
-      stderr "Installing Go"
-      GOFILE="$(mktemp -d)/go.tar.gz"
-      curl --fail -Lo "$GOFILE" \
-        https://go.dev/dl/go1.20.6.linux-amd64.tar.gz
-      sudo rm -rf /usr/local/go
-      sudo tar -C /usr/local -xzf "$GOFILE"
-    fi
-  )
+  ( install_go )
   (
     if type bazel 2>&1 >/dev/null
     then
