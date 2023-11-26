@@ -106,7 +106,8 @@ install_go() {
   GOFILE="$(mktemp -d)/go.tar.gz"
   curl --fail -Lo "$GOFILE" \
     https://go.dev/dl/"$VERSION".linux-amd64.tar.gz
-  sudo rm -rf /usr/local/go
+  sudo rm -rf /usr/local/go && \
+    sudo tar -C /usr/local -xzf "$GOFILE"
 }
 
 install_toolchains() {
