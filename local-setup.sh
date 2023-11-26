@@ -148,8 +148,11 @@ install_toolchains() {
 
 install_gcloud() {
   # gcloud stanza: https://cloud.google.com/sdk/docs/install#deb
-  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-    | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+  if ! test -f /usr/share/keyrings/cloud.google.gpg
+  then
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+      | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+  fi
   echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
     | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
   # We have to --no-install-recommends because it wants to install
