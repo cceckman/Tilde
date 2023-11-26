@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Based on https://awbmilne.github.io/blog/SSH-Host-Fallback/ :
+usage() {
+cat >&2 <<EOF
+"$0" <TARGET_HOST> <TARGET_KEY>
+
+Tests if TARGET_HOST is reachable via SSH, and if so, if it offers TARGET_KEY
+as a host key. TARGET_HOST may be a hostname (resolved via the usual mechanism)
+or IP.
+
+Exits with code 0 if the host is reachable and has the host key, nonzero
+otherwise.
+EOF
+}
+
+
+TARGET_HOST="$1"
+TARGET_KEY="$2"
+
+if test -z "$TARGET_HOST" || test -z "$TARGET_KEY"
+then
+  echo >&2 "Missing argument"
+  echo >&2 ""
+  usage
+  exit 1
+fi
+
+if ! test -z "$XDG_RUNTIME_DIR" && test -d "$XDG_RUNTIME_DIR"
+then
+  TMPDIR="$XDG_RUNTIME_DIR/tmp"
+  mkdir -p "$TMPDIR"
+fi
+
+TMPFILE=$(mktemp check-host-fingerprints.tmp.XXXXXX)
+
+# Set -T timeout to 2 seconds; default is 5, it shouldn't take that long.
+# Exit immediately on timeout.
+ssh-keyscan -T 2 "$TARGET_HOST" 2>/dev/null >"$TMPFILE" || exit 1
+FINGERPRINTS=$(ssh-keygen -lf "$TMPFILE" | awk '{print $2}')
+rm -f "$TMPFILE"
+
+for FINGERPRINT in $FINGERPRINTS
+do
+        if test "$FINGERPRINT" = "$TARGET_KEY"
+        then
+                exit 0
+        fi
+done
+
+exit 1
+
