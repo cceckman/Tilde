@@ -29,17 +29,20 @@ fi
 if ( ! test -z "$XDG_RUNTIME_DIR" ) && test -d "$XDG_RUNTIME_DIR"
 then
   echo "$XDG_RUNTIME_DIR"
-  export TMPDIR="$XDG_RUNTIME_DIR/tmp"
+  export TMPDIR="${XDG_RUNTIME_DIR}/tmp"
   mkdir -p "$TMPDIR"
 fi
 
-TMPFILE=$(mktemp -t check-ssh-hostkey.tmp.XXXXXX)
+TMPFILE="$(mktemp -t check-ssh-hostkey.tmp.XXXXXX)"
 
 # Set -T timeout to 2 seconds; default is 5, it shouldn't take that long.
 # Exit immediately on timeout.
-ssh-keyscan -T 2 "$TARGET_HOST" 2>/dev/null >"$TMPFILE" || exit 1
+ssh-keyscan -T 2 "$TARGET_HOST" 2>/dev/null >"$TMPFILE" || {
+  rm "$TMPFILE"
+  exit 1
+}
 FINGERPRINTS=$(ssh-keygen -lf "$TMPFILE" | awk '{print $2}')
-rm -f "$TMPFILE"
+set -x; rm -f "$TMPFILE"; set +x
 
 for FINGERPRINT in $FINGERPRINTS
 do
