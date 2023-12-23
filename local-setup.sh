@@ -10,35 +10,27 @@ stderr() {
 
 TILDE="$HOME"/r/github.com/cceckman/Tilde
 
-upgrade_tilde() {
-  (
-    set +x
-    cd "$TILDE"
-    if test "$(git rev-parse --is-shallow-repository)" = true
-    then
-      stderr "Unshallowing Tilde"
-      git fetch --unshallow
-    fi
-    git submodule update --init --recursive
-    git remote prune origin
-    # Unshallow, then promote to SSH;
-    # We likely haven't minted or enrolled a pubkey for Github
-    if git remote get-url origin | grep -q 'http'
-    then
-      stderr "Upgrading Tilde to SSH"
-      git remote set-url origin git@github.com:cceckman/Tilde.git
-    fi
-  )
-}
-
 ssh_config() {
-  (
-    set +x
-    cd
+  sudo apt-get install -y ykcs11
+  mkdir -p ~/.ssh
+  chmod 0700 ~/.ssh
 
-    if ! test -f .ssh/config
-    then
-      cat <<EOF >.ssh/config
+  # Set up enrollment key:
+  cat <<EOF >$HOME/.ssh/id_enrollment.pub
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBEWOv6ObxM/LQTQXMJYKDrk/yzpog0CvhXWCCFu/3SddnYujiLDTDvPKM+7LmPRWTvaWDvWyaG1mvIL17aBlO8=
+EOF
+
+  # And a new per-device key for Github, if needed:
+  if ! test -f $HOME/.ssh/id_github.pub
+  then
+    stderr "Generating an SSH keypair for github.com"
+    ssh-keygen -t ed25519 -C cceckman@"$(hostname)" -f $HOME/.ssh/id_github
+  fi
+
+  # Seed SSH config:
+  if ! test -f $HOME/.ssh/config
+  then
+    cat <<EOF >$HOME/.ssh/config
 Host *
   PasswordAuthentication no
   # Only use identity files, not any identity loaded in ssh-agent
@@ -46,33 +38,57 @@ Host *
   ControlPath ~/.ssh/control-%h-%p-%r
   ControlMaster=auto
   ControlPersist=10
-
 EOF
-    fi
+  fi
 
-    if ! test -f .ssh/id_github.pub
-    then
-      stderr "Generating an SSH keypair for github.com"
-      ssh-keygen -t ed25519 -C cceckman@"$(hostname)" -f .ssh/id_github
-    fi
-    if ! grep "^Host github.com" .ssh/config
-    then
-      stderr "Adding GH stanza to .ssh/config"
-      cat <<EOF >>.ssh/config
+  if ! grep "^Host github.com" $HOME/.ssh/config
+  then
+    TEMP="$(mktemp -p ~/.ssh)"
+    cat - $HOME/.ssh/config <<EOF  >$TEMP
 Host github.com
+  User cceckman
   PasswordAuthentication no
+  PKCS11Provider /usr/lib/$(uname -m)-linux-gnu/libykcs11.so
   IdentitiesOnly yes
-  IdentityFile %d/.ssh/id_github
+  IdentityFile ~/.ssh/id_enrollment.pub
+  IdentityFile ~/.ssh/id_github
 
 EOF
+    mv "$TEMP" $HOME/.ssh/config
+  fi
+}
+
+upgrade_tilde() {
+  (
+    set +x
+    cd "$TILDE"
+
+    # Promote to SSH, then unshallow;
+    # SSH has better performance than HTTP, if I understand correctly.
+    if git remote get-url origin | grep -q 'http'
+    then
+      stderr "Upgrading Tilde to SSH"
+      git remote set-url origin git@github.com:cceckman/Tilde.git
     fi
+
+    if test "$(git rev-parse --is-shallow-repository)" = true
+    then
+      stderr "Unshallowing Tilde"
+      git fetch --unshallow
+    fi
+    git submodule update --init --recursive
+    git remote prune origin
   )
 }
 
 upgrade_links() {
   (
     stderr "Updating homedir links"
-    ln -sf "$TILDE"/.config/ "$HOME"
+    mkdir -p "$HOME/.config"
+    for dir in $(ls "$TILDE"/.config)
+    do
+	    ln -sf "$TILDE"/.config/"$dir" "$HOME"/.config
+    done
     ln -sf "$TILDE"/.gitignore_global "$HOME"
     ln -sf "$TILDE"/.gitconfig "$HOME"
     ln -sf "$TILDE"/.vim "$HOME"
@@ -178,13 +194,27 @@ install_theme() {
   "$HOME"/scripts/retheme selenized dark
 }
 
+install_gui() {
+  sudo apt-get install -y \
+    sway swayidle swaylock xdg-desktop-portal-wlr waybar \
+    foot alacritty mako-notifier bemenu \
+    light gammastep
+}
+
+# TODO: Install GUI environment
+
 main() {
+  ssh_config
   upgrade_tilde
   upgrade_links
   install_toolchains
   install_tools
-  ssh_config
   install_theme
+
+  if ( test -d /usr/share/wayland-sessions || test -d /usr/share/xsessions )
+  then
+    install_gui
+  fi
 }
 
 main
