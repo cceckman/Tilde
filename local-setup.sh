@@ -85,9 +85,9 @@ upgrade_links() {
   (
     stderr "Updating homedir links"
     mkdir -p "$HOME/.config"
-    for dir in $(ls "$TILDE"/.config)
+    for dir in $(ls "$TILDE"/config)
     do
-	    ln -sf "$TILDE"/.config/"$dir" "$HOME"/.config
+	    ln -sf "$TILDE"/config/"$dir" "$HOME"/.config
     done
     ln -sf "$TILDE"/.gitignore_global "$HOME"
     ln -sf "$TILDE"/.gitconfig "$HOME"
