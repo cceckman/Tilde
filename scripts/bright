@@ -1,26 +1,20 @@
 #!/bin/sh
-# Brightness control
+# Brightness control, for internal and external monitors
 
-set -e
+# If you're not in the i2c group, fix that!
 
-backlight=/sys/class/backlight/intel_backlight/brightness
+set -eux
 
-if test -e "$backlight"
+if ! lsmod | grep - i2c
 then
-  # Skip xbacklight
-  if test "$#" -eq 1
-  then
-    echo "$1" | sudo tee "$backlight"
-  else
-    cat "$backlight"
-  fi
-  exit
+  modprove i2c-dev
 fi
 
-# Fall back to xbacklight
-if [ "$#" -eq 1 ]
-then
-  xbacklight -set $1
-else
-  xbacklight
-fi
+brightnessctl "$@"
+
+# Apply to external monitors too:
+PERCENT="$(( $(brightnessctl get) * 100 / $(brightnessctl max) ))"
+MAX="$(ddcutil getvcp 10 | grep -o 'max .*' | grep -o '[0-9]*')"
+NEW="$(( MAX *  ratio / 100 ))"
+ddcutil setvcp 10 "$NEW"
+

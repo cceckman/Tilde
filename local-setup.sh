@@ -198,7 +198,8 @@ install_gui() {
   sudo apt-get install -y \
     sway swayidle swaylock xdg-desktop-portal-wlr waybar \
     foot alacritty mako-notifier bemenu \
-    light gammastep
+    brightnessctl ddcutil gammastep \
+    fonts-font-awesome
 }
 
 # TODO: Install GUI environment
