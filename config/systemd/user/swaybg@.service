@@ -1,0 +1,18 @@
+[Unit]
+Description=Hold random background on a monitor
+
+[Service]
+PassEnvironment=PATH
+ExecSearchPath=%h/scripts
+ExecStart=bg-rotate --show %i
+
+# Hardening
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+
+# Elevated permissions to sync ownership (disabled by default),
+# see https://docs.syncthing.net/advanced/folder-sync-ownership
+#AmbientCapabilities=CAP_CHOWN CAP_FOWNER
+
+

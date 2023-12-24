@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -eux
+
+# Rotate backgrounds
+
+# Rotate-now by triggering the service.
+now() {
+  systemctl --user start bg-rotate.service
+}
+
+# Run swaybg for a monitor
+show() {
+  IMAGE="$(find "${HOME}/Syncthing/Backgrounds" -type f \
+    | sort -R \
+    | head -1)"
+  swaybg -m fill -o "$1" -i "$IMAGE"
+}
+
+# Trigger the service for all monitors
+all() {
+  swaymsg -r -t get_outputs \
+    | jq -r .[].name \
+    | while read MONITOR
+      do
+        systemctl --user restart swaybg@"$MONITOR"
+      done
+}
+
+case "$1" in
+  "--now")
+    now
+    ;;
+  "--show")
+    show "$2"
+    ;;
+  "--all")
+    all
+    ;;
+  *)
+    echo >&2 "Unknown argument: $arg"
+    ;;
+esac

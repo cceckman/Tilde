@@ -239,8 +239,11 @@ exec mako
 input "1:1_AT_Translated_set_2_keyboard" xkb_options ctrl:swapcaps
 
 # try to make screen-sharing work:
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK SDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+exec systemctl --user WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
 
 # start programs for system tray
-exec ~/scripts/tray
+exec_always --no-startup-id ~/scripts/tray
+# start background screensaver
+exec_always --no-startup-id bg-rotate --now
 

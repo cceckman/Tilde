@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer for background rotation
+
+[Install]
+WantedBy=default.target
+
+[Timer]
+OnUnitActiveSec=3600
+
+# Note: the default accuracy is 1min, to avoid CPU wakeups.
+

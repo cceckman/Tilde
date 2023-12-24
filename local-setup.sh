@@ -205,14 +205,21 @@ install_gui() {
   sudo apt-get install -y \
     blueman libspa-0.2-bluetooth
 
+  systemctl --user disable --now xdg-desktop-portal-gtk
+  systemctl --user enable --now xdg-desktop-portal-wlr
+
   mkdir -p ~/.local/share/fonts/
-  FONTDIR="$(mktemp -d)"
-  (
-    cd $FONTDIR ; echo >&2 $FONTDIR
-    curl -Lo fontawesome.zip https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip
-    unzip fontawesome.zip
-    cp */otfs/*.otf ~/.local/share/fonts
-  )
+  if ! find ~/.local/share/fonts -name 'Font Awesome*' >/dev/null
+  then
+    FONTDIR="$(mktemp -d)"
+    (
+      cd $FONTDIR ; echo >&2 $FONTDIR
+      curl -Lo fontawesome.zip https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip
+      unzip fontawesome.zip
+      cp */otfs/*.otf ~/.local/share/fonts
+    )
+    rm -rf "$FONTDIR"
+  fi
 
   fc-cache
 }

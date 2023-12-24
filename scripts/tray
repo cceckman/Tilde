@@ -2,6 +2,14 @@
 
 pkill -f blueman-applet
 pkill -f nm-applet
+pkill -f syncthingtray
 
 blueman-applet &
-nm-applet --indicator &
+if type nm-applet 2>&1 >/dev/null
+then
+  nm-applet --indicator &
+fi
+if type syncthingtray 2>&1 >/dev/null
+then
+  (sleep 10 && syncthingtray --wait ) &
+fi
