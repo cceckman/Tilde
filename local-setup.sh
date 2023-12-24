@@ -50,8 +50,8 @@ Host github.com
   PasswordAuthentication no
   PKCS11Provider /usr/lib/$(uname -m)-linux-gnu/libykcs11.so
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/id_enrollment.pub
   IdentityFile ~/.ssh/id_github
+  IdentityFile ~/.ssh/id_enrollment.pub
 
 EOF
     mv "$TEMP" $HOME/.ssh/config
