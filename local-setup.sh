@@ -183,7 +183,7 @@ install_gcloud() {
 install_tools() {
   # Various tools I like...
   cargo install git-branchless
-  sudo apt-get -y install gh file inotify-tools
+  sudo apt-get -y install gh file inotify-tools strace linux-perf
 
   install_gcloud
 }
@@ -199,7 +199,11 @@ install_gui() {
     sway swayidle swaylock xdg-desktop-portal-wlr waybar \
     foot alacritty mako-notifier bemenu \
     brightnessctl ddcutil gammastep \
-    fonts-font-awesome
+    fonts-font-awesome \
+    xwayland
+
+  sudo apt-get install -y \
+    blueman libspa-0.2-bluetooth
 }
 
 # TODO: Install GUI environment

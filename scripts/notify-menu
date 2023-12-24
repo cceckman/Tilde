@@ -1,0 +1,36 @@
+#!/bin/sh
+
+if ! type makoctl 1>/dev/null
+then
+  exit 1
+fi
+
+ACTION="$(cat <<EOF | ~/scripts/menuize "Notificatons: "
+clear
+open
+hide
+show
+EOF
+)"
+
+case "$ACTION" in
+  clear)
+    exec makoctl dismiss --all
+    ;;
+  open)
+    NOTIFICATION="$(makoctl list | jq -r '.data[0][] | "\(.id.data\ \(.summary.data|"' | ~/scripts/somemenu -l 20 -p "Open: "  | grep -o '^[0-9]\+')"
+    if test -z "$NOTIFICATION"; then exit 1; fi
+    exec makoctl invoke -n "$NOTIFICATION"
+    ;;
+  show)
+    exec makoctl mode -r do-not-disturb
+    ;;
+  hide)
+    TIME="$(~/scripts/somemenu -l 20 -p "Silence for: ")"
+    makoctl mode -a do-not-disturb
+    nohup sh -c "sleep $TIME; makoctl mode -r do-not-disturb"
+    ;;
+  *)
+    exit 1
+esac
+

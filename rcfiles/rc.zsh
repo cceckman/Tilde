@@ -39,3 +39,7 @@ bindkey -M vicmd v edit-command-line
 # Allow comments in interactive scripts, e.g. if copy+pasted
 setopt interactivecomments
 
+# Finally: if we're not in a graphical environment, launch sway
+if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec sway
+fi

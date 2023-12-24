@@ -1,0 +1,25 @@
+#!/bin/sh
+
+ACTION="$(cat <<EOF | ~/scripts/menuize "Poweroff behavior: "
+lock
+restart
+sway-exit
+poweroff
+EOF
+)"
+
+case "$ACTION" in
+  lock)
+    swaylock -f -c 000000
+    ;;
+  restart)
+    sudo reboot
+    ;;
+  sway-exit)
+    swaymsg exit
+    ;;
+  poweroff)
+    poweroff
+    ;;
+esac
+

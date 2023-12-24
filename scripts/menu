@@ -3,7 +3,7 @@
 # Meta-menu: menu of menus
 
 MENU="$(
-  find ~/scripts -regex '.*-menu' \
+  find -L ~/scripts -regex '.*-menu' \
 | xargs -n1 basename \
 | cut -d'-' -f1 \
 | sort \
