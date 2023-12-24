@@ -204,6 +204,17 @@ install_gui() {
 
   sudo apt-get install -y \
     blueman libspa-0.2-bluetooth
+
+  mkdir -p ~/.local/share/fonts/
+  FONTDIR="$(mktemp -d)"
+  (
+    cd $FONTDIR ; echo >&2 $FONTDIR
+    curl -Lo fontawesome.zip https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip
+    unzip fontawesome.zip
+    cp */otfs/*.otf ~/.local/share/fonts
+  )
+
+  fc-cache
 }
 
 # TODO: Install GUI environment

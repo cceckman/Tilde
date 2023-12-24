@@ -108,7 +108,7 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+      "tooltip": false
     },
     "memory": {
         "format": "{}% "
@@ -124,7 +124,9 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        // Below are from the Font Awesome 5 Free collection; FontAwesome4,
+        // which is in Debian repos, doesn't include these.
+        "format-icons": ["", "", "", "", ""]
     },
     "battery": {
         "states": {
