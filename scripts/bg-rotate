@@ -27,17 +27,18 @@ all() {
       done
 }
 
-case "$1" in
-  "--now")
-    now
-    ;;
+case "${1:-}" in
   "--show")
     show "$2"
+    exit
     ;;
   "--all")
     all
+    exit
     ;;
-  *)
-    echo >&2 "Unknown argument: $arg"
+  *) # or --now
     ;;
 esac
+
+
+now
