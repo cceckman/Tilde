@@ -16,10 +16,10 @@ case "$ACTION" in
     swaymsg exit
     ;;
   restart)
-    sudo reboot
+    systemctl reboot
     ;;
   poweroff)
-    poweroff
+    systemctl poweroff
     ;;
 esac
 
