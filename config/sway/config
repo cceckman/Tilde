@@ -6,14 +6,6 @@
 # Work configuration; set RH monitor vertical
 # exec xrandr --output DP-1 --rotate left
 
-# Set background
-# exec --not-startup-od sh ~/.fehbg
-# exec --no-startup-id xscreensaver &
-
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -52,8 +44,8 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/scripts/bright set '5%-'
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/scripts/bright set '+5%'
+bindsym XF86MonBrightnessDown exec ~/scripts/bright set '5%-'
+bindsym XF86MonBrightnessUp exec ~/scripts/bright set '+5%'
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
@@ -73,7 +65,7 @@ bindsym $mod+space exec "~/scripts/menu"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec i3-dmenu-desktop
 
 # change focus
 
@@ -226,10 +218,10 @@ for_window [class=".*"] move window to workspace current
 
 # Lock and turn off monitors
 exec swayidle -w \
-  timeout 300 'swaylock -f -c 000000' \
-  timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on" \
-    before-sleep 'swaylock -f -c 000000'
+    timeout 10 swaylock \
+    timeout 600 'swaymsg "output * dpms off"' \
+      resume 'swaymsg "output * dpms on"' \
+    before-sleep swaylock \
 
 # Run the mako notification daemon in the background
 exec mako
@@ -242,7 +234,7 @@ exec systemctl --user WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
 
 # start programs for system tray
-exec_always --no-startup-id ~/scripts/tray
+exec_always ~/scripts/tray
 # start background screensaver
-exec_always --no-startup-id bg-rotate --now
+exec_always bg-rotate --now
 
