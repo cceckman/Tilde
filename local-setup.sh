@@ -205,9 +205,6 @@ install_gui() {
   sudo apt-get install -y \
     blueman libspa-0.2-bluetooth
 
-  systemctl --user disable --now xdg-desktop-portal-gtk
-  systemctl --user enable --now xdg-desktop-portal-wlr
-
   mkdir -p ~/.local/share/fonts/
   if ! find ~/.local/share/fonts -name 'Font Awesome*' >/dev/null
   then

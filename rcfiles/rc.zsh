@@ -44,5 +44,8 @@ systemctl --user import-environment PATH
 
 # Finally: if we're not in a graphical environment, launch sway
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  export XDG_SESSION_TYPE=wayland
+  # https://github.com/swaywm/sway/pull/4876#issuecomment-1332403978
+  export XDG_CURRENT_DESKTOP=sway
   exec sway
 fi
