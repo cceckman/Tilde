@@ -218,9 +218,9 @@ for_window [class=".*"] move window to workspace current
 
 # Lock and turn off monitors
 exec swayidle -w \
-    timeout 10 swaylock \
-    timeout 600 'swaymsg "output * dpms off"' \
-      resume 'swaymsg "output * dpms on"' \
+    timeout 300 swaylock \
+    timeout 600 "swaymsg 'output * dpms off'" \
+      resume "swaymsg 'output * dpms on'" \
     before-sleep swaylock \
 
 # Run the mako notification daemon in the background
