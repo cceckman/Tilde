@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. ~/scripts/syscolor >/dev/null
+
+swaylock --inside-color "$SYSTEM_UI_COLOR"aa

@@ -36,8 +36,8 @@ bindsym $mod+Return exec ~/scripts/term
 bindsym $mod+c exec ~/scripts/browser
 
 # Lock screen
-bindsym XF86Mail exec 'swaylock -f -c 000000'
-bindsym $mod+Shift+Tab exec 'swaylock -f -c 000000'
+bindsym XF86Mail exec ~/scripts/lock
+bindsym $mod+Shift+Tab exec ~/scripts/lock
 
 # Handle volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -218,10 +218,10 @@ for_window [class=".*"] move window to workspace current
 
 # Lock and turn off monitors
 exec swayidle -w \
-    timeout 300 swaylock \
+    timeout 300 ~/scripts/lock \
     timeout 600 "swaymsg 'output * dpms off'" \
       resume "swaymsg 'output * dpms on'" \
-    before-sleep swaylock \
+    before-sleep ~/scripts/lock \
 
 # Run the mako notification daemon in the background
 exec mako
