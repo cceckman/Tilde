@@ -60,7 +60,7 @@ bindsym $mod+Shift+v move scratchpad
 bindsym $mod+v scratchpad show
 
 # Menu-of-menus:
-bindsym $mod+grave exec '~/scripts/menu'
+bindsym $mod+apostrophe exec '~/scripts/menu'
 bindsym $mod+space exec bemenu-run
 
 # There also is the (new) i3-dmenu-desktop which only displays applications

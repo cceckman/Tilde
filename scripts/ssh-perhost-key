@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Generate an SSH key and install it, locally and remotely.
+
+set -eux
+
+if test -z "$1"
+then
+  echo >&2 "Usage: $0 <host>"
+  exit 1
+fi
+
+KEYFILE="$HOME/.ssh/id_$1"
+
+if ! test -f ~/.ssh/id_"$1"
+then
+  echo >&2 "Generating new per-host key for $1"
+  ssh-keygen -t ed25519 -C "$USER"@"$(hostname)" -f "$KEYFILE"
+fi
+
+# Install the key, then update our local config.
+ssh-copy-id -f -i "$KEYFILE" "$1"
+
+if ! grep "Host $1" ~/.ssh/config
+then
+  cat <<EOF >>~/.ssh/config
+
+Host $1
+  PasswordAuthentication no
+  IdentitiesOnly yes
+  IdentityFile %d/.ssh/id_$1
+
+EOF
+
+fi
