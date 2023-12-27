@@ -83,7 +83,7 @@ r() {
     return
   fi
 
-  local matches="$(ls $HOME/r/*/*/$1)"
+  local matches="$(ls -d $HOME/r/*/*/$1)"
   local n="$(echo $matches | wc -w)"
   if test "$n" -eq 1
   then
