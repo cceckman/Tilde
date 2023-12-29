@@ -202,7 +202,10 @@ workspace_auto_back_and_forth yes
 # Notifications windows, e.g. mako, have no title
 for_window [app_id="^$"] floating enable
 for_window [app_id="^$"] border csd
-for_window [app_id="^$"] move absolute position 20 20
+
+# Firefox sharing indicator should float
+for_window [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"] move scratchpad
+no_focus [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"]
 
 # Remove title, include it in waybar instead
 default_border pixel 2
