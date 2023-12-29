@@ -1,0 +1,55 @@
+#!/bin/sh
+
+if ! test -f ~/.config/home-assistant/token
+then
+  swaynag -t warning -m "No Home Assistant token available! See $(realpath $0)"
+  exit 1
+fi
+
+hass() {
+  ENDPOINT="$1"
+  curl \
+    -H "Authorization: Bearer $(cat ~/.config/home-assistant/token)" \
+    -H "Content-Type: application/json" \
+    http://homeassistant.monkey-heptatonic.ts.net:8123/"$ENDPOINT"
+}
+
+hass_post() {
+  ENDPOINT="$1"
+  curl -s \
+    -H "Authorization: Bearer $(cat ~/.config/home-assistant/token)" \
+    -H "Content-Type: application/json" \
+    http://homeassistant.monkey-heptatonic.ts.net:8123/"$ENDPOINT" \
+    -d @-
+}
+
+# Apparently there are two ways to get scenes-for-an-area: websocket API
+# or template.
+# https://community.home-assistant.io/t/get-api-areas-rest-endpoint/271440
+# Going the template route, based
+# in part on https://community.home-assistant.io/t/automation-to-list-all-scenes-in-area-and-add-these-to-an-input-select/462980/3
+#
+# (I'm -1 on "websocket rather than REST")
+
+SCENE="$(cat <<EOS | hass_post api/template | jq -r '.[]' | ~/scripts/somemenu -l20 -p "Scene: "
+{
+  "template": "{{
+      expand(area_entities('Office'))
+    | selectattr('domain', 'eq', 'scene')
+    | map(attribute='entity_id')
+    | list | to_json
+  }}"
+}
+EOS
+)"
+
+if test -z "$SCENE"
+then
+  exit 1
+fi
+
+cat <<EOS | hass_post api/services/scene/turn_on
+{
+    "entity_id": "${SCENE}"
+}
+EOS
