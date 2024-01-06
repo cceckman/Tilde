@@ -11,7 +11,7 @@ now() {
 
 # Run swaybg for a monitor
 show() {
-  IMAGE="$(find "${HOME}/Syncthing/Backgrounds" -type f \
+  IMAGE="$(find "${HOME}/Syncthing/Backgrounds" -type f -not -name '.*' \
     | sort -R \
     | head -1)"
   swaybg -m fill -o "$1" -i "$IMAGE"
