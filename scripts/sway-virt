@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# https://github.com/emersion/xdg-desktop-portal-wlr/issues/107#issuecomment-1596107337
+
+set -eux
+
+if swaymsg -t get_outputs | grep -qv HEADLESS-1
+then
+  # https://github.com/swaywm/sway/issues/5553
+  swaymsg create_output
+fi
+
+swaymsg output HEADLESS-1 resolution 1920x1080
+bg-rotate
+# https://github.com/Ferdi265/wl-mirror
+# Nearest scaling, so 1920x1080 becomes a sharp 4x on a 4k monitor
+wl-mirror --scaling nearest HEADLESS-1 &
+MIRROR="$!"
+
+read DONE
+
+kill $MIRROR
+
+# Not effective; requires an unplug, which isn't available in my Sway version.
+# swaymsg output HEADLESS-1 disable
+
