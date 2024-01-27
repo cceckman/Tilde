@@ -200,7 +200,7 @@ install_gui() {
     foot alacritty mako-notifier bemenu \
     brightnessctl ddcutil gammastep \
     fonts-font-awesome \
-    xwayland
+    xwayland wl-clipboard
 
   sudo apt-get install -y \
     blueman libspa-0.2-bluetooth
