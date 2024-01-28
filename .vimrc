@@ -279,7 +279,10 @@ autocmd FileType python setlocal foldmethod=indent
 " .md to Markdown, not modula2. Come on.
 au BufRead,BufNewFile *.md setfiletype markdown
 " Use 80-character text wrapping in markdown.
-autocmd FileType markdown setlocal textwidth=80
+" autocmd FileType markdown setlocal textwidth=80
+" Use word-wrap in Markdown rather than character-wrap.
+" (Maybe always?)
+autocmd FileType markdown setlocal linebreak
 
 " Restore line position when re-opening a file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
