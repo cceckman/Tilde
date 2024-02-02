@@ -187,8 +187,6 @@ bindsym $mod+r mode "resize"
 # Move containers (workspaces) between monitors
 bindsym $mod+Shift+p move workspace to output right
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
         swaybar_command waybar
 }
@@ -207,10 +205,14 @@ for_window [app_id="^$"] border csd
 for_window [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"] move scratchpad
 no_focus [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"]
 
-# Remove title, include it in waybar instead
+# By default, remove title, include it in waybar instead
 default_border pixel 2
 gaps inner 2
 smart_gaps inverse_outer
+
+# Highlight xwayland windows
+for_window [shell="xwayland"] border normal 2
+for_window [shell="xwayland"] title_format "%title (%shell)"
 
 # Theming - based on selenized-dark
 client.focused #adbcbc88 #adbcbccc #184956 #cad8d988
@@ -240,5 +242,5 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSO
 # start programs for system tray
 exec_always ~/scripts/tray
 # start background screensaver
-exec_always bg-rotate --now
+exec_always ~/scripts/bg-rotate
 
