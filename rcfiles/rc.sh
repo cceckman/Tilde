@@ -24,6 +24,11 @@ ssh() {
 
 if test -n "$WAYLAND_DISPLAY"
 then
-  alias copy=wl-copy
-  alias paste=wl-paste
+  copy() {
+    wl-copy && echo >&2 "✂️"
+  }
+
+  paste() {
+    wl-paste && echo >&2 "✒️"
+  }
 fi
