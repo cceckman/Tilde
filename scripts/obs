@@ -2,4 +2,4 @@
 
 sudo modprobe v4l2loopback video_nr=2 card_label="OBS Virtual Camera" exclusive_caps=1
 
-/usr/bin/obs
+exec /usr/bin/obs
