@@ -213,6 +213,9 @@ smart_gaps inverse_outer
 # Highlight xwayland windows
 for_window [shell="xwayland"] border normal 2
 for_window [shell="xwayland"] title_format "%title (%shell)"
+# Allow manual toggle of title bar
+bindsym $mod+o border toggle
+
 
 # Theming - based on selenized-dark
 client.focused #adbcbc88 #adbcbccc #184956 #cad8d988
