@@ -18,7 +18,7 @@ case "$ACTION" in
     exec makoctl dismiss --all
     ;;
   open)
-    NOTIFICATION="$(makoctl list | jq -r '.data[0][] | "\(.id.data\ \(.summary.data|"' | ~/scripts/somemenu -l 20 -p "Open: "  | grep -o '^[0-9]\+')"
+    NOTIFICATION="$(makoctl list | jq -r '.data[0][] | "\(.id.data) \(.summary.data)"' | ~/scripts/somemenu -l 20 -p "Open: "  | grep -o '^[0-9]\+')"
     if test -z "$NOTIFICATION"; then exit 1; fi
     exec makoctl invoke -n "$NOTIFICATION"
     ;;
