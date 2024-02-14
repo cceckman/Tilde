@@ -2,9 +2,10 @@
 
 ACTION="$(cat <<EOF | ~/scripts/menuize "Terminate: "
 lock
-restart
+suspend
 sway-exit
-poweroff
+restart
+off
 EOF
 )"
 
@@ -12,14 +13,18 @@ case "$ACTION" in
   lock)
     swaylock -f -c 000000
     ;;
+  suspend)
+    systemctl suspend
+    ;;
   sway-exit)
     swaymsg exit
     ;;
   restart)
     systemctl reboot
     ;;
-  poweroff)
+  off)
     systemctl poweroff
     ;;
+
 esac
 
