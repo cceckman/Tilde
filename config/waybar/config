@@ -41,6 +41,12 @@
     //         "default": ""
     //     }
     // },
+    "sway/window": {
+      "rewrite": {
+        "(.*) — Mozilla Firefox": "🌎 $1",
+        "(.*) - Google Chrome": "  $1"
+      },
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
