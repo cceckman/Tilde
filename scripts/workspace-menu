@@ -30,25 +30,51 @@ test -n "$ITEM" || exit 1
 ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
 
 # What do we want to do with it?
-WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): " | cut -f1
-1 tmux + code
-2 tmux
-3 code
+WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): "
+code
+tmux
+both
 EOF
 )
 
 SHORTNAME="$(basename $ITEM)"
 
+# Where do we want to do it?
+WHEREDO=$(cat <<EOF | somemenu -l 2 -p "Where?"
+local
+compute
+EOF
+)
+
 dotmux() {
-  # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
-  # TODO
-  alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
+  set -x
+  case "$WHEREDO" in
+    local)
+      # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
+      # TODO
+      alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
+      ;;
+    compute)
+      alacritty -e ssh -t compute \
+        "/usr/bin/zsh -i -c 'cd $ITEM && attach \$(basename \$(pwd))'"
+      ;;
+  esac
 }
 
 docode() {
-  # Wayland wrapped code is still not working well...
-  # code --enable-features=UseOzonePlatform --ozone-platform=wayland "$ITEM"
-  code "$ITEM"
+  case "$WHEREDO" in
+    local)
+      # Wayland wrapped code is still not working well...
+      # code --enable-features=UseOzonePlatform --ozone-platform=wayland "$ITEM"
+      code "$ITEM"
+      ;;
+    compute)
+      # Assume the folder is in the same location remotely.
+      # This is true in my conventions
+      code --remote ssh-remote+compute "$ITEM"
+      ;;
+  esac
+
 }
 
 # Ensure PATH is up to date before launching any UI apps.
@@ -57,8 +83,13 @@ then
   . ~/rcfiles/path.sh
 fi
 
-case "$WHATDO" in
-  1*) docode; dotmux;;
-  2*) dotmux ;;
-  3*) docode ;;
-esac
+if echo "$WHATDO" | grep -Pq '(code|both)'
+then
+  docode
+fi
+
+if echo "$WHATDO" | grep -Pq '(tmux|both)'
+then
+  dotmux
+fi
+
