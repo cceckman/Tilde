@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# inotifywait wrapper
+
+while true
+do
+  "$@" &
+  PID="${!}"
+
+  # Exclude:
+  # - Vim temporary files
+  # - Cargo target directory, relative to the current directory
+  # - .git directory, relative to the current directory
+
+  inotifywait \
+    --recursive \
+    --event create \
+    --event modify \
+    --event move \
+    --event delete \
+    --exclude '(\.sw..?$|~$)' \
+    @./target @./.git \
+    .
+
+  kill "$PID"
+  # Let any other FS operations complete...
+  sleep 0.1
+done
+
