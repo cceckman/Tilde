@@ -13,16 +13,16 @@ case "$ACTION" in
   lock)
     swaylock -f -c 000000
     ;;
-  suspend)
+  sleep)
     systemctl suspend
     ;;
-  sway-exit)
+  logout)
     swaymsg exit
     ;;
   restart)
     systemctl reboot
     ;;
-  off)
+  off|poweroff)
     systemctl poweroff
     ;;
 

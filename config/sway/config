@@ -205,6 +205,12 @@ for_window [app_id="^$"] border csd
 for_window [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"] move scratchpad
 no_focus [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"]
 
+# Zoom should turn on the lights
+for_window [app_id=".*zoom.*" title=".*[Mm]eeting.*"] exec ~/scripts/roomlight scenes.on_camera
+# Zoom popups should act as popups
+# no_focus [title="zoom" title="zoom"]
+# for_window [title="zoom" title="zoom"] move scratchpad
+
 # By default, remove title, include it in waybar instead
 default_border pixel 2
 gaps inner 2

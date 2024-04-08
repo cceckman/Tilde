@@ -15,6 +15,7 @@
   df = diff --name-only
   sha = rev-parse HEAD
   reword = commit --amend
+  unshallow = "!f() { git remote set-branches origin '*' && git fetch --unshallow -v; }; f"
 [status]
   showUntrackedFiles = no
 [diff]

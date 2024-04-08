@@ -1,81 +1,28 @@
-#! /bin/sh
+#!/bin/sh
 
-set -e
+if ! test -f ~/.config/home-assistant/token
+then
+  swaynag -t warning -m "No Home Assistant token available! See $(realpath $0)"
+  exit 1
+fi
 
-key_send() {
-  ON="$1" # boolean
-  BRIGHT="$2" # percentile
-  TEMP="$3" # kelvin
+if ! test "$#" -eq 1
+then
+  exit 1
+fi
 
-  # https://github.com/adamesch/elgato-key-light-api/blob/master/resources/lights/README.md
-  # says the kelvin-to-API conversion is 1,000,000 / API value-
-  # 1,000,000 / 143 = ~7000K (max)
-  # 1,000,000 / 344 = ~2900K (min)
-  TEMP_API=$(( 1000000 / TEMP ))
-  if test "$TEMP_API" -lt 143
-  then
-    TEMP_API=143
-  elif test "$TEMP_API" -gt 344
-  then
-    TEMP_API=344
-  fi
+hass_post() {
+  ENDPOINT="$1"
+  curl -s \
+    -H "Authorization: Bearer $(cat ~/.config/home-assistant/token)" \
+    -H "Content-Type: application/json" \
+    http://homeassistant.monkey-heptatonic.ts.net:8123/"$ENDPOINT" \
+    -d @-
+}
 
-  cat <<EOF | curl -s >/dev/null \
-    --request PUT http://192.168.1.174:9123/elgato/lights -d @-
+
+cat <<EOS | hass_post api/services/scene/turn_on
 {
-  "numberOfLights": 1,
-  "lights": [{
-    "on": $ON,
-    "brightness": $BRIGHT,
-    "temperature": $TEMP_API
-  }]
+    "entity_id": "${1}"
 }
-EOF
-}
-
-nanoleaf_send() {
-  ON="$1"     # boolean
-  BRIGHT="$2" # percentile
-  TEMP="$3"   # kelvin
-
-  cat <<EOF | curl \
-  -H 'Content-Type: application/json' \
-  --request PUT \
-  http://192.168.1.75:16021/api/v1/$(cat ~/.config/nanoleaf/token)/state \
-  -d @-
-{
-  "on": {"value": $ON },
-  "ct": {"value": $TEMP },
-  "brightness": {"value": $BRIGHT }
-}
-EOF
-
-}
-
-case "$1" in
-  "blind")
-    key_send      1 100 6500
-    nanoleaf_send true 100 6500
-    ;;
-  "camera")
-    key_send      1 30 6500
-    nanoleaf_send true 60 6500
-    ;;
-  "low")
-    key_send      1 6 5000
-    nanoleaf_send true 45 5000
-    ;;
-  "rest")
-    key_send      1 6 3000
-    nanoleaf_send true 45 3000
-    ;;
-  "off")
-    key_send      0 0 3500
-    nanoleaf_send false 0 3500
-    ;;
-  *)
-    echo >&2 "unknown command"
-    exit 2
-    ;;
-esac
-
+EOS
