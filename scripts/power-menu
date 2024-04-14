@@ -2,8 +2,8 @@
 
 ACTION="$(cat <<EOF | ~/scripts/menuize "Terminate: "
 lock
-suspend
-sway-exit
+sleep
+logout
 restart
 off
 EOF
