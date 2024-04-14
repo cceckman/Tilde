@@ -26,7 +26,7 @@ case "$ACTION" in
     exec makoctl mode -r do-not-disturb
     ;;
   hide)
-    TIME="$(~/scripts/somemenu -l 20 -p "Silence for: ")"
+    TIME="$(~/scripts/somemenu -p 'Silence for: ' </dev/null)"
     makoctl mode -a do-not-disturb
     nohup sh -c "sleep $TIME; makoctl mode -r do-not-disturb"
     ;;
