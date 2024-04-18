@@ -35,6 +35,7 @@ $HOME/scripts
 /usr/local/go/bin
 /usr/local/google-cloud-sdk/bin
 $HOME/.nix-profile/bin
+/opt/nvim-linux64/bin
 ADDPATHS
 
 export PATH

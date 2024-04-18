@@ -41,3 +41,6 @@
 [submodule ".vim/bundle/vim-solarized"]
 	path = .vim/bundle/vim-solarized
 	url = https://github.com/ericbn/vim-solarized.git
+[submodule "config/nvim"]
+	path = config/nvim
+	url = git@github.com:cceckman/kickstart.nvim
