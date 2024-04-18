@@ -4,13 +4,19 @@
 
 set -eux
 
-if swaymsg -t get_outputs | grep -qv HEADLESS-1
+if ! ( swaymsg -t get_outputs | grep -q HEADLESS-1 )
 then
   # https://github.com/swaywm/sway/issues/5553
   swaymsg create_output
 fi
 
-swaymsg output HEADLESS-1 resolution 1920x1080
+
+if test "$1" = "remarkable"
+then
+  swaymsg output HEADLESS-1 resolution 1404x1872
+else
+  swaymsg output HEADLESS-1 resolution 1920x1080
+fi
 bg-rotate
 # https://github.com/Ferdi265/wl-mirror
 # Nearest scaling, so 1920x1080 becomes a sharp 4x on a 4k monitor
