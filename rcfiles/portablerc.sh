@@ -24,6 +24,7 @@ alias g="git"
 alias mtr="mtr --curses"
 alias z="exec zsh"
 alias bat="batcat" # Debian name conflict
+alias fd="fdfind" # Debian name conflict
 
 if ls -v >/dev/null 2>&1
 then
@@ -58,6 +59,9 @@ e() {
   if test "$TERM_PROGRAM" = "vscode"
   then
     code "$@"
+  elif type nvim >/dev/null 2>&1
+  then
+    nvim "$@"
   else
     vim "$@"
   fi
