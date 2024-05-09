@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Camera light "daemon":
+# switch to bright lights whenever I open a "Meeting Room" window.
+
+echo >&2 "camlightd startup:"
+
+# Wait for Sway startup:
+while ! swaymsg -t get_tree >&2
+do
+  sleep 1s
+done
+echo >&2 "camlightd ready"
+
+
+swaymsg -m -t subscribe '["window"]' \
+  | jq -r --unbuffered \
+    'select(.change == "title") | .container.name | match("Meeting Room") | .string' \
+| while read TITLE
+do
+  ~/scripts/roomlight scene.on_camera
+done
+
+
