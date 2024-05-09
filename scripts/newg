@@ -1,0 +1,18 @@
+#!/bin/sh
+
+REPO="$1"
+if test -z "$1"
+then
+  echo >&2 "Provide a repository name"
+  exit 1
+fi
+
+mkdir -p ~/r/github.com/cceckman/"$REPO"
+cd ~/r/github.com/cceckman/"$REPO"
+echo "# $REPO" >README.md
+git init .
+git add README.md
+git commit -m "Initial commit"
+
+gh repo create "$REPO" --private --source=.
+

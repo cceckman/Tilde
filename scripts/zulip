@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Install with:
+# python3 -m venv ~/.venv/zulip_venv
+# source ~/.venv/zulip_venv/bin/activate
+# pip3 install git+https://github.com/zulip/zulip-terminal.git@main
+#
+# because the current release doesn't support python3.11 :(
+
+source ~/.venv/zulip_venv/bin/activate
+exec zulip-term
+

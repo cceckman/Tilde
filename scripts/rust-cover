@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Repeatedly run coverage
+
+fdfind | entr -r cargo llvm-cov --lcov --output-path target/lcov.info
+
+

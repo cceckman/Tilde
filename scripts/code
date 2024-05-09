@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if ! test -z "$WAYLAND_DISPLAY"
+then
+  exec /usr/bin/code --ozone-platform-hint=wayland --enable-features=WaylandWindowDecorations "$@"
+else
+  exec /usr/bin/code "$@"
+fi
+

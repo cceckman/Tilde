@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if test "$1" = "low"
+then
+  swaymsg output '"Dell Inc. DELL P2715Q V7WP95BJ282L"' res 1920x1080
+else
+  swaymsg output '"Dell Inc. DELL P2715Q V7WP95BJ282L"' res 3940x2160
+fi
+
+
