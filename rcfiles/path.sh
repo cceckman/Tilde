@@ -23,6 +23,8 @@ do
     *) if test -d "$x";
        then
          PATH="$x:$PATH"
+       else
+         # echo >&2 "$x doesn't exist"
        fi
        ;;
   esac
@@ -36,6 +38,7 @@ $HOME/scripts
 /usr/local/google-cloud-sdk/bin
 $HOME/.nix-profile/bin
 /opt/nvim-linux64/bin
+$HOME/.fly/bin/
 ADDPATHS
 
 export PATH
