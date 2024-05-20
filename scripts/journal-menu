@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Quick-launch for Obsidian.
+
+# TODO: Would be fun to make this "or raise the current window if one exists"
+
+exec obsidian
+

@@ -16,6 +16,7 @@
   sha = rev-parse HEAD
   reword = commit --amend
   unshallow = "!f() { git remote set-branches origin '*' && git fetch --unshallow -v; }; f"
+  split = "!git reset HEAD~1 && git commit --interactive"
 [status]
   showUntrackedFiles = no
 [diff]
