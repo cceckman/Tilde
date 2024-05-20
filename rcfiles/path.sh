@@ -25,6 +25,7 @@ do
          PATH="$x:$PATH"
        else
          # echo >&2 "$x doesn't exist"
+         true
        fi
        ;;
   esac
