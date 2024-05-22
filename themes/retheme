@@ -54,6 +54,11 @@ retheme() {
     esac
   fi
 
+  if type gsettings >/dev/null
+  then
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-$ALTVARIANT"
+  fi
+
   INC="$REALDIR/$THEME/$VARIANT.inc.sh"
   if ! test -f "$INC"
   then
@@ -126,6 +131,7 @@ EOF
 }
 
 theme_code() {
+  set -x
   THEME="$1"
   VARIANT="$2"
   ALTVARIANT="$3"
