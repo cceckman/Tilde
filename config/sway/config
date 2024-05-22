@@ -209,7 +209,7 @@ no_focus [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"]
 # ...but AFAICT this only works if a window _appears_ with this title,
 # not if an existing window's title _changes_ to this.
 # Instead, we listen.
-exec systemctl --user start camlightd.service
+exec systemctl --user restart camlightd.service
 # for_window [title=".*Personal Meeting Room.*"] exec scenes.on_camera
 # Zoom popups should act as popups
 # no_focus [title="zoom" title="zoom"]
