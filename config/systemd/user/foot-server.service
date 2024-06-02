@@ -1,0 +1,11 @@
+# From https://rgoswami.me/posts/lowering-resource-usage-foot-systemd/#memory-consumption
+[Unit]
+Description=Foot terminal server
+
+[Service]
+ExecStart=/usr/bin/foot --server=/run/user/%U/foot-server.sock
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

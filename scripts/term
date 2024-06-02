@@ -5,6 +5,11 @@ then
   . ~/rcfiles/path.sh
 fi
 
+if command -v footclient >/dev/null
+then
+  exec footclient --server "$XDG_RUNTIME_DIR"/foot-server.sock "$@"
+fi
+
 if command -v alacritty >/dev/null
 then
   exec alacritty "$@"
