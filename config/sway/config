@@ -200,16 +200,13 @@ workspace_auto_back_and_forth yes
 # Notifications windows, e.g. mako, have no title
 for_window [app_id="^$"] floating enable
 for_window [app_id="^$"] border csd
+# ssh-askpass should float
+for_window [title="ssh-askpass"] floating enable
 
 # Firefox sharing indicator should float
 for_window [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"] move scratchpad
 no_focus [app_id=".*[Ff]irefox.*" title=".*Sharing Indicator"]
 
-# Zoom should turn on the lights.
-# ...but AFAICT this only works if a window _appears_ with this title,
-# not if an existing window's title _changes_ to this.
-# Instead, we listen.
-exec systemctl --user restart camlightd.service
 # for_window [title=".*Personal Meeting Room.*"] exec scenes.on_camera
 # Zoom popups should act as popups
 # no_focus [title="zoom" title="zoom"]
@@ -251,6 +248,15 @@ input "1:1:AT_Translated_Set_2_keyboard" xkb_options ctrl:swapcaps
 # try to make screen-sharing, launch-from-path, etc. work
 # exec systemctl --user WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway PATH
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway PATH
+
+# Zoom should turn on the lights.
+# ...but AFAICT this only works if a window _appears_ with this title,
+# not if an existing window's title _changes_ to this.
+# Instead, we listen.
+# Run this after setting up the above env vars.
+# TODO: Use systemd activation for Sway?
+exec_always systemctl --user restart camlightd.service
+exec_always systemctl --user restart foot-server.service
 
 # start programs for system tray
 exec_always ~/scripts/tray
