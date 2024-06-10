@@ -3,7 +3,12 @@
 # Portable shell config- to local or remote hosts.
 
 set -o vi
-export EDITOR=vim
+if type nvim >/dev/null 2>&1
+then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 case "$SHELL" in
   */zsh)
@@ -59,11 +64,8 @@ e() {
   if test "$TERM_PROGRAM" = "vscode"
   then
     code "$@"
-  elif type nvim >/dev/null 2>&1
-  then
-    nvim "$@"
   else
-    vim "$@"
+    "$EDITOR" "$@"
   fi
 }
 
