@@ -8,6 +8,7 @@ fi
 # Debugging:
 # exec 2>&1
 # exec >>/tmp/log
+set -x
 
 # List all git repositories and modified times;
 # Sort in reverse order;
@@ -17,8 +18,10 @@ fi
 ITEM="$(
 find ~/r \
   -name .git -type d \
+  -maxdepth 4\
   -printf "%T@ %p\n" 2>/dev/null \
 | sort -nr \
+| head -20 \
 | cut -d' ' -f1 --complement \
 | xargs dirname \
 | xargs -I{} sh -c 'echo $(basename {})\\t{}' \
@@ -30,21 +33,23 @@ test -n "$ITEM" || exit 1
 ITEM="$(echo $ITEM | grep -o '[^[:space:]]\+$')"
 
 # What do we want to do with it?
-WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): "
-code
-tmux
-both
-EOF
-)
+# WHATDO=$(cat <<EOF | somemenu -l 3 -p "Open $(basename $ITEM): "
+# tmux
+# code
+# both
+# EOF
+# )
 
+WHATDO="tmux"
 SHORTNAME="$(basename $ITEM)"
 
 # Where do we want to do it?
-WHEREDO=$(cat <<EOF | somemenu -l 2 -p "Where?"
-local
-compute
-EOF
-)
+# WHEREDO=$(cat <<EOF | somemenu -l 2 -p "Where?"
+# local
+# compute
+# EOF
+# )
+WHEREDO="local"
 
 dotmux() {
   set -x
@@ -52,10 +57,10 @@ dotmux() {
     local)
       # zsh -i to force loading of rcfiles, incl. syscolor script, before tmux.
       # TODO
-      alacritty -e /usr/bin/zsh -i -c "tmux -u2 new-session -DA -s '$SHORTNAME' -c '$ITEM'"
+      ~/scripts/term tmux -u2 new-session -DA -s "$SHORTNAME" -c "$ITEM"
       ;;
     compute)
-      alacritty -e ssh -t compute \
+      ~/scripts/term ssh -t compute \
         "/usr/bin/zsh -i -c 'cd $ITEM && attach \$(basename \$(pwd))'"
       ;;
   esac
