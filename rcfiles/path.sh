@@ -40,6 +40,8 @@ $HOME/scripts
 $HOME/.nix-profile/bin
 /opt/nvim-linux64/bin
 $HOME/.fly/bin/
+$HOME/.ghcup/bin
+$HOME/.cabal/bin
 ADDPATHS
 
 export PATH
