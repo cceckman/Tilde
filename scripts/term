@@ -7,6 +7,12 @@ fi
 
 if command -v footclient >/dev/null
 then
+  # Robust starting of footclient:
+  test -S "$XDG_RUNTIME_DIR"/foot-server.sock && {
+     exec footclient --server "$XDG_RUNTIME_DIR"/foot-server.sock "$@"
+  }
+  systemctl --user restart foot-server
+  sleep 0.2
   exec footclient --server "$XDG_RUNTIME_DIR"/foot-server.sock "$@"
 fi
 
