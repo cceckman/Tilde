@@ -105,7 +105,7 @@ upgrade_links() {
 }
 
 install_go() {
-  VERSION="go1.21.4"
+  VERSION="go1.22.5"
   if type go 2>&1 >/dev/null
   then
     stderr "Found Go:"
