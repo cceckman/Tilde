@@ -42,7 +42,7 @@ main() {
 
   set +x
   # Include terminfo so we can SSH here
-  sudo -n apt-get install -y tmux zsh vim ripgrep moreutils foot-terminfo
+  sudo -n apt-get install -y tmux zsh vim ripgrep moreutils foot-terminfo mtr-tiny
   ZSH="$(cat /etc/shells | grep zsh | head -1)"
   sudo -n usermod --shell "$ZSH" "$USER"
   set -x

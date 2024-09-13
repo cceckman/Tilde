@@ -14,5 +14,5 @@ brightnessctl "$@"
 PERCENT="$(( $(brightnessctl get) * 100 / $(brightnessctl max) ))"
 MAX="$(ddcutil getvcp 10 | grep -o 'max .*' | grep -o '[0-9]*')"
 NEW="$(( MAX * PERCENT / 100 ))"
-ddcutil setvcp 10 "$NEW"
+ddcutil setvcp 10 "$NEW" || true
 
