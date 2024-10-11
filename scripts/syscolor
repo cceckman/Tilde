@@ -4,7 +4,7 @@
 
 case "$(hostname | sha256sum | awk '{print $1}')" in
 
-  212baeb*|f0295eb6f*|f074ac1a*)
+  1533f2f*|212baeb*|f0295eb6f*|f074ac1a*)
     echo 'cyan'
     SYSTEM_UI_COLOR=00FFFF;
     ;;
