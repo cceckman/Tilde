@@ -12,7 +12,7 @@ brightnessctl "$@"
 
 # Apply to external monitors too:
 PERCENT="$(( $(brightnessctl get) * 100 / $(brightnessctl max) ))"
-MAX="$(ddcutil getvcp 10 | grep -o 'max .*' | grep -o '[0-9]*')"
+MAX="$(ddcutil getvcp 10 | grep -o 'max .*' | grep -o '[0-9]*' || echo 100)"
 NEW="$(( MAX * PERCENT / 100 ))"
 ddcutil setvcp 10 "$NEW" || true
 
